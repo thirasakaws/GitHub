@@ -28,7 +28,7 @@
 
         </div>
         <div class="col-6">
-           <div class="form-group">  
+           <div class="form-group">
                 <label class="font-color-foodmall-gray-light2 lable-left-35 " > นามสกุล  </label>
                 <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="นามสกุล" data-field="lastname">
             </div> <!--// -->
@@ -36,16 +36,16 @@
     </div>
     <div class="row ">
         <div class="col-12">
-            <div class="form-group row"> 
+            <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
                 <div class="col">
                     <input class="input_data_bn edit_data ORDER_contact w-90 " type="text" min="10" max="10" placeholder="เบอร์ติดต่อ" data-field="contact">
                 </div>
             </div> <!--// -->
         </div>
-        
+
         <div class="col-12">
-            <div class="form-group row"> 
+            <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >   วิธีการจ่ายเงิน <span class="text-danger">*</span> </label>
                 <div class="col">
                     <select id="paymenttype" class="input_data_bn  edit_data ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน">
@@ -56,9 +56,9 @@
                 </div>
             </div> <!--// -->
         </div>
-       
+
     </div> <!--// row -->
-   
+
   </div>
 
   <hr>
@@ -118,30 +118,30 @@
     <div class="" id="listmenuorder">
       <div class="row row_tablecontent" style="display:none">
         <div class="col-2 text-left">
-            <span class="menu_qty">0</span> 
+            <span class="menu_qty">0</span>
             <span class="font-color-foodmall-gray-light2">x</span>
         </div>  <!--// จำนวน -->
-          
+
         <div class="col-8">
             <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
         </div> <!--// ชื่อเมนู -->
-        
+
         <div class="col-2 text-right">
            ฿ <span class="menu_menuprice">0.00 </span>
         </div> <!--// ราคา -->
       </div>
-        
+
     </div>
     <hr>
-    
-    
+
+
     <div class="align-items-center">
       <div class="row">
           <div class="col-6">
               ค่าอาหาร
           </div>
           <div class="col-6 text-right">
-              ฿ <span class="total_price">0 </span> 
+              ฿ <span class="total_price">0 </span>
           </div>
       </div>
       <div class="row">
@@ -152,17 +152,17 @@
                ฿ <span class="total_shippingcost">0 </span>
           </div>
       </div>
-      <hr>  
-        
+      <hr>
+
       <div class="row ">
           <div class="col-6">
               รวมทั้งหมด
           </div>
           <div class="col-6 text-right ">
-              ฿ <span class="grandtotal">0 </span> 
+              ฿ <span class="grandtotal">0 </span>
           </div>
       </div>
-      <hr>  
+      <hr>
     </div>
 
   </div>
@@ -284,6 +284,7 @@
           if(res.result){
               $('#writelocation_cus').show('slow').hide('slow');
               getcustomeraddress();
+
           }else{
             alert(res.detail);
           }
@@ -330,12 +331,15 @@
               getcustomeraddress();
               $('#showlist_address').hide();
               showlist_address_temp=false;
+              working.order = res.detail;
+              update_ship_cost();
             }else{
 
             }
          });
     }
-    function update_ship_cost(){
+    function update_ship_cost(forceresfresh){
+      //alert("Update SHOP COST");
       var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');
