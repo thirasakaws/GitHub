@@ -26,13 +26,16 @@
       background-size: 26px 35px;
       pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
   }
+  #address {
+    resize: none;
+  }
 </style>
 <div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5> <!-- Image Preview -->
-        </div>
+        <!-- <div class="modal-header">
+            <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5>
+        </div> -->
 
         <div class="modal-body" style="width:500; height:500">
 
@@ -43,12 +46,15 @@
 
         </div>
         <div id="floating-panel">
-          <input id="address" style="width: 100%" type="text" value="">
+          <!-- <input id="address" style="width: 100%" type="text" value=""> -->
+          <!-- <input class="form-control p-3" id="address" style="width: 100%; height: 20%" type="text" value=""> -->
+          <!-- <textarea class="form-control" id="address" style="width: 100%" type="text" value=""> -->
+          <textarea class="form-control" id="address" wrap="hard" style="width: 100%; height: 20%" type="text" value=""></textarea>
           <!-- <input id="submit" type="button" value="Reverse Geocode"> -->
         </div>
 
         <div class="modal-footer">
-            <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button>
+            <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ไปตำแหน่งปัจจุบัน</button>
             <button onclick="btn_modal_map()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกที่อยู่นี้ </button>
             <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
         </div>
@@ -72,6 +78,7 @@
   var latlng_saved;
   var latlng_default_startup;
   var alreadyset = false;
+  var latlng_have_save = false;
   
   function initMap() {
     console.log("init Map");
@@ -159,16 +166,22 @@
   }
 
   function call_modal_maps(setting,cbfnc) {
-    var latlng_have_save;
     latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
-    
+    latlng_saved = {};
+
     if ( ('lat' in setting) && ('lng' in setting) ) {
-      latlng_have_save = true;
-      latlng_saved = {};
-      latlng_saved.lat = setting.lng;    // switch bewteen LAT to LNG from MongoDB    
-      latlng_saved.lng = setting.lat;    // switch bewteen LAT to LNG from MongoDB`
+      if (setting.lat && setting.lng) {
+        latlng_have_save = true;
+        if (setting.lat > setting.lng) {
+          latlng_saved.lat = setting.lng;    // switch bewteen LAT to LNG from MongoDB
+          latlng_saved.lng = setting.lat;    // switch bewteen LAT to LNG from MongoDB
+        } else {
+          latlng_saved = setting;
+        }
+      } else {
+        latlng_saved = latlng_default_startup;
+      }
     } else {
-      latlng_have_save = false;
       latlng_saved = latlng_default_startup;
     }
     // window.alert(JSON.stringify(latlng_saved));
@@ -186,14 +199,25 @@
       tempcbfnc_maps = cbfnc;
 
       if (latlng_have_save === true) {
+        // themarker_image = {
+        //   url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        //   // This marker is 20 pixels wide by 32 pixels high.
+        //   size: new google.maps.Size(20, 32),
+        //   // The origin for this image is (0, 0).
+        //   origin: new google.maps.Point(0, 0),
+        //   // The anchor for this image is the base of the flagpole at (0, 32).
+        //   anchor: new google.maps.Point(0, 32)
+        // };
+
         themarker_image = {
-          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          url: 'https://sv1.picz.in.th/images/2020/04/13/USQivq.png',
           // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(20, 32),
+          // size: new google.maps.Size(300, 370),
+          scaledSize: new google.maps.Size(30, 37),
           // The origin for this image is (0, 0).
           origin: new google.maps.Point(0, 0),
           // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(0, 32)
+          anchor: new google.maps.Point(15, 33)
         };
 
         themarker = new google.maps.Marker({
@@ -207,8 +231,9 @@
           gmap.setZoom(18);
           gmap.panTo(themarker.getPosition());
           showAddress();
-        }, 500);
-        
+        }, 500); 
+      } else {
+        googlemap_geogetLocation();
       }
     },100);
   }

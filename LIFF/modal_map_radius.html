@@ -1,19 +1,19 @@
 <!-- Modal for GPS -->
 <style media="screen">
-  #googlemap {
+  #googlemap_radius_radius {
       position: relative;
   }
 </style>
-<div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade " id="modal_google_gps_radius" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5> <!-- Image Preview -->
-        </div>
+        <!-- <div class="modal-header">
+            <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5>
+        </div> -->
 
         <div class="modal-body" style="width:500; height:500">
 
-          <div    id='googlemap' style="width: 100%; height: 300px" >
+          <div    id='googlemap_radius' style="width: 100%; height: 300px" >
     			Gmaps
 
           </div>
@@ -27,9 +27,9 @@
         </div>
 
         <div class="modal-footer">
-            <!-- <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button> -->
-            <button onclick="btn_modal_map()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกขอบเขตบริการ </button>
-            <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+            <!-- <button onclick="btn_modal_map_radius_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button> -->
+            <button onclick="btn_modal_map_radius()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกขอบเขตบริการ </button>
+            <button onclick="$('#modal_google_gps_radius').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
         </div>
 
     </div>
@@ -54,10 +54,10 @@
   var circle_area;
   var service_radius = 0;
   
-  function initMap() {
+  function initMap_radius() {
     console.log("init Map");
     // Initialize Map
-    gmap = new google.maps.Map(document.getElementById('googlemap'), {
+    gmap = new google.maps.Map(document.getElementById('googlemap_radius'), {
       center: latlng_saved,
       zoom: 15,
       disableDefaultUI: true,
@@ -146,10 +146,10 @@
     }, 1000);
   }
 
-  function btn_modal_map_current(){
-      googlemap_geogetLocation();
+  function btn_modal_map_radius_current(){
+      googlemap_radius_geogetLocation();
   }
-  function googlemap_geogetLocation() {
+  function googlemap_radius_geogetLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position){
         var pos = {lat:position.coords.latitude,lng: position.coords.longitude};
@@ -165,7 +165,7 @@
     alert("error No GPS Allowed")
   }
 
-  function call_modal_maps(setting,cbfnc) {
+  function call_modal_radius_maps(setting,cbfnc) {
     var latlng_have_save;
     latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
     
@@ -187,10 +187,10 @@
     }
     // window.alert(JSON.stringify(latlng_saved));
 
-    // $('#modal_google_gps').modal('show');
+    // $('#modal_google_gps_radius').modal('show');
     setTimeout(()=>{
-      initMap();
-      $('#modal_google_gps').modal('show');
+      initMap_radius();
+      $('#modal_google_gps_radius').modal('show');
       if(typeof(setting) == 'function'){
         cbfnc = setting;
         // setting ={lat:13.79607108667891,lng:100.71164142340422};
@@ -228,11 +228,11 @@
   }
 
 
-  $("#modal_google_gps").on("shown.bs.modal", function () {
+  $("#modal_google_gps_radius").on("shown.bs.modal", function () {
     google.maps.event.trigger(gmap, "resize");
   });
 
-  function btn_modal_map(){
+  function btn_modal_map_radius(){
     var position = {};
     // position.lat = latlng.lat();
     // position.lng = latlng.lng();
@@ -249,7 +249,7 @@
     }else{
 
     }
-    $('#modal_google_gps').modal('hide');
+    $('#modal_google_gps_radius').modal('hide');
   }
 
 </script>

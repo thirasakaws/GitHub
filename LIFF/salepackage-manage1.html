@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group row mt-3 border-bottom border-light mt-3">
-        <label class="col-sm-4 text-gray-light " style="width:auto;">  กำหนดเมนู <span class="text-gray-light2">(เปิด-ปิด)</span> </label>
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  กำหนดเมนู <span class="text-gray-light2">(ปิด - เปิด)</span> </label>
         <div class="col text-right d-flex d-inline ">
             <div class="ml-auto">
                 <label class="switch">
@@ -27,7 +27,7 @@
     </div> <!-- // กำหนดเมนู (เปิด-ปิด) -->
 
     <div class="form-group row mt-3 border-bottom border-light mt-3">
-        <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Auto-Manual)</span> </label>
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Manual - Auto)</span> </label>
         <div class="col text-right d-flex d-inline ">
             <div class="ml-auto">
                 <label class="switch">
@@ -69,21 +69,6 @@
         </div>
     </div> <!-- // กำหนดราคา -->
 
-
-
-    <!-- <div class=" mt-1">
-    <!--<div class="card-body">
-      <strong class="font-color-shop text-title110">
-          <i class="far fa-money-bill-alt"></i> กำหนดราคา
-      </strong>
-      <div class="text-center mb-1 mt-1 d-flex">
-          <div class="ml-auto">
-               <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-submit-shop addnewmenuprice" onclick='show_moremanagemenuprice();'>
-                   <i class="fas fa-plus"></i> เพิ่มราคาเมนู
-               </button>
-          </div>
-      </div> -->
-
     <div class="form-group mt-1">
         <div class='show_managemenuprice mt-2 ' style='display:none; width:100%'>
             <div class="row mt-1">
@@ -119,11 +104,14 @@
         <div class="mt-1 row_tablecontent" style="display:none;">
 
             <div class="form-group row mt-3 border border-bottom border-light">
-                <div class="col-9 d-inline pt-2" style="width: auto;">
+                <div class="col-4 d-inline pt-2" style="width: auto;">
                     <span class="menuprice_detail text-title110" style="width:auto;"> </span>
                     <div>
                         ราคา <span class="menuprice_price font-color-shop"></span> <span class="text-gray-light">บาท</span>
                     </div>
+                </div>
+                <div class="col-4  p-2">
+                      <span class="btn btn-sm btn-light text-secondary" onclick="showeditprice(this);">ตั้งค่า<i class="fas fa-cog"></i></span>
                 </div>
                 <div class="col text-right d-flex d-inline pt-2">
                     <div class="ml-auto">
@@ -140,6 +128,43 @@
     <!-- </div> // card-body -->
 </div>
 
+<div class="modal fade" id="modal_edit_price"  tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-body" >
+          <div class="row">
+              <div class="col-6 text-left">
+                  <h5>จัดการข้อมูลราคา</h5>
+              </div>
+              <div class="col-6 text-right">
+                  <span class="btn btn-outline-danger btn-sm" onclick="editprice($('#editprice').val(),$('#editpricedetail').val(),'delete');">ลบรายการ</span>
+              </div>
+          </div>
+          <div class="row mt-1">
+              <div class="col-4">
+                  คำอธิบายเมนู
+              </div>
+              <div class="col">
+                  <input type="text" id="editpricedetail" class="form-control">
+              </div>
+          </div>
+          <div class="row mt-1">
+              <div class="col-4">
+                  กำหนดราคา
+              </div>
+              <div class="col">
+                  <div class="input-group">
+                      <input type="number" id="editprice" class="form-control">
+
+                  </div>
+              </div>
+          </div>
+          <button class="btn btn-sm btn-submit-shop btn-block mt-3" onclick="editprice($('#editprice').val(),$('#editpricedetail').val(),'save');">บันทึก</button>
+          <hr>
+        </div>
+
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -152,17 +177,11 @@
       data.LINE_USER = LINE_USER;
       data[field] = obj.val();
 
-      console.log("data",data);
-      $.postJSON('/api/liff/edit/menu', data, function (res) {
-          if (!res.result) {
-              alert(res.detail);
-              cb(false);
-          }else { cb(true); refresh_managemenupage();  };
-      })
+      // console.log("data",data);
+      updatemenuprice(data)
     },(obj)=>{
       return true;
     });
-
 
     function refresh_managemenupage() {
         $.postJSON('/api/liff/get/menu', {LINE_USER: LINE_USER, _id: working.menunow}, (res) => {
@@ -202,21 +221,9 @@
 
             setdatabyclass($('.main_data'), 'MENU', working.activemenu);
 
-            ADVWS.make_edittext($('.editable'), function (data, obj) {
-                edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-
-            }, function (data2vilidate, field) {
-                if (field == 'price') {
-                    if (!(Number(data2vilidate) > 0)) {
-                        return "กำหนดราคาขั้นต่ำ 1 บาท";
-                    }
-                }
-                if (!data2vilidate)
-                    return "Invalid data";
-            });
         });
-    }
-    ;
+    };
+
     function addnewprice() {
         var detailprice = $('#newprice_detail').val();
         var newprice = $('#newprice_price').val();
@@ -241,15 +248,8 @@
             alert('กรุณากำหนดราคา');
             return false;
         }
-        console.log(data);
-        $.postJSON('/api/liff/edit/menu', data, (res) => {
-            if (!res.result) {
-                return alert(res.detail);
-            } else {
-                refresh_managemenupage();
-            }
-
-        });
+        // console.log(data);
+        updatemenuprice(data);
         $('.show_managemenuprice').hide();
     }
     ;
@@ -262,15 +262,8 @@
             confirm_order = "mannual";
         }
         var data = {LINE_USER: LINE_USER, _id: dataid, confirm_order: confirm_order};
-        console.log("sending", data)
-        $.postJSON('/api/liff/edit/menu', data, function (res) {
-            if (!res.result) {
-                return alert(res.detail);
-            } else {
-                refresh_managemenupage();
-            }
-
-        });
+        // console.log("sending", data)
+        updatemenuprice(data);
     }
     function changemenustatus(obj) {
         if (!working.activemenu.price || working.activemenu.price.length <= 0) {
@@ -291,15 +284,8 @@
             menu_status = 4;
         }
         var data = {LINE_USER: LINE_USER, _id: dataid, status: menu_status};
-        console.log("sending", data)
-        $.postJSON('/api/liff/edit/menu', data, function (res) {
-            if (!res.result) {
-                return alert(res.detail);
-            } else {
-                refresh_managemenupage();
-            }
-
-        });
+        // console.log("sending", data)
+        updatemenuprice(data);
     }
 
 
@@ -346,17 +332,58 @@
                 working.activemenu.price[x].status = newstatus;
             }
         }
-        console.log('peice ', working.activemenu.price)
+        // console.log('peice ', working.activemenu.price);
         var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
-        console.log(data);
-        $.postJSON('/api/liff/edit/menu', data, (res) => {
-            if (!res.result) {
-                return alert(res.detail);
-            } else {
-                refresh_managemenupage();
-            }
-
-        });
+        // console.log(data);
+        updatemenuprice(data);
     };
 
+  function updatemenuprice(data){
+
+    $.postJSON('/api/liff/edit/menu', data, (res) => {
+        if (!res.result) {
+            return alert(res.detail);
+        } else {
+            refresh_managemenupage();
+        }
+
+    });
+  }
+
+  var editmemuprice ={};
+   function showeditprice(obj){
+     var found;
+     var price = $(obj).parents('.row_tablecontent').attr('value-price');
+     var value = $(obj).parents('.row_tablecontent').attr('value');
+     for (var x = 0; x < working.activemenu.price.length; x++) {
+         if (working.activemenu.price[x].price == price && working.activemenu.price[x].detail == value) {
+              editmemuprice = working.activemenu.price[x];
+              found = true;
+         }
+     }
+     if(found){
+       // $('.jsonshow').html(JSON.stringify(editmemuprice));
+       $('#editprice').val(editmemuprice.price);
+       $('#editpricedetail').val(editmemuprice.detail)
+       $('#modal_edit_price').modal('show');
+     }
+   };
+
+   function editprice(price,value,action){
+     for (var x = 0; x < working.activemenu.price.length; x++) {
+       for (var x = 0; x < working.activemenu.price.length; x++) {
+           if (working.activemenu.price[x].price == Number(editmemuprice.price) && working.activemenu.price[x].detail == editmemuprice.detail) {
+                if (action == 'save') {
+                  working.activemenu.price[x].price = Number(price);
+                  working.activemenu.price[x].detail = value;
+                }else if (action == 'delete') {
+                    working.activemenu.price.splice(x, 1);
+                }
+           }
+       }
+     };
+     var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
+     updatemenuprice(data);
+      $('#modal_edit_price').modal('hide');
+   };
 </script>

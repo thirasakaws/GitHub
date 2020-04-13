@@ -1,12 +1,11 @@
 <div class='container-fluid main_data' >
     <div class="box-head-title-shop text-center" >
-        <span class="header-shop"> จัดการเมนูอาหาร</span>
+        <span class="header-shop"> จัดการเมนูอาหาร</span> <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id"></span></span>
     </div>
 
 
     <div class="text-center">
-        <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id">MENU ID</span></span>
-        <h5>ชื่อเมนู : <span class='MENU_name editable font-color-shop' ></span></h5>
+        <h5>ชื่อเมนู : <input class="input_data_bn edit_data MENU_name text-center" placeholder="ชื่อเมนู" data-field="name"></h5>
     </div>
     <hr>
 
@@ -64,7 +63,7 @@
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
-                    <input class="input_data_bn edit_data MENU_detail w-90 " placeholder="รายละเอียดเมนู" data-field="detail">
+                    <textarea class="input_data_bn form-control edit_data MENU_detail w-100" style="min-height:150px;" placeholder="รายละเอียดเมนู" data-field="detail"> </textarea>
 
                 </div>
                 <!--//template for save data one field-->
@@ -189,6 +188,8 @@
             }
             working.activemenu = res.detail;
             // Set Default
+//            if (!working.activemenu.name)
+//                working.activemenu.name = '';
             if (!working.activemenu.description)
                 working.activemenu.description = '';
             // if(!working.activemenu.price) working.activemenu.price = 10000;

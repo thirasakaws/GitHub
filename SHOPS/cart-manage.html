@@ -23,7 +23,7 @@
                 <div class="menu_name">ชื่ออาหาร</div>
                 <small class="text-secondary menu_pricedes">รายละเอียด</small>
                 <small class="show_menunote" style="display:none;">(<span class="menu_note"></span>)</small>
-                <div style="color:#ff5e33;">
+                <div class="font-color-foodmall">
                   <span class="menu_menuprice">0.00</span> ฿
                 </div>
               </div>
@@ -35,13 +35,13 @@
           <div class="col-4">
               <div class="row">
                   <div class="col-3">
-                      <i class="fas fa-minus text-orange " onclick="updatecartitem(this,'remove');"></i>
+                      <i class="fas fa-minus font-color-foodmall " onclick="updatecartitem(this,'remove');"></i>
                   </div>
                   <div class="col-auto text-center">
                     <span class="menu_qty">0</span>
                   </div>
                   <div class="col-3 text-left">
-                    <i class="fas fa-plus text-orange " onclick="updatecartitem(this,'add');"></i>
+                    <i class="fas fa-plus font-color-foodmall " onclick="updatecartitem(this,'add');"></i>
                   </div>
               </div>
 
@@ -62,7 +62,7 @@
   </div>
 <!-- onclick="checkout();" -->
   <div class="fixed-bottom">
-    <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-orange btn-block" style="background-color:#ff5e33; color:#ffff;" onclick="go2View('cart-manage1')"> สรุปรายการสั่งซื้อ </button>
+    <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="go2View('cart-manage1')"> สรุปรายการสั่งซื้อ </button>
 
   </div>
 

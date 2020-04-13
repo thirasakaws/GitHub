@@ -2,13 +2,13 @@
     <div class="box-head-title-shop text-center" >
         <span class="header-shop"> จัดการเมนูของร้านค้า</span>
     </div>
-    
+
 
   <div class="text-center mb-3">
       <h4 class="shopmenu_shopname font-color-shop header-title-shop"></h4>
   </div>
-    
-    
+
+
 <!--    จัดการเมนูของร้านค้า-->
 
 <div class="">
@@ -28,7 +28,7 @@
    </div>
 
   </div>
-</div> 
+</div>
 
    <div id='main-menu'>
      <div class='rowmenu row_tablecontent card mt-1 mb-2' style='display:none' >
@@ -36,22 +36,22 @@
             <div class="row">
                 <div class="col-8">
                      <span class='card-title font-size-shop-110' data-field='name'>
-                        <span class="text-gray-light2"># <span class="shopmenu_id">MENU ID </span></span> 
-                        <span class="shopmenu_name font-color-shop"> SHOP MENU NAME</span> 
+                        <span class="text-gray-light2"># <span class="shopmenu_id">MENU ID </span></span>
+                        <span class="shopmenu_name font-color-shop"> SHOP MENU NAME</span>
                      </span>
                 </div> <!--// header -->
-                                
-                
-                <div class="col-4 ">          
+
+
+                <div class="col-4 ">
                     <div class="text-right">
                         <small href="#" onclick="managethismenu(this);" class="font-color-shop border-color-shop rounded-pill">
                             <i class="fas fa-cog"></i> จัดการเมนู
                         </small>
                     </div>
                 </div> <!--// จัดการเมนู -->
-                
-                
-                
+
+
+
                 <div class="col-7">
                     <div class="mt-2 pl-4">
                         <small class="" style="line-height: 20px;">
@@ -62,7 +62,7 @@
                     </div>
                      <!-- <input type="checkbox" data-toggle="toggle"  data-on="เปิด" data-off="ปิด" data-onstyle="info" data-offstyle="danger" class="toggle-menu" onchange="managestatusmenu(this);"> -->
                   </div>  <!--// จัดการจำนวน -->
-                
+
                   <div class="col-5" >
                       <div class="mt-5 text-right">
                         <small onclick="manageactivethismenu(this);" class="font-color-shop border-color-shop rounded-pill">
@@ -71,14 +71,14 @@
                         </small>
                       </div>
                  </div>  <!--// ขั้นสูง -->
- 
+
             </div>   <!--// row -->
-            
+
             <div class="ml-4">
                 <small class="text-danger warn_menu w-100 mt-1"></small>
             </div>
-        </div> <!-- // card-body  --> 
-        
+        </div> <!-- // card-body  -->
+
       </div>
     </div>
 </div>
@@ -136,10 +136,10 @@ function getmenulist(){
           if(!obj[x].price || obj[x].price.length <= 0){
             TR.find('.warn_menu').html('** กรุณาเพิ่มราคาเมนูของคุณ');
           }
-          
-     
+
+
           TR.find('.shopmenu_id').html(obj[x]._id);
-          
+
 
           TR.find('.shopmenu_status').html(status);
           TR.show();

@@ -1,11 +1,13 @@
-<div id='gmap_ordergps'>
+<div id='gmap_cusgps'>
 </div>
 <div class="container-fluid">
-  <div class="label-orange text-center mb-3" >
-    <span class="header_title">รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i> </span>
-  </div>
-
-  <hr>
+    
+  <div class="box-head-title-shop text-center line-bottom-color-shop mb-3" >
+        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i></span>
+  </div> 
+  
+  
+  
   <div id="order_last">
       Please Wait..
   </div>
@@ -27,20 +29,24 @@
     border-radius: 35px;
 }
   </style>
+  
+  
 
   <div id="order_template1" style="display:none;">
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
           <div class="text-center">
-            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+              <strong class="card-title">##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span> </strong>
           </div>
+            
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
             </div>
           </div>
+            
           <div class="text-center">
-            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+            ** ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
             <!-- <small>
                 <span>ข้อมูลจัดส่ง</span> <br>
                   ##ORDER-addressid##
@@ -62,45 +68,64 @@
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
           <div class="text-center">
-            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+              <strong class="card-title" >##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span></strong>
           </div>
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
             </div>
           </div>
-          <div class="text-center">
-            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+          <div class="row">
+                
+            
+          <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+               
+          <div class="col-6 mt-3 mb-3 text-right">
+             <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                 <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
             <!-- <small>
                 <span>ข้อมูลจัดส่ง</span> <br>
                   ##ORDER-addressid##
             </small> -->
           </div>
+            </div> 
 
-          <button type="button" class="btn btn-success btn-lg btn-block" onclick="order_accept(this,##ORDER-id##,'working');" >ตอบรับทำรายการ</button>
+          <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
+              <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
+          </button>
         </div>
        </div>
     </div>
     <div id="order_template3" style="display:none;">
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
-          <div class="text-center">
-            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          <div class="text-center mt-1 mb-1">
+              <strong class="card-title" >##ORDER-statusshow## #  <span class="text-success">##ORDER-id##</span></strong>
           </div>
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
             </div>
           </div>
-          <div class="text-center">
-            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
-            <!-- <small>
-                <span>ข้อมูลจัดส่ง</span> <br>
-                  ##ORDER-addressid##
-            </small> -->
-          </div>
+            
+          <div class="row">
+                
+            
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
 
-          <button type="button" class="btn btn-success btn-lg btn-block"  onclick="order_accept(this,##ORDER-id##,'finish');" >ตอบรับทำเสร็จแล้ว</button>
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+              <!-- <small>
+                  <span>ข้อมูลจัดส่ง</span> <br>
+                    ##ORDER-addressid##
+              </small> -->
+            </div>
+          </div>  
+            
+     
+
+          <button type="button" class="btn btn-success btn-md btn-block"  onclick="order_accept(this,##ORDER-id##,'finish');" ><i class="fas fa-check-circle"></i> ตอบรับทำเสร็จแล้ว</button>
         </div>
        </div>
     </div>
@@ -132,17 +157,21 @@
   <div id="order_template_menu" style="display:none;">
     <div class="border rounded p-2 mt-1">
       <div class="row">
-          <div class="col-8">
-              <strong>##MENU-name##  X ##MENU-qty## </strong> <br>
+          <div class="col-8">              
+              ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span>  <br>
           </div>
           <div class="col-4 text-right">
-              <span class="text-danger">##MENU-priceshow##฿</span>
+              <span class="font-color-shop">฿ ##MENU-priceshow##</span>
           </div>
       </div>
       <small class="row">
         <div class="col-12">
-          <strong>รายละเอียด</strong> <br>
-            <span> ##MENU-name## ##MENU-pricedetail## <span class="text-warning">##MENU-note##</span> X ##MENU-qty##  </span>
+            <strong class="text-gray-light2 border-bottom-gray">รายละเอียด</strong> 
+            <div class="mt-2">
+                ##MENU-qty## x  ##MENU-name## <span class="font-color-shop"> ##MENU-pricedetail##</span>
+                
+                <span class="font-color-shop">##MENU-note##</span>
+            </div>
         </div>
 
       </small>
@@ -192,7 +221,7 @@
 
         <div class="modal-footer" >
 
-            <button onclick="$('#modal_image_customer_preview').modal('hide');"  class="btn btn-sm btn-light border border-secondary">
+            <button onclick="$('#modal_image_customer_preview').modal('hide');" id="hidecusmodal" class="btn btn-sm btn-light border border-secondary">
                 <i class="fa fa-fw fa-times"></i> Close
             </button>
         </div>
@@ -270,15 +299,22 @@ function runApp(){
       // $('#shopi0ngcart').html(JSON.stringify(res.detail));
 };
 
-$('#gmap_ordergps').load('/LIFF/modal_gps.html');
-  function find_location_order() {
-    $('#modal_image_customer_preview').hide();
-      var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
-      call_modal_maps(detail, function (data) {
-          console.log('DataBack:', data);
-          addcusaddress(data)
-      });
+$('#gmap_cusgps').load('/LIFF/modal_gps.html');
+function find_location_order() {
+  console.log('cuslocate',ordercustomerlocation);
+  var pos;
+  if (ordercustomerlocation &&  Array.isArray(ordercustomerlocation.coordinates)) {
+      // Already input Location
+      pos = {lat: ordercustomerlocation.coordinates[0], lng: ordercustomerlocation.coordinates[1]};
+      console.log('pos',pos);
+  } else {
+                alert('ไม่พบพิกัด');
+                return false;
   }
+  call_modal_maps(pos);
+    setTimeout(()=>{ $('#hidecusmodal').click()},500);
+}
+
 
 function getcustomeraddress(){
   $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
@@ -313,7 +349,7 @@ function order_accept(obj,orderid,type){
 
 }
 var template_customer = $('#modal_image_customer_preview').html();
-
+var ordercustomerlocation = '';
 function previewcustomer(order_id){
   var address = false;
   var obj_cust;
@@ -323,7 +359,13 @@ function previewcustomer(order_id){
           for(var x=0;x<working.address.length;x++){
                  if(working.address[x]._id == obj.addressid){
                     obj.customerid.address = working.address[x].address;
-                    obj.customerid.location = working.address[x].location;
+                    if(working.address[x].location){
+                        obj.customerid.location = working.address[x].location;
+                        ordercustomerlocation = obj.customerid.location;
+                    }else {
+                      ordercustomerlocation = '';
+                    }
+
                     address = true;
                     console.log('--',obj,address);
                  }

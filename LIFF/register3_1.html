@@ -1,5 +1,7 @@
 <div id='gmap_gps'>
 </div>
+<div id='gmap_gps_raduis'>
+</div>
 <div class="container-fluid main_data">
     <div class="label-orange text-center mb-3" >
         <span class="header_title"><i class="fas fa-store"></i> ตั้งค่าสาขา</span>
@@ -55,6 +57,7 @@ Address: <span class='BRANCH_address editable_branch'>  </span><br>
     setdatabyclass($('.main_data'), 'BRANCH', working.branch);
 
 $('#gmap_gps').load('/LIFF/modal_gps.html');
+$('#gmap_gps_raduis').load('/LIFF/modal_map_raduis.html');
 function show_gps(){
   var pos;
   if(working.branch.location && Array.isArray(working.branch.location.coordinates)){

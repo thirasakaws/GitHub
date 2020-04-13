@@ -14,6 +14,7 @@
     register_all_page();  // Register SubPAGE
     function runApp(){
       $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+          console.log('order',res);
           if(res.result){
             $('#warn-order').hide();
             working.order = res.detail;

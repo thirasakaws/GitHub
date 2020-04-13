@@ -2,15 +2,17 @@
 </div>
 <div class="container-fluid main_data">
     <div class="box-head-title-foodmall text-center  " >
-        <span class="header-foodmall"> 
+        <span class="header-foodmall">
             โปรไฟล์ของฉัน
         </span>
     </div>
-    
+
         <div class="text-center">
             <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
            <div class="mt-3 mb-3">
-              <span class='font-color-foodmall header-sub-title-foodmall CUSTOMER_displayName editable'></span>
+             <input class="text-center h4 input_data_bn edit_data CUSTOMER_displayName font-color-foodmall header-sub-title-foodmal">
+
+              <!-- <span class='font-color-foodmall header-sub-title-foodmall CUSTOMER_displayName editable'></span> -->
 <!--             <span class='h5 text-info CUSTOMER_displayName editable'></span>  -->
              <small class="text-secondary"><i class="fas fa-pen"></i></small>
            </div>
@@ -20,125 +22,48 @@
          <div class="card-body">
 
              <div class="form-group row">
-                 <label class="col-4 font-color-foodmall-gray-light">ชื่อ</label>
-                 <div class="col">
-                     <span class='CUSTOMER_firstname editable'></span>
-                 </div>
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  ชื่อ  </label>
+               <div class="col">
+                   <input class="input_data_bn edit_data CUSTOMER_firstname w-90 " id="firstname" type="text" placeholder="ชื่อ" data-field="firstname">
+               </div>
              </div>   <!-- // -->
-             
+
              <div class="form-group row">
-                 <label class="col-4 font-color-foodmall-gray-light">นามสกุล</label>
-                 <div class="col">
-                     <span class='CUSTOMER_lastname editable'></span>
-                 </div>
-             </div>  <!-- // -->
-             
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  นามสกุล  </label>
+               <div class="col">
+                   <input class="input_data_bn edit_data CUSTOMER_lastname w-90 " id="lastname"  type="text"  placeholder="นามสกุล" data-field="lastname">
+               </div>
+             </div>   <!-- // -->
+
              <div class="form-group row">
-                 <label class="col-4 font-color-foodmall-gray-light">เบอร์ติดต่อ</label>
-                 <div class="col">
-                     <span class='CUSTOMER_mobileno editable'></span>
-                 </div>
-             </div>  <!-- // -->
-             
-             <div class="form-group row d-flex">
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ  </label>
+               <div class="col">
+                   <input class="input_data_bn edit_data CUSTOMER_mobileno w-90 " id="mobileno"  type="text"  placeholder="เบอร์ติดต่อ" data-field="mobileno">
+               </div>
+             </div>   <!-- // -->
+
+             <!-- <div class="form-group row d-flex">
                  <label class="col-4 font-color-foodmall-gray-light">Location</label>
                  <div class="col mr-auto text-right">
 
                       <small onclick='find_location_cus()' class='btn btn-sm btn-outline-submit-foodmall-small rounded-pill'>
                         <i class="fas fa-map-marker-alt"></i> GPS ระบุพิกัดของคุณ
                       </small>
-                      <span id='writelocation_cus' class='badge badge-success' style='display:none'>recorded !</span> 
-                 
+                      <span id='writelocation_cus' class='badge badge-success' style='display:none'>recorded !</span>
+
                  </div>
              </div>  <!-- // -->
-             
+
               <div class="form-group row">
                  <label class="col-4 font-color-foodmall-gray-light">ที่อยู่ปัจจุบัน</label>
                  <div class="col d-flex">
                      <div class="ml-auto">
-                        <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-outline-submit-foodmall-small rounded-pill" onclick='showadd_address();'>
+                        <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-outline-submit-foodmall-small rounded-pill"  onclick='find_location_cus()'>
                             <i class="fas fa-plus"></i> เพิ่มที่อยู่
                         </button>
                       </div>
                  </div>
              </div>  <!-- // -->
-             
-
-              <div class='form-group showadd_address mt-2 card w-100' style='display:none;'>
-                <div class="card-body">
-                    
-                    <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> ที่อยู่</label>
-                        <div class="col">
-                            <input type="text" id="newadd_address" class="form-control">
-                            <small class="text-secondary text-gray-light2">เลขที่/หมู่ ตรอก ซอย ถนน</small>
-                        </div>
-                    </div>  <!-- // -->  
-
-                   <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> แขวง/ตำบล</label>
-                        <div class="col">
-                            <input type="text" id="newadd_subdistrict" class="form-control">
-                        </div>
-                    </div>  <!-- // -->  
-                    
-                    <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> เขต/อำเภอ</label>
-                        <div class="col">
-                            <input type="text" id="newadd_district" class="form-control">
-                        </div>
-                    </div>  <!-- // --> 
-                    
-                    <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> เมือง</label>
-                        <div class="col">
-                             <input type="text" id="newadd_city" class="form-control">
-                        </div>
-                    </div>  <!-- // -->
-                    
-                    <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> จังหวัด</label>
-                        <div class="col">
-                            <input type="text" id="newadd_province" class="form-control">
-                        </div>
-                    </div>  <!-- // -->
-                    
-                    <div class="form-group row">
-                        <label class="col-4 font-color-foodmall-gray-light"> รหัสไปรษณีย์</label>
-                        <div class="col">
-                             <input type="text" id="newadd_zipcode" class="form-control">
-                        </div>
-                    </div>  <!-- // -->
-               
-                     
-                    
-
-                  <button class="btn btn-sm btn-orange btn-block mt-3" onclick="addnewprice();">+ เพิ่มที่อยู่</button>
-                </div>
-                <hr>
-           </div>
-             
-             
-           <div class="form-group row">
-                 <label class="col-4 font-color-foodmall-gray-light"> รหัสไปรษณีย์</label>
-                 <div class="col">
-                     <span class='CUSTOMER_zipcode editable'></span> 
-                 </div>
-             </div>  <!-- // -->  
-
-<!--           <div class="row  mt-1">
-              <div class="col-4">
-                <strong class="card-title">ที่อยู่ปัจจุบัน </strong>
-              </div>
-              <div class="col-6">
-                : <span class='CUSTOMER_address editable'></span>
-              </div>
-           </div>-->
-
-
-
-
-
          </div>
        </div>
 
@@ -147,6 +72,24 @@
 <script>
     // setdatabyclass($('.main_data'), 'LINE', LINE_USER);
     refresh_cusmanage1();
+
+    //for input tag
+    $('.edit_data').Fusefield( (obj,cb,data)=>{
+      console.log("data",data);
+      $.postJSON('/api/liff/update/customerinfo', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+              cb(false);
+          }else {
+              res.detail ? working.customer = res.detail : false;
+            cb(true);
+          }
+      })
+    },(obj)=>{
+      return true;
+    });
+
+
 
     $('#gmap_cusgps').load('/LIFF/modal_gps.html');
       function find_location_cus() {
@@ -182,21 +125,7 @@ function refresh_cusmanage1(){
                 if(!working.customer.firstname) working.customer.firstname ='';
                 if(!working.customer.lastname) working.customer.lastname ='';
                 if(!working.customer.mobileno) working.customer.mobileno ='';
-                if(!working.customer.location) working.customer.location ={};
-                if(!working.customer.address) working.customer.address ='';
-                if(!working.customer.zipcode) working.customer.zipcode ='';
-
                   setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
-                  ADVWS.make_edittext($('.editable'),function(data,obj){
-                      edtable_update_toserver(data,obj,'/api/liff/update/customerinfo');
-                      },function(data2vilidate,field){
-                        if(field =='mobileno'){
-                          if(!data2vilidate || data2vilidate== ''){
-                              return "กรุณาระบุเบอร์ติดต่อ";
-                          }
-                        }
-                          if(!data2vilidate) return "Invalid data";
-                      });
                 // return;
             }
             // $('#customerdetail').html(JSON.stringify(res.detail));

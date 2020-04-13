@@ -80,7 +80,7 @@
 
      <div class="row mt-2">
        <div class="col-12" onclick='showlist_address();'>
-          <textarea class="form-control bg-light " disabled id="addres_area"></textarea>
+          <textarea class="form-control bg-light " disabled id="addres_area" placeholder="คลิกที่นี่เพื่อดูรายการที่อยู่"></textarea>
        </div>
      </div>
      <div class="text-left card" id="showlist_address" style="display:none;">
@@ -122,11 +122,11 @@
             <span class="font-color-foodmall-gray-light2">x</span>
         </div>  <!--// จำนวน -->
 
-        <div class="col-8">
+        <div class="col-7">
             <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
         </div> <!--// ชื่อเมนู -->
 
-        <div class="col-2 text-right">
+        <div class="col-3 text-right">
            ฿ <span class="menu_menuprice">0.00 </span>
         </div> <!--// ราคา -->
       </div>
@@ -208,6 +208,7 @@
               if(!working.order.contact || working.order.contact==''){
                  $('.ORDER_contact').val(working.customer.mobileno);
               }
+              console.log("TEST--",working.order,working.customer);
             },500)
 
     }
@@ -217,23 +218,28 @@
       $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
         if(res.result){
           obj = res.detail;
-          if(!working.order.addressid){
-              working.order.addressid = obj[0]._id;
-          }
-              $('#addres_area').attr('data-id', working.order.addressid)
-          for(var x=0;x<obj.length;x++){
-                 var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
-                 if(obj[x]._id == working.order.addressid){
-                    TR.find('.radio_id').prop('checked', true);
-                    $('#addres_area').val(obj[x].address);
-                 }
-                 TR.find('.radio_id').attr('id','add'+obj[x]._id);
-                 TR.find('.radio_for').attr('for','add'+obj[x]._id);
-                 TR.show();
-          }
+          if(obj.length >0){
+              working.address = res.detail;
+              for(var x=0;x<obj.length;x++){
+                     var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
+                     if (working.order.addressid) {
+                       if(obj[x]._id == working.order.addressid){
+                         working.order.location = obj[x].location;
+                          TR.find('.radio_id').prop('checked', true);
+                          $('#addres_area').val(obj[x].address);
+                          $('#addres_area').attr('data-id', working.order.addressid)
+                       }
+                     }
+                     TR.find('.radio_id').attr('id','add'+obj[x]._id);
+                     TR.find('.radio_for').attr('for','add'+obj[x]._id);
+                     TR.show();
+                }
+              }else {
+                $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
+              }
 
         }else{
-          alert(res.detail);
+          $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
         }
       });
     };
@@ -265,11 +271,18 @@
 
     $('#gmap_ordergps').load('/LIFF/modal_gps.html');
       function find_location_order() {
-          var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
-          call_modal_maps(detail, function (data) {
-              console.log('DataBack:', data);
-              addcusaddress(data)
-          });
+        var pos;
+        if (working.order.location && Array.isArray(working.order.location.coordinates)) {
+            // Already input Location
+            pos = {lat: working.order.location.coordinates[0], lng: working.order.location.coordinates[1]};
+            // console.log('pos',pos);
+        } else {
+                      pos = {}
+        }
+        call_modal_maps(pos, function (data) {
+            // console.log('DataBack:', data);
+            addcusaddress(data)
+        });
       }
       function addcusaddress(loc){
         var data = {
@@ -277,14 +290,13 @@
           address : loc.address
           };
         data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
-        console.log('ORDER GPS',data);
+        // console.log('ORDER GPS',data);
 
         $.postJSON('/api/liff/update/address', data, function (res) {
-          console.log("LOCATE",res);
+          // console.log("LOCATE",res);
           if(res.result){
               $('#writelocation_cus').show('slow').hide('slow');
               getcustomeraddress();
-
           }else{
             alert(res.detail);
           }
@@ -293,12 +305,12 @@
 
     function getUsercustomer() {
         $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
-          console.log("RESPONSE",res);
+          // console.log("RESPONSE",res);
           if(res.result){
             if(res.detail){
                 working.customer = res.detail;
                 setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
-                // $('.ORDER_contact').val(working.customer.mobileno);
+                $('.ORDER_contact').val(working.customer.mobileno);
                 // getcustomeraddress();
             }
 
@@ -312,8 +324,14 @@
       if ($(obj).is(':checked')) {
         var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
         working.order.addressid = dataid;
+        for(var x=0;x<working.address.length;x++){
+          if (working.address[x]._id==dataid) {
+              working.order.location = working.address[x].location;
+          }
+        }
         update_order();
         }
+        // console.log('order -- ',working.order);
 
     }
 
@@ -325,21 +343,18 @@
                   lastname : $('.ORDER_lastname').val(),
                   contact : $('.ORDER_contact').val()
                 };
-                console.log("data",data);
+                // console.log("data",data);
       $.postJSON('/engine/order/update',data,(res)=>{
           if(res.result){
               getcustomeraddress();
               $('#showlist_address').hide();
               showlist_address_temp=false;
-              working.order = res.detail;
-              update_ship_cost();
             }else{
 
             }
          });
     }
-    function update_ship_cost(forceresfresh){
-      //alert("Update SHOP COST");
+    function update_ship_cost(){
       var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');

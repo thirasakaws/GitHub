@@ -4,14 +4,15 @@
 
 <script>
 
-$('#gmap_gps').load('/LIFF/modal_map_marker_view.html',function(){
+$('#gmap_gps').load('/LIFF/modal_gps.html',function(){
+  var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
   function updategpslocation(loc){
     console.log(loc)
   }
   function showError(err){
     console.log(err)
   }
-  call_modal_maps ([100,-12],updategpslocation,showError);
+  call_modal_maps (latlng_default_startup,updategpslocation,showError);
 
 
 
