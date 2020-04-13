@@ -1,0 +1,254 @@
+<div id='gmap_gps'>
+</div>
+<div class="container-fluid main_data">
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> ตั้งค่าสาขา</span>
+    </div>
+
+
+    <h4 class="mt-3 mb-3"> 
+        <i class="fas fa-store font-color-shop"></i> <span class='SHOP_name font-color-shop'></span> 
+    </h4>
+
+    <div class=" row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  ชื่อสาขา </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100 ">
+                <input class="input_data_bn edit_data BRANCH_name w-90" placeholder="สาขา" data-field="name">
+                <!--<span class='BRANCH_name editable_branch font-color-shop text-title110'></span>-->
+            </div>
+        </div>
+    </div> <!-- // สาขา --> 
+
+    <div class="row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  Location </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100 text-right">
+                <button onclick='show_gps()' class='btn btn-sm btn-outline-submit-shop'>
+                    <i class="fas fa-map-marker-alt"></i> GPS ระบุพิกัดร้านอาหาร
+                </button> 
+                <span id='writelocationok' class='badge badge-success' style='display:none'>recorded !</span>
+                
+            </div>
+        </div>
+    </div> <!-- // GPS -->
+
+
+    <div class="row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  Address </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100 ">
+                <input class="input_data_bn edit_data BRANCH_address w-90" placeholder="ที่อยู่" data-field="address">
+                <!--<span class='BRANCH_address editable_branch'>  </span>-->
+            </div>
+        </div>
+    </div> <!-- // Address: -->
+    <div class="row mb-3">
+       <label class="col-sm-4 text-gray-light2 lable-left-35 " ><b>  จังหวัด </b></label>
+       <div class="col d-flex">
+           <!--                                                    <div class="float-left pl-2 mb-2">
+                                                                   <span class='SHOP_bank_account editable_shop'>  </span>
+                                                               </div>-->
+           <div class="float-left pl-2  w-100 ">
+               <select class="input_data_bn edit_data BRANCH_province w-90" data-field="province"></select>
+           </div>
+       </div>
+
+   </div> 
+    <div class=" row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เวลาเปิด-ปิด </label>
+        <div class="col d-flex ml-3 w-100">
+            <div class="float-left pl-2 mb-2 row  w-90">
+<!--                <span class='BRANCH_openclose editable_branch'>  </span>-->
+<span>เปิด&nbsp;
+                    <select id="open_time" class="input_data_bn  edit_data BRANCH_open_time" data-field="open_time">
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                </span>
+                <span>&nbsp;ปิด&nbsp;
+                    <select id="close_time" class="input_data_bn edit_data BRANCH_close_time" data-field="close_time">
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div> <!-- // เวลาเปิดปิด: -->
+
+    <div class=" row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100 ">
+                <input class="input_data_bn edit_data BRANCH_contact w-90" placeholder="เบอร์โทร" data-field="contact">
+<!--                <span class='BRANCH_contact editable_branch'>  </span>-->
+            </div>
+        </div>
+    </div> <!-- // เบอร์ติดต่อ -->
+
+    <div class=" row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  สถานะ </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100">
+                <select class='BRANCH_opening edit_data input_data_bn w-90 ' data-field="opening">
+                    <option value="1">เปิดร้าน</option>
+                    <option value="2">ปิดร้าน</option>
+                </select>
+                
+            </div>
+        </div>
+    </div> <!-- // สถานะ: -->
+
+
+
+
+</div>
+<script>
+    console.log("Manage Branch", working.shopbranch);
+//    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    setdatabyclass($('.main_data'), 'SHOP', working.shop);
+    if (working.branch) {   // Config Data for Default Data if No Data to use
+        if (!working.branch.address)
+            working.branch.address = 'ที่อยู่ร้านอาหาร';
+        if (!working.branch.openclose)
+            working.branch.openclose = 'ร้านเปิด-ปิด ปกติ';
+        if (!working.branch.contact)
+            working.branch.contact = '-';
+        if (!working.branch.opening)
+            working.branch.opening = 1;
+    }
+    $.get('/api/data/ticket/province_list',function(data){
+        
+        var selectoption =""
+        selectoption += '<option value="">----เลือก-----</option>'
+            for(var x=0;x<data.length;x++){
+                selectoption +='<option value="'+data[x]._id+'">'+data[x].name+'</option>'
+            }
+            $('.BRANCH_province').html(selectoption)
+            setdatabyclass($('.main_data'), 'BRANCH', working.branch);
+    })
+
+
+    $('#gmap_gps').load('/LIFF/modal_gps.html');
+    function show_gps() {
+        var pos;
+        if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
+            // Already input Location
+            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1]};
+        } else {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log("GOT POSTIION", position);
+                    pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+                    call_modal_maps(pos, updategpslocation, showError);
+                });
+                return;
+            }
+        }
+        call_modal_maps(pos, updategpslocation, showError);
+
+
+    }
+
+    $('.edit_data').Fusefield( (obj,cb)=>{
+      var field = obj.attr('data-field');
+      var data = {};
+      data.LINE_USER = LINE_USER;
+      data._id = working.branch._id;
+      data.shopid=working.shop._id,
+      data[field] = obj.val();
+      console.log(data)
+      $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+              cb(false);
+          }else cb(true);
+      })
+    },(obj)=>{
+      return true;
+    });
+
+    function updategpslocation(loc) {
+        var data = {
+            LINE_USER: LINE_USER,
+            shopid: working.shop._id,
+            _id: working.branch._id
+        };
+        data.location = {type: "Point", coordinates: [loc.lat, loc.lng]};
+
+        $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                return;
+            }
+            working.branch.location = data.location;
+            $('#writelocationok').show('slow').hide('slow');
+        });
+    }
+
+    ADVWS.make_edittext($('.editable_branch'), function (data, obj) {
+        data.shopid = working.shop._id; // include shopid to check with Server
+        edtable_update_toserver(data, obj, '/api/liff/edit/shopbranch');
+    }, function (data2vilidate) {
+        if (!data2vilidate)
+            return "Invalid data";
+    });
+
+    var array_status = [{value: 1, text: 'เปิดร้าน'}, {value: 2, text: 'ปิดร้าน'}];
+    ADVWS.make_editselect($('.editable_branch_select'), array_status, function (data, obj) {
+        data.shopid = working.shop._id; // include shopid to check with Server
+        edtable_update_toserver(data, obj, '/api/liff/edit/shopbranch');
+    }, function (data2vilidate) {
+        if (!data2vilidate)
+            return "Invalid data";
+    });
+//  $('.editable_branch_select').editable('setValue',1);
+    function showError(error) {
+        console.log("ERROR", error)
+    }
+
+</script>

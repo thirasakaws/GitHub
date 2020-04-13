@@ -1,0 +1,23 @@
+<div class="fixed-bottom" id='modal_edit_text' style='display:none'>
+  <form class='form-control inline' onsubmit="return frm_edit_textsubmit();">
+    <input type='text' id='text_modal_edit'> <button type='button' class='btn btn-sm btn-danger'>X</button>
+    <button type='submit' class='btn btn-sm btn-success'>OK</button>
+  </form>
+</div>
+
+<script>
+  var temp_modal_edit_textfnc;
+function call_modal_edittext(val='',cb=undefined){
+  $('#text_modal_edit').val(val);
+  temp_modal_edit_textfnc = cb;
+  $('#modal_edit_text').modal('show');
+}
+function frm_edit_textsubmit(){
+    $('#modal_edit_text').modal('hide');
+    if(typeof(temp_modal_edit_textfnc)=='function'){
+      temp_modal_edit_textfnc($('#text_modal_edit').val());
+    }
+
+    return false;
+}
+</script>

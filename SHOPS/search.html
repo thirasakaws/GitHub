@@ -1,0 +1,123 @@
+<style media="screen">
+  body {margin: 0; height: 100%; overflow: hidden},
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none;
+  }
+</style>
+
+<div class="container-fluid noselect">
+    
+    <div class="box-head-title-foodmall text-center" >
+        <span class="header-foodmall"> สั่งซื้ออาหารกับทางเรา</span> 
+    </div>
+    
+    
+<div class="form-group  mt-2">
+    <div class="col-12">
+        <input type ="text" value='' placeholder="คำค้นหา" id='keywords' class="form-control form-control-md">
+    </div>
+    
+    
+    <div class="col-12 mt-5">
+       
+            <button class='btn btn-md btn-outline-submit-foodmall mr-1 mb-4' onclick="search_bytype();">
+                <i class="fas fa-search"></i> ประเภทอาหาร
+            </button>
+             
+       
+            <button class='btn btn-md btn-outline-submit-foodmall mr-1 mb-4' onclick="search_bygps();">
+                <i class="fas fa-search"></i> ระยะทาง
+            </button>
+    
+            <button class='btn btn-md btn-outline-submit-foodmall mr-1 mb-4' onclick="search_byprice();">
+                 <i class="fas fa-search"></i> ราคา
+            </button>
+      
+        
+      
+            <button class='btn btn-md btn-outline-submit-foodmall mr-1 mb-4' onclick="">
+                 <i class="fas fa-search"></i> ร้านค้า
+            </button>
+        
+        
+<!--        <select class="form-control">
+            <option onchange="search_bytype();">ประเภทอาหาร </option>
+            <option onclick="search_bygps();">ระยะทาง </option>
+            <option onclick="search_byprice();">ราคาอาหาร </option> 
+        </select>-->
+    </div>
+</div>
+
+ <br>
+
+
+
+</div>
+<script>
+    all_page = ['search-1'];
+    var working={};
+    register_all_page();  // Register SubPAGE
+
+    function runApp() {
+        console.log("RUN APP");
+
+
+    }
+    initializeLiff();
+    function search_bytype(){
+
+        var keys= $('#keywords').val();
+        if(!keys || keys.length < 2){
+        //  alert("กรุณากรอกคำค้นหามากกว่า 1 ตัวอักษรขึ้นไป");
+        //  return;
+        }
+        console.log("Search..");
+        sendtext("MENU: "+keys);
+
+    }
+    function search_bygps(){
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+          console.log("GOT POSTIION",position);
+          var pos = {lat:position.coords.latitude,lng: position.coords.longitude};
+          $.postJSON('/api/liff/update/customerinfo',{LINE_USER:LINE_USER,lastposition:pos},function(res){
+            console.log("GOT res",res);
+            if(res.result){
+                sendtext("ร้านใกล้เคียง: "+$('#keywords').val());
+            }else{
+              alert(res.detail);
+            }
+          });
+        },
+         function (err) {
+            if(err.code == 1) {
+               alert("Error: กรุณาอนุญาติการใช้ GPS \r\n คุณสามารถปิดเมนูแล้วลองทำดูอีกครั้งได้");
+            } else if( err.code == 2) {
+               alert("Error: Position is unavailable!");
+            }
+         });
+        return;
+      }
+
+      console.log("Search..");
+//
+    }
+    function sendtext(text){
+      liff.sendMessages([{
+                 'type': 'text',
+                 'text': text
+             }]).then(function() {
+                 liff.closeWindow();
+             }).catch(function(error) {
+               console.log("Send Error");
+                 window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+             });
+    }
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

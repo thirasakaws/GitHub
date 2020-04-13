@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row alert alert-secondary" role="alert" id="warn-order" style="display:none;">
+    <br>
+
+     <small class="text-secondary">ไม่พบรายการสั่งซื้อของคุณ</small>
+  </div>
+  <!-- ตรวจสอบข้อมูลกรุณารอสักครู่...
+  <div id='shopingcart'>
+  </div> -->
+</div>
+<script>
+    all_page = ['cart-manage','cart-manage1','cart-wait-confirm','cart-wait-payment','cart-show-cancel'];
+     var working={};
+    register_all_page();  // Register SubPAGE
+    function runApp(){
+      $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+          if(res.result){
+            $('#warn-order').hide();
+            working.order = res.detail;
+            if(working.order.status <=5){
+              go2View('cart-manage'); // แก้ไขรายการได้  มียืนยัน ชำระกับยกเลิก
+            }else if(working.order.status == 7 || working.order.status == 8 ){
+              go2View('cart-wait-confirm'); // ยกเลิก ได้อย่างเดียว , เปลี่ยน เบอร์ติดต่อได้
+            }else if(working.order.status == 9 ){
+              go2View('cart-show-cancel'); // ร้านค้าไม่สามารถทำได้ แสดง หน้ายอมรับการยกเลิก
+            }else if(working.order.status == 10 ){    //ร้านค้ายืนยันแล้วว่ามีของพร้อม
+              go2View('cart-wait-payment'); //หน้านี้แสดง QR Payment ด้วย รอจ่ายเงิน หรือไม่ก็ ยกเลิก
+            }else{
+              alert("status:" + working.order.status)
+            }
+          //alert("Found item" +  res.detail.items.length)
+
+            // $('#shopingcart').html(JSON.stringify(res.detail));
+          }else{
+            $('#warn-order').show();
+            // alert(res.detail);
+          }
+      });
+
+    }
+    function resetorder(){
+        if(confirm('ยืนยันยกเลิกรายการทั้งหมด?')){
+        $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'reset'},(res)=>{
+          if(res.result){
+            liff.closeWindow();
+          }else{
+            alert(res.detail);
+          }
+        });
+        }
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

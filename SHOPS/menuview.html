@@ -1,0 +1,34 @@
+<div class="container-fluid" id='mainview'>
+  SHOP: <span class='MENU_shopname'></span> <hr>
+  Menu Name: <span class='MENU_name'></span>
+
+    <div  class="card-columns" id='main_menu_preview'>
+
+    </div>
+    <div> Review of Customer </div>
+...
+<br>
+<div> Write your New Review Here
+        <div> <input type='text'> </div>
+</div>
+<script>
+
+  var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F','');
+
+  $.get('/api/liff/get/menu/'+detail,function(res){
+
+      if(res && res.detail){
+        //alert('OK')
+        setdatabyclass($('#mainview'),'MENU',res.detail)
+        var menu = res.detail;
+        var allhtml = '';
+        for(var x=0 ; x < menu.images.length;x++){
+            allhtml += `<div class="card">
+                <img src="https://www.kinarai.com/cdn/image/menu/${menu.images[x]}" class="card-img-top " >
+            </div>`;
+
+        }
+        $('#main_menu_preview').html(allhtml);
+      }
+  });
+</script>

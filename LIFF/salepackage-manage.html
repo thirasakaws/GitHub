@@ -1,0 +1,333 @@
+<div class='container-fluid main_data' >
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> จัดการเมนูอาหาร</span>
+    </div>
+
+
+    <div class="text-center">
+        <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id">MENU ID</span></span>
+        <h5>ชื่อเมนู : <span class='MENU_name editable font-color-shop' ></span></h5>
+    </div>
+    <hr>
+
+    <div id="mainimage_view" class="text-center">
+        <div id="headimage_menu_view">
+            <img style="width:90%;" onclick='previewimg(this);' class='menu_mainimage_view rounded' src='/api/liff/menu/image/#maunimgsrc' style='display:none' >
+            <br>
+            <span id="main_imagemenu"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class='btn btn-sm btn-outline-submit-shop mt-3' onclick='show_moremanagemenu();'>
+            รูปภาพเมนูอาหาร
+            <i class="fa fa-angle-double-down double-down" aria-hidden="true"></i>
+            <i class="fa fa-angle-double-up double-up" style="display:none;" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="form-group mt-1" style="">
+        <div class='show_moremanagemenu' style='display:none; width:100%'>
+
+            <div class="card mt-1">
+                <div class="card-body">
+                    <strong class="card-title">รูปภาพเมนูอาหาร</strong> <br>
+
+                    <span class="text-warning">**ภาพแรกจะกลายเป็นภาพหลักของเมนูคุณ</span>
+
+                    <div id='image_uploader'></div>
+                    <div id='menu_image_view_div' class="form-inline">
+                        <img style="width:22%;" onclick='previewimg(this);' class='rounded menu_image_view mr-1 ml-1 mb-1' src='/api/liff/menu/image/#imgsrc' style='display:none' >
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!--// รูปย่อย -->
+
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> คำอธิบาย  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <input class="input_data_bn edit_data MENU_description w-90 " placeholder="คำอธิบายเมนู" data-field="description">
+
+                </div>
+                <!--//template for save data one field-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> รายละเอียด  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <input class="input_data_bn edit_data MENU_detail w-90 " placeholder="รายละเอียดเมนู" data-field="detail">
+
+                </div>
+                <!--//template for save data one field-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ประเภทเมนูอาหาร  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <select id="type  " class="input_data_bn  edit_data MENU_type" data-field="type" placeholder="ประเภทเมนู">
+                        <option value="1">ขนมและของหวาน</option>
+                        <option value="2">อาหารทานเล่น</option>
+                        <option value="3">ทอด</option>
+                        <option value="4">ต้ม</option>
+                        <option value="5">ผัด</option>
+                        <option value="6">แกง</option>
+                        <option value="7">ยำ</option>
+                        <option value="8">เครื่องดื่ม</option>
+                    </select>
+
+                </div>
+                <!--//template for save data one field-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ระยะเวลาในการทำ  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <select id="timespent  " class="input_data_bn  edit_data MENU_timespent" data-field="timespent" placeholder="นาที/ชั่วโมง">
+                        <option value="1">น้อยกว่า 30 นาที</option>
+                        <option value="2">30 นาที-1 ชม.</option>
+                    </select>
+
+                </div>
+                <!--//template for save data one field-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ขนาด  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <select id="size  " class="input_data_bn  edit_data MENU_size" data-field="size" placeholder="ขนาด(กรัม)">
+                        <option value="1">น้อยกว่า 500 ก.</option>
+                        <option value="2">500-1000 ก.</option>
+                        <option value="3">1000-2000 ก.</option>
+                    </select>
+                </div>
+                <!--//template for save data one field-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3 border-bottom border-light">
+        <div class="col-12">
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> น้ำหนัก  </b></label>
+            <div class="col d-flex">
+                <!--//template for save data one field-->
+                <div class="float-left pl-2 mb-2 w-100 ">
+                    <select id="weight  " class="input_data_bn  edit_data MENU_weight" data-field="weight" placeholder="น้ำหนัก(กิโลกรัม)">
+                        <option value="1">0.5-1 กก.</option>
+                        <option value="2">1-2 กก.</option>
+                        <option value="3">2-3 กก.</option>
+                        <option value="4">3-4 กก.</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id='main-menuimage'>
+      <div class='rowmenu row_tablecontent' style='display:none' >
+         <img src='/'>
+         <span class='shopmenu_name' data-field='name'>description</span>
+         <button type='button' onclick="managethismenu(this);"> จัดการ</button>
+       </div>
+     </div> -->
+</div>
+<div id='menu_image_preview_div'>
+</div>
+<script>
+    $('#menu_image_preview_div').load('/LIFF/modal_view_menuimage.html');
+    refresh_managemenupage();
+
+    //for input tag
+    $('.edit_data').Fusefield((obj, cb) => {
+        var field = obj.attr('data-field');
+        var data = {};
+        data._id = working.activemenu._id;
+        data.LINE_USER = LINE_USER;
+        data[field] = obj.val();
+
+        console.log("data", data);
+        $.postJSON('/api/liff/edit/menu', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                cb(false);
+            } else {
+                cb(true);
+                refresh_managemenupage();
+            }
+            ;
+        })
+    }, (obj) => {
+        return true;
+    });
+
+
+    function refresh_managemenupage() {
+        $.postJSON('/api/liff/get/menu', {LINE_USER: LINE_USER, _id: working.menunow}, (res) => {
+            if (!res.result) {
+                alert(res.detail);
+                return;
+            }
+            working.activemenu = res.detail;
+            // Set Default
+            if (!working.activemenu.description)
+                working.activemenu.description = '';
+            // if(!working.activemenu.price) working.activemenu.price = 10000;
+            if (!working.activemenu.detail)
+                working.activemenu.detail = '';
+            if (!working.activemenu.images)
+                working.activemenu.images = [];
+            if (!working.activemenu.type)
+                working.activemenu.type = '';
+            if (!working.activemenu.timespent)
+                working.activemenu.timespent = '';
+            if (!working.activemenu.size)
+                working.activemenu.size = '';
+            if (!working.activemenu.weight)
+                working.activemenu.weight = '';
+            var mainimage_view_template = $('#mainimage_view').html();
+            if (working.activemenu.images.length > 0) {
+                loadmainmenuimage();
+            } else {
+                $('.menu_mainimage_view').hide();
+                $('#main_imagemenu').addClass('text-warning text-center').html('คุณยังไม่มีรูปภาพเมนูอาหาร กรุณาใส่รูปภาพเมนูอาหาร')
+            }
+
+
+            setdatabyclass($('.main_data'), 'MENU', working.activemenu);
+
+            ADVWS.make_edittext($('.editable'), function (data, obj) {
+                edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+                // setTimeout(function() {      // Auto Show NEXT
+                //     $(obj).closest('span').next().find('.editable').editable('show');
+                // }, 200);
+            }, function (data2vilidate, field) {
+                if (field == 'price') {
+                    if (!(Number(data2vilidate) > 0)) {
+                        return "กำหนดราคาขั้นต่ำ 1 บาท";
+                    }
+                }
+                if (!data2vilidate)
+                    return "Invalid data";
+            });
+
+            // var array_weight = [{value: 1, text: 'ของหวาน'}, {value: 2, text: 'ของคาว'}];
+            // ADVWS.make_editselect($('.MENU_type'), array_weight, function (data, obj) {
+            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+            // }, function (data2vilidate) {
+            //     if (!data2vilidate)
+            //         return "Invalid data";
+            // });
+            //
+            // var array_weight = [{value: 1, text: 'น้อยกว่า 500 กรัม'}, {value: 2, text: '500-1000 กรัม'}];
+            // ADVWS.make_editselect($('.MENU_size'), array_weight, function (data, obj) {
+            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+            // }, function (data2vilidate) {
+            //     if (!data2vilidate)
+            //         return "Invalid data";
+            // });
+            //
+            // var array_weight = [{value: 1, text: 'น้อยกว่า 0.5 กก.'}, {value: 2, text: '0.5-1 กก.'}];
+            // ADVWS.make_editselect($('.MENU_weight'), array_weight, function (data, obj) {
+            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+            // }, function (data2vilidate) {
+            //     if (!data2vilidate)
+            //         return "Invalid data";
+            // });
+            //
+            // var array_weight = [{value: 1, text: 'น้อยกว่า 30 นาที'}, {value: 2, text: '30 นาที - 1 ชม.'}];
+            // ADVWS.make_editselect($('.MENU_timespent'), array_weight, function (data, obj) {
+            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+            // }, function (data2vilidate) {
+            //     if (!data2vilidate)
+            //         return "Invalid data";
+            // });
+
+        });
+    }
+    ;
+
+
+    var template_menu_mainimage_view = $('#headimage_menu_view').html();
+    function loadmainmenuimage() {
+        $('#headimage_menu_view').html('');
+        var temphtml = template_menu_mainimage_view.replace('#maunimgsrc', working.activemenu.images[0]);
+        $('#headimage_menu_view').html(temphtml);
+        $('.menu_mainimage_view').show(temphtml);
+    }
+
+
+    var template_menu_image_view = $('#menu_image_view_div').html();
+    $('#image_uploader').load('/LIFF/modal_file_upload.html', function () {
+        var data2post = {LINE_USER: LINE_USER, menuid: working.menunow};
+        call_modal_image_upload({url: '/api/liff/menu/uploader', postdata: data2post}, (res) => {
+            // POST Image Finish
+            console.log('UPload finish', res);
+            if (res.result) {
+                if (res.detail && res.detail.images) {
+                    working.activemenu = res.detail;
+                    show_menu_image();
+                    refresh_managemenupage();
+                }
+            }
+        });
+        show_menu_image();
+    });
+
+    var show_moremanagemenu_show = false;
+    function show_moremanagemenu() {
+        show_menu_image();
+        if (show_moremanagemenu_show) {
+            $('.show_moremanagemenu').hide();
+            $('.double-down').show();
+            $('.double-up').hide();
+        } else {
+            $('.show_moremanagemenu').show();
+            $('.double-down').hide();
+            $('.double-up').show();
+        }
+        show_moremanagemenu_show = !show_moremanagemenu_show;
+    }
+
+
+    function show_menu_image() {
+        $('#menu_image_view_div').html('');
+        var temphtml = '';
+        console.log("SHOWING IMAGE", working.activemenu.images)
+        if (Array.isArray(working.activemenu.images)) {
+            if (working.activemenu.images.length == 0) {
+                $('#headimage_menu_view').html(template_menu_mainimage_view)
+                $('.menu_image_view').hide();
+            } else {
+                for (var x = 0; x < working.activemenu.images.length; x++) {
+                    temphtml += template_menu_image_view.replace('#imgsrc', working.activemenu.images[x]);
+                }
+            }
+        }
+        $('#menu_image_view_div').html(temphtml);
+        $('.menu_image_view').show(temphtml);
+    }
+    function previewimg(obj) {
+        call_modal_image_menupreivew($(obj));
+    }
+
+</script>

@@ -1,0 +1,51 @@
+<style>
+    .list-group-item { 
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+</style>
+<div class="container-fluid main_data">
+     <div class="box-head-title-foodmall text-center  " >
+        <span class="header-foodmall"> 
+            โปรไฟล์ของฉัน
+        </span>
+    </div> <!--// line-bottom-color-foodmall -->
+    
+        <div class="text-center">
+            <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
+           <div class="mt-3 mb-3">
+             <h5 class='font-color-foodmall header-sub-title-foodmall CUSTOMER_displayName'></h5>
+             
+           </div>
+        </div>  <!-- // Line Profile -->
+        
+        <div class="card row mt-3">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between" onclick="open_customermanage();">
+                <span class="">ข้อมูลส่วนตัว</span> <i class="fas fa-angle-right font-color-foodmall"></i>
+            </li>
+          <!-- <li class="list-group-item d-flex justify-content-between"><span>ร้านโปรดของคุณ</span>  <i class="fas fa-angle-right"></i></li>
+          <li class="list-group-item d-flex justify-content-between"><span>เมนูโปรดของคุณ</span>  <i class="fas fa-angle-right"></i></li>
+          <li class="list-group-item d-flex justify-content-between"><span>ประวัติการสั่งซื้อ</span>  <i class="fas fa-angle-right"></i></li> -->
+          <li class="list-group-item d-flex justify-content-between">
+              <span>ศูนย์บริการความช่วยเหลือ</span>  <i class="fas fa-angle-right font-color-foodmall"></i>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+              <span>การตั้งค่า</span>  <i class="fas fa-angle-right font-color-foodmall"></i>
+          </li>
+        </ul>
+      </div>
+
+</div> <!-- // container-fluid  -->
+
+<script>
+  refresh_cusmanage();
+
+
+function refresh_cusmanage(){
+  setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+};
+  function open_customermanage(){
+    go2View('customer-manage1');
+  }
+  </script>

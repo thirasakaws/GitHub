@@ -1,0 +1,28 @@
+<div class="container-fluid" id='mainview'>
+  SHOP VIEW
+  <img src=''>
+</div>
+<script>
+
+  var liffstring = '?liff.state=%2Fshopid%3D';
+  var detail = window.location.search.replace(liffstring,'');
+  if(detail){
+      window.sessionStorage.setItem("shopId",detail);
+  }
+  function runApp(){
+    alert(LINE_USER.displayName);
+    alert("SHOPID:" + detail)
+  }
+    //alert(window.location.href);
+    var temp = window.location.href.replace(liffstring+detail,'');
+    //alert(temp);
+    if(window.location.href !== temp){
+        window.history.pushState({
+          callpath: 'shopview'
+        }, 'ShopView', temp);
+    }
+  initializeLiff();
+
+
+
+</script>

@@ -1,0 +1,61 @@
+Test File UPLOAD
+
+<div id='modal_form'>
+</div>
+<div id='testcrop'>
+</div>
+<div class="container-fluid main_data">
+<span type='text' id='testtext' data-field='data'>TEST TEXT </span>
+</div>
+<select id='testselect' onchange="updatefnc(this);">
+</select>
+
+
+
+<button type="button" class="btn btn-success btn-icon tooltips_attach_images" title="กำหนดแนบไฟล์รูปภาพ"  onclick="topic_upload_image()" data-toggle="tooltip" data-placement="top" ><i class="fa fa-fw fa-picture-o"></i>Upload Image File</button>
+
+<br>
+<div class="container-fluid main_data">
+
+<select id="country" multiple="multiple">
+  </select>
+</div>
+<script>
+  $('#modal_form').load('/adminkinarai/modal_file_upload.html');
+function topic_upload_image(){
+  call_modal_image_upload({url:'/api/image/shop/uploader',postdata:{shopid:1,name:'testkub',owner:'testowner'}},function(data){
+    console.log("responseback",data);
+
+  });
+};
+
+var data = [{_id:1,name:'test'} ,{_id:2,name:'test2'} ,{_id:3,name:'test3'} ];
+setdata_selection($(testselect),data,2);
+ADVWS.make_edittext($('#testtext'),updatefnc,validatefnc);
+/// ########  TEST TAGS
+var testset = {
+  url:'/api/tags/shoptype',
+  postdata:{name:'testja',status:1},
+  tagname : 'mytag'
+}
+
+ ADVWS.make_selecttags($('#country'),['a','d'],testset,function(obj){
+   console.log("Data update",obj)
+   
+ },false);
+
+
+
+function updatefnc(newdata,jqueryobj){
+  console.log(newdata,jqueryobj)
+  //alert("Error");
+  //return "Server ERROR"
+  // Return When Error
+}
+function validatefnc(newvalue){
+  if(newvalue !='test'){
+    return "ต้องใส่ test เพื่อUpdate เท่านั้น";
+    // Return When Error
+  }
+}
+</script>

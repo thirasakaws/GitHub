@@ -1,0 +1,31 @@
+<div class="container-fluid main_data">
+        <div class="text-center">
+            <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
+           <div class="">
+             <h4 class='text-info CUSTOMER_displayName'></h4>
+             <button type="button" class="btn btn-light" onclick="open_customermanage();">แก้ไขข้อมูลส่วนตัว <i class="fas fa-angle-right"></i></button>
+           </div>
+        </div>  <!-- // Line Profile -->
+        <div class="card row mt-1">
+        <ul class="list-group list-group-flush">
+          <!-- <li class="list-group-item d-flex justify-content-between"><span>ร้านโปรดของคุณ</span>  <i class="fas fa-angle-right"></i></li>
+          <li class="list-group-item d-flex justify-content-between"><span>เมนูโปรดของคุณ</span>  <i class="fas fa-angle-right"></i></li>
+          <li class="list-group-item d-flex justify-content-between"><span>ประวัติการสั่งซื้อ</span>  <i class="fas fa-angle-right"></i></li> -->
+          <li class="list-group-item d-flex justify-content-between"><span>ศูนย์บริการความช่วยเหลือ</span>  <i class="fas fa-angle-right"></i></li>
+          <li class="list-group-item d-flex justify-content-between"><span>การตั้งค่า</span>  <i class="fas fa-angle-right"></i></li>
+        </ul>
+      </div>
+
+</div> <!-- // container-fluid  -->
+
+<script>
+  refresh_cusmanage();
+
+
+function refresh_cusmanage(){
+  setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+};
+  function open_customermanage(){
+    go2View('customer-manage1');
+  }
+  </script>

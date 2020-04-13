@@ -1,0 +1,402 @@
+<div id='gmap_ordergps'>
+</div>
+<div class="container-fluid main_data">
+
+ <div class="box-head-title-foodmall text-center line-bottom-color-foodmall " >
+        <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i>  สรุปรายการสั่งซื้อ</span>
+</div>
+
+
+<!--  <div class="text-center">
+        <h4>สรุปรายการสั่งซื้อ </h4>
+  </div> -->
+
+  <div class="text-secondary d-flex justify-content-between">
+    <h6 class="text-orange">ข้อมูลการจัดส่ง</h6>
+
+    <span class="btn btn-sm btn-outline-danger" onclick="resetorder();"> <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกรายการ</span>
+  </div>
+
+  <div class="">
+    <!--<small>ส่งไปยัง</small>-->
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="form-group">
+                <label class="font-color-foodmall-gray-light2 lable-left-35 " > ชื่อ </label>
+                <input class="input_data_bn edit_data CUSTOMER_firstname ORDER_firstname w-90 " placeholder="ชื่อผู้รับ" data-field="firstname">
+            </div> <!--// -->
+
+        </div>
+        <div class="col-6">
+           <div class="form-group">  
+                <label class="font-color-foodmall-gray-light2 lable-left-35 " > นามสกุล  </label>
+                <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="นามสกุล" data-field="lastname">
+            </div> <!--// -->
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-12">
+            <div class="form-group row"> 
+                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
+                <div class="col">
+                    <input class="input_data_bn edit_data ORDER_contact w-90 " type="text" min="10" max="10" placeholder="เบอร์ติดต่อ" data-field="contact">
+                </div>
+            </div> <!--// -->
+        </div>
+        
+        <div class="col-12">
+            <div class="form-group row"> 
+                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >   วิธีการจ่ายเงิน <span class="text-danger">*</span> </label>
+                <div class="col">
+                    <select id="paymenttype" class="input_data_bn  edit_data ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน">
+                      <option value="" disabled selected>โปรดระบุ</option>
+                      <option value="1">Cash On Delivery</option>
+                      <option value="2">QR payment By Quickpay</option>
+                  </select>
+                </div>
+            </div> <!--// -->
+        </div>
+       
+    </div> <!--// row -->
+   
+  </div>
+
+  <hr>
+
+  <div class="form-group mt-3 border-bottom border-light mt-3">
+    <div class="row">
+      <div class="col-6">
+          <label class="font-color-foodmall-gray-light2 " style="width:auto;"> ที่อยู่ปลายทาง</label>
+      </div>
+      <div class="col-6 text-right">
+          <div class="ml-auto">
+           <button type="button" name="button" class="btn btn-sm btn-outline-submit-foodmall rounded-pill" onclick='find_location_order();'>
+               <i class="fas fa-plus"></i> เพิ่มที่อยู่
+           </button>
+          </div>
+       </div>
+    </div> <!--// -->
+
+
+     <div class="row mt-2">
+       <div class="col-12" onclick='showlist_address();'>
+          <textarea class="form-control bg-light " disabled id="addres_area"></textarea>
+       </div>
+     </div>
+     <div class="text-left card" id="showlist_address" style="display:none;">
+       <div class="col-12 text-center">
+         <div class="btn btn-block">
+             <strong class="h4 text-secondary"> <span>เลือกที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
+         </div>
+       </div>
+       <div class="card-body" id="address_list">
+         <div class="custom-control custom-radio row_tablecontent" style="display:none;" >
+           <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
+           <label class="custom-control-label add_address radio_for" for=""></label>
+         </div>
+       </div>
+     </div> <!--// -->
+
+ </div>
+
+    <!-- <div class='form-group showadd_address mt-2 card w-100' style='display:none;'>
+      <div class="card-body">
+        <div class="">
+          <strong onclick='find_location_order()' class='badge badge-pill badge-danger' style="font-size:150%;">
+              GPS <i class="fas fa-map-marker-alt"></i>
+            </strong>
+            <br><small class="text-warning">**กดที่ GPS เพื่อดู map</small>
+            <span id='writelocation_order' class='badge badge-success' style='display:none'>recorded !</span>
+        </div>
+      </div>
+ </div> -->
+
+  <div class="mt-2 mb-2 bg-space-gray"></div>
+
+  <div class="mt-1 mb-5">
+      <h6 class="font-color-foodmall">สรุปคำสั่งซื้อ</h6>
+    <div class="" id="listmenuorder">
+      <div class="row row_tablecontent" style="display:none">
+        <div class="col-2 text-left">
+            <span class="menu_qty">0</span> 
+            <span class="font-color-foodmall-gray-light2">x</span>
+        </div>  <!--// จำนวน -->
+          
+        <div class="col-8">
+            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+        </div> <!--// ชื่อเมนู -->
+        
+        <div class="col-2 text-right">
+           ฿ <span class="menu_menuprice">0.00 </span>
+        </div> <!--// ราคา -->
+      </div>
+        
+    </div>
+    <hr>
+    
+    
+    <div class="align-items-center">
+      <div class="row">
+          <div class="col-6">
+              ค่าอาหาร
+          </div>
+          <div class="col-6 text-right">
+              ฿ <span class="total_price">0 </span> 
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <span class="total_distance font-color-foodmall">0 </span> กม.
+          </div>
+          <div class="col-6 text-right">
+               ฿ <span class="total_shippingcost">0 </span>
+          </div>
+      </div>
+      <hr>  
+        
+      <div class="row ">
+          <div class="col-6">
+              รวมทั้งหมด
+          </div>
+          <div class="col-6 text-right ">
+              ฿ <span class="grandtotal">0 </span> 
+          </div>
+      </div>
+      <hr>  
+    </div>
+
+  </div>
+
+  <div class="fixed-bottom">
+    <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="checkout_payment();"> ยืนยันรายการ และชำระเงิน </button>
+
+  </div>
+
+</div>
+<script>
+  var showlistadd_temp = $('#address_list').html();
+  var template_ordermenulist = $('#listmenuorder').html();
+  refresh_managecart1();
+
+  //for input tag
+  $('.edit_data').Fusefield( (obj,cb,data)=>{
+    console.log("data",data);
+    $.postJSON('/engine/order/update', data, function (res) {
+        if (!res.result) {
+            alert(res.detail);
+            cb(false);
+        }else {
+            res.detail ? working.order = res.detail : false;
+          cb(true);
+        }
+    })
+  },(obj)=>{
+    return true;
+  });
+
+
+    function refresh_managecart1(){
+      if (working.order) {
+        console.log("ORDER",working.order);
+
+      }
+            getUsercustomer();
+            getcustomeraddress();
+            setTimeout(()=>{
+              showmwnuorderlist(working.order.items);
+              setdatabyclass($('.main_data'), 'ORDER', working.order);
+              if(!working.order.contact || working.order.contact==''){
+                 $('.ORDER_contact').val(working.customer.mobileno);
+              }
+            },500)
+
+    }
+
+    function getcustomeraddress(){
+       $('#address_list').html(showlistadd_temp);
+      $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+        if(res.result){
+          obj = res.detail;
+          if(!working.order.addressid){
+              working.order.addressid = obj[0]._id;
+          }
+              $('#addres_area').attr('data-id', working.order.addressid)
+          for(var x=0;x<obj.length;x++){
+                 var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
+                 if(obj[x]._id == working.order.addressid){
+                    TR.find('.radio_id').prop('checked', true);
+                    $('#addres_area').val(obj[x].address);
+                 }
+                 TR.find('.radio_id').attr('id','add'+obj[x]._id);
+                 TR.find('.radio_for').attr('for','add'+obj[x]._id);
+                 TR.show();
+          }
+
+        }else{
+          alert(res.detail);
+        }
+      });
+    };
+
+    function showmwnuorderlist(obj){
+      $('#listmenuorder').html(template_ordermenulist);
+
+        for(var x=0;x<obj.length;x++){
+          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
+        //  totalprice += obj[x].menuprice;
+          obj[x].pricedes = obj[x].price.detail;
+               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
+               if(obj[x].menuprice>0){
+                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+               }else {
+                 TR.find('.menu_menuprice').html('0.00')
+               }
+               if (obj[x].note) {
+                  TR.find('.menu_notedate').show();
+               }
+
+               TR.show();
+
+               /// +=delivery
+        }
+        update_ship_cost();
+
+    }
+
+    $('#gmap_ordergps').load('/LIFF/modal_gps.html');
+      function find_location_order() {
+          var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+          call_modal_maps(detail, function (data) {
+              console.log('DataBack:', data);
+              addcusaddress(data)
+          });
+      }
+      function addcusaddress(loc){
+        var data = {
+          LINE_USER : LINE_USER,
+          address : loc.address
+          };
+        data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
+        console.log('ORDER GPS',data);
+
+        $.postJSON('/api/liff/update/address', data, function (res) {
+          console.log("LOCATE",res);
+          if(res.result){
+              $('#writelocation_cus').show('slow').hide('slow');
+              getcustomeraddress();
+          }else{
+            alert(res.detail);
+          }
+        });
+      };
+
+    function getUsercustomer() {
+        $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
+          console.log("RESPONSE",res);
+          if(res.result){
+            if(res.detail){
+                working.customer = res.detail;
+                setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+                // $('.ORDER_contact').val(working.customer.mobileno);
+                // getcustomeraddress();
+            }
+
+          }else{
+            //Do Something
+          }
+        });
+    }
+
+    function updateorder_add(obj) {
+      if ($(obj).is(':checked')) {
+        var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
+        working.order.addressid = dataid;
+        update_order();
+        }
+
+    }
+
+    function update_order(){
+      var data = {
+                  LINE_USER: LINE_USER,
+                  addressid:working.order.addressid,
+                  firstname : $('.ORDER_firstname').val(),
+                  lastname : $('.ORDER_lastname').val(),
+                  contact : $('.ORDER_contact').val()
+                };
+                console.log("data",data);
+      $.postJSON('/engine/order/update',data,(res)=>{
+          if(res.result){
+              getcustomeraddress();
+              $('#showlist_address').hide();
+              showlist_address_temp=false;
+            }else{
+
+            }
+         });
+    }
+    function update_ship_cost(){
+      var grandtotal = Number(working.order.totalcost);
+      var order=working.order;
+      order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');
+      if(order.logistic){
+          grandtotal += order.logistic.deliveryTotalAmount;
+          order.logistic.distanceShopToCustomerInKM ? $('.total_distance').html(addCommas(order.logistic.distanceShopToCustomerInKM)) : $('.total_distance').html('0.00');
+          order.logistic.deliveryTotalAmount ? $('.total_shippingcost').html(addCommas(order.logistic.deliveryTotalAmount)) : $('.total_shippingcost').html('0.00');
+      }
+
+      grandtotal ? $('.grandtotal').html(addCommas(grandtotal)) : $('.grandtotal').html('0.00');
+
+    }
+    function checkout_payment(){
+      if(!working.order.contact || working.order.contact.length < 10){
+        alert('กรุณาระบุเบอร์ติดต่อ')
+        return false;
+      }
+      if(Number(working.order.paymenttype) > 0){
+
+      }else{
+        alert('กรุณาระบุวิธีการชำระเงิน')
+        return false;
+      }
+
+      if(working.order && working.order.items && working.order.items.length >0 && working.order._id){
+          liff.sendMessages([{
+                   'type': 'text',
+                   'text': "OrderConfirm: #"+working.order._id
+               }]).then(function() {
+                   liff.closeWindow();
+               }).catch(function(error) {
+                  console.log("Send Error");
+                   window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+               });
+
+      }else{
+          alert("รายการสั่งซื้อของคุณยังไม่พร้อมสำหรับชำระเงิน");
+      }
+    };
+
+    var showlist_address_temp=false;
+    function showlist_address(){
+      $('.showadd_address').hide();
+
+      if(showlist_address_temp){
+        $('#showlist_address').hide();
+      }else{
+          $('#showlist_address').show();
+      }
+      showlist_address_temp = !showlist_address_temp;
+    }
+
+    // var showadd_address_temp=false;
+    // function showadd_address(){
+    //   $('#showlist_address').hide();
+    //   showlist_address_temp=false;
+    //   if(showadd_address_temp){
+    //     $('.showadd_address').hide();
+    //   }else{
+    //       $('.showadd_address').show();
+    //   }
+    //   showadd_address_temp = !showadd_address_temp;
+    // }
+</script>

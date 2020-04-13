@@ -1,0 +1,348 @@
+<div id='gmap_ordergps'>
+</div>
+<div class="container-fluid">
+  <div class="label-orange text-center mb-3" >
+    <span class="header_title">รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i> </span>
+  </div>
+
+  <hr>
+  <div id="order_last">
+      Please Wait..
+  </div>
+  <style media="screen">
+
+    .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+    .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+}
+  </style>
+
+  <div id="order_template1" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="text-center">
+            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+          <div class="row">
+            <div class="col-6 p-1">
+                <button type="button" class="btn btn-danger btn-circle btn-xl float-left" onclick="order_accept(this,##ORDER-id##,'reject');" >ไม่รับ</button>
+            </div>
+            <div class="col-6 p-1">
+                <button type="button" class="btn btn-success btn-circle btn-xl float-right" onclick="order_accept(this,##ORDER-id##,'accept');" >รับ</button>
+            </div>
+          </div
+        </div>
+       </div>
+    </div>
+
+    <div id="order_template2" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="text-center">
+            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+
+          <button type="button" class="btn btn-success btn-lg btn-block" onclick="order_accept(this,##ORDER-id##,'working');" >ตอบรับทำรายการ</button>
+        </div>
+       </div>
+    </div>
+    <div id="order_template3" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="text-center">
+            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+
+          <button type="button" class="btn btn-success btn-lg btn-block"  onclick="order_accept(this,##ORDER-id##,'finish');" >ตอบรับทำเสร็จแล้ว</button>
+        </div>
+       </div>
+    </div>
+
+    <div id="order_template5" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="text-center">
+            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+        </div>
+       </div>
+    </div>
+
+
+
+  <div id="order_template_menu" style="display:none;">
+    <div class="border rounded p-2 mt-1">
+      <div class="row">
+          <div class="col-8">
+              <strong>##MENU-name##  X ##MENU-qty## </strong> <br>
+          </div>
+          <div class="col-4 text-right">
+              <span class="text-danger">##MENU-priceshow##฿</span>
+          </div>
+      </div>
+      <small class="row">
+        <div class="col-12">
+          <strong>รายละเอียด</strong> <br>
+            <span> ##MENU-name## ##MENU-pricedetail## <span class="text-warning">##MENU-note##</span> X ##MENU-qty##  </span>
+        </div>
+
+      </small>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modal_image_customer_preview"  tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ข้อมูลลูกค้า</h5> <!-- Image Preview -->
+      </div>
+
+        <div class="modal-body" >
+          <div class="row">
+            <div class="col-4">
+              <img id='file_image_preview' src='##CUS-pictureUrl##' class="rounded" width='100%'>
+            </div>
+            <div class="col-8">
+              <small>
+                <span class="h5"> ##CUS-displayName##</span> <br>
+                <div class="row">
+                    <div class="col-12">
+                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-mobileno##</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <strong>ข้อมูลจัดส่ง</strong> : ##CUS-address##
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <small onclick='find_location_order();' class='btn btn-sm btn-outline-danger rounded-pill'>
+                        <i class="fas fa-map-marker-alt"></i> ดูพิกัด GPS
+                      </small>
+                    </div>
+                </div>
+                </small>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer" >
+
+            <button onclick="$('#modal_image_customer_preview').modal('hide');"  class="btn btn-sm btn-light border border-secondary">
+                <i class="fa fa-fw fa-times"></i> Close
+            </button>
+        </div>
+
+    </div>
+  </div>
+</div>
+<script>
+    all_page = ["order_seller_latest1"];
+    var working = {};
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-8WBq4nwD';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+  var template1= $("#order_template1").html();    // Order Status = 7
+  var template2= $("#order_template2").html();    // Order Status = 11
+  var template3= $("#order_template3").html();    // Order Status = 15
+  var template5= $("#order_template5").html();    // Order Status = 5/10
+  var order_template_menu = $('#order_template_menu').html();
+
+  var STATUSSHOW =[];
+  STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
+  STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
+  STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
+  STATUSSHOW[11]='ลูกค้าชำระเงินแล้ว';
+  STATUSSHOW[12]='ลูกค้าจะชำระเงินแบบ COD';
+  STATUSSHOW[15]='ร้านกำลังดำเนินการ';
+  STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
+
+function runApp(){
+    getcustomeraddress();
+  $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+      if(res.result){
+        working.orderlast = res.detail;
+        if(working.orderlast.length ==0){
+            $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+        if (working.orderlast) {
+          //console.log("ORDER",working.orderlast);
+          var order1=[],order2=[],order3=[],order5=[];
+
+           working.orderlast.map((obj)=>{   // setting Some Default
+
+             if(!obj.note) obj.note='';
+                  obj.statusshow = STATUSSHOW[obj.status];
+                  obj.items.map((item)=>{   // setting Some Default
+                      item.priceshow = item.price.price;
+                      item.pricedetail = item.price.detail;
+                  });
+                  if(obj.status==7) order1.push(obj);
+                  else if(obj.status==11 || obj.status==12) order2.push(obj);
+                  else if(obj.status==5 || obj.status==10) order5.push(obj);
+                  else if(obj.status==15) order3.push(obj);
+                  else order5.push(obj);
+                obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
+           });
+           var html1  = hash_replace(template1,'ORDER',order1)
+           var html2  = hash_replace(template2,'ORDER',order2)
+           var html3  = hash_replace(template3,'ORDER',order3)
+           var html5  = hash_replace(template5,'ORDER',order5)
+           $("#order_last").html(html1+html2+html3+html5);
+          }else {
+            return 'ไม่พบเมนู'
+          }
+          // go2View('order_seller_latest1');
+        // $('#shopingcart').html(JSON.stringify(res.detail));
+      }else{
+        //$('#warn-order').show();
+        go2View('must-openshop');
+        // alert(res.detail);
+      }
+  });
+      // $('#shopi0ngcart').html(JSON.stringify(res.detail));
+};
+
+$('#gmap_ordergps').load('/LIFF/modal_gps.html');
+  function find_location_order() {
+    $('#modal_image_customer_preview').hide();
+      var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+      call_modal_maps(detail, function (data) {
+          console.log('DataBack:', data);
+          addcusaddress(data)
+      });
+  }
+
+function getcustomeraddress(){
+  $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+    console.log('getadd',res);
+    if(res.result){
+      working.address = res.detail;
+      // console.log('getadd',res);
+      // obj = res.detail;
+      // for(var x=0;x<obj.length;x++){
+      //        if(obj[x]._id == working.order.addressid){
+      //           $('.ORDER_address').html(obj[x].address);
+      //        }
+      // }
+
+    }else{
+      // alert(res.detail);
+    }
+  });
+};
+
+function order_accept(obj,orderid,type){
+  $(obj).hide();
+  var data={LINE_USER: LINE_USER,
+    orderid:orderid
+  }
+  data.action=type;
+  $.postJSON('/engine/order/shop',data,(res)=>{
+      if(res.result){
+        runApp();
+      }
+  });
+
+}
+var template_customer = $('#modal_image_customer_preview').html();
+
+function previewcustomer(order_id){
+  var address = false;
+  var obj_cust;
+    working.orderlast.map((obj)=>{
+      // console.log('add',working.address);
+      if(working.address){
+          for(var x=0;x<working.address.length;x++){
+                 if(working.address[x]._id == obj.addressid){
+                    obj.customerid.address = working.address[x].address;
+                    obj.customerid.location = working.address[x].location;
+                    address = true;
+                    console.log('--',obj,address);
+                 }
+            }
+        }else {
+          return 'address not found'
+        }
+
+      if(obj._id == order_id) obj_cust = obj.customerid
+    })
+    if(address){
+      console.log('add',obj_cust);
+        $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
+        $('#modal_image_customer_preview').modal('show');
+      }
+      // address = !address;
+}
+
+initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

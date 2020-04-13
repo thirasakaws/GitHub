@@ -1,0 +1,430 @@
+<style>
+    .form-group {
+        margin-bottom: 0rem;
+    }
+    .fa-camera size_icon-sm {
+        font-size:2em !important;
+    }
+</style>
+<div class="container-fluid main_data">
+
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> จัดการร้านอาหาร</span>
+    </div>
+
+
+    <div class="text-center p-2 row" id="edit_image_shop"  >
+        <div class="col-sm-12 text-center mb-3" id='shop_image_view_div' style="padding: auto !important ;margin: auto !important;">
+            <div id='image_uploader' style="display:none"></div>
+            <img class='shop_image_view rounded border border-light img-front-shop' onclick="fncmanageimage()" src='/api/liff/shop/image/#imgsrc'  >
+        </div> <!-- รูปภาพร้านค้า -->
+
+        <div class="col-sm-12 text-center mt-2 rounded p-1 border border-light" >
+            <span onclick="fncmanageimage()" class="font-color-shop">
+                <i class="fas fa-camera fa-1x font-color-shop "></i>
+                แก้ไขรูปภาพ
+            </span>
+        </div>
+    </div>
+
+
+    <div class="form-group row p-2">
+        <span  class="text-gray-light col-8 col-sm-8">
+            ชื่อร้าน :  <span class='SHOP_name font-color-shop'></span>
+        </span>
+
+        <div class="col-sm-4 col-4 text-rigth ">
+            <span class="font-color-shop float-lg-right"  onclick="edit_shop();">
+                <i class="fas fa-cogs"></i> ตั้งค่าร้าน
+            </span>
+        </div>
+
+    </div> <!-- // ชื่อร้าน -->
+
+
+    <div class="form-group row p-2">
+        <span  class="text-gray-light col-12 col-sm-12"> สถานะ : <span class="badge badge-pill badge-success SHOP_status"></span></span>
+    </div> <!-- // สถานะ -->
+
+    <div class="form-group row  border-light p-2">
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Manual-Auto)</span> </label>
+        <div class="col text-right d-flex d-inline ">
+            <div class="ml-auto">
+                <label class="switch">
+                    <input type="checkbox" id="confirm_order" onchange="changeconfirm_order(this)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+        </div>
+    </div> <!-- // การยืนยัน order auto-mannual -->
+
+    <div class="form-group row  border-light p-2">
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  การเปิด-ปิดร้าน <span class="text-gray-light2">(Off-On)</span> </label>
+        <div class="col text-right d-flex d-inline ">
+            <div class="ml-auto">
+                <label class="switch">
+                    <input type="checkbox" id="service_status" onchange="change_service_status(this)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+        </div>
+    </div> <!-- // เปิดปิดร้าน -->
+
+
+    <!--    <div class="form-group row p-2">
+            <span class="col-sm-12 text-gray-light"> ประเภทร้านอาหาร  </span>
+            <div class="col-sm-12">
+                <select class="SHOP_type"  multiple="multiple" placeholder="เลือกประเภทร้านค้า"></select>
+            </div>
+        </div>-->
+    <!-- // ประเภทร้านอาหาร -->
+
+
+    <hr>
+    <div id='shopbranch-select' class="row form-group p-2" >
+        <span  class="col-sm-12 col-xs-12 col-12 text-gray-light"> สาขา </span>
+        <div class="col-sm-12 col-xs-12 col-12">
+            <select class="form-control " id='shopbranch' ></select>
+        </div>
+    </div> <!-- // สาขา -->
+
+    <div class="form-group row p-2">
+        <div class="col-sm-8 col-8 col-xs-8">
+            <button class='btn btn-sm btn-submit-shop' onclick='show_createbranch();'>
+                <i class="fas fa-plus"></i> สร้างสาขา
+            </button>
+        </div>
+        <span class="font-color-shop col-sm-4 col-xs-4 col-4 float-lg-right text-right" onclick='fncmanagebranch()' id='managebranch' style='display:none'>
+            <i class="fas fa-cogs"></i> ตั้งค่าสาขา
+        </span>
+    </div> <!-- // สร้างสาขา -->
+
+    <div class="form-group row p-2 " style="">
+        <div class='show_createbranch' style='display:none; width:100%'>
+            <label for="createbranch" class="col-sm-2 col-form-label"> สร้างสาขา  </label>
+            <div class="col-sm-12 d-flex">
+                <div class="" style="width:76%">
+                    <input type='text' class='form-control form-control' id='shopbranchname' placeholder="ชื่อสาขา" >
+                    <br>
+                </div>
+                <div class="ml-auto">
+                    <button class="btn btn-sm btn-outline-orange font-color-shop" onclick='createnewbranch()'>
+                        <i class="fas fa-plus"></i> สาขาใหม่
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- // สร้างสาขา -->
+    <hr>
+
+
+
+            <div class="rounded bg-light pl-2 pb-2">
+                <div class="font-color-shop line-for-header pt-1 pb-1">
+                    Share Admin Shop For The Other
+
+                </div>
+                <div class="mt-3 pr-1">
+                    <span> เข้าบริหารจัดการร้านค้า อื่น :</span>
+                    <div class="form-group row">
+                        <div class="col-8 pr-0">
+                            <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'>
+                            <small id="emailHelp" class="form-text text-muted">กรอกรหัสลับเพื่อเข้าจัดการบริหารร้านค้าอื่น</small>
+                        </div>
+                        <div class="col">
+                            <button class='btn btn-sm btn-submit-shop btn-block' onclick="loginshopshare();">
+                                <i class="fas fa-sign-in-alt"></i> Log-in
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- // เข้าบริหารจัดการร้านค้า -->
+
+
+            <div class="rounded bg-light pl-2 mt-5">
+                <div class="font-color-shop line-for-header pt-1 pb-1">
+                    กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ
+                </div>
+                <div class="mt-3 pr-1">
+                    <!--<span> เข้าบริหารจัดการร้านค้า อื่น :</span>-->
+                    <div class="form-group row">
+                        <div class="col-8 pr-0">
+                            Shared Key : <span class="text-gray-light2" id='shopsharenumber'></span>
+                        </div>
+                        <div class="col text-right d-flex d-inline ">
+                            <div class="ml-auto">
+                                <label class="switch">
+                                    <input type="checkbox" id="sharethisshop" onchange="changeshopshare(this)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                             <small id="emailHelp" class="form-text text-muted">
+                                 ** คุณสามารถ Share Key ให้สิทธิ์บุคคลอื่น จัดการร้านค้านี้ได้โดย ให้พิมพ์ข้อความ ตามหมายเลข นี้
+                    เมื่อเลิกการแชร์แล้ว ปิด ส่วนนี้ ผู้ที่ใช้งาน Share อยู่ก็จะไม่สามารถเข้าใช้ได้อีก
+                             </small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- // กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ -->
+            <hr>
+            <div> Advance  ...<button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
+                                        <i class="fas fa-sign-in-alt"></i> For Multiple Shop
+                                    </button></div>
+
+</div>
+<script>
+    console.log("Setting", working.shop);
+    var template_shop_image_view;
+    $('#image_uploader').load('/LIFF/modal_file_upload.html', function () {
+        var data2post = {LINE_USER: LINE_USER, shopid: working.shop._id};
+        call_modal_image_upload({url: '/api/liff/shop/uploader', postdata: data2post}, (res) => {
+            // POST Image Finish
+            console.log('UPload finish', res);
+            if (res.result) {
+                if (res.detail && res.detail.images) {
+                    working.shop = res.detail;
+                    show_shop_image();
+                }
+            }
+        });
+        template_shop_image_view = $('#shop_image_view_div').html();
+        show_shop_image();
+    });
+    $('#shop_image_preview_div').load('/LIFF/modal_view_shopimage.html');
+    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    setdatabyclass($('.main_data'), 'SHOP', working.shop);
+    if (working.shop.status == 1) {
+        $('.SHOP_status').html('รอตรวจสอบ');
+        $('.SHOP_status').css("background-color", "#f1c40f");
+    }
+    if (working.shop.status == 5) {
+        $('.SHOP_status').html('อนุมัติเรียบร้อย');
+        $('.SHOP_status').css("background-color", "#229954");
+    }
+    if (working.shop.confirm_order == "auto") {
+        $('#confirm_order').prop('checked', true);
+    } else if (working.shop.confirm_order == "manual") {
+        $('#confirm_order').prop('checked', false)
+    }
+
+    if (working.shop.service_status == "online") {
+        $('#service_status').prop('checked', true);
+    } else if (working.shop.service_status == "offline") {
+        $('#service_status').prop('checked', false)
+    }
+    if (working.shop.shop_share == "share") {
+        $('#sharethisshop').prop('checked', true);
+        $('#shopsharenumber').html(working.shop.shopsharenumber);
+        if (working.shop.shopshareuser) {
+            $('#shopsharenumber').html(working.shop.shopsharenumber + ' : (' + working.shop.shopshareuser.length + ' users)');
+        } else {
+            $('#shopsharenumber').html(working.shop.shopsharenumber + ' : (0 users)');
+        }
+    } else {
+        $('#sharethisshop').prop('checked', false);
+        $('#shopsharenumber').html('-');
+    }
+    var shopbranch_select_template = $('#shopbranch-select').html();
+    function check_shopbranch() {
+        $.postJSON('/api/liff/check/shopbranch', {LINE_USER: LINE_USER, shopid: working.shop._id}, function (res) {
+            console.log("res from branch");
+            console.log(res);
+            $('#shopbranch').html(''); // Clear Old Value
+            if (Array.isArray(res.detail) && res.detail.length > 0) {
+                working.shopbranch = res.detail;
+                $('#shopbranch-select').html(shopbranch_select_template).removeClass('alert alert-warning').addClass('text-left');
+                $('.show_createbranch').hide();
+                $('#managebranch').show();
+            } else {
+                $('#shopbranch-select').addClass('text-danger text-center alert alert-warning').html('ดูเหมือน คุณจะยังไม่มีสาขา ? <br> สร้างสาขาใหญ่ ของคุณได้เลย')
+
+            }
+            setdata_selection($('#shopbranch'), res.detail);
+        });
+    }
+    function loginshopshare() {
+        var ran = $('#shopshareloginnumber').val();
+        if (!ran)
+            return;
+
+        $.postJSON('/api/liff/login/shopshare', {LINE_USER: LINE_USER, shopid: working.shop._id, shopsharenumber: ran}, function (res) {
+            if (res.result && res.detail) {
+                alert(res.detail);
+                liff.closeWindow();
+            } else {
+                alert(res.detail);
+            }
+        });
+    }
+    check_shopbranch();
+    var show_createbranch_show = false;
+    function show_createbranch() {
+        if (show_createbranch_show) {
+            $('.show_createbranch').hide('slow');
+        } else {
+            $('.show_createbranch').show('slow');
+        }
+        show_createbranch_show = !show_createbranch_show;
+    }
+
+    function createnewbranch() {
+        if (!$('#shopbranchname').val()) {
+            return alert('กรุณากรอกข้อมูลสาขา');
+        }
+        var objbranch = {
+            LINE_USER: LINE_USER,
+            shopid: working.shop._id,
+            name: $('#shopbranchname').val()
+        }
+        $.postJSON('/api/liff/register/shopbranch', objbranch, function (res) {
+            if (res.result) {
+                check_shopbranch();
+            } else {
+                alert(res.detail);
+            }
+        });
+    }
+    function change_service_status(obj_service) {
+        var service_status;
+        var textalert;
+        if ($(obj_service).is(':checked')) {
+            service_status = "online";
+            textalert = "คุณต้องการ เปิดให้บริการร้านใช่หรือไม่ ?"
+        } else {
+            service_status = "offline";
+            textalert = "คุณต้องการ ปิดให้บริการร้านใช่หรือไม่ ?"
+        }
+        var setdata2 = {LINE_USER: LINE_USER, _id: working.shop._id, service_status: service_status}
+        if (confirm(textalert) == true) {
+            $.postJSON('/api/liff/edit/shop', setdata2, function (res) {
+                if (!res.result) {
+                    return alert(res.detail);
+                }
+            });
+        }
+
+    }
+    function changeshopshare(obj) {
+        var shop_share;
+        if ($(obj).is(':checked')) {
+            shop_share = "share";
+            textalert = "คุณต้องการ เปิดให้ผู้อื่นจัดการร้านค้าของคุณ ?"
+        } else {
+            shop_share = "off";
+            textalert = "คุณต้องการ ปิดการจัดการร้านค้าของคุณจากบุคคลอื่น ?"
+        }
+        var setdata2 = {LINE_USER: LINE_USER, _id: working.shop._id, shop_share: shop_share}
+        if (confirm(textalert) == true) {
+            $.postJSON('/api/liff/edit/shop', setdata2, function (res) {
+                if (!res.result) {
+                    return alert(res.detail);
+
+                } else {
+                    if (shop_share == 'share' && res.detail) {
+                        $('#shopsharenumber').html(res.detail.shopsharenumber);
+                    } else {
+                        $('#shopsharenumber').html('');
+                    }
+                }
+            });
+        } else
+            return false;
+    }
+
+
+    function changeconfirm_order(obj_con) {
+        var confirm_order;
+        if ($(obj_con).is(':checked')) {
+            confirm_order = "auto";
+        } else {
+            confirm_order = "mannual";
+        }
+        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id, confirm_order: confirm_order}
+        //        $.postJSON('/api/liff/edit/shop', setdata, () => {
+        //            working.shop.confirm_order = confirm_order;
+        //        });
+        $.postJSON('/api/liff/edit/shop', setdata, function (res) {
+            if (!res.result) {
+                return alert(res.detail);
+            }
+        });
+    }
+    function fncmanageimage() {
+        $('#edit_image_shop').attr('disabled', true)
+        $.get(location.href, function (data) {
+            $("#shop_image_view").html(data.replace(/src=/g, 'xsrc='));
+        });
+        go2View('edit_image_shop');
+        return false
+    }
+
+    function fncmanagebranch() {
+        if (Number($('#shopbranch').val()) > 0) {
+            for (var x = 0; x < working.shopbranch.length; x++) {
+                if (working.shopbranch[x]._id == $('#shopbranch').val()) {
+                    working.branch = working.shopbranch[x];
+                }
+            }
+            if (!working.branch) {
+                return alert("Not found Branch");
+            }
+
+            go2View('register3');
+        } else {
+            alert("Invalid Branch");
+        }
+
+    }
+
+    function show_shop_image() {
+
+        $('#shop_image_view_div').html('');
+        var temphtml = '';
+        //console.log("SHOWING IMAGE", template_shop_image_view)
+
+        if (Array.isArray(working.shop.images)) {
+//            for (var x = 0; x < working.shop.images.length; x++) {
+            temphtml += template_shop_image_view.replace('#imgsrc', working.shop.images[0]);
+//            }
+        }
+        $('#shop_image_view_div').html(temphtml);
+        $('.shop_image_view').show(temphtml);
+    }
+
+    function previewimg(obj) {
+        call_modal_image_preivew($(obj));
+    }
+
+    ADVWS.make_edittext($('.editable_shop'), function (data, obj) {
+        edtable_update_toserver(data, obj, '/api/liff/edit/shop');
+    }, function (data2vilidate) {
+        if (!data2vilidate)
+            return "Invalid data";
+    });
+    // main_url_get_tags = '/api/tags/shoptype';
+    // $('.SHOP_type').adv_tags(working.shop.type,false);
+
+
+//    ADVWS.make_selecttags($('.SHOP_type'), working.shop.type, {url: '/api/tags/shoptype', postdata: {}}, function (data) {
+//        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id, type: data}
+//        $.postJSON('/api/liff/edit/shop', setdata, () => {
+//        working.shop.type = data;
+//    });
+//    }, false);
+    function edit_shop() {
+        go2View('edit_shop');
+    }
+
+
+
+    //  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

@@ -1,0 +1,188 @@
+<div id='gmap_cusgps'>
+</div>
+<div class="container-fluid main_data">
+        <div class="text-center">
+            <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
+           <div class="">
+             <span class='h4 text-info CUSTOMER_displayName editable'></span>  <small class="text-secondary"><i class="fas fa-pen"></i></small>
+           </div>
+        </div>  <!-- // Line Profile -->
+
+        <div class="row card">
+         <div class="card-body">
+
+           <div class="row mt-1">
+              <div class="col-4">
+                <strong class="card-title"> ชื่อ </strong>
+              </div>
+              <div class="col-4">
+                : <span class='CUSTOMER_firstname editable'></span>
+              </div>
+           </div>
+
+           <div class="row mt-1">
+              <div class="col-4">
+                <strong class="card-title"> นามสกุล </strong>
+              </div>
+              <div class="col-4">
+                : <span class='CUSTOMER_lastname editable'></span>
+              </div>
+           </div>
+
+           <div class="row mt-1">
+              <div class="col-4">
+                <strong class="card-title text-danger">เบอร์ติดต่อ *</strong>
+              </div>
+              <div class="col-4">
+                : <span class='CUSTOMER_mobileno editable'></span>
+              </div>
+           </div>
+
+           <div class="row  mt-1">
+              <div class="col-4">
+                <strong class="card-title">Location </strong>
+              </div>
+              <div class="col-4">
+                <strong onclick='find_location_cus()' class='badge badge-pill badge-danger'>
+                    GPS <i class="fas fa-map-marker-alt"></i>
+                  </strong>
+                  <span id='writelocation_cus' class='badge badge-success' style='display:none'>recorded !</span>
+              </div>
+           </div>
+
+           <!-- <div class="form-group row mt-3 border-bottom border-light mt-3">
+               <label class="col-sm-4 text-gray-light font-weight-bold " style="width:auto;">  ที่อยู่ปัจจุบัน</label>
+               <div class="col text-right d-flex d-inline">
+                   <div class="ml-auto">
+                    <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-outline-orange" onclick='showadd_address();'>
+                        <i class="fas fa-plus"></i> เพิ่มที่อยู่
+                    </button>
+                   </div>
+               </div>
+           </div> <!-- // ที่อยู่
+
+              <div class='form-group showadd_address mt-2 card w-100' style='display:none;'>
+                <div class="card-body">
+                  <div class="row mt-1">
+                    <div class="col-4">
+                      ที่อยู่
+
+                    </div>
+                    <div class="col">
+                      <input type="text" id="newadd_address" class="form-control">
+                      <small class="text-secondary text-gray-light2">( เช่น ธรรมดา + เพิ่มใข่ดาว )</small>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-4">
+                      กำหนดราคา
+                    </div>
+                    <div class="col">
+                      <div class="input-group">
+                          <input type="number" id="newprice_price" class="form-control">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text">บาท</div>
+                          </div>
+                      </div>
+                        <small class="text-secondary text-gray-light2">( ราคาอาหารจานนี้ )</small>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-orange btn-block mt-3" onclick="addnewprice();">+ เพิ่มรายการ</button>
+                </div>
+                <hr>
+           </div> -->
+
+
+
+           <!-- backup -->
+
+           <div class="row  mt-1">
+              <div class="col-4">
+                <strong class="card-title">ที่อยู่ปัจจุบัน </strong>
+              </div>
+              <div class="col-6">
+                : <span class='CUSTOMER_address editable'></span>
+              </div>
+           </div>
+
+           <div class="row  mt-1">
+              <div class="col-4">
+                <strong class="card-title">รหัสไปรษณีย์ </strong>
+              </div>
+              <div class="col-4">
+                : <span class='CUSTOMER_zipcode editable'></span>
+              </div>
+           </div>
+
+           <!-- backup -->
+
+
+
+         </div>
+       </div>
+
+</div> <!-- // container-fluid  -->
+
+<script>
+    // setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    refresh_cusmanage1();
+
+    $('#gmap_cusgps').load('/LIFF/modal_gps.html');
+      function find_location_cus() {
+          var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+          call_modal_maps(detail, function (data) {
+              console.log('DataBack:', data);
+              updategpslocation(data)
+          });
+      }
+
+      function updategpslocation(loc){
+        var data = {
+          LINE_USER : LINE_USER,
+          };
+        data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
+
+        $.postJSON('/api/liff/update/customerinfo',data,function(res){
+          console.log("RES",res);
+              if(!res.result){
+                alert(res.detail);
+                return;
+              }
+              working.customer.location = data.location ;
+              $('#writelocation_cus').show('slow').hide('slow');
+        });
+      }
+
+function refresh_cusmanage1(){
+    if(!working.customer.firstname) working.customer.firstname ='';
+    if(!working.customer.lastname) working.customer.lastname ='';
+    if(!working.customer.mobileno) working.customer.mobileno ='';
+    if(!working.customer.location) working.customer.location ={};
+    if(!working.customer.address) working.customer.address ='';
+    if(!working.customer.zipcode) working.customer.zipcode ='';
+
+      setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+      ADVWS.make_edittext($('.editable'),function(data,obj){
+          edtable_update_toserver(data,obj,'/api/liff/update/customerinfo');
+          },function(data2vilidate,field){
+            if(field =='mobileno'){
+              if(!data2vilidate || data2vilidate== ''){
+                  return "กรุณาระบุเบอร์ติดต่อ";
+              }
+            }
+              if(!data2vilidate) return "Invalid data";
+          });
+
+};
+
+var showadd_address_temp=false;
+function showadd_address(){
+  if(showadd_address_temp){
+    $('.showadd_address').hide();
+  }else{
+      $('.showadd_address').show();
+  }
+  showadd_address_temp = !showadd_address_temp;
+}
+
+  </script>

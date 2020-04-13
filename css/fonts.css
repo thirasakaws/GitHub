@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'CSChatThai';
+    src: url('../fonts/CSChatThai/CSChatThai.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CSChatThaiUI';
+    src: url('../fonts/CSChatThai/CSChatThaiUI.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Prompt Light';
+    src: url('../fonts/Prompt/Prompt-Light.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Prompt Medium';
+    src: url('../fonts/Prompt/Prompt-Medium.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Prompt Regular';
+    src: url('../fonts/Prompt/Prompt-Regular.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Prompt SemiBold';
+    src: url('../fonts/Prompt/Prompt-SemiBold.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Regular';
+    src: url('../fonts/roboto/Roboto-Regular.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Light';
+    src: url('../fonts/roboto/Roboto-Light.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'K2D Light';
+    src: url('../fonts/k2d/K2D-Light.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'K2D Regular';
+    src: url('../fonts/k2d/K2D-Regular.ttf') format('truetype');         
+    font-weight: normal;
+    font-style: normal;
+}

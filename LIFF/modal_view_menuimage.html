@@ -1,0 +1,60 @@
+<div class="modal fade bd-example-modal-lg" id="modal_image_menu_preview"  tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">รูปเมนูอาหาร</h5> <!-- Image Preview -->
+            </div>
+
+            <div class="modal-body" >
+                <img id='file_image_preview' src='' class="rounded" width='100%'>
+
+            </div>
+
+            <div class="modal-footer" >
+                <button onclick='fnc_delete_menuimage(this);' class="btn btn-sm btn-danger">
+                    <i class="far fa-trash-alt"></i> Delete this file..
+                </button>
+
+                <button onclick="$('#modal_image_menu_preview').modal('hide');"  class="btn btn-sm btn-light border border-secondary">
+                    <i class="fa fa-fw fa-times"></i> Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var tempcbfnc_image_menupreview;
+    function call_modal_image_menupreivew(jquerobj, cbfnc) {
+        $('#modal_image_menu_preview').modal('show');
+        $('#file_image_preview').attr('src', jquerobj.attr('src'));
+        if (typeof (cbfnc) == 'function')
+            tempcbfnc_image_menupreview = cbfnc;
+
+    }
+    function fnc_delete_menuimage(obj) {
+        $('#modal_image_menu_preview').modal('hide');
+        var temp_src = $('#file_image_preview').attr('src')
+        console.log(working)
+        var cutsrc = temp_src.split("/api/liff/menu/image/");
+        console.log(cutsrc)
+        var dataimage = cutsrc[1]
+        var tempimage = working.activemenu.images
+
+
+        var setdata = {LINE_USER: LINE_USER, _id: working.activemenu._id}
+        if (tempimage.indexOf(dataimage) > -1) {
+            console.log(tempimage.indexOf(dataimage))
+//            tempimage.splice(tempimage.indexOf(dataimage), 1)
+            console.log(tempimage)
+            var index = tempimage.indexOf(dataimage);
+            tempimage.splice(tempimage.indexOf(dataimage), 1)
+            setdata.images = tempimage;
+            $.postJSON('/api/liff/delete/image_menu', setdata, (res) => {
+                console.log(res)
+                alert('ลบรูปภาพแล้ว')
+                show_menu_image()
+            });
+        }
+    }
+</script>

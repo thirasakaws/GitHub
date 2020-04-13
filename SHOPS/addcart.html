@@ -1,0 +1,102 @@
+<div class="container-fluid">
+<div id='result-add'>
+<!--Processing...-->
+<div class="box-head-title-foodmall text-center" >
+        <span class="header-foodmall"> กรุณาเลือกเมนูอาหารที่ต้องการสั่ง</span> 
+    </div>
+
+</div>
+    
+<div class="p-1 mt-3 select_price bg-light rounded mt-1" style="display:none">
+    <div id='menuprice-select' class="" style="width:100%">
+         <span class="font-color-foodmall pl-1"> เลือกรายการ </span>
+         <div class="form-group row pb-2">
+             
+             <div class="col-10 pr-0">
+                  <select class="form-control ml-1" id='menu_select'></select>
+             </div>
+              <div class="col-2 pl-0 pr-0 pl-2">
+                <button onclick='update_price()' class=' btn btn-md btn-submit-foodmall rounded-circle' id='managebranch'>
+                   <i class="fas fa-plus"></i> 
+                </button>
+             </div>
+         </div>
+
+     </div>
+</div>
+    
+    <div class="row mt-3">
+        <div class="col-4 text-left">
+            <button type='button' class="btn btn-outline-secondary" onclick="liff.closeWindow();">
+                <i class="fas fa-times"></i> ยกเลิก 
+            </button>
+        </div>
+        
+        <div class="col text-right">
+            <button type='button' class="btn btn-outline-submit-foodmall" onclick="go2View('cart')">
+               <i class="fas fa-shopping-basket"></i> ดูรถเข็นของคุณ 
+                <!--                See your Shopping Cart -->
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    // all_page = [''];
+     var working={};
+    var liffstring = '?liff.state=%2Fmenuid%3D';
+    var detail = window.location.search.replace(liffstring,'');
+    var menuid = detail;
+    function fnc_noprofile(){
+      alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
+      liff.login();
+    }
+    var select_template = $('#shopbranch-select').html();
+        function runApp(){
+        var data2send ={
+          LINE_USER: LINE_USER,
+          menuid:menuid,
+          selectedprice:working.selectedprice,
+          main:main_web_site
+          }
+      $.postJSON('/engine/order',data2send,(res)=>{
+          if(res.result){
+            if(res.action =='selectprice'){ // Show Select Price
+              $('.select_price').show();
+              working.selectprice = res.detail.prices;
+              set_selection(res.detail.prices);
+              return;
+            }
+
+            $("#result-add").html("เพิ่มสินค้าไปยังรถเข็นแล้ว").addClass('text-success pt-3 pb-3');
+          }else{
+            $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
+          }
+
+      });
+
+    }
+    function set_selection (allprice){
+        var html ='';
+        for(var x=0; x < allprice.length;x++){
+          html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
+        }
+            $('#menu_select').html(html);
+      }
+      function update_price(){
+          var index = $('#menu_select').val();
+        //  alert("INDEX:" + index);
+          $('.select_price').hide('slow');
+          working.selectedprice = working.selectprice[index];
+          runApp();
+      }
+
+    var temp = window.location.href.replace(liffstring+detail,'');
+    if(window.location.href !== temp){
+        window.history.pushState({
+          callpath: 'addcart'
+        }, 'Add item to Shoppingcart', temp);
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

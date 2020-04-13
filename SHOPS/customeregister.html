@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  Please wait...
+    Check Completeness Customer Data:<br>
+    <div id='customerdetail'>
+    </div>
+</div>
+<script>
+    all_page = ['customer-manage','customer-manage1'];
+    var working={};
+    register_all_page();  // Register SubPAGE
+    function runApp() {
+        console.log("RUN APP");
+        $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
+          if(res.result){
+            if(res.detail){
+                working.customer = res.detail;
+                go2View('customer-manage');
+                return;
+            }
+            // $('#customerdetail').html(JSON.stringify(res.detail));
+
+          }else{
+            alert(res.detail);
+          }
+        });
+
+    }
+    initializeLiff();
+
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

@@ -1,0 +1,724 @@
+<style>
+    .input_data_bn {
+        border:none;
+        outline: none;
+        width:90%;
+        background-color:transparent
+    }
+    .w-90 {
+        width: 90% !important
+    }
+    .input_data_b {
+        outline: none;
+        width:90%;
+        background-color:transparent
+    }
+    .hide {
+        display: none
+    }
+    .card-header {
+        background-color: #fff
+    }
+</style>
+
+<div class="container-fluid main_data" style="margin-bottom:100px">
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> ตั้งค่าร้านอาหาร</span>
+    </div>
+    
+    
+    <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+           <i class="fas fa-store fa-1x"></i>  ข้อมูลทั่วไป
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="">
+                    <div class="row ">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b> Shop Name  </b></label>
+                        <div class="col d-flex">
+                            <!--//template for save data one field-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_name " placeholder="ชื่อร้าน" data-field="name">
+                                <span class="save_status"></span><!--//for icon status-->
+                            </div> 
+                            <!--//template for save data one field-->
+                        </div>
+                    </div> <!-- // Address -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  Address </b></label>
+                        <div class="col d-flex ">
+                            <div class="float-left pl-2  w-100 ">
+                                <!--<span class='SHOP_name editable_shop'></span>-->
+                                <input class="input_data_bn edit_data SHOP_address" placeholder="ที่อยู่" data-field="address">
+                                <span class="save_status"></span>
+                            </div>
+
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_address editable_shop'>  </span>
+                                                        </div>-->
+                        </div>
+                    </div> <!-- // Address -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  เวลาเปิด-ปิด </b></label>
+                        <div class="col d-flex ml-3 w-100">
+                            <div class="float-left pl-2 mb-2 row  w-90">
+                                <span>เปิด&nbsp;
+                                    <select id="open_time" class="change_data SHOP_open_time" data-field="open_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                    <span class="save_status"></span>
+                                </span>
+                                <span>&nbsp;ปิด&nbsp;
+                                    <select id="close_time" class=" change_data SHOP_close_time" data-field="close_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                    <span class="save_status"></span>
+                                </span>
+
+                                <!--<span class='SHOP_openclose editable_shop'>  </span>-->
+                            </div>
+
+                        </div>
+                    </div> <!--// เวลาเปิด-ปิด  -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  เบอร์ติดต่อ </b></label>
+                        <div class="col d-flex">
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_contact editable_shop'>  </span>
+                                                        </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_contact " placeholder="เบอร์ติดต่อ" data-field="contact">
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+                    </div> <!--// เบอร์ติดต่อ  -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  บัญชีธนาคาร </b></label>
+                        <div class="col d-flex">
+                            <!--                                                    <div class="float-left pl-2 mb-2">
+                                                                                    <span class='SHOP_bank_account editable_shop'>  </span>
+                                                                                </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_bank_account " placeholder="xxxx-xxxx-xxxx-xxxx" data-field="bank_account">
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+
+                    </div> <!--// บัญชีธนาคาร  -->
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  ช่องทางการชำระ </b></label>
+                        <div class="col d-flex">
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_paychannel editable_shop_select'>  </span>
+                                                        </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <select class="input_data_b change_data SHOP_paychannel " data-field="paychannel">
+                                    <option value="1">QuickPay (PromptPay)</option>
+                                    <option value="2">เก็บเงินปลายทาง</option>
+                                </select>
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+                    </div> <!--// ช่องทางการชำระ  -->
+                </div> <!--// end -->
+          
+          
+      </div>
+    </div> <!-- content--> 
+  </div>
+        
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="accordion" id="accordion_shop mt-4">
+        <div class="card card-header line-bottom-color-shop" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div class="font-color-shop header-sub-title   ">
+
+                <i class="fas fa-store fa-1x"></i>  ข้อมูลทั่วไป
+                <i class="fas fa-caret-down" style=" float: right"></i>
+
+            </div>
+        </div>
+        <div id="collapseOne" class=" collapse show" aria-labelledby="headingOne" data-parent="#accordion_shop">
+            <div class="card-body">
+                <div class="">
+                    <div class="row ">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b> Shop Name  </b></label>
+                        <div class="col d-flex">
+                            <!--//template for save data one field-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_name " placeholder="ชื่อร้าน" data-field="name">
+                                <span class="save_status"></span><!--//for icon status-->
+                            </div> 
+                            <!--//template for save data one field-->
+                        </div>
+                    </div> <!-- // Address -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  Address </b></label>
+                        <div class="col d-flex ">
+                            <div class="float-left pl-2  w-100 ">
+                                <!--<span class='SHOP_name editable_shop'></span>-->
+                                <input class="input_data_bn edit_data SHOP_address" placeholder="ที่อยู่" data-field="address">
+                                <span class="save_status"></span>
+                            </div>
+
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_address editable_shop'>  </span>
+                                                        </div>-->
+                        </div>
+                    </div> <!-- // Address -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  เวลาเปิด-ปิด </b></label>
+                        <div class="col d-flex ml-3 w-100">
+                            <div class="float-left pl-2 mb-2 row  w-90">
+                                <span>เปิด&nbsp;
+                                    <select id="open_time" class="change_data SHOP_open_time" data-field="open_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                    <span class="save_status"></span>
+                                </span>
+                                <span>&nbsp;ปิด&nbsp;
+                                    <select id="close_time" class=" change_data SHOP_close_time" data-field="close_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                    <span class="save_status"></span>
+                                </span>
+
+                                <!--<span class='SHOP_openclose editable_shop'>  </span>-->
+                            </div>
+
+                        </div>
+                    </div> <!--// เวลาเปิด-ปิด  -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  เบอร์ติดต่อ </b></label>
+                        <div class="col d-flex">
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_contact editable_shop'>  </span>
+                                                        </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_contact " placeholder="เบอร์ติดต่อ" data-field="contact">
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+                    </div> <!--// เบอร์ติดต่อ  -->
+
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  บัญชีธนาคาร </b></label>
+                        <div class="col d-flex">
+                            <!--                                                    <div class="float-left pl-2 mb-2">
+                                                                                    <span class='SHOP_bank_account editable_shop'>  </span>
+                                                                                </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <input class="input_data_bn edit_data SHOP_bank_account " placeholder="xxxx-xxxx-xxxx-xxxx" data-field="bank_account">
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+
+                    </div> <!--// บัญชีธนาคาร  -->
+                    <div class="row button-top_gray">
+                        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  ช่องทางการชำระ </b></label>
+                        <div class="col d-flex">
+                            <!--                            <div class="float-left pl-2 mb-2">
+                                                            <span class='SHOP_paychannel editable_shop_select'>  </span>
+                                                        </div>-->
+                            <div class="float-left pl-2  w-100 ">
+                                <select class="input_data_b change_data SHOP_paychannel " data-field="paychannel">
+                                    <option value="1">QuickPay (PromptPay)</option>
+                                    <option value="2">เก็บเงินปลายทาง</option>
+                                </select>
+                                <span class="save_status"></span>
+                            </div>
+                        </div>
+                    </div> <!--// ช่องทางการชำระ  -->
+                </div>
+            </div>
+        </div>
+        <!--1-->
+        <div class="card card-header line-bottom-color-shop " id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <div class="font-color-shop header-sub-title ">
+                <i class="fa fa-hamburger"></i>
+                <span style="width:80%"> ประเภทร้านอาหาร</span>
+                <i class="fa fa-caret-down" style=" float: right"></i>
+            </div>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_shop">
+            <div class="card-body">
+                <div class=" mb-2">
+                    <div class="row   pt-2 m-0" >
+                        <select class="SHOP_type button-top_gray col-12 col-sm-12 p-2"  multiple="multiple" placeholder="เลือกประเภทร้านค้า"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--2-->
+        <div class="card card-header  line-bottom-color-shop "  id="headingThree"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <div class="font-color-shop header-sub-title ">
+                <i class="far fa-calendar-alt"></i> วันที่เปิดให้บริการ
+                <i class="fa fa-caret-down" style=" float: right"></i>
+            </div>
+        </div>
+        <div id="collapseThree" class=" collapse " aria-labelledby="headingThree" data-parent="#accordion_shop">
+            <div class="card-body">
+                <div class=" mb-2" id="date-list">
+                    <div class="row   pt-2 m-0  text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันอาทิตย์ <span class="text-gray-light2">(Sunday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch" >
+                                <input type="checkbox" id="date_sun" class="toggle-date" onchange="managethisdate('sun');" style="width:50px;">
+
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light  ">
+                            วันจันทร์ <span class="text-gray-light2" style="font-weight: 200;">(Monday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_mon" class="toggle-date" onchange="managethisdate('mon');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันอังคาร <span class="text-gray-light2" style="font-weight: 200;">(Tuesday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_tue" class="toggle-date" onchange="managethisdate('tue');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันพุธ <span class="text-gray-light2" style="font-weight: 200;">(Wednesday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_wed" class="toggle-date" onchange="managethisdate('wed');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันพฤหัสบดี <span class="text-gray-light2" style="font-weight: 200;">(Thursday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_thu" class="toggle-date" onchange="managethisdate('thu');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันศุกร์ <span class="text-gray-light2" style="font-weight: 200;">(Friday) </span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_fri" class="toggle-date" onchange="managethisdate('fri');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row button-top_gray pt-2 m-0 text-right">
+                        <div class="col-9 text-left text-gray-light ">
+                            วันเสาร์ <span class="text-gray-light2" style="font-weight: 200;">(Saterday)</span>
+                        </div>
+                        <div class="col-3">
+                            <label class="switch">
+                                <input type="checkbox" id="date_sat" class="toggle-date" onchange="managethisdate('sat');">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--3-->
+        <div class="card card-header line-bottom-color-shop " id="headingFour"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <div class="font-color-shop header-sub-title   ">
+                <i class="fa fa-user"></i>
+                <span style="width:80%"> LINE APP Setting</span>
+                <i class="fa fa-caret-down" style=" float: right"></i>
+            </div>
+        </div>
+        <div id="collapseFour" class="  collapse" aria-labelledby="headingFour" data-parent="#accordion_shop">
+            <div class="card-body">
+                (for Premium shop)
+                <div class="row ">
+                    <label class="col-sm-4 text-gray-light " ><b> LIFFID  </b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+
+                            <span class='SHOP_liffid editable_shop' data-field='liffid'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-top_gray ">
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><b> MENU VIEW LIFFID  </b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+                            <span class='SHOP_liffmenuview editable_shop'  data-field='liffmenuview'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-top_gray ">
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><b>Add Cart LIFFID  </b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+                            <span class='SHOP_liffaddcart editable_shop'  data-field='liffaddcart'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-top_gray ">
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><b>Shopping Cart LIFFID  </b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+                            <span class='SHOP_liffshoppingcart editable_shop'  data-field='liffshoppingcart'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-top_gray ">
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><b>Channel Secret</b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+                            <span class='SHOP_linechannel editable_shop'  data-field='linechannel'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-top_gray ">
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><b>Channel TOKEN</b></label>
+                    <div class="col d-flex">
+                        <div class="float-left pl-2 mb-2">
+                            <span class='SHOP_linetoken editable_shop'  data-field='linetoken'></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card card-header line-bottom-color-shop"   id="headingFive"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+            <div class="font-color-shop header-sub-title   ">
+                <i class="fa fa-palette"></i>
+                <span style="width:80%"> Theme </span>
+                <i class="fa fa-caret-down" style=" float: right"></i>
+            </div>
+        </div>
+        <!--style="border-bottom:solid 1px #fc7d10"-->
+        <div id="collapseFive" class=" collapse" aria-labelledby="headingFive" data-parent="#accordion_shop">
+            <div class="card-body">
+                <div class="p-2">
+                    <span>สีหลัก </span>
+                    <input type="color" id="primary_color" class="SHOP_primary_color">
+                    <span>สีรอง </span>
+                    <input type="color" id="secondary_color" class="SHOP_secondary_color">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--    <div class="form-group row">
+            <label class="col-sm-4 text-gray-light lable-left-35 " >  สถานะ </label>
+            <div class="col d-flex">
+                <div class="ml-auto">
+                    <span class='SHOP_opening editable_shop_select'>  </span>
+                </div>
+            </div>
+        </div>-->
+    <!--// สถานะ  -->
+
+    <!-- วันที่เปิด : <span class='SHOP_opendate editable_shop'>  </span><br> -->
+
+
+
+</div>
+<script>
+    console.log("Setting", working.shop);
+    if (working.shop) {   // Config Data for Default Data if No Data to use
+        if (!working.shop.address)
+            working.shop.address = 'ที่อยู่ร้านอาหาร';
+        if (!working.shop.openclose)
+            working.shop.openclose = 'ร้านเปิด-ปิด ปกติ';
+        if (!working.shop.bank_account)
+            working.shop.bank_account = '-';
+        if (!working.shop.contact)
+            working.shop.contact = '-';
+        if (!working.shop.opendate)
+            working.shop.opendate = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+        if (!working.shop.opening)
+            working.shop.opening = 1;
+        if (!working.shop.paychannel)
+            working.shop.paychannel = 1;
+    }
+    // console.log("Error1");
+    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    setdatabyclass($('.main_data'), 'SHOP', working.shop);
+    setdateopen(working.shop.opendate);
+
+    function setdateopen(obj) {
+        if (obj.length > 0) {
+            for (var x = 0; x < obj.length; x++) {
+                $('#date_' + obj[x] + '').prop('checked', true);
+            }
+        }
+    }
+    //for input tag 
+    var tempdatafield
+    $('.edit_data').focus(function () {
+        console.log($(this).attr('data-field'))
+        tempdatafield = $(this).val()
+
+        //get
+    })
+    //for select tag
+    $('.change_data').change(function () {
+        console.log('change select')
+        console.log($(this).attr('data-field'))
+        change_data($(this))
+    });
+
+    $('.edit_data').focusout(function () {
+        console.log($(this).attr('data-field'))
+        change_data($(this))
+        //update
+    });
+
+
+    ADVWS.make_edittext($('.editable_shop'), function (data, obj) {
+        var oldvalue = obj.html();
+        console.log(oldvalue)
+        console.log(data)
+        data.LINE_USER = LINE_USER;
+        data._id = working.shop._id
+        $.postJSON('/api/liff/edit/shop', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                obj.editable('setValue', oldvalue);  // Roll Back Value to Old Value
+            }
+        })
+    }, function (data2vilidate) {
+        if (!data2vilidate)
+            return "Invalid data";
+    });
+
+//    var array_status = [{value: 1, text: 'เปิดร้าน'}, {value: 2, text: 'ปิดร้าน'}];
+//    ADVWS.make_editselect($('.SHOP_opening'), array_status, function (data, obj) {
+//        data.shopid = working.shop._id; // include shopid to check with Server
+//        edtable_update_toserver(data, obj, '/api/liff/edit/shop');
+//    }, function (data2vilidate) {
+//        if (!data2vilidate)
+//            return "Invalid data";
+//    });
+
+//    var array_paychannel = [{value: 1, text: 'QuickPay (PromptPay)'}, {value: 2, text: 'เก็บเงินปลายทาง'}];
+//    ADVWS.make_editselect($('.SHOP_paychannel'), array_paychannel, function (data, obj) {
+//        data.shopid = working.shop._id; // include shopid to check with Server
+//        edtable_update_toserver(data, obj, '/api/liff/edit/shop');
+//    }, function (data2vilidate) {
+//        if (!data2vilidate)
+//            return "Invalid data";
+//    });
+
+
+    var template_opendate = $("#date-list").html();
+// function newdate_table_row(obj){
+//     for(var x=0; x < obj.length;x++){
+//       var TR = tablerow($("#date-list"), 'opendate', obj[x], template_opendate, false) ;
+//       if(obj[x].status == 0){
+//         TR.find('.toggle-date').prop('checked',true);
+//       }else if (obj[x].status == 1) {
+//         TR.find('.toggle-date').prop('checked',false);
+//       }
+//         TR.show('slow');
+//     }
+// }
+    ADVWS.make_selecttags($('.SHOP_type'), working.shop.type, {url: '/api/tags/shoptype', postdata: {}}, function (data) {
+        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id, type: data}
+        $.postJSON('/api/liff/edit/shop', setdata, () => {
+            working.shop.type = data;
+        });
+    }, false);
+
+    $('#primary_color').change(function () {
+        var setcolor = {LINE_USER: LINE_USER, _id: working.shop._id, primary_color: $('#primary_color').val()}
+        $.postJSON('/api/liff/edit/shop', setcolor, () => {
+            working.shop.primary_color = $('#primary_color').val();
+        });
+    });
+
+    $('#secondary_color').change(function () {
+        var setcolor = {LINE_USER: LINE_USER, _id: working.shop._id, secondary_color: $('#secondary_color').val()}
+        $.postJSON('/api/liff/edit/shop', setcolor, () => {
+            working.shop.secondary_color = $('#secondary_color').val();
+        });
+    });
+
+    function managethisdate(dateclick) {
+        console.log("dateclick", dateclick)
+        if (!Array.isArray(working.shop.opendate)) {
+            working.shop.opendate = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']; // open alldate ?
+
+        }
+        var found = working.shop.opendate.indexOf(dateclick);
+        if (found !== -1) {  // exist
+            working.shop.opendate.splice(found, 1);
+        } else {
+            working.shop.opendate.push(dateclick);
+        }
+        var data = {LINE_USER: LINE_USER, _id: working.shop._id, opendate: working.shop.opendate};
+        console.log("sending", data)
+        $.postJSON('/api/liff/edit/shop', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                return;
+            } else if (res.result) {
+                working.shop = res.detail;
+            }
+
+        });
+    }
+</script>

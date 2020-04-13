@@ -1,0 +1,199 @@
+<div class="container-fluid" >
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> การจัดส่ง</span>
+    </div>
+    
+    <div class="main_data">
+        <div class="form-group row">
+            
+        </div>
+        <div>
+            Delivery
+            <select class="input_data_bn editable_shop SHOP_delivery" data-field='delivery' >
+                <option disabled value='1'>LINE MAN </option>
+                <option disabled value='2'>Kinarai Delivery Service</option>
+                <option selected value='3'>จัดส่งเอง</option>
+                <option disabled value='4'>จัดส่งเอง เฉพาะพื้นที่ให้บริการ</option>
+            </select>
+        </div>
+        <br>
+
+        ตารางกับหนดค่าจัดส่ง ต่อรอบการจัดส่ง
+        <br>
+
+        <div class="row button-top_gray">
+            <label class="col-sm-4 text-gray-light lable-left-35 " ><b>  จำนวน สินค้าต่อ รอบ  </b></label>
+            <div class="col d-flex ">
+                <div class="float-left pl-2  w-100 ">
+                    <!--<span class='SHOP_name editable_shop'></span>-->
+                    <input class="input_data_bn editable_shop SHOP_max_deliver_item" type='number' placeholder="เช่น 10" data-field="max_deliver_item">
+
+                </div>
+
+                <!--                            <div class="float-left pl-2 mb-2">
+                                                <span class='SHOP_address editable_shop'>  </span>
+                                            </div>-->
+            </div>
+        </div> <!-- // Address -->
+    </div>
+    Level รอบการคำนวณ
+
+    <div id='delivery_type1' >
+        <div class="row button-top_gray row_tablecontent" data-id="##DELI-id##" >
+            <label class="col-sm-4 text-gray-light lable-left-35 " ><b>ระยะเริ่มต้น </b> # : ##DELI-id##</label>
+            <div class="col d-flex ">
+                <div class="float-left pl-2  w-100 ">
+                    ระยะไม่เกิน <input class="input_data_bn editable_delivery_t1 " type='number' placeholder="ระยะทางไม่เกิน (Km)" data-field="distance" value="##DELI-distance##"> Km
+                    <br>ค่าเริ่มต้น <input class="input_data_bn editable_delivery_t1 " type='number' placeholder="เช่น 10" data-field="fee"  value="##DELI-fee##">บาท
+                    <br>ค่าบริการต่อชิ้น <input class="input_data_bn editable_delivery_t1 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##"> บาท
+                </div>
+
+                <!--                            <div class="float-left pl-2 mb-2">
+                                                <span class='SHOP_address editable_shop'>  </span>
+                                            </div>-->
+            </div>
+        </div> <!-- // Address -->
+    </div>
+    <hr>
+    <div class="text-center mt-3 mb-3"><button onclick='addnewdelivery();'> เพิ่ม ส่วนคำนวณ </button></div>
+    <div class="row button-top_gray delivery_type2" id="delivery_type2">
+        <label class="col-sm-4 text-gray-light lable-left-35 " ><b>ระยะเหมาจ่าย </b></label>
+        <div class="col d-flex  row_tablecontent" data-id="##DELI-id##">
+            <div class="float-left pl-2  w-100 ">
+                <font color='red'>เกินกว่า </font> <input class="input_data_bn editable_delivery_t2 " type='number' placeholder="ระยะทางไม่เกิน (Km)" value="##DELI-distance##" data-field="distance">
+                Km<br>ค่าเริ่มต้น <input class="input_data_bn  editable_delivery_t2 " type='number' placeholder="เช่น 10" data-field="fee"   value="##DELI-fee##>
+                บาท <br>ค่าบริการต่อชิ้น <input class="input_data_bn editable_delivery_t2 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##">บาท
+            </div>
+
+            <!--                            <div class="float-left pl-2 mb-2">
+                                            <span class='SHOP_address editable_shop'>  </span>
+                                        </div>-->
+        </div>
+    </div> <!-- // Address -->
+</div>
+<script>
+    all_page = [''];
+    var working = {};
+    alert("TEST");
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-NPwXkOyo';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+
+
+    var template_delivery_type1 = $('#delivery_type1').first().html();
+    var template_delivery_type2 = $('#delivery_type2').first().html();
+//    $('#mytable .row_tablecontent').attr('id', "displaynone1")
+  //  $('#displaynone1').hide()
+    var maintable = $('#mytable');
+
+    function runApp() {
+        console.log("RUN APP");
+        $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+            console.log(res);
+            if (res.result) {
+                working.shop = res.detail;
+                setdatabyclass($('.main_data'), 'SHOP', working.shop);
+//                go2View('salepackage1');
+            } else {
+
+//                go2View('must-openshop');
+            }
+            get_delivery()
+        });
+
+    }
+//    initializeLiff();
+    function set_default_deli(obj){
+      if(!obj._id) obj._id ='';
+      if(!obj.per_item) obj.per_item ='';
+     if(!obj.distance) obj.distance ='';
+      if(!obj.fee) obj.fee ='';
+    }
+    function get_delivery() {
+//        console.log('get data type 1')
+        $.postJSON('/api/liff/check/shopdalivery', {LINE_USER: LINE_USER}, function (res2) {
+          //alert(JSON.stringify(res2.detail));
+            if (res2.result) {
+
+              //$('#delivery_type1').html(JSON.stringify(res2.detail));                return;
+                if (Array.isArray(res2.detail) && res2.detail.length > 0) {    // มีร้านอยู่แล้ว
+                    var type1 =[];
+                    var type2={};
+                    for(var x =0; x < res2.detail.length;x++){
+                      set_default_deli(res2.detail[x]);
+                      if(res2.detail[x].type==1){
+                        type1.push(res2.detail[x]);
+                      }else if(res2.detail[x].type==2){
+                        type2 = res2.detail[x];
+                      }
+                    }
+                    alert(type1.length);
+                        $('#delivery_type2').html(JSON.stringify(type1));
+                        return;
+                    $('#delivery_type1').html(hash_replace(template_delivery_type1,'DELI',type1));
+                    $('#delivery_type2').html(hash_replace(template_delivery_type2,'DELI',type2));
+                    set_obj_fusefiled($('.editable_delivery_t1'),1);
+                    set_obj_fusefiled($('.editable_delivery_t2'),2);
+                }
+                //                go2View('salepackage1');
+            }
+        });
+    }
+
+    $('.editable_shop').Fusefield((obj, cb,data) => {
+        $.postJSON('/api/liff/edit/shop', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                cb(false);
+            } else
+                cb(true);
+        })
+    }, (obj) => {
+        if (obj.attr('data-field') == "max_deliver_item") {
+            if (Number(obj.val()) < 1) {
+                alert("Max Items ต้องมากกว่า 0");
+                return false;
+            }
+        }
+        return true;
+    });
+
+    function set_obj_fusefiled(jqueryobj,type){
+      jqueryobj.Fusefield((obj, cb,data) => {
+          data.type = type;
+          data._id=obj.find_id();
+          alert("SETID " + data._id);
+          $.postJSON('/api/liff/edit/deliverytable', data, function (res) {
+              console.log(res)
+              if (!res.result) {
+                  alert(res.detail);
+                  cb(false);
+              } else {
+                  cb(true);
+              }
+  //            get_deliver_type1()
+          })
+      }, (obj) => {
+          return true;
+      });
+    }
+
+    function addnewdelivery() {
+//
+          $.postJSON('/api/liff/edit/deliverytable', {LINE_USER:LINE_USER}, function (res) { // Create New Data
+            if(res.result){
+              var obj= res.detail;
+              set_default_deli(obj);
+              var html = hash_replace(template_delivery_type1,'DELI',obj)
+              $('#delivery_type1').append(html);
+              set_obj_fusefiled($('.editable_delivery_t1'));
+            }
+          });
+
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

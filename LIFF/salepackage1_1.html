@@ -1,0 +1,125 @@
+<div class='container-fluid main_data' >
+  <div class="text-center">
+      <h4 class="shopmenu_shopname"></h4>
+  </div>
+    จัดการเมนูของร้านค้า
+<br>
+<div class="">
+  <div class="text-center mb-1">
+     <button type="button" name="button"  style="border-radius: 20px;" class="btn btn-outline-info addnewmenu" onclick="show_addnewmenu();"> + เพิ่มเมนู</button>
+  </div>
+  <div class="text-center " id="addnewmenu_area" style="display:none">
+
+    <div class="card mt-2 mb-2">
+     <div class="card-body">
+       <h5 class="card-title">ระบุชื่อเมนูของคุณ</h5>
+       <span class='makenewmenu' data-field='name'>เพิ่ม<span>
+     </div>
+   </div>
+
+  </div>
+</div>
+
+   <div id='main-menu'>
+     <div class='rowmenu row_tablecontent card mt-1 mb-1' style='display:none' >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5">
+               <h6 class='card-title shopmenu_name' data-field='name'>SHOP NAME</h6>
+              <small><a href="#" onclick="managethismenu(this);">จัดการเมนู</a></small>
+            </div>
+            <div class="col-4">
+              <small>
+                <div>จำนวนคงเหลือ : <span class="shopmenu_amount"></span></div>
+                <div>จำกัดต่อวัน : <span class="shopmenu_limit_date"></span> </div>
+                <div>สถานะ : <span class="shopmenu_status"></span></div>
+              </small>
+               <!-- <input type="checkbox" data-toggle="toggle"  data-on="เปิด" data-off="ปิด" data-onstyle="info" data-offstyle="danger" class="toggle-menu" onchange="managestatusmenu(this);"> -->
+            </div>
+            <div class="col-3 text-center" onclick="manageactivethismenu(this);">
+                <p style="font-size:250%;"><i class="fa fa-angle-right" aria-hidden="true"></i></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+  setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+  var template_menu = $('#main-menu').html();
+  ADVWS.make_edittext($('.makenewmenu'),function(data,obj){
+      data.LINE_USER=LINE_USER ;
+      $.postJSON('/api/liff/add/menu',data,(res)=>{
+          if(!res.result){
+            return alert(res.detail);
+          }
+          getmenulist()
+          // new_table_row([data])
+        
+          $('.makenewmenu').editable('setValue',null);
+          // Create new row
+      });
+  },function(data2vilidate){
+      if(!data2vilidate) return "Invalid data";
+  });
+
+  var array_category =[{value:1,text:'hot'},{value:2,text:'cool'}];
+  ADVWS.make_editselect($('.MENU_category'),array_category, function(data,obj){
+    // data.shopid = working.shop._id; // include shopid to check with Server
+    // edtable_update_toserver(data,obj,'/api/liff/search/shop');
+  },function(data2vilidate){
+    if(!data2vilidate) return "Invalid data";
+  });
+getmenulist();
+function getmenulist(){
+  $.postJSON ('/api/liff/list/menu',{LINE_USER:LINE_USER},(res)=>{
+      if(res.result){
+        $('.shopmenu_shopname').html(res.detail[0].shopname)
+          new_table_row(res.detail);
+      }
+  });
+}
+
+  function new_table_row(obj){
+     $('#main-menu').html(template_menu);
+      for(var x=0; x < obj.length;x++){
+        if(!obj[x].status) obj[x].status = 5;
+        var TR = tablerow($("#main-menu"), 'shopmenu', obj[x], template_menu, false) ;
+        var status;
+          if (obj[x].status==5) {
+              status = 'เปิด';
+              TR.find('.shopmenu_status').css('color','green');
+          }else if (obj[x].status==4) {
+            status = 'ปิด';
+            TR.find('.shopmenu_status').css('color','red');
+          }
+
+          TR.find('.shopmenu_status').html(status);
+          TR.show();
+      }
+  }
+
+  var show_addnewmenu_show=false;
+  function show_addnewmenu(){
+    if(show_addnewmenu_show){
+      $('#addnewmenu_area').hide('slow');
+    }else{
+        $('#addnewmenu_area').show('slow');
+    }
+    show_addnewmenu_show = !show_addnewmenu_show;
+  }
+
+  function managethismenu(obj){
+    working.menunow = $(obj).find_id();
+    //alert('Menue'+working.menunow );
+    go2View('salepackage-manage');
+  }
+
+  function manageactivethismenu(obj){
+    working.menunow = $(obj).find_id();
+    //alert('Menue'+working.menunow );
+    go2View('salepackage-manage1');
+  }
+
+</script>

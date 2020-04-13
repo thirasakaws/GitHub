@@ -1,0 +1,59 @@
+<center>
+    <h1>
+        Kinarai ?
+    </h1>
+    <h2>
+        ไม่รู้ จะกินอะไร มากินกับเราไหม !
+    </h2>
+
+    <br>
+    <button onclick='return shoplogin();'>สำหรับร้านค้า Create / Login </button>
+
+</center>
+<script>
+  // see https://github.com/line/line-liff-v2-starter/blob/master/public/liff-starter.js
+  function shoplogin(){
+    //https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1234567890&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&state=12345abcde&scope=profile%20openid&nonce=09876xyz
+    
+    //initializeLiff('1653987624-3QNY4job');
+  }
+
+
+  function initializeLiff(myLiffId) {
+    liff
+        .init({
+            liffId: myLiffId
+        })
+        .then(() => {
+            // start to use LIFF's api
+            initializeApp();
+        })
+        .catch((err) => {
+            console.log("ERROR");
+        });
+}
+
+function initializeApp() {
+    displayLiffData();
+
+    // check if the user is logged in/out, and disable inappropriate button
+    if (liff.isLoggedIn()) {
+        console.log("user Loged in");
+        //show logout button
+    } else {
+      console.log("user NOT LOG in");
+        //show login Button
+    }
+}
+
+
+function displayLiffData() {
+    var user_data = {};
+    user_data.browserLanguage = liff.getLanguage();
+    user_data.sdkVersion = liff.getVersion();
+    user_data.isInClient = liff.isInClient();
+    user_data.isLoggedIn = liff.isLoggedIn();
+    user_data.deviceOS = liff.getOS();
+    console.log(user_data);
+}
+</script>

@@ -1,0 +1,168 @@
+<!-- Modal for FILE UPLOADER -->
+
+<div class="modal fade bd-example-modal-lg" id="modal_image_uploader" data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Upload Image File</h5>
+      </div>
+
+        <div class="modal-body" >
+         Preview :
+         <img id='file_upload_image_preview' src='' width='200' height='200'>
+
+
+         <label class="btn btn-primary btn-upload" for="image_uploader_btn" title="Upload image file">
+                     <input type="file" class="sr-only" id="image_uploader_btn" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                     <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+                       <span class="fa fa-upload"></span>
+                     </span>
+                   </label>
+
+
+
+
+        </div>
+            <!-- Progress Bar -->
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                            <div class="bar_fill_text" id="pt">%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		<div class="modal-footer" >
+      <button id='btn_file_upload_confirm' class="btn btn-success">Confirm Send this file..</button>
+                    <button onclick="$('#modal_image_uploader').modal('hide');" class="btn btn-sm btn-danger">
+                        <i class="fa fa-fw fa-times"></i> Close
+                    </button>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+var tempimagefile4upload;
+var upload_url ='';
+var postdata = undefined;
+$('#image_uploader_btn').on('change',function(){
+
+     var file = $(this)[0].files[0];
+     tempimagefile4upload =file;
+    console.log(file);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        $('#file_upload_image_preview').attr('src', e.target.result);
+      //  $('#file_upload_image_preview').croppie();
+    };
+    reader.readAsDataURL(file);
+
+
+})
+
+$('#btn_file_upload_confirm').on('click',function(){
+    doUploadImage();
+});
+
+function OnProgress(e){
+    //Progress bar
+    console.log(e);
+    var pt= Math.ceil(e.loaded* 100/ (e.total))  ;
+    //console.log(total);
+    console.log(pt);
+    $('#pt').html(pt+ '%'); //update status text
+}
+
+
+
+function doUploadImage(){
+    if(tempimagefile4upload){
+
+        console.log("FILE UPLODING");
+        if(tempimagefile4upload.size > 10000000){
+            alert("Allow Only image < 10 MB");
+            return;
+        }
+
+        console.log(tempimagefile4upload);
+        var formData = new FormData();
+        formData.append('file', tempimagefile4upload);
+
+
+        if(postdata){
+          var allhead = Object.keys(postdata);
+          for(var x=0; x < allhead.length ; x++){
+              formData.append(  allhead[x],postdata[allhead[x]]);
+          }
+        }
+        /// Disable all related
+
+            $('#btn_file_upload_confirm').prop('disabled', true);
+            $('#image_uploader_btn').prop('disabled', true);
+
+           $('#modal_image_uploader').attr('data-keyboard',false);
+
+
+        //
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+        if(request.readyState == 4){
+            $('#image_uploader_btn').prop('disabled', false);
+            $('#btn_file_upload_confirm').prop('disabled', false);
+            tempimagefile4upload =null;
+            $('#file_upload_image_preview').attr('src', '');
+
+            $('#modal_image_uploader').modal("hide");
+
+            try {
+                var resp = JSON.parse(request.response);
+            } catch (e){
+                var resp = {
+                    status: 'error',
+                    data: 'Unknown error occurred: [' + request.responseText + ']'
+                };
+                console.error(resp);
+                return;
+            }
+
+                afterUploadfileSuccess(resp);
+            }
+         };
+
+    request.upload.addEventListener('progress', OnProgress, false);
+    console.log("POSTING ",upload_url);
+    request.open('POST', upload_url);
+    request.send(formData);
+    console.log("Sending ",formData);
+
+    }
+}
+
+
+var tempcbfnc_image_upload;
+function call_modal_image_upload(setting,cbfnc){
+  upload_url = setting.url;
+  if(setting.postdata){
+    postdata = setting.postdata;
+  }
+  if(typeof(cbfnc)=='function') tempcbfnc_image_upload =cbfnc;
+  $('#modal_image_uploader').modal('show');
+
+}
+function afterUploadfileSuccess (imagedata){
+    if(tempcbfnc_image_upload){
+      tempcbfnc_image_upload(imagedata);
+       $('#modal_image_uploader').modal('hide');
+    }else{
+      console.error("NO CBFNC FOR IMAGE UPLOAD");
+    }
+};
+
+
+</script>

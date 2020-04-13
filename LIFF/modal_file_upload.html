@@ -1,0 +1,128 @@
+<div class="">
+
+        <img width="120px" height="120px" class='rounded' id='image_preview_area'  style='display:none'>
+
+  <div class="spinner-border text-primary" id='imageuploading' style="width:2rem;height: 2rem; font-size: 50px;display:none" role="status"  >
+  </div>
+<label class="btn btn-sm btn-orange btn-upload ml-auto" for="image_uploader_btn" title="Upload image file">
+      <input type="file" class="sr-only" id="image_uploader_btn" name="file" accept="*" onchange="upload_shopimage(this);">
+      <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+          <span class="btn btn-submit-shop btn-sm"><i class="fas fa-plus"></i> เพิ่มรูป (10Mb Max)</span>
+      </span>
+ </label>
+</div>
+
+
+<script>
+
+var tempimagefile4upload;
+var upload_url ='';
+var postdata = undefined;
+function upload_shopimage(obj){
+  $('#imageuploading').show();
+  var file = $(obj)[0].files[0];
+  tempimagefile4upload =file;
+ var reader = new FileReader();
+ reader.onload = function(e) {
+     $('#image_preview_area').attr('src', e.target.result).show();
+     doUploadImage();
+ };
+ reader.readAsDataURL(file);
+}
+
+function clear_upload_area(){
+   $('#image_preview_area').attr('src', '').hide();
+   $('#imageuploading').hide();
+}
+
+function OnProgress(e){
+    //Progress bar
+//    console.log(e);
+    var pt= Math.ceil(e.loaded* 100/ (e.total))  ;
+    //console.log(total);
+  //  console.log(pt);
+    $('#pt').html(pt+ '%'); //update status text
+}
+
+function doUploadImage(){
+    if(tempimagefile4upload){
+        if(tempimagefile4upload.size > 10000000){
+            clear_upload_area();
+            alert("Allow Only image < 10 MB");
+            return;
+        }
+
+        //console.log(tempimagefile4upload);
+        var formData = new FormData();
+        formData.append('file', tempimagefile4upload);
+
+
+        if(postdata){
+          var allhead = Object.keys(postdata);
+          for(var x=0; x < allhead.length ; x++){
+              var val = postdata[allhead[x]];
+              if(typeof(val) == 'object'){
+                try{
+                  val = JSON.stringify(val);
+                  console.log("STRINGIFY")
+                }catch(e){
+
+                }
+              }
+              formData.append(  allhead[x],val);
+          }
+        }
+
+
+        //
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+        if(request.readyState == 4){
+            tempimagefile4upload =null;
+            clear_upload_area();
+            try {
+                var resp = JSON.parse(request.response);
+            } catch (e){
+                var resp = {
+                    status: 'error',
+                    data: 'Unknown error occurred: [' + request.responseText + ']'
+                };
+                alert(request.responseText);
+                return;
+            }
+
+                afterUploadfileSuccess(resp);
+            }
+         };
+
+    request.upload.addEventListener('progress', OnProgress, false);
+    request.open('POST', upload_url);
+    request.send(formData);
+    console.log("Sending File");
+
+    }
+}
+
+
+var tempcbfnc_image_upload;
+function call_modal_image_upload(setting,cbfnc){
+  upload_url = setting.url;
+  if(setting.postdata){
+    postdata = setting.postdata;
+  }
+  console.log("SETTING ",upload_url);
+  console.log(postdata);
+  if(typeof(cbfnc)=='function') tempcbfnc_image_upload =cbfnc;
+
+}
+function afterUploadfileSuccess (imagedata){
+    console.log("afterUploadfileSuccess Called")
+    if(tempcbfnc_image_upload){
+      tempcbfnc_image_upload(imagedata);
+    }else{
+      console.error("NO CBFNC FOR IMAGE UPLOAD");
+    }
+};
+
+
+</script>

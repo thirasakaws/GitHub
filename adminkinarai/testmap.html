@@ -1,0 +1,17 @@
+Test GPS MAP
+<div id='modal_gps_form'>
+</div>
+
+<button type="button" class="btn btn-icon tooltips_attach_images" title="GPS"  onclick="show_gps()" data-toggle="tooltip" data-placement="top" ><i class="fa fa-fw fa-picture-o"></i>GPS CHECK</button>
+
+
+
+<script>
+  $('#modal_gps_form').load('/adminkinarai/modal_gps.html');
+  function show_gps(objid){
+    var detail =  {lat:13.79607108667891,lng:100.71164142340422};
+    call_modal_maps(detail,function(data){
+        console.log('DataBack:',data);
+    });
+  }
+</script>

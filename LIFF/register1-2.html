@@ -1,0 +1,137 @@
+<div class="container-fluid main_data">
+ 
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop">  ลงทะเบียนร้านอาหาร</span>
+    </div>
+    
+
+    <div class="col-sm-12 mt-2">
+
+        <div class="mt-2">
+            <img class="LINE_pictureUrl img-fluid rounded-circle  img-thumbnail mx-auto d-block mt-3 mb-3" width="100px" height="100px" alt="...">
+            คุณ <span class='text-orange LINE_displayName'></span>
+        </div>  <!-- // Line Profile -->
+
+
+
+          <div class="form-group mt-3">
+            <label for="lable">ชื่อร้านอาหาร <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="shopname" placeholder="ชื่อร้านอาหารของคุณ">
+
+          </div> <!-- // Restaurant Name / ชื่อร้านอาหาร -->
+
+
+
+          <div class="form-group">
+                <label for="lable">ประเภทร้านอาหาร <span class="text-danger">*</span></label>
+                <select class="form-control" name="shoptype" id="shoptype">
+                    <option value="1">อาหารไทย</option>
+                    <option value="2">อาหารอีสาน</option>
+                    <option value="3">อาหารเหนือ</option>
+                    <option value="4">อาหารใต้</option>
+                    <option value="5">อาหารญี่ปุ่น</option>
+                    <option value="6">อาหารอิตาเลี่ยน</option>
+                    <option value="7">อาหารเกาหลี</option>
+                    <option value="8">อาหารจีน</option>
+                    <option value="9">อาหารเพื่อสุขภาพ</option>
+                    <option value="10">อาหารฮาลาล</option>
+                    <option value="11">อาหารทะเล </option>
+                    <option value="12">อาหารเซ็ท</option>
+                    <option value="13">อาหารจานเดียว</option>
+                    <option value="14">เมนูเส้น</option>
+                    <option value="15">Street Food</option>
+                    <option value="16">ของหวาน</option>
+                    <option value="17">เครื่องดื่ม</option>
+                    <option value="18">ข้าวแกง</option>
+                    <option value="19">ปิ้งย่าง</option>
+                    <option value="20">สุกี้,ชาบู</option>
+                    <option value="21">อื่น ๆ</option>
+                </select>
+  
+          </div> <!--// Restaurant Type / ประเภทร้าน -->
+
+
+
+    </div>
+
+    <div class="col-sm-12 pt-3 mb-5">
+        <button onclick='submitnewshop()' class='form-control btn btn-submit-shop btn-block'>
+            <i class="fas fa-store"></i>  สร้างร้านอาหาร / Create Shop
+        </button>
+    </div>
+    <div class="col-sm-12">
+        <hr>
+    </div>
+    
+    
+    <div class="col-sm-12 mt-2 pt-3">
+        
+        <div class="rounded bg-light pl-2">
+            <div class="font-color-shop line-for-header pt-1 pb-1"> จัดการบริหารร้านค้าอื่น <!-- หรือ เข้าจัดการร้านค้าให้บุคคลอื่น-->  </div>
+          
+            <div class="mt-3">
+                <span>Login Code</span>
+                <div class="form-group row pt-1 pb-2 pr-1">
+                    <div class="col-8 pr-0">
+                        <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'> 
+                        <small id="emailHelp" class="form-text text-muted">กรอกรหัสลับเพื่อเข้าจัดการบริหารร้านค้าอื่น</small>
+                    </div>
+                    <div class="col">
+                        <button class='btn btn-sm btn-submit-shop btn-block' onclick="loginshopshare();">
+                            <i class="fas fa-sign-in-alt"></i> Login 
+                        </button>
+                    </div>
+
+                </div>
+            </div>       
+        </div>  
+        
+        
+    </div>  <!-- //  จัดการบริหารร้านค้าอื่น --> 
+
+ 
+    
+
+</div> <!-- // container-fluid  -->
+
+<script>
+  setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+  function submitnewshop() {
+      if(!$('#shopname').val()){
+        alert("กรุณากรอกข้อมูลชื่อร้านค้า");
+        return;
+      }
+      var obj = {
+          name: $('#shopname').val(),
+          LINE_USER: LINE_USER
+      };
+      $.postJSON('/api/liff/register/shop', obj, function (res) {
+
+          if (!res.result) {
+              if (res.detail) {
+                  alert(res.detail);
+                  return;
+              }
+          }
+          working.shop = res.detail;
+          go2View('register2');
+          console.log("GOT BACK");
+          //console.log(res);
+
+      });
+  }
+
+  function loginshopshare(){
+    var ran = $('#shopshareloginnumber').val();
+    if(!ran) return;
+
+      $.postJSON('/api/liff/login/shopshare', {LINE_USER: LINE_USER,shopsharenumber:ran},function(res){
+          if(res.result && res.detail){
+            alert(res.detail);
+            liff.closeWindow();
+          }else{
+            alert(res.detail);
+          }
+      });
+  }
+  </script>

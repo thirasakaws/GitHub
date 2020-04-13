@@ -1,0 +1,72 @@
+/*
+สำหรับฝั่งลูกค้าเข้าใช้งาน  food mall style sheet 
+*/
+
+.font-color-foodmall {  color: #fc7d10 !important; }
+.font-color-foodmall-2 { color: #545559 !important; } 
+.font-color-foodmall-gray-light { color: #545559; }
+.font-color-foodmall-gray-light2 { color: #9E9E9E !important; font-weight: 200;}
+.font-color-foodmall-gray-medium { color: #191919; }
+
+
+.box-head-title-foodmall { 
+    background-color: #ffffff !important;
+    color: #fc7d10;
+    padding: 6px 4px;
+/*    border-bottom: 2px #fc7d10 solid;*/
+/*    border-top: 2px #fc7d10 solid;*/
+/*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;*/
+    margin-bottom: 15px;
+}
+
+.header-foodmall { font-family: 'kanit'; font-size: 120% }
+.header-sub-title-foodmall { font-family: 'kanit'; font-size: 110%; }
+.line-header-foodmall { border-bottom: 1px solid #ededed; }
+
+.text-indent-foodmall-50 { text-indent: 50px; }
+
+
+.btn-submit-foodmall{ background-color: #fc7d10 !important; color: #ffffff !important;}
+.btn-submit-foodmall:hover { color: #fff !important; background-color: #f4690b; }
+.btn-submit-foodmall:active { color: #fff !important; background-color: #f4690b; }
+.btn-outline-submit-foodmall {   
+    color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+}
+.line-bottom-color-foodmall { border-bottom: 1px #fc7d10 solid; border-right: 0px #fff solid; border-left: 0px #fff solid;  }
+
+.btn-outline-submit-foodmall:hover {   
+    color: #ffffff !important;
+    background-color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+}
+
+/* ปุ่มสีส้ม ขนาดเล็ก */
+.btn-outline-submit-foodmall-small {   
+    color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top : 1px !important;
+    padding-bottom: 1px !important;
+}
+.btn-outline-submit-foodmall-small:hover{   
+    color: #ffffff !important;
+    background-color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top : 1px !important;
+    padding-bottom: 1px !important; 
+  
+}
+.badge-outline-foodhall { color: #fc7d10 !important;   border-color: #fc7d10 !important; }
+
+.border-bottom-gray {  border-bottom: solid 1px #eae9e9 !important; }
+
+.border-top-gray {  border-top: solid 1px #eae9e9 !important; }
+
+.input_data_bn {
+    border-bottom: solid 1px #eae9e9 !important;
+}
+.bg-space-gray { border-bottom: 8px solid #f4f3f3; height: 20px; }

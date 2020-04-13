@@ -1,0 +1,230 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div>
+        <h1><b><u>Orders</u></b></h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3>ค้นหารายการสั่งซื้อ </h3>
+                    <div class="col-md-2 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <!--                    <h3> สถานะ / Status</h3>
+                                        <div class="col col-md-2 mb-2">
+                    
+                                            <select id="status" class="form-control">
+                                                <option value="">ไม่ระบุ</option>
+                                                <option value="1">เปิดการใช้งาน</option>
+                                                <option value="0">ปิดการใช้งาน</option>
+                                            </select>
+                                        </div>-->
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-lg-right" >
+                <div class="pagination_bar " style="padding-bottom:30px">  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Customer</th>
+                    <th>Rider</th>
+                    <th>Transfer Detail </th>
+                    <th>Menu Detail</th>
+                    <th>Create Date</th>
+                    <th>Last Update</th>
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="order_id"></td>
+                    <td class="order_customerid"></td>
+                    <td class="order_rider"></td>
+                    <td class="order_rider_detail"></td>
+                    <td >
+                        <button class="btn btn-primary"><i class="fa fa-search order_items"></i> Menu</button>
+                    </td>
+                    <td class="order_createdate"></td>
+                    <td class="order_lastupdate"></td>
+                    <td>
+                        <span class="order_status"></span>
+                        <button type="button" class="float-right btn btn-primary btn-sm alink" onclick="edit_status_order(this)"><i class="fa fa-pencil  " ></i> Status Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalorderstatus" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalorderstatus">Status Manage | ID :<span id="id_order"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--select status and confirm-->
+                <select id="status_order" class="form-control">
+                    <option class="text-warning" value="1">รอตรวจสอบ</option>
+                    <option class="text-dark" value="2">อยู่ระหว่างตรวจสอบ</option>
+                    <option class="text-success" value="3">ตรวจสอบแล้ว</option>
+                    <option class="text-danger" value="4">ปิดใช้งาน</option>
+                    <option class="text-primary" value="5">เปิดใช้งาน</option>
+                    <option class="text-primary" value="6">เลือกเมนู</option>
+                    <option class="text-primary" value="11">รอชำระเงิน</option>
+                    <option class="text-primary" value="15">ชำระแล้ว</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/order_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_order_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    function showdata_order_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'order', objdata[x], template_of_testtable);
+                if (objdata[x].status == 1) {
+                    TR.find('.order_status').addClass('text-primary').html('รายการใหม่');
+                }
+                if (objdata[x].status == 6) {
+                    TR.find('.order_status').addClass('text-warning').html('เลือกเมนู');
+                }
+                if (objdata[x].status == 11) {
+                    TR.find('.order_status').addClass('text-black').html('รอชำระเงิน');
+                }
+                if (objdata[x].status == 15) {
+                    TR.find('.order_status').addClass('text-success').html('ชำระแล้ว');
+                }
+                if (objdata[x].status == 4) {
+                    TR.find('.order_status').addClass('text-danger').html('ปิด');
+                }
+                if (objdata[x].status == 5) {
+                    TR.find('.order_status').addClass('text-primary').html('เปิด');
+                }
+                if (objdata[x].createdate) {
+                    TR.find('.order_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                }
+                if (objdata[x].lastupdate) {
+                    TR.find('.order_lastupdate').html(moment(objdata[x].lastupdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                } else {
+                    if (objdata[x].createdate) {
+                        TR.find('.order_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                    }
+                }
+                if (objdata[x].price) {
+                    TR.find('.order_price').html(addCommas(objdata[x].price));
+                }
+                TR.show();
+            }
+        }
+    }
+    function edit_data_order(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/order_edit?order_id=' + tempid);
+        return false;
+    }
+    function edit_status_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/order_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.status) {
+                $('#status_order').val(result.status)
+            }
+        });
+
+        $('#id_order').html(res_id)
+        $('#save_btn').attr('onclick', 'update_orderstatus(' + res_id + ')')
+        $('#showmodal').modal('show')
+
+    }
+
+    function update_orderstatus(order_id1) {
+        var postdata = {
+            _id: order_id1,
+            status: $('#status_order').val()
+        }
+        $.postJSON('/api/data/kinarai/order_update_status', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                $('#showmodal').modal('hide')
+                refreshpage()
+            }
+        });
+
+    }
+    function filterFormsubmit_allotment() {
+
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+        if ($('#status').val()) {
+            search.status = $('#status').val();
+        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+        return false;
+    }
+</script>

@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <input type='text' class='editthis' data-field='name1' data-id="15" value="test">
+
+    <input type='text' class='editthis' data-field='name2' data-id="17" value="test">
+
+</div>
+<script>
+
+$.fn.Fusefield = function(callback,testfnc){
+  var oldvalue;
+  this.focus( (e)=> {
+      oldvalue = $(e.currentTarget).val();
+  });
+  this.focusout((e)=>{
+    if(e.currentTarget.nodeName !='SELECT'){
+        fusefieldchange(e.currentTarget,callback,testfnc);
+    }
+
+  });
+  this.change((e)=>{
+    if(e.currentTarget.nodeName =='SELECT'){
+        fusefieldchange(e.currentTarget,callback,testfnc);
+    }
+  });
+
+  function fusefieldchange(obj){
+    var jq_obj= $(obj);
+    if(typeof(testfnc) == 'function'){
+      if(!testfnc(jq_obj)){
+        jq_obj.val(oldvalue);   // Fail Test , Set to Old Value
+        return;
+      }
+    }
+    if(jq_obj.val() == oldvalue ) return false; // Nothing Change
+    var tempjq = $.parseHTML(`<div class="spinner-border text-warning spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>`);
+    var viewOK = $.parseHTML(`<span><i class="fa fa-1x fa-check"></i></span>`);
+    var viewFail = $.parseHTML(`<span><i class="fa fa-1x fa-times"></i></span>`);
+    jq_obj.after(tempjq);
+    callback(jq_obj,(result)=>{
+        $(tempjq).remove();
+        if(result){
+            jq_obj.after(viewOK);
+            setTimeout(()=>{$(viewOK).remove()},2000);
+        }else{
+            jq_obj.after(viewFail);
+            jq_obj.val(oldvalue);
+            setTimeout(()=>{$(viewFail).remove();},2000);
+        }
+    });
+  }
+};
+
+///////////////////////////////// วิธ๊ใช้
+
+//$().function( successvalidate_function,validate_function);
+/////////////
+$('.editthis').Fusefield((obj,cb)=>{
+    var postdata = {
+        LINE_USER: LINE_USER,
+    }
+    var fieldname =$(obj).attr('data-field');
+    postdata[fieldname] = obj.val()
+    console.log("POSTING",postdata)
+    $.postJSON('/api/liff/edit/shop', postdata, function (res) {
+      if(res.result) cb(true);
+      else cb(false);
+    });
+
+},testvalue);
+
+function testvalue(obj){
+    var fieldname =obj.attr('data-field');
+    if(fieldname !='name1') return true;
+
+    if(obj.val() > 0 ) return true;
+    else return false;
+}
+</script>

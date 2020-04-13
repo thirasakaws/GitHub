@@ -1,0 +1,63 @@
+<div class="modal fade bd-example-modal-lg" id="modal_image_shop_preview"  tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">รูปภาพหน้าปกร้าน</h5>
+            </div>
+
+            <div class="modal-body" >
+                <img id='file_image_preview' class="rounded" src='' width='100%'>
+
+            </div>
+
+            <div class="modal-footer">
+                <button onclick='fnc_delete_shopimage(this);' class="btn btn-sm btn-danger">
+                    <i class="far fa-trash-alt"></i> Delete this file..
+                </button>
+
+                <button onclick="$('#modal_image_shop_preview').modal('hide');" class="btn btn-sm btn-light border border-secondary">
+                    <i class="fa fa-fw fa-times"></i> Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var tempcbfnc_image_preview;
+    function call_modal_image_preivew(jquerobj, cbfnc) {
+        $('#modal_image_shop_preview').modal('show');
+        $('#file_image_preview').attr('src', jquerobj.attr('src'));
+        if (typeof (cbfnc) == 'function')
+            tempcbfnc_image_preview = cbfnc;
+
+    }
+    function fnc_delete_shopimage(obj) {
+        console.log('delete img :', obj);
+//        alert('fnc_delete_shopimage');
+        $('#modal_image_shop_preview').modal('hide');
+        console.log(working)
+        var temp_src = $('#file_image_preview').attr('src')
+        var cutsrc = temp_src.split("/api/liff/shop/image/");
+        console.log(cutsrc)
+        var dataimage = cutsrc[1]
+        var tempimage = working.shop.images
+
+
+        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id}
+        if (tempimage.indexOf(dataimage) > -1) {
+            console.log(tempimage.indexOf(dataimage))
+//            tempimage.splice(tempimage.indexOf(dataimage), 1)
+            console.log(tempimage)
+            var index = tempimage.indexOf(dataimage);
+            tempimage.splice(tempimage.indexOf(dataimage), 1)
+            setdata.images =tempimage;
+            $.postJSON('/api/liff/delete/image_shop', setdata, (res) => {
+                console.log(res)
+                alert('ลบรูปภาพแล้ว')
+                show_shop_image()
+            });
+        }
+
+    }
+</script>

@@ -1,0 +1,132 @@
+<!-- Modal for GPS -->
+
+<div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">GPS LOCATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body" style="width:100%; height:100%">
+
+                <div    id='googlemap' style="max-width: 100%; height: 400px" >
+                    Gmaps
+
+                </div>
+
+            </div>
+            <div class="modal-footer row" style="margin :15px">
+                <div class="col-sm-12 col-12 col-md-12" >
+                    <div class="row">
+                        <h3>Name : </h3><input id="gps_nameofplace" class="col-12 col-sm-12 col-md-3 form-control" type='text' placeholder="ชื่อสถานที่">
+                        <h3>Address : </h3><input id="gps_addressofplace" class="col-12 col-sm-12 col-md-3 form-control"  type='text' placeholder="ที่อยู่">
+                        <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fa fa-map-marker"></i> Get Your Location</button>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-12 col-md-12 text-right">
+                    <button onclick="btn_modal_map()" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-save"></i> OK </button>
+                    <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-times"></i> Close </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var tempcbfnc_maps;
+    var gmap;
+    var themarker;
+    function initMap() {
+        gmap = new google.maps.Map(document.getElementById('googlemap'), {
+            center: {lat: 13.79607108667891, lng: 100.71164142340422},
+            zoom: 10
+        });
+
+        google.maps.event.addListener(gmap, 'click', function (event) {
+            if (themarker) {
+                themarker.setMap(null);
+            }
+            themarker = new google.maps.Marker({
+                position: event.latLng,
+                map: gmap
+            });
+        });
+
+    }
+    function btn_modal_map_current() {
+        googlemap_geogetLocation();
+    }
+    function googlemap_geogetLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("GOT POSTIION", position)
+                var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+                if (themarker) {
+                    themarker.setMap(null);
+                }
+                themarker = new google.maps.Marker({
+                    position: pos,
+                    map: gmap
+                });
+                gmap.setZoom(17);
+                gmap.panTo(pos);
+            }, show_modal_mapError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    function show_modal_mapError(error) {
+        console.log(error);
+        alert("error No GPS Allowed")
+    }
+    function call_modal_maps(setting, cbfnc) {
+        initMap();
+        if (typeof (setting) == 'function') {
+            cbfnc = setting;
+            setting = {lat: 13.79607108667891, lng: 100.71164142340422};
+
+        } else {
+
+
+        }
+        $('#gps_nameofplace').val(setting.title);
+        $('#gps_addressofplace').val(setting.address);
+        tempcbfnc_maps = cbfnc;
+        themarker = new google.maps.Marker({
+            position: setting,
+            map: gmap,
+            title: 'Postition'
+        });
+
+        $('#modal_google_gps').modal('show');
+    }
+
+
+    $("#modal_google_gps").on("shown.bs.modal", function () {
+        google.maps.event.trigger(gmap, "resize");
+    });
+
+    function btn_modal_map() {
+
+        var position = {};
+        position.lat = themarker.getPosition().lat();
+        position.lng = themarker.getPosition().lng();
+        position.title = $('#gps_nameofplace').val();
+        position.address = $('#gps_addressofplace').val();
+        console.log(position);
+
+        if (tempcbfnc_maps) {
+            tempcbfnc_maps(position);
+        } else {
+
+        }
+        $('#modal_google_gps').modal('hide');
+    }
+
+</script>

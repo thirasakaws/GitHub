@@ -1,0 +1,335 @@
+<link href="/css/glyphicons.css" rel="stylesheet">
+<link href="/css/select2.min.css" rel="stylesheet" type="text/css"/>
+
+<link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--  Food Mall Style Sheet ฝั่งลูกค้า-->
+<link href="/css/food_mall_stylesheet.css?v=11" rel="stylesheet" type="text/css"/>
+
+
+<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
+<link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+<link href="/css/fontawesome.min.css" rel="stylesheet" type="text/css"/>
+<script src="/js/fontawesome.min.js" type="text/javascript"></script>
+<script src="/js/moments.min.js" type="text/javascript"></script>
+
+<script src="/js/select2.min.js" type="text/javascript"></script>
+<script src="/js/select2tags.js" type="text/javascript"></script>
+
+<script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
+
+<link href="/css/all.css" rel="stylesheet" type="text/css"/>
+<script src="/js/all.js" type="text/javascript"></script>
+
+<script src="/SHOPS/advws_util.js?v=29" type="text/javascript"></script>
+<link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+
+<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
+
+</script>
+
+<style>
+    .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
+    .body { color: #545559; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }
+
+    /* custom css */
+    .border-left-primary {
+        border-left: .25rem solid #4e73df!important;
+    }
+    .border-left-success {
+        border-left: .25rem solid #1cc88a!important;
+    }
+    .border-left-info {
+        border-left: .25rem solid #36b9cc!important;
+    }
+
+    .border-left-warning {
+        border-left: .25rem solid #f6c23e!important;
+    }
+    .text_alert{
+        margin-top: 13px;
+        color: red;
+        padding-left: 5px;
+    }
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+    .align-items-center {
+        align-items: center!important;
+    }
+
+    .no-gutters > .col, .no-gutters > [class*=col-] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .mb-0, .my-0 {
+        margin-bottom: 0!important;
+    }
+    .text-gray-300 {
+        color: #dddfeb!important;
+    }
+    .mr-3, .mx-3 {
+        margin-right: 1rem!important;
+    }
+    .progress {
+        display: flex;
+        height: 1rem;
+        overflow: hidden;
+        font-size: .75rem;
+        background-color: #eaecf4;
+        border-radius: .35rem;
+    }
+
+
+    /* Footer */
+    .scroll-to-top:hover {
+        background: #5a5c69;
+    }
+
+    .scroll-to-top:focus, .scroll-to-top:hover {
+        color: #fff;
+    }
+
+    a:focus {
+        outline: none;
+    }
+
+
+    a:hover {
+        color: #224abe;
+        text-decoration: underline;
+    }
+    .select2 {
+        width:100%!important;
+    }
+    .scroll-to-top {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        display: none;
+        width: 2.75rem;
+        height: 2.75rem;
+        text-align: center;
+        color: #fff;
+        background: rgba(90,92,105,.5);
+        line-height: 46px;
+    }
+
+    .ticket_navbar_floragolf  {
+        background-color : #40281E;
+    }
+    .header_title { font-family: 'kanit'; font-size: 120%}
+    .btn-orange { background-color: #fc7d10 !important; color: #fff;}
+    .btn-orange:hover { color: #fff !important; background-color: #f4690b; }
+    .btn-orange:active { color: #fff !important; background-color: #f4690b; }
+    .label-orange { background-color: #fc7d10 !important; color: #fff; padding:6px 4px; }
+    .text-orange { color: #fc7d10 !important; }
+    .text-gray-light { color: #545559; }
+    .text-gray-medium { color: #191919; }
+    .lable-left { width: 25%; }
+    .box-header { padding:6px 4px; }
+
+
+
+    /* edit shop */
+    .switch {
+     position: relative;
+     display: inline-block;
+     width: 60px;
+     height: 34px;
+   }
+
+   .switch input {
+     opacity: 0;
+     width: 0;
+     height: 0;
+   }
+
+   .slider {
+     position: absolute;
+     cursor: pointer;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: #ccc;
+     -webkit-transition: .4s;
+     transition: .4s;
+   }
+
+   .switch .slider:before {
+     position: absolute;
+     content: "";
+     height: 26px;
+     width: 26px;
+     left: 4px;
+     bottom: 4px;
+     background-color: white;
+     -webkit-transition: .4s;
+     transition: .4s;
+   }
+
+   .switch input:checked + .slider {
+     background-color: #2196F3;
+   }
+
+   .switch input:focus + .slider {
+     box-shadow: 0 0 1px #2196F3;
+   }
+
+   .switch input:checked + .slider:before {
+     -webkit-transform: translateX(26px);
+     -ms-transform: translateX(26px);
+     transform: translateX(26px);
+   }
+
+   /* Rounded sliders */
+   .switch .slider.round {
+     border-radius: 34px;
+   }
+
+   .switch .slider.round:before {
+     border-radius: 50%;
+   }
+
+</style>
+<div id='mainpage_body' style="margin-top: 0px !important;">
+
+</div>
+<footer class="mt-2 mb-2" style="margin-left: 0px !important;">
+
+</footer>
+<script>
+var temp_url_permission
+var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','menulist','menuview','menu','menusearch','shopview'];
+var firsttime_visit =true;
+
+var temp =  window.location.pathname.split('/');
+//  #### Setting ########## For LINE APP
+var myLiffId =temp[2];  // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+if(myLiffId){
+  ajax_settoken(myLiffId);
+}else{
+  alert("Error in LIFF");
+}
+var main_web_site = undefined;
+if(myLiffId.indexOf('1653987613') !==-1){   // Main Channel ID;
+  main_web_site = true;
+}
+//  #### END  Setting ########## For LINE APP
+var firstgourl = temp[3];
+function register_all_page(){
+  for (var x = 0; x < all_page.length; x++) {
+    var prefix = '/shop/'+myLiffId +'/';
+      if(all_page[x].indexOf('/') !==-1){
+          prefix = '/'
+      }
+      //console.log("REGISTER :" + prefix+all_page[x]);
+      onPageshow(prefix+all_page[x], {obj: '#mainpage_body', url: '/SHOPS/' + all_page[x] + '.html'}, function () {
+        // obj is main_div  url ,real-url
+        var url = window.location.href;
+        var querysplit = url.split('/');
+        var detailofview = querysplit[5];
+        //screen_page_byname(detailofview);
+      });
+
+  }
+}
+register_all_page();
+
+
+var temp_console = console.log;
+console.log = function(...any){
+   temp_console(...any);
+   $.postJSON('/api/liff/console',any);
+}
+
+if(!starturl) starturl ='main'
+if (starturl == '/undefined') {
+    starturl ='main'
+}
+if(starturl[0] =='/'){
+  starturl = starturl.replace('/','');
+}
+if(!starturl) starturl ='main'
+
+
+var alreadyinit = false;
+function initializeApp() {
+    console.log("init ok");
+    if(typeof(alreadyinit) == 'function'){
+      alreadyinit();
+      return;
+    }
+    if(alreadyinit) return;
+    //alreadyinit =true;
+    displayLiffData();
+    //    alert("loading Data");
+    // check if the user is logged in/out, and disable inappropriate button
+    if (liff.isLoggedIn()) {
+        console.log("user Loged in");
+        //show logout button
+        liff.getProfile().then(profile => {
+        //  alert("loading Data");
+          LINE_USER.pictureUrl  = profile.pictureUrl;
+          LINE_USER.userId = profile.userId;
+          LINE_USER.displayName= profile.displayName;
+          LINE_USER.statusMessage= profile.statusMessage;
+          LINE_USER.getDecodedIDToken= liff.getDecodedIDToken().email;
+          runApp();
+          alreadyinit = runApp;
+        }).catch(err => {
+          if(typeof(fnc_noprofile) == 'function') fnc_noprofile();
+          console.log("Error Getprofile",err)
+        });
+    } else {
+      console.log("user NOT LOG in");
+      liff.login();
+        //show login Button
+    }
+}
+function initializeLiff() {
+  //  console.log("INT LIFFID:"+myLiffId)
+    if(alreadyinit) {
+      if(typeof(runApp) =='function') runApp();
+      return;
+    }
+    liff.init({ liffId: myLiffId }, initializeApp , err => {
+      console.log(err.code, err.message)
+
+    });
+}
+var LINE_USER = {};
+function displayLiffData() {
+
+    LINE_USER.browserLanguage = liff.getLanguage();
+    LINE_USER.sdkVersion = liff.getVersion();
+    LINE_USER.isInClient = liff.isInClient();
+    LINE_USER.isLoggedIn = liff.isLoggedIn();
+    LINE_USER.deviceOS = liff.getOS();
+    //console.log(LINE_USER);
+}
+// First Time
+
+var firstgourl = starturl;
+var tempsharp = starturl.indexOf('#') ;
+if(tempsharp !== -1){
+  firstgourl = starturl.substr(0,tempsharp);
+}
+var tempsharp = firstgourl.indexOf('?') ;
+if(tempsharp !== -1){
+  firstgourl = firstgourl.substr(0,tempsharp);
+}
+var temp =  firstgourl.split('/');
+//  #### Setting ########## For LINE APP
+var myLiffId =temp[0];  // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+//  #### END  Setting ########## For LINE APP
+var firstgourl = temp[1];
+//console.log("LOAD "+firstgourl);
+//go2View(starturl);
+$('#mainpage_body').load('/SHOPS/' + firstgourl + '.html');
+
+</script>

@@ -1,0 +1,296 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Restaurants</u></b></h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/restaurant_add")'>
+                    <i class="fa fa-plus"></i>
+                    Add restaurant
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3>ค้นหาชื่อ ภัตตาคาร</h3>
+                    <div class="col-md-2 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <!--                    <h3> สถานะ / Status</h3>
+                                        <div class="col col-md-2 mb-2">
+                    
+                                            <select id="status" class="form-control">
+                                                <option value="">ไม่ระบุ</option>
+                                                <option value="1">เปิดการใช้งาน</option>
+                                                <option value="0">ปิดการใช้งาน</option>
+                                            </select>
+                                        </div>-->
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " >  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="text-center">#</th>
+                    <th rowspan="2">Name</th>
+                    <th rowspan="2">Location</th>
+                    <th rowspan="2">Address</th>
+                    <th rowspan="2">Contact</th>
+                    <th rowspan="2">Frequency Ordering</th>
+                    <th rowspan="2">Create Date</th>
+                    <th rowspan="2">Last Update</th>
+                    <th rowspan="2">status</th>
+                    <th colspan="3" class="text-center">Official Manage</th>
+                    <th rowspan="2">Action</th>
+                </tr>
+                <tr>
+                    <th scope="col">Recommend</th>
+                    <th scope="col">Popular</th>
+                    <th scope="col">Manage</th>
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="restaurant_id"></td>
+                    <td class="restaurant_name"></td>
+                    <td class="restaurant_location"></td>
+                    <td class="restaurant_address"></td>
+                    <td >tel : <span class="restaurant_phone_number"></span><br>email : <u><span class="restaurant_email"></span></u></td>
+                    <td class="restaurant_frequency_ordering"></td>
+                    <td class="restaurant_createdate"></td>
+                    <td class="restaurant_lastupdate"></td>
+                    <td class="restaurant_status"></td>
+                    <td class="restaurant_recommend"></td>
+                    <td class="restaurant_popular"></td>
+                    <td class=" text-center">
+                        <button type="button" class="btn btn-primary btn-sm alink" onclick="edit_official_restaurant(this)"><i class="fa fa-pencil  " ></i> Official Edit</button>
+                    </td>
+                    <td class=" text-center">
+                        <button type="button" class="btn btn-primary btn-sm alink" onclick="edit_data_restaurant(this)"><i class="fa fa-pencil  " ></i> Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalofficial" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalofficial">Official Manage | ID :<span id="id_restaurant"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-8 col-sm-8 col-md-8">Recommend Menu</div>
+                    <div class="col-4 col-sm-4 col-md-4"><select class="form-control" id="recommend_menu"></select></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-8 col-sm-8 col-md-8">Popular Menu</div>
+                    <div class="col-4 col-sm-4 col-md-4"> <select class="form-control" id="popular_menu"></select></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/restaurant_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_restaurant_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    create_select_option('recommend_menu', 1, 10)
+    create_select_option('popular_menu', 1, 10)
+    function create_select_option(id, start, end) {
+        var option_select = ''
+        option_select += '<option value=""> ไม่ระบุ</option>'
+        for (var x = start; x <= end; x++) {
+            option_select += '<option value="' + x + '">' + x + '</option>'
+        }
+        $('#' + id).html(option_select)
+    }
+
+    function showdata_restaurant_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not Found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'restaurant', objdata[x], template_of_testtable);
+                if (objdata[x].createdate) {
+                    TR.find('.restaurant_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                }
+                if (objdata[x].lastupdate) {
+                    TR.find('.restaurant_lastupdate').html(moment(objdata[x].lastupdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                } else {
+                    if (objdata[x].createdate) {
+                        TR.find('.restaurant_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                    }
+                }
+                if (objdata[x].status == 0) {
+                    TR.find('.restaurant_status').addClass('text-danger').html('ปิดใช้งาน');
+                }
+                if (objdata[x].status == 1) {
+                    TR.find('.restaurant_status').addClass('text-success').html('เปิดใช้งาน');
+                }
+                if (objdata[x].official) {
+                    if (objdata[x].official.length > 0) {
+                        for (var y = 0; y < objdata[x].official.length; y++) {
+                            if (objdata[x].official[y].group == "Recommend Menu") {
+                                TR.find('.restaurant_recommend').html(addCommas(objdata[x].official[y].ranking))
+                            }
+                            if (objdata[x].official[y].group == "Popular Menu") {
+                                TR.find('.restaurant_popular').html(addCommas(objdata[x].official[y].ranking))
+                            }
+                        }
+                    }
+
+                }
+
+                if (objdata[x].frequency_ordering) {
+                    TR.find('.restaurant_frequency_ordering').html(addCommas(objdata[x].frequency_ordering));
+                }
+                TR.show();
+            }
+        }
+    }
+    function edit_data_restaurant(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/restaurant_edit?restaurant_id=' + tempid);
+        return false;
+    }
+    function edit_official_restaurant(restaurant_id) {
+        var res_id = $(restaurant_id).find_id();
+        //restaurant_id load this data
+        //
+        $.get('/api/data/kinarai/restaurant_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result && result.official) {
+                if (result.official.length > 0) {
+                    for (var x = 0; x < result.official.length; x++) {
+                        if (result.official[x].group == "Recommend Menu") {
+                            $('#recommend_menu').val(result.official[x].ranking)
+                        }
+                        if (result.official[x].group == "Popular Menu") {
+                            $('#popular_menu').val(result.official[x].ranking)
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#id_restaurant').html(res_id)
+        $('#save_btn').attr('onclick', 'update_official(' + res_id + ')')
+        $('#showmodal').modal('show')
+    }
+    function update_official(restaurant_id1) {
+
+        console.log(restaurant_id1)
+        //postto update restaurant_id1
+        var official = []
+        if ($('#recommend_menu').val()) {
+            var recom = {
+                group: "Recommend Menu",
+                ranking: $('#recommend_menu').val()
+            }
+            official.push(recom)
+        }
+        if ($('#popular_menu').val()) {
+            var pop = {
+                group: "Popular Menu",
+                ranking: $('#popular_menu').val()
+            }
+            official.push(pop)
+        }
+
+        var postdata = {
+            _id: restaurant_id1,
+            official: official
+        }
+        console.log(postdata)
+        $.postJSON('/api/data/kinarai/restaurant_update_official', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                $('#showmodal').modal('hide')
+                refreshpage()
+            }
+        });
+
+
+    }
+
+    function filterFormsubmit_allotment() {
+
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+        if ($('#status').val()) {
+            search.status = $('#status').val();
+        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+        return false;
+    }
+</script>

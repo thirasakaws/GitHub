@@ -1,0 +1,113 @@
+<!-- ลงทะเบียน ร้านค้า --> 
+<html>
+    <head>
+        <link href="/css/glyphicons.css" rel="stylesheet">
+        <link href="/css/select2.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+       
+        <link href="/css/all.css" rel="stylesheet" type="text/css"/>
+        <script src="/js/all.js" type="text/javascript"></script>
+        <script src="/js/select2.min.js" type="text/javascript"></script>
+        <script src="/js/select2tags.js" type="text/javascript"></script>
+        <script src="/js/popper.min.js" type="text/javascript"></script>
+        <script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
+
+        <script src="/LIFF/advws_util.js?v=3" type="text/javascript"></script>
+        <script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
+</script>
+<style>
+    .header_title { font-family: 'kanit'; }
+</style>
+    </head>
+    <body>
+        
+        
+<div class="container-fluid main_data">
+<h3 class="header_title">
+        <i class="fas fa-store"></i> จัดการร้านของคุณ - Restaurant Setting 
+    </h3>
+ 
+     <div class="form-group row">
+        <label class="col-sm-2 text-gray-light width-left-25" > ชื่อร้าน  </label>  
+        <div class="col-sm-10">
+            
+            <span class='SHOP_name '></span> 
+            <a class="btn btn-sm btn-orange" href="#" onclick="edit_shop();"> 
+                <i class="fas fa-cogs"></i> Setting
+            </a>
+        </div>
+    </div> <!-- // ชื่อร้าน -->
+    
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label"> สถานะ  </label>  
+        <div class="col-sm-9">
+            <span class="badge badge-pill badge-success SHOP_status"></span>
+            <!--<small class="form-text text-muted">Restaurant Name</small>-->
+        </div>
+    </div> <!-- // สถานะ --> 
+
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label"> ประเภทร้านอาหาร  </label>  
+        <div class="col-sm-9">
+            <select class="SHOP_type"  multiple="multiple" placeholder="เลือกประเภทร้านค้า"></select>
+        </div>
+    </div> <!-- // ประเภทร้านอาหาร --> 
+    
+    <div id='shopbranch-select' class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label"> สาขา  </label>  
+        <div class="col-sm-9">
+            <select class="" id='shopbranch'></select>
+            <button onclick='fncmanagebranch()' class=' btn btn-sm btn-success' id='managebranch' style='display:none'>Manage This Branch</button>
+
+        </div>
+    </div> <!-- // สาขา -->
+    
+ 
+ 
+<!--<div id='shopbranch-select'>
+<br> สาขา
+
+</div>-->
+<br>
+<button class='btn btn-sm btn-danger' onclick='show_createbranch();'>+ สร้างสาขา</button>
+<hr>
+<div class='show_createbranch' style='display:none'>
+สร้างสาขา :
+<input type='text' class='form-control' id='shopbranchname' placeholder="ชื่อสาขา">
+<br>
+<button onclick='createnewbranch()' class='form-control btn btn-sm btn-danger'>createnewbranch</button>
+</div>
+
+<br>
+
+ <label for="image_uploader_btn">รูป ร้าน :</label>
+ <div id='image_uploader'></div>
+ <div id='shop_image_view_div'>
+      <img width="120px" height="120px" onclick='previewimg(this);' class='rounded shop_image_view' src='/api/liff/shop/image/#imgsrc' style='display:none' >
+      <br>
+ </div>
+
+
+</div> <!-- // container-fluid --> 
+
+<div id='shop_image_preview_div'>
+</div>
+<script>
+  function submitnewshopowner() {
+      console.log("POST /api/liff/register/shopowner")
+      $.postJSON('/api/liff/register/shopowner', {LINE_USER: LINE_USER}, function (res) {
+          if (!res.result) {
+              if (res.detail) {
+                  alert(res.detail);
+              }
+          } else {
+              go2View('register1-2');
+          }
+      });
+  }
+  
+</script>
+    </body>
+</html>

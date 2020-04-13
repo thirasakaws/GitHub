@@ -1,0 +1,362 @@
+
+<div class='container-fluid main_data' >
+
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> จัดการเมนูอาหาร</span>
+    </div>
+
+
+    <div class="text-center">
+        <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id">MENU ID</span></span>
+        <h5>ชื่อเมนู : <span class='MENU_name font-color-shop' ></span></h5>
+    </div>
+
+    <div class="form-group row mt-3 border-bottom border-light mt-3">
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  กำหนดเมนู <span class="text-gray-light2">(เปิด-ปิด)</span> </label>
+        <div class="col text-right d-flex d-inline ">
+            <div class="ml-auto">
+                <label class="switch">
+                    <input type="checkbox" id="menu_status" onchange="changemenustatus(this)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+        </div>
+    </div> <!-- // กำหนดเมนู (เปิด-ปิด) -->
+
+    <div class="form-group row mt-3 border-bottom border-light mt-3">
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Auto-Manual)</span> </label>
+        <div class="col text-right d-flex d-inline ">
+            <div class="ml-auto">
+                <label class="switch">
+                    <input type="checkbox" id="confirm_order" onchange="changeconfirm_order(this)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+        </div>
+    </div> <!-- // การยืนยัน order auto-mannual -->
+
+    <div class="form-group row mt-3 border-bottom border-light mt-3">
+
+        <div class="col-12">
+          <label class="col-sm-12 text-gray-light lable-left-35 " ><b> จำกัดต่อวัน  </b></label>
+          <div class="col d-flex">
+              <!--//template for save data one field-->
+              <div class="float-left pl-2 mb-2 w-100 ">
+                  <input id="limit_date" class="input_data_bn edit_data MENU_limit_date w-90 " placeholder="จำกัดต่อวัน" data-field="limit_date">
+
+              </div>
+              <!--//template for save data one field-->
+          </div>
+        </div>
+
+    </div> <!-- // จำกัดต่อวัน -->
+
+
+    <div class="form-group row mt-3 border-bottom border-light mt-3">
+        <label class="col-sm-4 text-gray-light " style="width:auto;">  กำหนดราคา </label>
+        <div class="col text-right d-flex d-inline">
+            <div class="ml-auto">
+                <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-submit-shop addnewmenuprice" onclick='show_moremanagemenuprice();'>
+                    <i class="fas fa-plus"></i> เพิ่มราคาเมนู
+                </button>
+            </div>
+        </div>
+    </div> <!-- // กำหนดราคา -->
+
+
+
+    <!-- <div class=" mt-1">
+    <!--<div class="card-body">
+      <strong class="font-color-shop text-title110">
+          <i class="far fa-money-bill-alt"></i> กำหนดราคา
+      </strong>
+      <div class="text-center mb-1 mt-1 d-flex">
+          <div class="ml-auto">
+               <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-submit-shop addnewmenuprice" onclick='show_moremanagemenuprice();'>
+                   <i class="fas fa-plus"></i> เพิ่มราคาเมนู
+               </button>
+          </div>
+      </div> -->
+
+    <div class="form-group mt-1">
+        <div class='show_managemenuprice mt-2 ' style='display:none; width:100%'>
+            <div class="row mt-1">
+                <div class="col-4">
+                    คำอธิบายเมนู
+
+                </div>
+                <div class="col">
+                    <input type="text" id="newprice_detail" class="form-control">
+                    <small class="text-secondary text-gray-light2">( เช่น ธรรมดา + เพิ่มใข่ดาว )</small>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-4">
+                    กำหนดราคา
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="number" id="newprice_price" class="form-control">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">บาท</div>
+                        </div>
+                    </div>
+                    <small class="text-secondary text-gray-light2">( ราคาอาหารจานนี้ )</small>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-submit-shop btn-block mt-3" onclick="addnewprice();">+ เพิ่มรายการ</button>
+            <hr>
+        </div>
+    </div>
+
+    <small id="menupricelist">
+        <div class="mt-1 row_tablecontent" style="display:none;">
+
+            <div class="form-group row mt-3 border border-bottom border-light">
+                <div class="col-9 d-inline pt-2" style="width: auto;">
+                    <span class="menuprice_detail text-title110" style="width:auto;"> </span>
+                    <div>
+                        ราคา <span class="menuprice_price font-color-shop"></span> <span class="text-gray-light">บาท</span>
+                    </div>
+                </div>
+                <div class="col text-right d-flex d-inline pt-2">
+                    <div class="ml-auto">
+                        <label class="switch">
+                            <input type="checkbox" class="menuprice_status" onchange="managepricestatus(this);">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div> <!-- // จำกัดต่อวัน -->
+
+        </div> <!--// row_tablecontent -->
+    </small>
+    <!-- </div> // card-body -->
+</div>
+
+</div>
+
+<script type="text/javascript">
+    refresh_managemenupage();
+
+    //for input tag
+    $('.edit_data').Fusefield( (obj,cb)=>{
+      var field = obj.attr('data-field');
+      var data = {}; data._id = working.activemenu._id;
+      data.LINE_USER = LINE_USER;
+      data[field] = obj.val();
+
+      console.log("data",data);
+      $.postJSON('/api/liff/edit/menu', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+              cb(false);
+          }else { cb(true); refresh_managemenupage();  };
+      })
+    },(obj)=>{
+      return true;
+    });
+
+
+    function refresh_managemenupage() {
+        $.postJSON('/api/liff/get/menu', {LINE_USER: LINE_USER, _id: working.menunow}, (res) => {
+            if (!res.result) {
+                alert(res.detail);
+                return;
+            }
+            working.activemenu = res.detail;
+            // Set Default
+            if (!working.activemenu.status)
+                working.activemenu.status = 4;
+            if (!working.activemenu.limit_date)
+                working.activemenu.limit_date = '';
+            if (!working.activemenu.price || Array.isArray(working.activemenu.price) == false)
+                working.activemenu.price = [];
+
+            if (working.activemenu.price.length > 0) {
+                showmenuprice(working.activemenu.price);
+            }
+            if (working.activemenu.confirm_order == "auto") {
+                $('#confirm_order').prop('checked', true);
+            } else if (working.activemenu.confirm_order == "manual") {
+                $('#confirm_order').prop('checked', false)
+            }
+            if (working.activemenu.status == 5) {
+                $('#menu_status').prop('checked', true);
+            } else {
+                $('#menu_status').prop('checked', false)
+            }
+            if (working.activemenu.status < 4) {
+                $('.warn_status').html('หากเมนูนี้ยังไม่ผ่านการตรวจสอบจะไม่สามารถเปิดใช้ได้').show();
+                $('#menu_status').prop('disabled', true)
+            } else {
+                $('.warn_status').hide();
+            }
+
+
+            setdatabyclass($('.main_data'), 'MENU', working.activemenu);
+
+            ADVWS.make_edittext($('.editable'), function (data, obj) {
+                edtable_update_toserver(data, obj, '/api/liff/edit/menu');
+
+            }, function (data2vilidate, field) {
+                if (field == 'price') {
+                    if (!(Number(data2vilidate) > 0)) {
+                        return "กำหนดราคาขั้นต่ำ 1 บาท";
+                    }
+                }
+                if (!data2vilidate)
+                    return "Invalid data";
+            });
+        });
+    }
+    ;
+    function addnewprice() {
+        var detailprice = $('#newprice_detail').val();
+        var newprice = $('#newprice_price').val();
+        var pricearr = working.activemenu.price;
+        for (var x = 0; x < pricearr.length; x++) {
+            if (pricearr[x].price == newprice && pricearr[x].detail == detailprice) {
+                alert('คุณมีข้อมูลนี้แล้ว');
+                return false;
+            }
+        }
+
+        if (!Array.isArray(working.activemenu.price)) {
+            working.activemenu.price = [];
+        }
+        working.activemenu.price.push({detail: detailprice, price: newprice, status: 1});
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
+        if (!detailprice) {
+            alert('กรุณาในข้อมูลคำอธิบายราคา');
+            return false;
+        }
+        if (!newprice) {
+            alert('กรุณากำหนดราคา');
+            return false;
+        }
+        console.log(data);
+        $.postJSON('/api/liff/edit/menu', data, (res) => {
+            if (!res.result) {
+                return alert(res.detail);
+            } else {
+                refresh_managemenupage();
+            }
+
+        });
+        $('.show_managemenuprice').hide();
+    }
+    ;
+    function changeconfirm_order(obj_con) {
+        var dataid = working.activemenu._id;
+        var confirm_order;
+        if ($(obj_con).is(':checked')) {
+            confirm_order = "auto";
+        } else {
+            confirm_order = "mannual";
+        }
+        var data = {LINE_USER: LINE_USER, _id: dataid, confirm_order: confirm_order};
+        console.log("sending", data)
+        $.postJSON('/api/liff/edit/menu', data, function (res) {
+            if (!res.result) {
+                return alert(res.detail);
+            } else {
+                refresh_managemenupage();
+            }
+
+        });
+    }
+    function changemenustatus(obj) {
+        if (!working.activemenu.price || working.activemenu.price.length <= 0) {
+            $('.warn_status').html('กรุณาเพิ่มราคาเมนูก่อน จะทำการเปิดขายได้').show();
+
+            setTimeout(function () {
+                $('.warn_status').hide('slow');
+                $('.warn_status').html('')
+            }, 3000);
+            $(obj).prop('checked', false)
+            return false;
+        }
+        var dataid = working.activemenu._id;
+        var menu_status;
+        if ($(obj).is(':checked')) {
+            menu_status = 5;
+        } else {
+            menu_status = 4;
+        }
+        var data = {LINE_USER: LINE_USER, _id: dataid, status: menu_status};
+        console.log("sending", data)
+        $.postJSON('/api/liff/edit/menu', data, function (res) {
+            if (!res.result) {
+                return alert(res.detail);
+            } else {
+                refresh_managemenupage();
+            }
+
+        });
+    }
+
+
+    var template_menuprice = $('#menupricelist').html();
+    function showmenuprice(obj) {
+        $('#menupricelist').html(template_menuprice);
+        for (var x = 0; x < obj.length; x++) {
+            // if(!obj[x].status) obj[x].status = 1;
+            var TR = tablerow($("#menupricelist"), 'menuprice', obj[x], template_menuprice, false);
+            if (obj[x].status == 1) {
+                TR.find('.menuprice_status').prop('checked', true);
+            } else {
+                TR.find('.menuprice_status').prop('checked', false);
+            }
+            TR.attr('value', obj[x].detail);
+            TR.attr('value-price', obj[x].price);
+            TR.show();
+        }
+    }
+
+    var moremanagemenuprice = false;
+    function show_moremanagemenuprice() {
+        if (moremanagemenuprice) {
+            $('.show_managemenuprice').hide();
+        } else {
+            $('.show_managemenuprice').show();
+        }
+        moremanagemenuprice = !moremanagemenuprice;
+    }
+
+    function managepricestatus(obj) {
+        // var price = parseFloat(Number($(obj).parents('.row_tablecontent .menuprice_price')));
+        var price = $(obj).parents('.row_tablecontent').attr('value-price');
+        var value = $(obj).parents('.row_tablecontent').attr('value');
+        var newstatus;
+        if ($(obj).is(':checked')) {
+            newstatus = 1;
+        } else {
+            newstatus = 0;
+        }
+        // alert(newstatus);
+        for (var x = 0; x < working.activemenu.price.length; x++) {
+            if (working.activemenu.price[x].price == price && working.activemenu.price[x].detail == value) {
+                working.activemenu.price[x].status = newstatus;
+            }
+        }
+        console.log('peice ', working.activemenu.price)
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
+        console.log(data);
+        $.postJSON('/api/liff/edit/menu', data, (res) => {
+            if (!res.result) {
+                return alert(res.detail);
+            } else {
+                refresh_managemenupage();
+            }
+
+        });
+    };
+
+</script>

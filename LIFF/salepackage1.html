@@ -1,0 +1,171 @@
+<div class='container-fluid main_data' >
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> จัดการเมนูของร้านค้า</span>
+    </div>
+    
+
+  <div class="text-center mb-3">
+      <h4 class="shopmenu_shopname font-color-shop header-title-shop"></h4>
+  </div>
+    
+    
+<!--    จัดการเมนูของร้านค้า-->
+
+<div class="">
+  <div class="text-center mb-2">
+     <button type="button" name="button"  style="border-radius: 20px;" class="btn btn-sm btn-outline-submit-shop addnewmenu" onclick="show_addnewmenu();">
+         <i class="fas fa-plus"></i> เพิ่มเมนูอาหาร
+     </button>
+  </div>
+  <div class="text-center " id="addnewmenu_area" style="display:none">
+
+    <div class="card mt-2 mb-2">
+     <div class="card-body">
+       <h5 class="card-title">ระบุชื่อเมนูของคุณ</h5>
+       <span class='makenewmenu font-color-shop' data-field='name'>
+           <i class="fas fa-plus"></i> เพิ่ม<span>
+     </div>
+   </div>
+
+  </div>
+</div> 
+
+   <div id='main-menu'>
+     <div class='rowmenu row_tablecontent card mt-1 mb-2' style='display:none' >
+        <div class="card-body pb-1 pt-2">
+            <div class="row">
+                <div class="col-8">
+                     <span class='card-title font-size-shop-110' data-field='name'>
+                        <span class="text-gray-light2"># <span class="shopmenu_id">MENU ID </span></span> 
+                        <span class="shopmenu_name font-color-shop"> SHOP MENU NAME</span> 
+                     </span>
+                </div> <!--// header -->
+                                
+                
+                <div class="col-4 ">          
+                    <div class="text-right">
+                        <small href="#" onclick="managethismenu(this);" class="font-color-shop border-color-shop rounded-pill">
+                            <i class="fas fa-cog"></i> จัดการเมนู
+                        </small>
+                    </div>
+                </div> <!--// จัดการเมนู -->
+                
+                
+                
+                <div class="col-7">
+                    <div class="mt-2 pl-4">
+                        <small class="" style="line-height: 20px;">
+                            <div><span class="label-inline-block-52 text-gray-light">จำนวนคงเหลือ </span>: <span class="shopmenu_amount pl-1"></span></div>
+                            <div><span class="label-inline-block-52 text-gray-light">จำกัดต่อวัน </span>: <span class="shopmenu_limit_date pl-1 font-color-shop font-weight-bold"></span></div>
+                            <div><span class="label-inline-block-52 text-gray-light">สถานะ </span>: <span class="shopmenu_status pl-1"></span></div>
+                        </small>
+                    </div>
+                     <!-- <input type="checkbox" data-toggle="toggle"  data-on="เปิด" data-off="ปิด" data-onstyle="info" data-offstyle="danger" class="toggle-menu" onchange="managestatusmenu(this);"> -->
+                  </div>  <!--// จัดการจำนวน -->
+                
+                  <div class="col-5" >
+                      <div class="mt-5 text-right">
+                        <small onclick="manageactivethismenu(this);" class="font-color-shop border-color-shop rounded-pill">
+                        <i class="fas fa-cog"></i> จัดการขั้นสูง
+                        <!--<i class="fas fa-chevron-right font-color-shop" aria-hidden="true" style="font-size: 140%;"></i>-->
+                        </small>
+                      </div>
+                 </div>  <!--// ขั้นสูง -->
+ 
+            </div>   <!--// row -->
+            
+            <div class="ml-4">
+                <small class="text-danger warn_menu w-100 mt-1"></small>
+            </div>
+        </div> <!-- // card-body  --> 
+        
+      </div>
+    </div>
+</div>
+
+<script>
+  setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+  var template_menu = $('#main-menu').html();
+  ADVWS.make_edittext($('.makenewmenu'),function(data,obj){
+      data.LINE_USER=LINE_USER ;
+      data.status = 4;
+      $.postJSON('/api/liff/add/menu',data,(res)=>{
+          if(!res.result){
+            return alert(res.detail);
+          }
+          getmenulist()
+          // new_table_row([data])
+          $('.makenewmenu').editable('setValue',null);
+          // Create new row
+      });
+  },function(data2vilidate){
+      if(!data2vilidate) return "Invalid data";
+  });
+
+  var array_category =[{value:1,text:'hot'},{value:2,text:'cool'}];
+  ADVWS.make_editselect($('.MENU_category'),array_category, function(data,obj){
+    // data.shopid = working.shop._id; // include shopid to check with Server
+    // edtable_update_toserver(data,obj,'/api/liff/search/shop');
+  },function(data2vilidate){
+    if(!data2vilidate) return "Invalid data";
+  });
+getmenulist();
+function getmenulist(){
+  $.postJSON ('/api/liff/list/menu',{LINE_USER:LINE_USER},(res)=>{
+      if(res.result){
+        $('.shopmenu_shopname').html(res.detail[0].shopname)
+          new_table_row(res.detail);
+      }
+  });
+}
+
+  function new_table_row(obj){
+     $('#main-menu').html(template_menu);
+      for(var x=0; x < obj.length;x++){
+        if(!obj[x].status) obj[x].status = 5;
+        var TR = tablerow($("#main-menu"), 'shopmenu', obj[x], template_menu, false) ;
+        var status;
+          if (obj[x].status==5) {
+              status = '<i class="far fa-check-circle"></i> เปิดขาย';
+              TR.find('.shopmenu_status').css('color','green');
+          }else if (obj[x].status==4) {
+            status = '<i class="far fa-times-circle"></i> ปิด';
+            TR.find('.shopmenu_status').css('color','red');
+          }
+
+          if(!obj[x].price || obj[x].price.length <= 0){
+            TR.find('.warn_menu').html('** กรุณาเพิ่มราคาเมนูของคุณ');
+          }
+          
+     
+          TR.find('.shopmenu_id').html(obj[x]._id);
+          
+
+          TR.find('.shopmenu_status').html(status);
+          TR.show();
+      }
+  }
+
+  var show_addnewmenu_show=false;
+  function show_addnewmenu(){
+    if(show_addnewmenu_show){
+      $('#addnewmenu_area').hide('slow');
+    }else{
+        $('#addnewmenu_area').show('slow');
+    }
+    show_addnewmenu_show = !show_addnewmenu_show;
+  }
+
+  function managethismenu(obj){
+    working.menunow = $(obj).find_id();
+    //alert('Menue'+working.menunow );
+    go2View('salepackage-manage');
+  }
+
+  function manageactivethismenu(obj){
+    working.menunow = $(obj).find_id();
+    //alert('Menue'+working.menunow );
+    go2View('salepackage-manage1');
+  }
+
+</script>

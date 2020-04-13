@@ -1,0 +1,220 @@
+<div id='gmap_ordergps'>
+</div>
+<div class="container-fluid main_orderdata">
+    
+    <div class="box-head-title-foodmall text-center  " >
+        <span class="header-foodmall"> 
+            สรุปรายการสั่งซื้อ <span class="font-color-foodmall">###ORDER-id##</span> 
+        </span>
+    </div>
+    
+
+<!--  <div class="text-center">
+        <h4>สรุปรายการสั่งซื้อ </h4>
+  </div> -->
+
+  <div class="text-secondary d-flex justify-content-between">
+    <h6 class="text-orange">ข้อมูลรายการสั่งซื้อ</h6>
+    <span class="btn btn-sm btn-outline-danger"  onclick="resetorder()"> 
+        <i class="far fa-trash-alt"></i> ยกเลิกรายการ
+    </span>
+  </div>
+
+
+  <div class="imgqr_payment text-center mt-4 mb-4">
+       <img src="##ORDER-qrCode##" alt="Qpay QrPaymentCode"  width="50%">
+  </div><!-- รูป QR Code  -->
+
+  <div class="form-group row">
+      <label class="col-4 font-color-foodmall-gray-light2"> ชื่อ</label>
+      <div class="col">
+          ##ORDER-firstname##    ##ORDER-lastname##
+      </div> 
+  </div> <!--// -->
+  
+  <div class="form-group row">
+      <label class="col-4 font-color-foodmall-gray-light2"> เบอร์ติดต่อ</label>
+      <div class="col">
+          ##ORDER-contact##
+      </div> 
+  </div> <!--// -->
+  
+  <div class="form-group row">
+      <label class="col-4 font-color-foodmall-gray-light2"> วิธีการจ่ายเงิน</label>
+      <div class="col">
+          <span class="paymenttype">##ORDER-paymenttypeshow##</span>
+      </div> 
+  </div> <!--// -->
+  
+  <div class="form-group row">
+      <label class="col-12 font-color-foodmall-gray-light2"> ที่อยู่ปลายทาง</label>
+      <div class="col-12">
+           <span class=" ORDER_address"></span>
+      </div> 
+  </div> <!--// -->
+  
+
+
+
+
+  <div class="mt-3 mb-5">
+      <h6>รายการสั่งซื้อ <span class="font-color-foodmall">###ORDER-id##</span> </h6>
+      
+     
+    <div class="" id="listmenuorder">
+      <div class="row row_tablecontent" style="display:none">
+         <div class="col-2 text-left">
+          <span class="menu_qty">0</span> x
+        </div>
+        <div class="col-7">
+            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+        </div>
+       
+        <div class="col-3 text-right">
+           ฿ <span class="menu_menuprice">0.00 </span> 
+        </div>
+      </div>
+    </div>
+    <hr>
+      
+    
+    <div class="align-items-center">
+      <div class="row">
+          <div class="col-6">
+              ค่าอาหาร
+          </div>
+          <div class="col-6 text-right">
+              ฿ <span class="total_price">0.00 </span> 
+          </div>
+      </div>
+        
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <span>##ORDER-totalKM## </span> กม.
+          </div>
+          <div class="col-6 text-right">
+             ฿ ##ORDER-totalshipcost##  
+          </div>
+      </div>
+      
+        <hr>  
+      <div class="row">
+          <div class="col-6">
+            <strong>รวมทั้งหมด</strong>
+          </div>
+          <div class="col-6 text-right ">
+             ฿ ##ORDER-grandtotal##  
+          </div>
+      </div>
+        
+    </div>
+    
+    <hr> 
+  </div>
+  <!--
+  <div class="fixed-bottom">
+    <button type="button" name="button" class="btn btn-lg btn-block label-orange" onclick="checkout_payment();"> ยืนยันรายการ และชำระเงิน </button>
+
+  </div>
+  -->
+</div>
+<script>
+  var showlistadd_temp = $('#address_list').html();
+  var template_ordermenulist = $('#listmenuorder').html();
+  var teplate_all = $('.main_orderdata').html();
+  refresh_page_wait();
+
+
+    function refresh_page_wait(){
+      if (working.order) {
+        // console.log("ORDER",working.order);
+        var paymenttype = ['','Cash On Delivery','QR payment By Quickpay'];
+        working.order.paymenttypeshow = paymenttype[working.order.paymenttype];
+        if( working.order.logistic){
+          working.order.totalshipcost = working.order.logistic.deliveryTotalAmount;
+          working.order.totalKM = working.order.logistic.distanceShopToCustomerInKM;
+        }
+        $('.main_orderdata').html(hash_replace(teplate_all,"ORDER",working.order));
+//        $('.paymenttype').html(paymenttype[Number(working.order.paymenttype)]);
+      }
+            showmwnuorderlist(working.order.items);
+            setdatabyclass($('.main_data'), 'ORDER', working.order);
+            getcustomeraddress();
+    }
+
+    function getcustomeraddress(){
+      $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+        if(res.result){
+          obj = res.detail;
+          for(var x=0;x<obj.length;x++){
+                 if(obj[x]._id == working.order.addressid){
+                    $('.ORDER_address').html(obj[x].address);
+                 }
+          }
+
+        }else{
+          // alert(res.detail);
+        }
+      });
+    };
+
+    function showmwnuorderlist(obj){
+      $('#listmenuorder').html(template_ordermenulist);
+      var totalprice =0,shippingcost = 0,grandtotal = 0;
+        for(var x=0;x<obj.length;x++){
+          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
+          totalprice += obj[x].menuprice;
+          obj[x].pricedes = obj[x].price.detail;
+               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
+               if(obj[x].menuprice>0){
+                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+               }else {
+                 TR.find('.menu_menuprice').html('0.00')
+               }
+               if (obj[x].note) {
+                  TR.find('.menu_notedate').show();
+               }
+
+               TR.show();
+
+               /// +=delivery
+        }
+        grandtotal = shippingcost+totalprice;
+        if (totalprice>0) {
+            $('.total_price').html(addCommas(totalprice))
+        }else {
+          $('.total_price').html('0.00')
+        }
+
+        if (shippingcost>0) {
+            $('.total_shippingcost').html(addCommas(shippingcost))
+        }else {
+          $('.total_shippingcost').html('0.00')
+        }
+
+        if (totalprice>0) {
+            $('.grandtotal').html(addCommas(grandtotal))
+        }else {
+          $('.grandtotal').html('0.00')
+        }
+
+    };
+
+    function checkout_payment(){
+      if(working.order && working.order.items && working.order.items.length >0 && working.order._id){
+          liff.sendMessages([{
+                   'type': 'text',
+                   'text': "OrderConfirm: #"+working.order._id
+               }]).then(function() {
+                   liff.closeWindow();
+               }).catch(function(error) {
+                  console.log("Send Error");
+                   window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+               });
+
+      }else{
+          alert("รายการสั่งซื้อของคุณยังไม่พร้อมสำหรับชำระเงิน");
+      }
+    };
+
+</script>

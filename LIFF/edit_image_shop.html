@@ -1,0 +1,208 @@
+<style>
+    .form-group {
+        margin-bottom: 0rem;
+    }
+    .fa-camera size_icon-sm {
+        font-size:2em !important;
+    }
+</style>
+<div class="container-fluid main_data">
+
+    <div class="box-head-title-shop text-center" >
+        <span class="header-shop"> จัดการรูปภาพร้าน</span>
+    </div>
+
+    <div class="form-group row " style="">
+        <label for="image_uploader_btn" class="col-sm-2 col-form-label font-color-shop"> อัปโหลดรูปภาพหน้าร้าน</label>
+
+        <div class="col-sm-10">
+            <div id='image_uploader'></div>
+            <small class="text-secondary">กรุณาอัปโหลดรูปภาพหน้าร้านที่มีความชัดเจน และตรงกับสถานที่ขายจริง ภาพแรกเป็น " ภาพปกร้านอาหาร "</small>
+
+            <div class="text-gray-light mt-3 mb-2"> แสดงรูปภาพ </div>
+            <div id='shop_image_view_div'>
+                <img width="31%" height="31%" onclick='previewimg(this);' class='rounded shop_image_view rounded float-left m-1' src='/api/liff/shop/image/#imgsrc' style='display:none' >
+
+            </div>  
+
+        </div>
+    </div>
+
+
+
+</div>  
+<!--// container-fluid--> 
+
+<div id='shop_image_preview_div'>
+</div>
+
+<script>
+    console.log("Setting", working.shop);
+    var template_shop_image_view;
+    $('#image_uploader').load('/LIFF/modal_file_upload.html', function () {
+        var data2post = {LINE_USER: LINE_USER, shopid: working.shop._id};
+        call_modal_image_upload({url: '/api/liff/shop/uploader', postdata: data2post}, (res) => {
+            // POST Image Finish
+            console.log('UPload finish', res);
+            if (res.result) {
+                if (res.detail && res.detail.images) {
+                    working.shop = res.detail;
+                    show_shop_image();
+                }
+            }
+        });
+        template_shop_image_view = $('#shop_image_view_div').html();
+        show_shop_image();
+    });
+
+    $('#shop_image_preview_div').load('/LIFF/modal_view_shopimage.html');
+    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    setdatabyclass($('.main_data'), 'SHOP', working.shop);
+    if (working.shop.status == 1) {
+        $('.SHOP_status').html('รอตรวจสอบ');
+        $('.SHOP_status').css("background-color", "#f1c40f");
+    }
+    if (working.shop.status == 5) {
+        $('.SHOP_status').html('อนุมัติเรียบร้อย');
+        $('.SHOP_status').css("background-color", "#229954");
+    }
+    if (working.shop.confirm_order == "auto") {
+        $('#confirm_order').prop('checked', true);
+    } else if (working.shop.confirm_order == "manual") {
+        $('#confirm_order').prop('checked', false)
+    }
+    var shopbranch_select_template = $('#shopbranch-select').html();
+    function check_shopbranch() {
+        $.postJSON('/api/liff/check/shopbranch', {LINE_USER: LINE_USER, shopid: working.shop._id}, function (res) {
+            // console.log("res from branch");
+            // console.log(res);
+            $('#shopbranch').html('');  // Clear Old Value
+            if (Array.isArray(res.detail) && res.detail.length > 0) {
+                working.shopbranch = res.detail;
+                $('#shopbranch-select').html(shopbranch_select_template).removeClass('alert alert-warning');
+                $('.show_createbranch').hide();
+                $('#managebranch').show();
+
+            } else {
+                $('#shopbranch-select').addClass('text-danger text-center alert alert-warning').html('ดูเหมือน คุณจะยังไม่มีสาขา ? <br> สร้างสาขาใหญ่ ของคุณได้เลย')
+
+            }
+            setdata_selection($('#shopbranch'), res.detail);
+        });
+    }
+    check_shopbranch();
+
+    var show_createbranch_show = false;
+    function show_createbranch() {
+        if (show_createbranch_show) {
+            $('.show_createbranch').hide('slow');
+        } else {
+            $('.show_createbranch').show('slow');
+        }
+        show_createbranch_show = !show_createbranch_show;
+    }
+
+    function createnewbranch() {
+        if (!$('#shopbranchname').val()) {
+            return alert('กรุณากรอกข้อมูลสาขา');
+        }
+        var objbranch = {
+            LINE_USER: LINE_USER,
+            shopid: working.shop._id,
+            name: $('#shopbranchname').val()
+        }
+        $.postJSON('/api/liff/register/shopbranch', objbranch, function (res) {
+            if (res.result) {
+                check_shopbranch();
+            } else {
+                alert(res.detail);
+            }
+        });
+
+    }
+    function changeconfirm_order(obj_con) {
+        var confirm_order;
+        if ($(obj_con).is(':checked')) {
+            confirm_order = "auto";
+        } else {
+            confirm_order = "mannual";
+        }
+        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id, confirm_order: confirm_order}
+        //        $.postJSON('/api/liff/edit/shop', setdata, () => {
+        //            working.shop.confirm_order = confirm_order;
+        //        });
+        $.postJSON('/api/liff/edit/shop', setdata, function (res) {
+            if (!res.result) {
+                return alert(res.detail);
+            }
+        });
+    }
+    function fncmanageimage() {
+        go2View('edit_image_shop');
+    }
+
+    function fncmanagebranch() {
+        if (Number($('#shopbranch').val()) > 0) {
+            for (var x = 0; x < working.shopbranch.length; x++) {
+                if (working.shopbranch[x]._id == $('#shopbranch').val()) {
+                    working.branch = working.shopbranch[x];
+                }
+            }
+            if (!working.branch) {
+                return alert("Not found Branch");
+            }
+
+            go2View('register3');
+        } else {
+            alert("Invalid Branch");
+        }
+
+    }
+
+    function show_shop_image() {
+
+        $('#shop_image_view_div').html('');
+        var temphtml = '';
+        console.log("SHOWING IMAGE", template_shop_image_view)
+
+        if (Array.isArray(working.shop.images)) {
+            for (var x = 0; x < working.shop.images.length; x++) {
+                temphtml += template_shop_image_view.replace('#imgsrc', working.shop.images[x]);
+            }
+        }
+        $('#shop_image_view_div').html(temphtml);
+        $('.shop_image_view').show(temphtml);
+
+    }
+
+    function previewimg(obj) {
+        call_modal_image_preivew($(obj));
+    }
+
+
+    ADVWS.make_edittext($('.editable_shop'), function (data, obj) {
+        edtable_update_toserver(data, obj, '/api/liff/edit/shop');
+    }, function (data2vilidate) {
+        if (!data2vilidate)
+            return "Invalid data";
+    });
+
+    // main_url_get_tags = '/api/tags/shoptype';
+    // $('.SHOP_type').adv_tags(working.shop.type,false);
+
+
+    ADVWS.make_selecttags($('.SHOP_type'), working.shop.type, {url: '/api/tags/shoptype', postdata: {}}, function (data) {
+        var setdata = {LINE_USER: LINE_USER, _id: working.shop._id, type: data}
+        $.postJSON('/api/liff/edit/shop', setdata, () => {
+            working.shop.type = data;
+        });
+    }, false);
+
+    function edit_shop() {
+        go2View('edit_shop');
+    }
+
+
+
+    //  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

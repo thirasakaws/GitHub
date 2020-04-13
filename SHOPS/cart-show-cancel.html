@@ -1,0 +1,178 @@
+<div id='gmap_ordergps'>
+</div>
+<div class="container-fluid main_data">
+     <div class="text-center mb-3 bg-danger" >
+      <span class="header_title text-light"><i class="fas fa-shopping-cart"></i> ยกเลิกรายการสั่งซื้อ #<span class="orderid"></span></span>
+    </div>
+
+<!--  <div class="text-center">
+        <h4>สรุปรายการสั่งซื้อ </h4>
+  </div> -->
+
+  <div class="text-secondary d-flex justify-content-between">
+    <h6 class="text-orange">ข้อมูลรายการสั่งซื้อ</h6>
+  </div>
+
+  <small class="">
+    <div class="row ">
+        <div class="col-4">
+          <span>ชื่อ : </span> <span class=" ORDER_firstname"></span>
+        </div>
+        <div class="col-8">
+          <span class=" ORDER_lastname"></span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-4">
+          <span>เบอร์ติดต่อ : </span>
+        </div>
+        <div class="col-8">
+          <span class=" ORDER_contact"></span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-4">
+          <span>วิธีการจ่ายเงิน :</span>
+        </div>
+        <div class="col-8">
+          <span class="paymenttype"></span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-4">
+          <span>ที่อยู่ปลายทาง : </span>
+        </div>
+        <div class="col-8">
+          <span class=" ORDER_address"></span>
+        </div>
+    </div>
+  </small>
+
+  <div class="mt-1 mb-5">
+    <h6>รายการสั่งซื้อ</h6>
+    <small class="text-secondary" id="listmenuorder">
+      <div class="row row_tablecontent" style="display:none">
+        <div class="col-7">
+            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+        </div>
+        <div class="col-2 text-center">
+          X<span class="badge badge-light badge-pill menu_qty">0</span>
+        </div>
+        <div class="col-3 text-right">
+          <span class="menu_menuprice">0.00 </span> ฿
+        </div>
+      </div>
+    </small>
+    <hr>
+    <div class="align-items-center">
+      <div class="row">
+          <div class="col-6">
+              ราคารวม
+          </div>
+          <div class="col-6 text-right">
+              <span class="total_price">0.00 </span> ฿
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <span>0.0 </span> กม.
+          </div>
+          <div class="col-6 text-right">
+              <span class="total_shippingcost">0.00 </span> ฿
+          </div>
+      </div>
+      <div class="row h5">
+          <div class="col-6">
+              ราคารวมทั้งหมด
+          </div>
+          <div class="col-6 text-right ">
+              <span class="badge badge-primary badge-pill grandtotal">0.00 </span> ฿
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="fixed-bottom">
+    <button type="button" id="btn_cancleorder" class="btn btn-lg btn-block btn-danger" onclick=""> ยืนยันการยกเลิกรายการ </button>
+
+  </div>
+
+</div>
+<script>
+  var showlistadd_temp = $('#address_list').html();
+  var template_ordermenulist = $('#listmenuorder').html();
+  refresh_page_wait();
+
+
+    function refresh_page_wait(){
+      if (working.order) {
+        // console.log("ORDER",working.order);
+        $('.orderid').html(working.order._id);
+        var paymenttype = ['','Cash On Delivery','QR payment By Quickpay'];
+        $('.paymenttype').html(paymenttype[Number(working.order.paymenttype)]);
+      }
+            showmwnuorderlist(working.order.items);
+            setdatabyclass($('.main_data'), 'ORDER', working.order);
+            getcustomeraddress();
+    }
+
+    function getcustomeraddress(){
+      $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+        if(res.result){
+          obj = res.detail;
+          for(var x=0;x<obj.length;x++){
+                 if(obj[x]._id == working.order.addressid){
+                    $('.ORDER_address').html(obj[x].address);
+                 }
+          }
+
+        }else{
+          // alert(res.detail);
+        }
+      });
+    };
+
+    function showmwnuorderlist(obj){
+      $('#listmenuorder').html(template_ordermenulist);
+      var totalprice =0,shippingcost = 0,grandtotal = 0;
+        for(var x=0;x<obj.length;x++){
+          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
+          totalprice += obj[x].menuprice;
+          obj[x].pricedes = obj[x].price.detail;
+               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
+               if(obj[x].menuprice>0){
+                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+               }else {
+                 TR.find('.menu_menuprice').html('0.00')
+               }
+               if (obj[x].note) {
+                  TR.find('.menu_notedate').show();
+               }
+
+               TR.show();
+
+               /// +=delivery
+        }
+        grandtotal = shippingcost+totalprice;
+        if (totalprice>0) {
+            $('.total_price').html(addCommas(totalprice))
+        }else {
+          $('.total_price').html('0.00')
+        }
+
+        if (shippingcost>0) {
+            $('.total_shippingcost').html(addCommas(shippingcost))
+        }else {
+          $('.total_shippingcost').html('0.00')
+        }
+
+        if (totalprice>0) {
+            $('.grandtotal').html(addCommas(grandtotal))
+        }else {
+          $('.grandtotal').html('0.00')
+        }
+
+    }
+
+</script>

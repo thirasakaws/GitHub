@@ -1,0 +1,216 @@
+/*advws style here*/
+
+
+/* GOOGLE FONTS */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
+@import url(https://fonts.googleapis.com/css?family=Oswald:300);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400);
+@import url(https://fonts.googleapis.com/css?family=Oswald:700);
+@import url('https://fonts.googleapis.com/css?family=Kanit');
+
+
+/*font */
+.fonttitle { font-size:1.571em; font-family: 'Kanit'; }
+.fontmain{ font-family: 'Kanit'; }
+
+.fontgray {color: #7d7c7c}
+.fontgray10 { font-size:0.714em; color: #7d7c7c}
+.fontgray12 { font-size:0.857em; color: #7d7c7c}
+.fontgray14 { font-size:1.000em; color: #7d7c7c}
+.fontgray16 { font-size:1.143em; color: #7d7c7c}
+.fontgray18 { font-size:1.286em; color: #7d7c7c}
+.fontgray20 { font-size:1.429em; color: #7d7c7c}
+.fontgray22 { font-size:1.571em; color: #7d7c7c}
+.fontgray30 { font-size:2.143em; color: #7d7c7c}
+.fontgray35 { font-size:2.500em; color: #7d7c7c}
+.fontgray60 { font-size:4.286em; color: #7d7c7c}
+.fontgray90 { font-size:6.429em; color: #7d7c7c}
+
+.fontgreen {color: #04b04e}
+.fontgreen10 { font-size:0.714em; color: #04b04e}
+.fontgreen12 { font-size:0.857em; color: #04b04e}
+.fontgreen14 { font-size:1.000em; color: #04b04e}
+.fontgreen16 { font-size:1.143em; color: #04b04e}
+.fontgreen18 { font-size:1.286em; color: #04b04e}
+.fontgreen20 { font-size:1.429em; color: #04b04e}
+.fontgreen22 { font-size:1.571em; color: #04b04e}
+.fontgreen30 { font-size:2.143em; color: #04b04e}
+.fontgreen35 { font-size:2.500em; color: #04b04e}
+.fontgreen60 { font-size:4.286em; color: #04b04e}
+.fontgreen90 { font-size:6.429em; color: #04b04e}
+
+.fontblack {color: #000000}
+.fontblack10 { font-size:0.714em; color: #333333}
+.fontblack12 { font-size:0.857em; color: #333333}
+.fontblack14 { font-size:1.000em; color: #333333}
+.fontblack16 { font-size:1.143em; color: #333333}
+.fontblack18 { font-size:1.286em; color: #333333}
+.fontblack20 { font-size:1.429em; color: #333333}
+.fontblack22 { font-size:1.571em; color: #333333}
+.fontblack30 { font-size:2.143em; color: #333333}
+.fontblack35 { font-size:2.500em; color: #333333}
+.fontblack60 { font-size:4.286em; color: #333333}
+.fontblack90 { font-size:6.429em; color: #333333}
+
+.fontred{color: #FA2A00}
+.fontred10 { font-size:0.714em; color: #FA2A00}
+.fontred12 { font-size:0.857em; color: #FA2A00}
+.fontred14 { font-size:1.000em; color: #FA2A00}
+.fontred16 { font-size:1.143em; color: #FA2A00}
+.fontred18 { font-size:1.286em; color: #FA2A00}
+.fontred20 { font-size:1.429em; color: #FA2A00}
+.fontred22 { font-size:1.571em; color: #FA2A00}
+.fontred30 { font-size:2.143em; color: #FA2A00}
+.fontred35 { font-size:2.500em; color: #FA2A00}
+.fontred60 { font-size:4.286em; color: #FA2A00}
+.fontred90 { font-size:6.429em; color: #FA2A00}
+
+.fontblue {color: #467fbf}
+.fontblue10 { font-size:0.714em; color: #467fbf}
+.fontblue12 { font-size:0.857em; color: #467fbf}
+.fontblue14 { font-size:1.000em; color: #467fbf}
+.fontblue16 { font-size:1.143em; color: #467fbf}
+.fontblue18 { font-size:1.286em; color: #467fbf}
+.fontblue20 { font-size:1.429em; color: #467fbf}
+.fontblue22 { font-size:1.571em; color: #467fbf}
+.fontblue30 { font-size:2.143em; color: #467fbf}
+.fontblue35 { font-size:2.500em; color: #467fbf}
+.fontblue60 { font-size:4.286em; color: #467fbf}
+.fontblue90 { font-size:6.429em; color: #467fbf}
+
+.fontwhite {color: #ffffff}
+.fontwhite10 { font-size:0.714em; color: #ffffff}
+.fontwhite12 { font-size:0.857em; color: #ffffff}
+.fontwhite14 { font-size:1.000em; color: #ffffff}
+.fontwhite16 { font-size:1.143em; color: #ffffff}
+.fontwhite18 { font-size:1.286em; color: #ffffff}
+.fontwhite20 { font-size:1.429em; color: #ffffff}
+.fontwhite22 { font-size:1.571em; color: #ffffff}
+.fontwhite30 { font-size:2.143em; color: #ffffff}
+.fontwhite35 { font-size:2.500em; color: #ffffff}
+.fontwhite60 { font-size:4.286em; color: #ffffff}
+.fontwhite90 { font-size:6.429em; color: #ffffff}
+
+.fontyellow {color: #FABE28}
+.fontyellow10 { font-size:0.714em; color: #FABE28}
+.fontyellow12 { font-size:0.857em; color: #FABE28}
+.fontyellow14 { font-size:1.000em; color: #FABE28}
+.fontyellow16 { font-size:1.143em; color: #FABE28}
+.fontyellow18 { font-size:1.286em; color: #FABE28}
+.fontyellow20 { font-size:1.429em; color: #FABE28}
+.fontyellow22 { font-size:1.571em; color: #FABE28}
+.fontyellow30 { font-size:2.143em; color: #FABE28}
+.fontyellow35 { font-size:2.500em; color: #FABE28}
+.fontyellow60 { font-size:4.286em; color: #FABE28}
+.fontyellow90 { font-size:6.429em; color: #FABE28}
+
+.fontorange {color: #ec8122}
+.fontorange10 { font-size:0.714em; color: #ec8122}
+.fontorange12 { font-size:0.857em; color: #ec8122}
+.fontorange14 { font-size:1.000em; color: #ec8122}
+.fontorange16 { font-size:1.143em; color: #ec8122}
+.fontorange18 { font-size:1.286em; color: #ec8122}
+.fontorange20 { font-size:1.429em; color: #ec8122}
+.fontorange22 { font-size:1.571em; color: #ec8122}
+.fontorange30 { font-size:2.143em; color: #ec8122}
+.fontorange35 { font-size:2.500em; color: #ec8122}
+.fontorange60 { font-size:4.286em; color: #ec8122}
+.fontorange90 { font-size:6.429em; color: #ec8122}
+
+
+
+.btn-top {
+	color: #212529;
+	background-color: #ffffff;
+	border-color: #ffffff
+}
+.btn-top:hover {
+	color: #212529;
+	background-color: #ffffff;
+	border-color: #ffffff
+}
+.btn-top.disabled, .btn-top:disabled {
+	color: #212529;
+	background-color: #ffffff;
+	border-color: #ffffff
+}
+.btn-top:not(:disabled):not(.disabled).active, .btn-top:not(:disabled):not(.disabled):active, .show>.btn-top.dropdown-toggle {
+	color: #212529;
+	background-color: #ffffff;
+	border-color: #ffffff
+}
+
+
+.btn-linktop {
+	font-weight: 400;
+	color: #ffffff;
+	background-color: transparent
+}
+.btn-linktop:hover {
+	color: #74b6fd;
+	background-color: transparent;
+	border-color: transparent
+}
+.btn-linktop.focus, .btn-linktop:focus {
+	border-color: transparent;
+	box-shadow: none
+}
+.btn-linktop.disabled, .btn-linktop:disabled {
+	color: #6c757d;
+	pointer-events: none
+}
+
+
+
+
+
+
+
+.pic-outlined {
+  /*width: 80px;
+  height: 80px;
+  line-height: 80px;*/
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.4rem;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-bottom: 20px;
+}
+
+.pic-outlined.pic-lg {
+  font-size: 2rem;
+}
+
+.pic-outlined.pic-sm {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.pic-outlined.pic-thin {
+  border-width: 1px;
+}
+
+.box-simple2 {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.box-simple2:hover .pic-outlined {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.box-simple2 .pic-outlined {
+  color: #467fbf;
+  /*border: 1px solid #467fbf;*/
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}

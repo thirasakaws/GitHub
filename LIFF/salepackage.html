@@ -1,0 +1,34 @@
+<div class="container-fluid">
+Please wait...
+</div>
+<script>
+    all_page = ['salepackage1','salepackage-manage1','salepackage-manage'];  // Sub File
+    var working={};
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-4R527y0R';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+
+    function runApp() {
+        console.log("RUN APP");
+        $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+            console.log("REsult back:");
+            console.log(res);
+            if (res.result) {
+                if(Array.isArray(res.detail) && res.detail.length > 0 ){    // มีร้านอยู่แล้ว
+                    working.shop = res.detail[0];
+                    go2View('salepackage1');
+                    return;
+                }
+                go2View('salepackage1');
+            } else {
+                go2View('must-openshop');
+            }
+        });
+
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

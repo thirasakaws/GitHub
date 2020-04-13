@@ -1,0 +1,49 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-8">
+            <h1><b><u>Add Shop Owner</u></b></h1>
+        </div>
+        <div class="col-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/shop_owner_list")'>
+                    <i class="fa fa-arrow-left"></i>
+                    Back
+                </button>
+                <button class="btn btn-outline-success alink" >
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return save_data_customer()">
+                <div class="form-row">
+                    <h3>ชื่อ </h3>
+                    <div class="col-md-2 mb-2">
+                        <input type="text"  name="search" class="form-control input-sm autoFilter" placeholder="ชื่อ"  >
+                    </div>
+                    <h3>เบอร์โทร </h3>
+                    <div class="col-md-2 mb-2">
+                        <input type="text"  name="search" class="form-control input-sm autoFilter" placeholder="เบอร์โทร" >
+                    </div>
+                    <h3>ค้นหารายการสั่งซื้อ </h3>
+                    <div class="col-md-4 mb-4">
+                        <input   name="search" class="form-control input-sm autoFilter" placeholder="ที่อยู่" >
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+</script>

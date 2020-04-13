@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+  <div class="form-group row  border-light p-2">
+      Advanced For Multiple Shop Owner
+      <div class="" id="template_eachshop">
+          <div class="row in-line">
+            ##shop-name##
+            <button class='btn btn-sm btn-submit-shop btn-block' onclick="setshopactive(##shop-id##);">
+                      <i class="fas fa-sign-in-alt"></i> Set Active and Login
+            </button>
+          </div>
+          <hr>
+      </div>
+      <div class="col-sm-12">
+          <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+      </div>
+  </div> <!-- // การยืนยัน order auto-mannual -->
+
+</div>
+<script>
+var template_shop = $('#template_eachshop').html();
+$('#template_eachshop').html('');
+  $.postJSON('/api/liff/list/shopowner', {LINE_USER: LINE_USER}, function (res) {
+      if(res.result){
+          if(res.detail.length >0 ){
+              var html=hash_replace(template_shop,'shop',res.detail);
+              $('#template_eachshop').html(html);
+          }else{
+              $('#template_eachshop').html("No Shop Available");
+          }
+
+      }else{
+        alert("No Shop Found");
+      }
+
+  });
+  function setshopactive(shopid){
+
+      $.postJSON('/api/liff/list/shopowner', {LINE_USER: LINE_USER , action:'setactive',shopid:shopid}, function (res) {
+          if(res.result){
+            alert("Set Shop Active\r\n Restart App to Log-in")
+
+          }else{
+            alert("No Shop Found");
+          }
+          liff.closeWindow();
+      });
+
+  }
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

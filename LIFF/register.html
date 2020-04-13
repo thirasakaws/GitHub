@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    Please wait...
+</div>
+<script>
+    all_page = ['register1-1', 'register1-2', 'register2', 'register2-gps', 'register3', 'edit_image_shop', 'edit_shop','shopshare','register-advance'];
+    var working = {};
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-3QNY4job';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+
+    function runApp() {
+        console.log("RUN APP");
+        $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+            console.log("REsult back:");
+            console.log(res);
+            if (res.result ) {
+                if (typeof(res.detail) =='object' && res.detail._id > 0) {    // มีร้านอยู่แล้ว
+
+                    working.shop = res.detail;
+                    go2View('register2');
+                    return;
+                }
+               go2View('register1-2');
+            } else {
+                go2View('register1-1');
+                console.log("NOT MEMBER SHOW");
+            }
+        });
+
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

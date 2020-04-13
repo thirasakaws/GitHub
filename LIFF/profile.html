@@ -1,0 +1,37 @@
+This is LIFF PAGE
+PROFILE
+<script>
+var myLiffId = '1653987613-mxZv7YAM';
+
+  function initializeLiff() {
+    console.log("Loged init in")
+    liff.init({ liffId: "1653987613-mMkbPQgN" });
+    //, err => console.error(err.code, error.message));
+}
+
+function initializeApp() {
+    displayLiffData();
+
+    // check if the user is logged in/out, and disable inappropriate button
+    if (liff.isLoggedIn()) {
+        console.log("user Loged in");
+        //show logout button
+    } else {
+      console.log("user NOT LOG in");
+        //show login Button
+    }
+}
+
+function displayLiffData() {
+    var user_data = {};
+    user_data.browserLanguage = liff.getLanguage();
+    user_data.sdkVersion = liff.getVersion();
+    user_data.isInClient = liff.isInClient();
+    user_data.isLoggedIn = liff.isLoggedIn();
+    user_data.deviceOS = liff.getOS();
+    console.log(user_data);
+}
+console.log("init App ja")
+initializeLiff();
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

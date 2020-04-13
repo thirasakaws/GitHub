@@ -1,0 +1,147 @@
+<div class="fixed-top" id='top_shopping_cart'  style="display:none">
+  TOP MENU
+  <button onclick="go2View('cart')">
+##CART-totalitem## ในตระกร้า
+</buttoN>
+</div>
+<div class="container-fluid" id='mainview'>
+  Loading..
+</div>
+<div class="container-fluid" id='template_mainview' style="display:none">
+
+    <div  class="card-columns" id='main_menu_preview' >
+      <div class="card">
+          <span > ##menu-name## </span>
+          <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top " >
+          ราคา ##menu-mainprice## บาท
+          <br>
+          ##menu-description##
+          ##menu-detail##
+
+          <button onclick="addtocart(##menu-id##)"> Add to Cart </button>
+      </div>
+
+    </div>
+    <div> Review of Customer </div>
+...
+<br>
+
+</div>
+<div class="modal fade " id="modal_priceselect" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <div class="form-group row mt-3 ">
+        <div id='menuprice-select' class="pl-3 alert alert-warning" style="width:100%">
+             <label for="inputEmail3" class="col-sm-2 col-form-label"> เลือกรายการ </label>
+             <div class="col-sm-9">
+                 <select class="" id='menu_select'></select>
+
+
+             </div>
+         </div>
+    </div>
+
+    <div class="modal-footer">
+
+        <button onclick="updateselectprice()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> OK </button>
+        <button onclick="$('#modal_priceselect').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+    </div>
+
+    </div>
+    </div>
+</div>
+
+<script>
+
+  var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F','');
+  var working={};
+  var template = $('#template_mainview').html();
+  var template_cart = $('#top_shopping_cart').html();
+  $('#top_shopping_cart').html('').show();
+  //$('#main_menu_preview').html('').show();
+
+  function addtocart(menuid){
+
+    var data2send ={
+      LINE_USER: LINE_USER,
+      menuid:menuid,
+      selectedprice:working.selectedprice,
+      main:main_web_site,
+      action:'add'
+      }
+    $.postJSON('/engine/order',data2send,(res)=>{
+      //  alert("Add to Shopping Cart");
+        if(res.result){
+          if(res.action =='selectprice'){ // Show Select Price
+            working.menuid = menuid;
+            $('#modal_priceselect').modal('show');
+            working.selectprice = res.detail.prices;
+            set_selection(res.detail.prices);
+            return;
+          }else{
+            working.order = res.detail;
+            update_shoppingcart();
+          }
+        }else{
+            alert(res.detail);
+        }
+
+    });
+  }
+  function set_selection (allprice){
+      var html ='';
+      for(var x=0; x < allprice.length;x++){
+        html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
+      }
+          $('#menu_select').html(html);
+    }
+
+
+  function runApp() {
+      $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+          if(res.result){
+            working.order = res.detail;
+
+
+
+          //alert("Found item" +  res.detail.items.length)
+
+            // $('#shopingcart').html(JSON.stringify(res.detail));
+          }else{
+
+          }
+          update_shoppingcart();
+      });
+      $.postJSON('/engine/get/menulist',{LINE_USER: LINE_USER,menuid:undefined},(res)=>{
+            if(res && res.detail){
+
+            var menu = res.detail;
+            var allhtml ='';
+            res.detail.map( (each)=>{
+                each.images ?  each.mainimage = each.images[0] : each.mainimage= 'kinarai.png';
+                each.price ?  each.mainprice = each.price[0].price : each.mainprice = '-';
+            });
+            allhtml=hash_replace(template,'menu',res.detail)
+            $('#mainview').html(allhtml);
+          }else{
+            alert(res.detail);
+          }
+      });
+  }
+  function update_shoppingcart(){
+      if(working.order){
+          working.order.totalitem = working.order.items.length;
+      }
+      $("#top_shopping_cart").html(hash_replace(template_cart,'CART',working.order))
+  }
+  initializeLiff();
+  function updateselectprice(){
+      var index = $('#menu_select').val();
+
+      $('#modal_priceselect').modal('hide');
+      working.selectedprice = working.selectprice[index];
+    //  alert("INDEX:" + JSON.stringify(working.selectedprice));
+      addtocart(working.menuid);
+  }
+
+</script>

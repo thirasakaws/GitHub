@@ -1,0 +1,30 @@
+    /* your styles go here */
+.text-header_page {
+    color: #ff137c
+}
+.input_danger {
+    border-color: red;
+    box-shadow: 0 0 5px red;
+    outline-color: red;
+}
+.input_success {
+    border-color: greenyellow;
+    box-shadow: 0 0 5px greenyellow;
+    outline-color: greenyellow;
+}
+
+.input_data_bn {
+    border:none;
+    outline: none;
+    border-bottom: solid 1px #000;
+    background-color:transparent;
+    border-radius: 0px
+}
+.w-90 {
+    width: 90% !important
+}
+.input_data_b {
+    outline: none;
+    width:90%;
+    background-color:transparent
+}

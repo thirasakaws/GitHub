@@ -1,0 +1,60 @@
+<div class="container-fluid main_data">
+<h2>  Register SHOP</h2>
+        <div class="col-sm-12" style="padding-bottom: 10px">
+          <img src='' class='LINE_pictureUrl rounded' width="50px" height="50px" > คุณ <span class='LINE_displayName'></span>
+          <br>
+
+            <label>
+                Start With Your ShopNAME:
+            </label>
+            <input type='text' class='form-control' id='shopname' placeholder="ชื่อร้านของคุณ">
+
+            <br>
+            ประเภทร้าน
+            <select class="form-control" name="">
+              <option>
+                ทั่วไป
+              </option>
+              <option>
+                ฮาลาน
+              </option>
+            </select>
+
+
+
+
+        </div>
+        <div class="col-sm-12">
+          <br>
+            <button onclick='submitnewshop()' class='form-control btn btn-success'>Create Shop</button>
+        </div>
+
+
+</div>
+<script>
+  setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+  function submitnewshop() {
+      if(!$('#shopname').val()){
+        alert("กรุณากรอกข้อมูลชื่อร้านค้า");
+        return;
+      }
+      var obj = {
+          name: $('#shopname').val(),
+          LINE_USER: LINE_USER
+      };
+      $.postJSON('/api/liff/register/shop', obj, function (res) {
+
+          if (!res.result) {
+              if (res.detail) {
+                  alert(res.detail);
+                  return;
+              }
+          }
+          working.shop = res.detail;
+          go2View('register2');
+          console.log("GOT BACK");
+          //console.log(res);
+
+      });
+  }
+  </script>

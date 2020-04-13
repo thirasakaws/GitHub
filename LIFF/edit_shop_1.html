@@ -1,0 +1,208 @@
+<style>
+   
+</style>
+
+<div class="container-fluid main_data">
+    <div class="label-orange text-center mb-3" >
+        <span class="header_title"><i class="fas fa-store"></i> ตั้งค่าร้านอาหาร</span>
+    </div>
+    
+    
+<h4 class="text-orange"> 
+    <i class="fas fa-store"></i> <span class='SHOP_name editable_shop'></span>
+</h4>
+    
+    
+<div class="form-group row mt-1">
+    <label class="col-sm-3 text-gray-light lable-left border border-dark" >  Address </label>
+    <div class="col d-flex">
+        <div class="ml-auto">
+            <span class='SHOP_address editable_shop'>  </span>
+        </div>
+    </div>
+</div>
+    
+Address : <span class='SHOP_address editable_shop'>  </span><br>
+เวลาเปิด-ปิด : <span class='SHOP_openclose editable_shop'>  </span><br>
+<!-- วันที่เปิด : <span class='SHOP_opendate editable_shop'>  </span><br> -->
+เบอร์ติดต่อ : <span class='SHOP_contact editable_shop'>  </span><br>
+บัญชีธนาคาร : <span class='SHOP_bank_account editable_shop'>  </span><br>
+ช่องทางการชำระ : <span class='SHOP_paychannel editable_shop_select'>  </span><br>
+สถานะ : <span class='SHOP_opening editable_shop_select'>  </span><br>
+
+<br>
+<div class="" id="date-list">
+  วันที่เปิดให้บริการ : <br>
+
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Sunday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_sun" class="toggle-date" onchange="managethisdate('sun');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Monday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_mon" class="toggle-date" onchange="managethisdate('mon');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Tuesday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_tue" class="toggle-date" onchange="managethisdate('tue');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Wednesday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_wed" class="toggle-date" onchange="managethisdate('wed');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Thursday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_thu" class="toggle-date" onchange="managethisdate('thu');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Friday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_fri" class="toggle-date" onchange="managethisdate('fri');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row border rounded p-1 text-right">
+    <div class="col-6">
+        Saterday
+    </div>
+    <div class="col-6">
+      <label class="switch">
+        <input type="checkbox" id="date_sat" class="toggle-date" onchange="managethisdate('sat');">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+  console.log("Setting",working.shop);
+  if(working.shop){   // Config Data for Default Data if No Data to use
+    if(!working.shop.address) working.shop.address = 'address';
+    if(!working.shop.openclose) working.shop.openclose = 'ร้านเปิดปิด ปกติ';
+    if(!working.shop.bank_account) working.shop.bank_account = '-';
+    if(!working.shop.contact) working.shop.contact = '-';
+    if(!working.shop.opendate) working.shop.opendate = ['sun' ,'mon','tue' ,'wed','thu','fri','sat'];
+    if(!working.shop.opening) working.shop.opening = 1;
+    if(!working.shop.paychannel) working.shop.paychannel = 1;
+  }
+  // console.log("Error1");
+    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+    setdatabyclass($('.main_data'), 'SHOP', working.shop);
+    setdateopen(working.shop.opendate);
+
+    function setdateopen(obj){
+      if(obj.length>0){
+        for(var x=0;x<obj.length;x++){
+          $('#date_'+obj[x]+'').prop('checked',true);
+        }
+      }
+    }
+
+ADVWS.make_edittext($('.editable_shop'),function(data,obj){
+    var oldvalue = obj.html();
+  data.LINE_USER = LINE_USER;
+  $.postJSON('/api/liff/edit/shop',data,function(res){
+        if(!res.result){
+          alert(res.detail);
+          obj.editable('setValue',oldvalue);  // Roll Back Value to Old Value
+        }
+  })
+},function(data2vilidate){
+    if(!data2vilidate) return "Invalid data";
+});
+
+var array_status =[{value:1,text:'เปิด'},{value:2,text:'ปิด'}];
+ADVWS.make_editselect($('.SHOP_opening'),array_status, function(data,obj){
+  data.shopid = working.shop._id; // include shopid to check with Server
+  edtable_update_toserver(data,obj,'/api/liff/edit/shop');
+},function(data2vilidate){
+  if(!data2vilidate) return "Invalid data";
+});
+
+var array_paychannel =[{value:1,text:'Quickpay'},{value:2,text:'เก็บเงินปลายทาง'}];
+ADVWS.make_editselect($('.SHOP_paychannel'),array_paychannel, function(data,obj){
+  data.shopid = working.shop._id; // include shopid to check with Server
+  edtable_update_toserver(data,obj,'/api/liff/edit/shop');
+},function(data2vilidate){
+  if(!data2vilidate) return "Invalid data";
+});
+
+
+var template_opendate = $("#date-list").html();
+// function newdate_table_row(obj){
+//     for(var x=0; x < obj.length;x++){
+//       var TR = tablerow($("#date-list"), 'opendate', obj[x], template_opendate, false) ;
+//       if(obj[x].status == 0){
+//         TR.find('.toggle-date').prop('checked',true);
+//       }else if (obj[x].status == 1) {
+//         TR.find('.toggle-date').prop('checked',false);
+//       }
+//         TR.show('slow');
+//     }
+// }
+
+function managethisdate(dateclick){
+  console.log("dateclick",dateclick)
+  if(!Array.isArray(working.shop.opendate)){
+      working.shop.opendate=['sun' ,'mon','tue' ,'wed','thu','fri','sat']; // open alldate ?
+
+  }
+  var found = working.shop.opendate.indexOf(dateclick);
+  if( found !== -1){  // exist
+      working.shop.opendate.splice(found,1);
+  }else{
+    working.shop.opendate.push(dateclick);
+  }
+  var data = {LINE_USER : LINE_USER , _id:working.shop._id, opendate:working.shop.opendate};
+    console.log("sending",data)
+  $.postJSON('/api/liff/edit/shop',data,function(res){
+        if(!res.result){
+          alert(res.detail);
+          return;
+        }else if(res.result){
+            working.shop = res.detail;
+        }
+
+  });
+}
+</script>

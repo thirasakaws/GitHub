@@ -1,0 +1,173 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Shop Branch</u></b></h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4  text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/shop_branch_add")'>
+                    <i class="fa fa-plus"></i>
+                    Add shop_branch
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3> ค้นหาชื่อ ร้านค้า</h3>
+                    <div class="col-md-2 col-sm-12 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <h3> สถานะ</h3>
+                    <div class=" col-md-2 col-sm-12 mb-2">
+
+                        <select id="status" class="form-control">
+                            <option value="">แสดงทั้งหมด</option>
+                            <option value="1">ยังไม่อนุมัติ</option>
+                            <option value="5">อนุมัตืแล้ว</option>
+                        </select>
+                    </div>
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " >  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Branch Name</th>
+                    <th>Shop</th>
+                    <th>Create Date</th>
+                    <th>Last Update</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="text-center shop_branch_id"></td>
+                    <td class="shop_branch_name"></td>
+                    <td class="shop_branch_shopid"></td>
+                    <td class="shop_branch_createdate"></td>
+                    <td class="shop_branch_lastupdate"></td>
+                    <td class=" text-center">
+                        <button class="alink" onclick="edit_data_shop_branch(this)"><i class="fa fa-pencil shop_branch_action " ></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/shop_branch_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_shop_branch_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    function showdata_shop_branch_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'shop_branch', objdata[x], template_of_testtable);
+                if (objdata[x].createdate) {
+                    TR.find('.shop_branch_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                }
+                if (objdata[x].lastupdate) {
+                    TR.find('.shop_branch_lastupdate').html(moment(objdata[x].lastupdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                } else {
+                    if (objdata[x].createdate) {
+                        TR.find('.shop_branch_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                    }
+                }
+
+                if (objdata[x].status == 1) {
+                    TR.find('.shop_branch_status').addClass('text-red').html('ยังไม่ได้อนุมัติ');
+                }
+                if (objdata[x].status == 5) {
+                    TR.find('.shop_branch_status').addClass('text-green').html('อนุมัติแล้ว');
+                }
+                if (objdata[x].shop_branchowner) {
+                    if (objdata[x].shop_branchowner.displayName) {
+                        TR.find('.shop_branch_shop_branchowner').html(objdata[x].shop_branchowner.displayName);
+                    }
+
+                }
+                TR.show();
+            }
+
+        }
+
+    }
+    function edit_data_shop_branch(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/shop_branch_edit?shop_branch_id=' + tempid);
+        return false;
+    }
+    function filterFormsubmit_allotment() {
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+        if ($('#status').val()) {
+            search.status = $('#status').val();
+        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+
+        return false;
+    }
+</script>

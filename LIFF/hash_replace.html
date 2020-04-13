@@ -1,0 +1,31 @@
+<div>
+  EXAMPLE OF hash_replace
+    <div id='template' style='display:none'>
+        <span>##PREFIX-fieldname##</span>
+
+        <br>
+        ##PREFIX-name## = ##PREFIX-default##
+        <hr>
+    </div>
+</div>
+
+<script>
+  var template_original = $('#template').html();    // เก็บค่า HTML เริ่มต้นไว้
+ $('#template').html('').show(); //  ลบทิ้งไว้ก่อน  แล้วเตรียมแสดง
+
+var exampledata = [{name:'testja'},{name:'test2again'}];
+
+// USAGE    hash_replace(template,PREFIX,object_data)   object_data เป็น array หรือ object ธรรมดาก็ได้
+
+// เนื่องจากบาง Field อาจจะไม่มีค่า คือ undefined ดังนั้นจะแสดงค่า Hash ที่ตั้งไว้ค้าง  วิธีแก้คือ อาจจะต้องเตรียม
+// ข้อมูลที่เป็น Default สำหรับค่า Field ที่ไม่มีค่า ดังตัวอย่าง
+/*
+exampledata.map((obj)=>{
+  if(!obj.default) obj.default='';
+  if(!obj.fieldname) obj.fieldname='ค่าปกติ';
+});
+*/
+
+  $('#template').html( hash_replace(template_original,'PREFIX',exampledata));
+
+  </script>

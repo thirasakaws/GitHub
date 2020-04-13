@@ -1,0 +1,31 @@
+<div class="container-fluid" id='mainview'>
+  SHOP VIEW
+  <img src=''>
+</div>
+<script>
+  //  #### Setting ########## For LINE APP
+      var myLiffId = '1653987613-4EgeVXda';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+  //  #### END  Setting ########## For LINE APP
+  var liffstring = '?liff.state=%2Fshopid%3D';
+  var detail = window.location.search.replace(liffstring,'');
+  if(detail){
+      window.sessionStorage.setItem("shopId",detail);
+  }
+  function runApp(){
+    alert(LINE_USER.displayName);
+    alert("SHOPID:" + detail)
+  }
+    //alert(window.location.href);
+    var temp = window.location.href.replace(liffstring+detail,'');
+    //alert(temp);
+    if(window.location.href !== temp){
+        window.history.pushState({
+          callpath: 'shopview'
+        }, 'ShopView', temp);
+    }
+  initializeLiff();
+
+
+
+</script>

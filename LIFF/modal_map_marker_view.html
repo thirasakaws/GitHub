@@ -1,0 +1,276 @@
+<!-- Modal for GPS -->
+<style media="screen">
+  #googlemap {
+      position: relative;
+  }
+</style>
+<div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">ตำแหน่งร้านอาหาร และจัดส่งอาหาร</h5> <!-- Image Preview -->
+        </div>
+
+        <div class="modal-body" style="width:500; height:500">
+
+          <div    id='googlemap' style="width: 100%; height: 300px" >
+    			Gmaps
+
+          </div>
+
+        </div>
+        <div id="floating-panel">
+          <!-- <input id="address" style="width: 100%" type="text" value=""> -->
+          <!-- <input id="submit" type="button" value="Reverse Geocode"> -->
+        </div>
+
+        <div class="modal-footer">
+            <!-- <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button>
+            <button onclick="btn_modal_map()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกที่อยู่นี้ </button> -->
+            <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var tempcbfnc_maps;
+  var gmap;
+  var themarker;
+  var themarker_image;
+  var delay_marker;
+  var geocoder;
+  var infowindow;
+  var latlng;
+  var latlng_marker;
+  var address;
+  var latlng_saved;
+  var latlng_default_startup;
+  var alreadyset = false;
+  var markers = [];
+  var bounds;
+  
+  function initMap() {
+    console.log("init Map");
+    // Initialize Map
+    gmap = new google.maps.Map(document.getElementById('googlemap'), {
+      center: latlng_saved,
+      zoom: 10,
+      disableDefaultUI: true,
+      gestureHandling: 'greedy'
+    });
+
+    geocoder = new google.maps.Geocoder;
+    infowindow = new google.maps.InfoWindow;
+    bounds = new google.maps.LatLngBounds;
+
+    // Event Map Click
+    google.maps.event.addListener(gmap, 'click', function(event) {
+      gmap.setZoom(18);
+      gmap.panTo(event.latLng);
+    });
+
+    // Event Map Screen Move
+    // gmap.addListener('center_changed', showAddress);
+  }
+
+  function showAddress() {
+    // Start Count Timer Again Before Time Runs Out
+    clearTimeout(delay_marker);
+    infowindow.close();
+
+    if(alreadyset){
+      setTimeout(()=>{
+        alreadyset = false;
+      }, 150);
+      gmap.panTo(latlng_marker);
+      infowindow.setPosition(latlng_marker);
+      infowindow.setContent(address);
+      infowindow.open(gmap);
+      return;
+    }
+
+    delay_marker = window.setTimeout(function() {
+      // Show Address via Latitude Longtitude Location
+      latlng = gmap.getCenter();
+      geocoder.geocode({'location': latlng}, function(results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            alreadyset = true;
+            address = results[0].formatted_address;
+            latlng_marker = latlng;
+            infowindow.setPosition(latlng);
+            infowindow.setContent(address);
+            infowindow.open(gmap);
+            // document.getElementById('address').value = address;
+            setTimeout(()=>{
+              alreadyset = false;
+            }, 150);
+          } else {
+            window.alert('No results found');
+          }
+        } else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+      });
+
+    }, 1000);
+  }
+
+  function btn_modal_map_current(){
+      googlemap_geogetLocation();
+  }
+  function googlemap_geogetLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position){
+        var pos = {lat:position.coords.latitude,lng: position.coords.longitude};
+        gmap.setZoom(18);
+        gmap.panTo(pos);
+      } ,show_modal_mapError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+  function show_modal_mapError(error) {
+    console.log(error);
+    alert("error No GPS Allowed")
+  }
+
+  function call_modal_maps(setting,cbfnc) {
+    var latlng_have_save;
+    latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS
+
+    if ( ('lat' in setting) && ('lng' in setting) ) {
+      latlng_have_save = true;
+      latlng_saved = {};
+      latlng_saved.lat = setting.lng;    // switch bewteen LAT to LNG from MongoDB    
+      latlng_saved.lng = setting.lat;    // switch bewteen LAT to LNG from MongoDB`
+    } else {
+      latlng_have_save = false;
+      latlng_saved = latlng_default_startup;
+
+      // Test
+      latlng_have_save = true;
+    }
+    // window.alert(JSON.stringify(latlng_saved));
+
+    // $('#modal_google_gps').modal('show');
+    setTimeout(()=>{
+      initMap();
+      $('#modal_google_gps').modal('show');
+      if(typeof(setting) == 'function'){
+        cbfnc = setting;
+        // setting ={lat:13.79607108667891,lng:100.71164142340422};
+      }else{
+      }
+
+      tempcbfnc_maps = cbfnc;
+
+      if (latlng_have_save === true) {
+        // themarker_image = {
+        //   url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        //   // This marker is 20 pixels wide by 32 pixels high.
+        //   size: new google.maps.Size(20, 32),
+        //   // The origin for this image is (0, 0).
+        //   origin: new google.maps.Point(0, 0),
+        //   // The anchor for this image is the base of the flagpole at (0, 32).
+        //   anchor: new google.maps.Point(0, 32)
+        // };
+        
+        // themarker = new google.maps.Marker({
+        //   position: latlng_saved,
+        //   map: gmap,
+        //   icon: themarker_image,
+        //   animation: google.maps.Animation.DROP,
+        //   title: 'Postition'
+        // });
+
+        addMarker(latlng_default_startup);            // ADVWS
+        addMarker({lat:13.752569, lng:100.574740});   // RCA
+        showMarkers();
+
+        setTimeout(() => {
+          gmap.fitBounds(bounds);
+          // gmap.setZoom(18);
+          // gmap.panTo(themarker.getPosition());
+          // showAddress();
+        }, 500);
+        
+      }
+    }, 100);
+  }
+
+
+  $("#modal_google_gps").on("shown.bs.modal", function () {
+    google.maps.event.trigger(gmap, "resize");
+  });
+
+  function btn_modal_map(){
+    var position = {};
+    // position.lat = latlng.lat();
+    // position.lng = latlng.lng();
+    position.lat = latlng.lng();    // switch bewteen LAT to LNG for MongoDB
+    position.lng = latlng.lat();    // switch bewteen LAT to LNG for MongoDB
+    // position.address = $('#address').val();
+    console.log(position);
+
+    if(tempcbfnc_maps){
+      tempcbfnc_maps(position);
+    }else{
+
+    }
+    $('#modal_google_gps').modal('hide');
+  }
+
+  function addMarker(location) {
+    themarker_image = {
+      url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      // This marker is 20 pixels wide by 32 pixels high.
+      size: new google.maps.Size(20, 32),
+      // The origin for this image is (0, 0).
+      origin: new google.maps.Point(0, 0),
+      // The anchor for this image is the base of the flagpole at (0, 32).
+      anchor: new google.maps.Point(0, 32)
+    };
+
+    themarker = new google.maps.Marker({
+      position: location,
+      map: gmap,
+      icon: themarker_image,
+      animation: google.maps.Animation.DROP,
+      // title: 'Postition'
+    });
+    markers.push(themarker);
+    bounds.extend(themarker.position);
+  }
+
+  function setMapOnAll(map) {
+    delete markers[0].icon;
+
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+    
+    infowindow.setPosition(markers[0].position);
+    infowindow.setContent("ร้านอาหาร");
+    infowindow.open(map, markers[0]);
+
+    markers[0].addListener('click', function() {
+      infowindow.setPosition(markers[0].position);
+      infowindow.setContent("ร้านอาหาร");
+      infowindow.open(map, markers[0]);
+    });
+    markers[1].addListener('click', function() {
+      infowindow.setPosition(markers[1].position);
+      infowindow.setContent("ส่งอาหาร");
+      infowindow.open(map, markers[1]);
+    });
+  }
+
+  function showMarkers() {
+    setMapOnAll(gmap);
+  }
+
+</script>

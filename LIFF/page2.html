@@ -1,0 +1,59 @@
+<style media="screen">
+  body {margin: 0; height: 100%; overflow: hidden},
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none;
+  }
+</style>
+<div class="container-fluid noselect">
+  ทดสอบ ส่ง TEXT
+<input type ="text" value='' placeholder="คำค้นหา" id='keywords'> <br>
+<br> ค้นหาอาหาร ตามประเภท <button type='btn btn-sm' onclick="search_bytype();">Search</button>
+
+
+</div>
+<script>
+    var url = window.location.href;
+    all_page = ['search-1'];
+    var working={};
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987613-mxZv7YAM';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+
+    function runApp() {
+        console.log("RUN APP");
+
+
+    }
+    initializeLiff();
+    function search_bytype(){
+
+        var keys= $('#keywords').val();
+        if(!keys || keys.length < 2){
+        //  alert("กรุณากรอกคำค้นหามากกว่า 1 ตัวอักษรขึ้นไป");
+        //  return;
+        }
+        console.log("Search..");
+        sendtext("MENU: "+keys);
+
+    }
+    function sendtext(text){
+      liff.sendMessages([{
+                 'type': 'text',
+                 'text': text
+             }]).then(function() {
+                 liff.closeWindow();
+             }).catch(function(error) {
+               console.log("Send Error");
+                 window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+             });
+    }
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

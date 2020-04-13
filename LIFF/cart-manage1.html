@@ -1,0 +1,226 @@
+<div id='gmap_ordergps'>
+</div>
+<div class="container-fluid main_data">
+ <div class="label-orange text-center mb-3" >
+  <span class="header_title"><i class="fas fa-shopping-cart"></i> สรุปรายการสั่งซื้อ</span>
+</div>
+
+<!--  <div class="text-center">
+        <h4>สรุปรายการสั่งซื้อ </h4>
+  </div> -->
+
+  <div class="">
+      <h6 class="text-orange">ข้อมูลการจัดส่ง</h6>
+  </div>
+
+  <div class="">
+    <small>ส่งไปยัง</small>
+    <div class="row">
+      <div class="col-4">
+        <strong>ชื่อ</strong> : <span class='CUSTOMER_firstname ORDER_firstname editable'></span>
+      </div>
+      <div class="col-8">
+        <strong>นามสกุล</strong> : <span class='CUSTOMER_lastname  ORDER_lastname editable'></span>
+      </div>
+
+    </div>
+    <div class="mt-1">
+        <strong class="text-danger">เบอร์ติดต่อ *</strong> <span class='CUSTOMER_mobileno ORDER_mobileno editable'></span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="">
+    <small>ที่อยู่ปลายทาง</small>
+    <div class="mt-1">
+        <span class='CUSTOMER_address editable'></span> <span class='CUSTOMER_zipcode ORDER_zipcode editable'></span>
+    </div>
+    <div class="row  mt-1">
+       <div class="col-2">
+         <strong class="card-title">ที่ตั้ง </strong>
+       </div>
+       <div class="col-10">
+         <strong onclick='find_location_order()' class='badge badge-pill badge-danger'>
+             GPS <i class="fas fa-map-marker-alt"></i>
+           </strong>
+           <span id='writelocation_order' class='badge badge-success' style='display:none'>recorded !</span>
+       </div>
+    </div>
+  </div>
+
+  <div class="mt-2 row" style="border-bottom: 8px solid #f4f3f3;">
+
+  </div>
+
+  <div class="mt-1">
+    <h6>รายการสั่งซื้อ</h6>
+    <small class="text-secondary" id="listmenuorder">
+      <div class="row row_tablecontent" style="display:none">
+        <div class="col-1 text-right">
+          <span class="badge badge-light badge-pill menu_qty">1</span>
+        </div>
+        <div class="col-8">
+            <span class="menu_name">ชื่อเมนู</span>
+        </div>
+        <div class="col-3 text-right">
+          <span class="menu_menuprice">0.00 </span> ฿
+        </div>
+      </div>
+    </small>
+    <hr>
+    <div class="align-items-center">
+      <div class="row">
+          <div class="col-6">
+              ราคารวม
+          </div>
+          <div class="col-6 text-right">
+              <span class="total_price">0.00 </span> ฿
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <span>0.0 </span> กม.
+          </div>
+          <div class="col-6 text-right">
+              <span class="total_shippingcost">0.00 </span> ฿
+          </div>
+      </div>
+      <div class="row h5">
+          <div class="col-6">
+              ราคารวมทั้งหมด
+          </div>
+          <div class="col-6 text-right ">
+              <span class="badge badge-primary badge-pill grandtotal">0.00 </span> ฿
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="fixed-bottom">
+    <button type="button" name="button" class="btn btn-lg btn-block" style="background-color:#ff5e33; color:#ffff;" onclick="checkout_payment();"> ชำระเงิน </button>
+
+  </div>
+
+</div>
+<script>
+
+  var template_ordermenulist = $('#listmenuorder').html();
+  refresh_managecart1();
+
+    function refresh_managecart1(){
+      if (working.order) {
+        console.log("ORDER",working.order);
+      }
+      getUsercustomer();
+      ADVWS.make_edittext($('.editable'),function(data,obj){
+          // edtable_update_toserver(data,obj,'/api/liff/update/customerinfo');
+          },function(data2vilidate,field){
+            // if(field =='mobileno'){
+            //   if(!data2vilidate || data2vilidate== ''){
+            //       return "กรุณาระบุเบอร์ติดต่อ";
+            //   }
+            // }
+              if(!data2vilidate) return "Invalid data";
+          });
+            showmwnuorderlist(working.order.items);
+    }
+
+    function showmwnuorderlist(obj){
+      $('#listmenuorder').html(template_ordermenulist);
+      var totalprice =0,shippingcost = 0,grandtotal = 0;
+        for(var x=0;x<obj.length;x++){
+          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
+          totalprice += obj[x].menuprice;
+          obj[x].pricedes = obj[x].price.detail;
+               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
+               if(obj[x].menuprice>0){
+                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+               }else {
+                 TR.find('.menu_menuprice').html('0.00')
+               }
+
+               TR.show();
+
+               /// +=delivery
+        }
+        grandtotal = shippingcost+totalprice;
+        if (totalprice>0) {
+            $('.total_price').html(addCommas(totalprice))
+        }else {
+          $('.total_price').html('0.00')
+        }
+
+        if (shippingcost>0) {
+            $('.total_shippingcost').html(addCommas(shippingcost))
+        }else {
+          $('.total_shippingcost').html('0.00')
+        }
+
+        if (totalprice>0) {
+            $('.grandtotal').html(addCommas(grandtotal))
+        }else {
+          $('.grandtotal').html('0.00')
+        }
+
+    }
+
+    $('#gmap_ordergps').load('/LIFF/modal_gps.html');
+      function find_location_order() {
+          detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+          call_modal_maps(detail, function (data) {
+              console.log('DataBack:', data);
+              updategpslocation(data)
+          });
+      }
+      function updategpslocation(loc){
+        var data = {
+          LINE_USER : LINE_USER,
+          };
+        data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
+        console.log('ORDER GPS',data);
+
+        // $.postJSON('/api/liff/update/customerinfo',data,function(res){
+        //   console.log("RES",res);
+        //       if(!res.result){
+        //         alert(res.detail);
+        //         return;
+        //       }
+        //       working.customer.location = data.location ;
+        //       $('#writelocation_cus').show('slow').hide('slow');
+        // });
+      }
+
+    function getUsercustomer() {
+        $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
+          console.log("RESPONSE",res);
+          if(res.result){
+            if(res.detail){
+                working.customer = res.detail;
+                setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+            }
+
+          }else{
+            //Do Something
+          }
+        });
+    }
+
+    function checkout_payment(){
+      if(working.order && working.order.items && working.order.items.length >0 && working.order._id){
+          liff.sendMessages([{
+                   'type': 'text',
+                   'text': "OrderConfirm: #"+working.order._id
+               }]).then(function() {
+                   liff.closeWindow();
+               }).catch(function(error) {
+                  console.log("Send Error");
+                   window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+               });
+
+      }else{
+          alert("รายการสั่งซื้อของคุณยังไม่พร้อมสำหรับชำระเงิน");
+      }
+    }
+</script>

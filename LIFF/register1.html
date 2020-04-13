@@ -1,0 +1,46 @@
+<div>
+Register STEP1 SHOP
+<div id='gmap_gps'>
+</div>
+Shop Name:<span id='userid'></span>
+  Name : <input type='text'class='form-control' id='shopname' >
+<button onclick='show_gps()' class='form-control btn btn-sm'>GPS</button>
+<br>
+ <label for="image_uploader_btn">Select image:</label>
+<input type='file' id='image_uploader_btn' name='Click Images' accept="image/*" >
+<button onclick='submitnewshop()' class='form-control'>Submit</button>
+
+
+</div>
+
+<script>
+$('#gmap_gps').load('/LIFF/modal_gps.html');
+var shop_gps_location;
+function show_gps(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position){
+      console.log("GOT POSTIION",position)
+      var pos = {lat:position.coords.latitude,lng: position.coords.longitude};
+      call_modal_maps(pos,function(data){
+          console.log('DataBack:',data);
+          shop_gps_location = data;
+      });
+    } ,showError);
+  }
+}
+
+function submitnewshop(){
+    var obj = {
+      location:shop_gps_location
+      LINE_USER:LINE_USER
+    }
+    $.postJSON('/api/engine/register/shop',obj,function(res){
+        console.log("GOT BACK");
+        console.log(res);
+
+    });
+}
+
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

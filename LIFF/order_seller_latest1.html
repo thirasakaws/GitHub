@@ -1,0 +1,82 @@
+<div class="container-fluid">
+<div class="label-orange text-center mb-3" >
+  <span class="header_title">รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i> </span>
+</div>
+
+  <hr>
+
+  <div id="order_last">
+      <div class="card row_tablecontent" style="display:none;">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="card-title menu_menuname" >ชื่อเมนู</h5>
+            </div>
+            <div class="col-2 btn btn-danger" style="border-radius: 20px;">
+                ไม่รับ
+            </div>
+            <div class="col-8">
+              <div class="">
+                <span >ราคา</span> : <span class="menu_price">0.00 ฿</span>
+              </div>
+              <div class="alert alert-warning" role="alert">
+              <strong>รายละเอียด :</strong> <span class="menu_detail">ไม่เผ็ด</span> <br>
+              <span class="menu_note"></span>
+              </div>
+            </div>
+            <div class="col-2 btn btn-success" style="border-radius: 20px;">
+                รับ
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
+
+
+</div>
+<script>
+var template_menulist = $('#order_last').html();
+  refresh_last_order();
+
+    function refresh_last_order(){
+      $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+          if(res.result){
+            $('#warn-order').hide();
+            working.orderlast = res.detail;
+            if (working.orderlast) {
+              console.log("ORDER",working.orderlast);
+                    show_order_last(working.orderlast);
+              }else {
+                return 'ไม่พบเมนู'
+              }
+              // go2View('order_seller_latest1');
+            // $('#shopingcart').html(JSON.stringify(res.detail));
+          }else{
+            $('#warn-order').show();
+            // alert(res.detail);
+          }
+      });
+          // $('#shopi0ngcart').html(JSON.stringify(res.detail));
+    }
+    function show_order_last(obj){
+      $('#order_last').html(template_menulist);
+
+        for(var x=0;x< obj.length;x++){
+          // console.log("SHOWING",obj[x]);
+               var TR = tablerow($("#order_last"), 'menu', obj[x], template_menulist, false);
+               if(obj[x].price>0){
+                  TR.find('.menu_price').html(addCommas(obj[x].price));
+               }else {
+                 TR.find('.menu_price').html('0.00')
+               }
+              // alert("TR =" +TR.html())
+               // TR.attr('data-id',obj[x].menuid);
+               TR.show();
+
+        }
+    }
+
+
+
+
+</script>
