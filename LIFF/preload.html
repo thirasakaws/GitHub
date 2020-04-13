@@ -195,7 +195,7 @@
 
     var alreadyinit = false;
     function initializeApp() {
-        console.log("init ok");
+        //console.log("init ok");
         if (typeof (alreadyinit) == 'function') {
             alreadyinit();
             return;
@@ -206,7 +206,7 @@
         displayLiffData();
         // check if the user is logged in/out, and disable inappropriate button
         if (liff.isLoggedIn()) {
-            console.log("user Loged in");
+            //console.log("user Loged in");
             //show logout button
             liff.getProfile().then(profile => {
                 LINE_USER.pictureUrl = profile.pictureUrl;

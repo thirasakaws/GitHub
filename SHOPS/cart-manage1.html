@@ -348,6 +348,8 @@
           if(res.result){
               getcustomeraddress();
               $('#showlist_address').hide();
+              if(res.detail) working.order = res.detail;
+              update_ship_cost();
               showlist_address_temp=false;
             }else{
 
@@ -355,6 +357,7 @@
          });
     }
     function update_ship_cost(){
+
       var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');

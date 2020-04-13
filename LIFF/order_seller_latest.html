@@ -1,13 +1,13 @@
 <div id='gmap_cusgps'>
 </div>
 <div class="container-fluid">
-    
+
   <div class="box-head-title-shop text-center line-bottom-color-shop mb-3" >
-        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i></span>
-  </div> 
-  
-  
-  
+        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync fa-spin" onclick="refresh_last_order();"></i></span>
+  </div>
+
+
+
   <div id="order_last">
       Please Wait..
   </div>
@@ -29,8 +29,8 @@
     border-radius: 35px;
 }
   </style>
-  
-  
+
+
 
   <div id="order_template1" style="display:none;">
       <div class="card row_tablecontent mb-3" >
@@ -38,13 +38,13 @@
           <div class="text-center">
               <strong class="card-title">##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span> </strong>
           </div>
-            
+
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
             </div>
           </div>
-            
+
           <div class="text-center">
             ** ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
             <!-- <small>
@@ -76,10 +76,10 @@
             </div>
           </div>
           <div class="row">
-                
-            
+
+
           <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
-               
+
           <div class="col-6 mt-3 mb-3 text-right">
              <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
                  <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
@@ -88,7 +88,7 @@
                   ##ORDER-addressid##
             </small> -->
           </div>
-            </div> 
+            </div>
 
           <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
               <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
@@ -107,10 +107,10 @@
                 ##ORDER-menudetail##
             </div>
           </div>
-            
+
           <div class="row">
-                
-            
+
+
             <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
 
             <div class="col-6 mt-3 mb-3 text-right">
@@ -121,9 +121,9 @@
                     ##ORDER-addressid##
               </small> -->
             </div>
-          </div>  
-            
-     
+          </div>
+
+
 
           <button type="button" class="btn btn-success btn-md btn-block"  onclick="order_accept(this,##ORDER-id##,'finish');" ><i class="fas fa-check-circle"></i> ตอบรับทำเสร็จแล้ว</button>
         </div>
@@ -157,7 +157,7 @@
   <div id="order_template_menu" style="display:none;">
     <div class="border rounded p-2 mt-1">
       <div class="row">
-          <div class="col-8">              
+          <div class="col-8">
               ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span>  <br>
           </div>
           <div class="col-4 text-right">
@@ -166,10 +166,10 @@
       </div>
       <small class="row">
         <div class="col-12">
-            <strong class="text-gray-light2 border-bottom-gray">รายละเอียด</strong> 
+            <strong class="text-gray-light2 border-bottom-gray">รายละเอียด</strong>
             <div class="mt-2">
                 ##MENU-qty## x  ##MENU-name## <span class="font-color-shop"> ##MENU-pricedetail##</span>
-                
+
                 <span class="font-color-shop">##MENU-note##</span>
             </div>
         </div>
@@ -198,7 +198,9 @@
                 <span class="h5"> ##CUS-displayName##</span> <br>
                 <div class="row">
                     <div class="col-12">
-                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-mobileno##</span>
+                      <strong>เบอร์ติดต่อ</strong> :           <a href="tel://##CUS-mobileno##" class='btn btn-sm btn-outline-danger rounded-pill'>
+                                  <i class="fas fa-phone-alt"></i> โทรหา ##CUS-mobileno##
+                                </a>
                     </div>
                 </div>
                 <div class="row">
