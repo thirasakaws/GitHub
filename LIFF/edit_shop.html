@@ -10,9 +10,22 @@
 </style>
 
 <div class="container-fluid main_data" style="margin-bottom:100px">
-    <div class="box-head-title-shop text-center" >
-        <span class="header-shop"> ตั้งค่าร้านอาหาร</span>
+    <div class="row box-head-title-shop">
+        <div class="col-3 p-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-shop"> ตั้งค่าร้านอาหาร</span>
+        </div>
+        <div class="col-3 p-0 text-right">
+<!--            <button class='btn border border-0 text-secondary' >
+                 Next <i class="fas fa-chevron-right"></i>
+            </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
+        </div>
     </div>
+
 
 
     <div class="accordion" id="accordionExample">
@@ -65,8 +78,8 @@
                             </div>
                         </div>
 
-                    </div> 
-                    
+                    </div>
+
                     <div class="row">
                         <label class="col-sm-4 text-gray-light2 lable-left-35 " ><b>  เวลาเปิด-ปิด </b></label>
                         <div class="col d-flex ml-3 w-100">
@@ -159,20 +172,23 @@
                         </div>
 
                     </div> <!--// บัญชีธนาคาร  -->
-                    
 
-                    
+
+
                     <div class="row">
                         <label class="col-sm-4 text-gray-light2 lable-left-35 " ><b>  ช่องทางการชำระ </b></label>
                         <div class="col d-flex">
-                            <!--                            <div class="float-left pl-2 mb-2">
-                                                            <span class='SHOP_paychannel editable_shop_select'>  </span>
-                                                        </div>-->
+
                             <div class="float-left pl-2  w-100 ">
-                                <select class="input_data_bn edit_data SHOP_paychannel w-90" data-field="paychannel">
-                                    <option value="1">QuickPay (PromptPay)</option>
-                                    <option value="2">เก็บเงินปลายทาง</option>
-                                </select>
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-1" value="1">
+                                <label class="custom-control-label" for="paytype-1">Cash On Delivery</label>
+                              </div>
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-2" value="2">
+                                <label class="custom-control-label" for="paytype-2">QR payment By Quickpay</label>
+                              </div
+
                             </div>
                         </div>
                     </div> <!--// ช่องทางการชำระ  -->
@@ -403,13 +419,13 @@
 </div>
 <script>
     console.log("Setting", working.shop);
-    
 
 
-    
+
+
     //load
-    
-    
+
+
     if (working.shop) {   // Config Data for Default Data if No Data to use
         if (!working.shop.address)
             working.shop.address = 'ที่อยู่ร้านอาหาร';
@@ -426,9 +442,34 @@
         if (!working.shop.paychannel)
             working.shop.paychannel = 1;
     }
-    
+
+    function updatepaymenttype(){
+      var allcheck = $('.paymenttype:checked');
+        var paymenttype =[];
+        allcheck.each(function () {
+
+            var item =$(this).attr('value');
+            if (!item) {
+                return false;
+            }
+            if(Number(item) > 0){
+              paymenttype.push(Number(item));
+            }
+        });
+        var data = {};
+        data.LINE_USER = LINE_USER;
+        data._id = working.shop._id;
+        data.paychannel = paymenttype;
+        $.postJSON('/api/liff/edit/shop', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                cb(false);
+            }else cb(true);
+        })
+    };
+
     $.get('/api/data/ticket/province_list',function(data){
-        
+
         var selectoption =""
         selectoption += '<option value="">----เลือก-----</option>'
             for(var x=0;x<data.length;x++){
@@ -522,9 +563,9 @@
             working.shop.type = data;
         });
     }, false);
-    
-    
-    
+
+
+
 
 //    $('#primary_color').change(function () {
 //        var setcolor = {LINE_USER: LINE_USER, _id: working.shop._id, primary_color: $('#primary_color').val()}

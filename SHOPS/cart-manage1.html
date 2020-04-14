@@ -7,9 +7,6 @@
 </div>
 
 
-<!--  <div class="text-center">
-        <h4>สรุปรายการสั่งซื้อ </h4>
-  </div> -->
 
   <div class="text-secondary d-flex justify-content-between">
     <h6 class="text-orange">ข้อมูลการจัดส่ง</h6>
@@ -84,15 +81,27 @@
        </div>
      </div>
      <div class="text-left card" id="showlist_address" style="display:none;">
-       <div class="col-12 text-center">
-         <div class="btn btn-block">
-             <strong class="h4 text-secondary"> <span>เลือกที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
+       <div class="card-body">
+         <div class="row">
+           <div class="col-12 text-center">
+             <div class="btn btn-block">
+                 <strong class="h4 text-secondary"> <span>เลือกที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
+             </div>
+           </div>
          </div>
-       </div>
-       <div class="card-body" id="address_list">
-         <div class="custom-control custom-radio row_tablecontent" style="display:none;" >
-           <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
-           <label class="custom-control-label add_address radio_for" for=""></label>
+         <div class="" id="address_list">
+           <div class="custom-control custom-radio row_tablecontent p-2" style="display:none;" >
+             <div class="row">
+               <div class="col-10">
+                 <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
+                 <label class="custom-control-label add_address radio_for" for=""></label>
+               </div>
+               <div class="col-2">
+                    <span class="text-danger btn btn-light" onclick="changethis_add(this,'disabled');"><i class="fas fa-trash-alt"></i></span>
+               </div>
+
+             </div>
+           </div>
          </div>
        </div>
      </div> <!--// -->
@@ -220,10 +229,12 @@
           obj = res.detail;
           if(obj.length >0){
               working.address = res.detail;
+              var found;
               for(var x=0;x<obj.length;x++){
                      var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
                      if (working.order.addressid) {
                        if(obj[x]._id == working.order.addressid){
+                         found = true;
                          working.order.location = obj[x].location;
                           TR.find('.radio_id').prop('checked', true);
                           $('#addres_area').val(obj[x].address);
@@ -233,6 +244,10 @@
                      TR.find('.radio_id').attr('id','add'+obj[x]._id);
                      TR.find('.radio_for').attr('for','add'+obj[x]._id);
                      TR.show();
+                }
+                if(!found){
+                  working.order.addressid = working.address[0]._id;
+                  update_order();
                 }
               }else {
                 $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
@@ -295,7 +310,7 @@
         $.postJSON('/api/liff/update/address', data, function (res) {
           // console.log("LOCATE",res);
           if(res.result){
-              $('#writelocation_cus').show('slow').hide('slow');
+              // $('#writelocation_cus').show('slow').hide('slow');
               getcustomeraddress();
           }else{
             alert(res.detail);
@@ -334,6 +349,26 @@
         // console.log('order -- ',working.order);
 
     }
+    function changethis_add(obj,action){
+        var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
+        if(confirm('ยืนยันที่จะลบที่อยู่นี้ ?')){
+          var data = {
+            LINE_USER : LINE_USER,
+            _id : dataid,
+            active : false
+            };
+
+          $.postJSON('/api/liff/update/address', data, function (res) {
+            // console.log("LOCATE",res);
+            if(res.result){
+                getcustomeraddress();
+            }else{
+              alert(res.detail);
+            }
+          });
+        }
+
+    }
 
     function update_order(){
       var data = {
@@ -357,7 +392,6 @@
          });
     }
     function update_ship_cost(){
-
       var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');
@@ -410,15 +444,4 @@
       showlist_address_temp = !showlist_address_temp;
     }
 
-    // var showadd_address_temp=false;
-    // function showadd_address(){
-    //   $('#showlist_address').hide();
-    //   showlist_address_temp=false;
-    //   if(showadd_address_temp){
-    //     $('.showadd_address').hide();
-    //   }else{
-    //       $('.showadd_address').show();
-    //   }
-    //   showadd_address_temp = !showadd_address_temp;
-    // }
 </script>

@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
   <div class="box-head-title-shop text-center line-bottom-color-shop mb-3" >
-        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync fa-spin" onclick="refresh_last_order();"></i></span>
+        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i></span>
   </div>
 
 
@@ -198,9 +198,7 @@
                 <span class="h5"> ##CUS-displayName##</span> <br>
                 <div class="row">
                     <div class="col-12">
-                      <strong>เบอร์ติดต่อ</strong> :           <a href="tel://##CUS-mobileno##" class='btn btn-sm btn-outline-danger rounded-pill'>
-                                  <i class="fas fa-phone-alt"></i> โทรหา ##CUS-mobileno##
-                                </a>
+                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-mobileno##</span>
                     </div>
                 </div>
                 <div class="row">
@@ -319,7 +317,8 @@ function find_location_order() {
 
 
 function getcustomeraddress(){
-  $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+  console.log('id',working.orderlast);
+  $.postJSON('/api/liff/get/address', {_id: 57}, function (res) {
     console.log('getadd',res);
     if(res.result){
       working.address = res.detail;
