@@ -1,10 +1,21 @@
 <div id='gmap_ordergps'>
 </div>
 <div class="container-fluid main_data">
-
- <div class="box-head-title-foodmall text-center line-bottom-color-foodmall " >
-        <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i>  สรุปรายการสั่งซื้อ</span>
-</div>
+  <div class="row box-head-title-foodmall line-bottom-color-foodmall ">
+      <div class="col-3 p-0 text-left">
+          <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+              <span class="header-foodmall"><i class="fas fa-chevron-left "></i> Back</span>
+          </button>
+      </div>
+      <div class="col-6  text-center " >
+             <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i>  สรุปรายการสั่งซื้อ</span>
+     </div>
+      <div class="col-3 p-0 text-right">
+          <!-- <button class='btn border border-0 text-secondary' >
+               Next <i class="fas fa-chevron-right"></i>
+          </button> <!--// onclick ยังไม่ได้ใส่ ให้นะ -->
+      </div>
+  </div>
 
 
 
@@ -19,15 +30,15 @@
     <div class="row mt-3">
         <div class="col-6">
             <div class="form-group">
-                <label class="font-color-foodmall-gray-light2 lable-left-35 " > ชื่อ </label>
-                <input class="input_data_bn edit_data CUSTOMER_firstname ORDER_firstname w-90 " placeholder="ชื่อผู้รับ" data-field="firstname">
+                <label class="font-color-foodmall-gray-light2 lable-left-35 " > ชื่อ <span class="text-danger">*</span></label>
+                <input class="input_data_bn edit_data CUSTOMER_firstname ORDER_firstname w-90 " placeholder="" data-field="firstname">
             </div> <!--// -->
 
         </div>
         <div class="col-6">
            <div class="form-group">
-                <label class="font-color-foodmall-gray-light2 lable-left-35 " > นามสกุล  </label>
-                <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="นามสกุล" data-field="lastname">
+                <label class="font-color-foodmall-gray-light2 lable-left-35 " > นามสกุล  <span class="text-danger">*</span></label>
+                <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="" data-field="lastname">
             </div> <!--// -->
         </div>
     </div>
@@ -36,7 +47,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
                 <div class="col">
-                    <input class="input_data_bn edit_data ORDER_contact w-90 " type="text" min="10" max="10" placeholder="เบอร์ติดต่อ" data-field="contact">
+                    <input class="input_data_bn edit_data ORDER_contact w-90 " type="text" min="10" max="10" placeholder="" data-field="contact">
                 </div>
             </div> <!--// -->
         </div>
@@ -108,17 +119,7 @@
 
  </div>
 
-    <!-- <div class='form-group showadd_address mt-2 card w-100' style='display:none;'>
-      <div class="card-body">
-        <div class="">
-          <strong onclick='find_location_order()' class='badge badge-pill badge-danger' style="font-size:150%;">
-              GPS <i class="fas fa-map-marker-alt"></i>
-            </strong>
-            <br><small class="text-warning">**กดที่ GPS เพื่อดู map</small>
-            <span id='writelocation_order' class='badge badge-success' style='display:none'>recorded !</span>
-        </div>
-      </div>
- </div> -->
+
 
   <div class="mt-2 mb-2 bg-space-gray"></div>
 
@@ -209,15 +210,11 @@
         console.log("ORDER",working.order);
 
       }
-            getUsercustomer();
+            // getUsercustomer();
             getcustomeraddress();
             setTimeout(()=>{
               showmwnuorderlist(working.order.items);
               setdatabyclass($('.main_data'), 'ORDER', working.order);
-              if(!working.order.contact || working.order.contact==''){
-                 $('.ORDER_contact').val(working.customer.mobileno);
-              }
-              console.log("TEST--",working.order,working.customer);
             },500)
 
     }
@@ -250,7 +247,8 @@
                   update_order();
                 }
               }else {
-                $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
+                $('#addres_area').val('');
+                $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู่");
               }
 
         }else{
@@ -318,23 +316,6 @@
         });
       };
 
-    function getUsercustomer() {
-        $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
-          // console.log("RESPONSE",res);
-          if(res.result){
-            if(res.detail){
-                working.customer = res.detail;
-                setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
-                $('.ORDER_contact').val(working.customer.mobileno);
-                // getcustomeraddress();
-            }
-
-          }else{
-            //Do Something
-          }
-        });
-    }
-
     function updateorder_add(obj) {
       if ($(obj).is(':checked')) {
         var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
@@ -374,13 +355,16 @@
       var data = {
                   LINE_USER: LINE_USER,
                   addressid:working.order.addressid,
-                  firstname : $('.ORDER_firstname').val(),
-                  lastname : $('.ORDER_lastname').val(),
-                  contact : $('.ORDER_contact').val()
+                  // firstname : $('.ORDER_firstname').val(),
+                  // lastname : $('.ORDER_lastname').val(),
+                  // contact : $('.ORDER_contact').val()
                 };
                 // console.log("data",data);
       $.postJSON('/engine/order/update',data,(res)=>{
           if(res.result){
+            // console.log('update',res);
+            working.order = res.detail;
+              $('.warn-save').show('slow').hide('slow');
               getcustomeraddress();
               $('#showlist_address').hide();
               if(res.detail) working.order = res.detail;
@@ -405,6 +389,22 @@
 
     }
     function checkout_payment(){
+      console.log('order',working.order.firstname);
+
+      if(working.order.firstname || working.order.firstname !==''){
+        if(working.order.lastname || working.order.lastname !==''){
+
+
+        }else{
+          alert('กรุณาระบุนามสกุลผู้รับ')
+          return false;
+        }
+
+      }else{
+        alert('กรุณาระบุชื่อผู้รับ')
+        return false;
+      }
+
       if(!working.order.contact || working.order.contact.length < 10){
         alert('กรุณาระบุเบอร์ติดต่อ')
         return false;
@@ -413,6 +413,13 @@
 
       }else{
         alert('กรุณาระบุวิธีการชำระเงิน')
+        return false;
+      }
+      if(Number(working.order.addressid) >0){
+
+
+      }else{
+        alert('กรุณาระบุที่อยู่ปลายทาง')
         return false;
       }
 
