@@ -1,7 +1,21 @@
 <div class='container-fluid main_data' >
-    <div class="box-head-title-shop text-center" >
-        <span class="header-shop"> จัดการเมนูอาหาร</span> <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id"></span></span>
-    </div>
+  <div class="row box-head-title-shop">
+      <div class="col-3 p-0 text-left">
+          <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+              <i class="fas fa-chevron-left"></i> Back
+          </button>
+      </div>
+      <div class="col-6  text-center" >
+          <span class="header-shop"> จัดการเมนูอาหาร</span>
+          <br> <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id"></span></span>
+      </div>
+      <div class="col-3 p-0 text-right">
+          <!-- <button class='btn border border-0 text-secondary' >
+               Next <i class="fas fa-chevron-right"></i>
+          </button>  -->
+      </div>
+  </div>
+
 
 
     <div class="text-center">
@@ -85,6 +99,7 @@
                         <option value="6">แกง</option>
                         <option value="7">ยำ</option>
                         <option value="8">เครื่องดื่ม</option>
+                        <option value="9">สลัด</option>
                     </select>
 
                 </div>
@@ -131,10 +146,11 @@
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
                     <select id="weight  " class="input_data_bn  edit_data MENU_weight" data-field="weight" placeholder="น้ำหนัก(กิโลกรัม)">
-                        <option value="1">0.5-1 กก.</option>
-                        <option value="2">1-2 กก.</option>
-                        <option value="3">2-3 กก.</option>
-                        <option value="4">3-4 กก.</option>
+                        <option value="1">น้อยกว่า 0.5 กก.</option>
+                        <option value="2">0.5-1 กก.</option>
+                        <option value="3">1-2 กก.</option>
+                        <option value="4">2-3 กก.</option>
+                        <option value="5">3-4 กก.</option>
                     </select>
 
                 </div>

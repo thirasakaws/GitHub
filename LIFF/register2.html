@@ -8,8 +8,21 @@
 </style>
 <div class="container-fluid main_data">
 
-    <div class="box-head-title-shop text-center" >
-        <span class="header-shop"> จัดการร้านอาหาร</span>
+    <div class="row box-head-title-shop text-center" >
+        <div class="col-3 p-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-shop"> จัดการร้านอาหาร</span>
+        </div>
+        <div class="col-3 p-0 text-right">
+            <!--            <button class='btn border border-0 text-secondary' >
+                             Next <i class="fas fa-chevron-right"></i>
+                        </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
+        </div>
+
     </div>
 
 
@@ -125,60 +138,60 @@
 
 
 
-            <div class="rounded bg-light pl-2 pb-2">
-                <div class="font-color-shop line-for-header pt-1 pb-1">
-                    Share Admin Shop For The Other
+    <div class="rounded bg-light pl-2 pb-2">
+        <div class="font-color-shop line-for-header pt-1 pb-1">
+            Share Admin Shop For The Other
 
+        </div>
+        <div class="mt-3 pr-1">
+            <span> เข้าบริหารจัดการร้านค้า อื่น :</span>
+            <div class="form-group row">
+                <div class="col-8 pr-0">
+                    <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'>
+                    <small id="emailHelp" class="form-text text-muted">กรอกรหัสลับเพื่อเข้าจัดการบริหารร้านค้าอื่น</small>
                 </div>
-                <div class="mt-3 pr-1">
-                    <span> เข้าบริหารจัดการร้านค้า อื่น :</span>
-                    <div class="form-group row">
-                        <div class="col-8 pr-0">
-                            <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'>
-                            <small id="emailHelp" class="form-text text-muted">กรอกรหัสลับเพื่อเข้าจัดการบริหารร้านค้าอื่น</small>
-                        </div>
-                        <div class="col">
-                            <button class='btn btn-sm btn-submit-shop btn-block' onclick="loginshopshare();">
-                                <i class="fas fa-sign-in-alt"></i> Log-in
-                            </button>
-                        </div>
+                <div class="col">
+                    <button class='btn btn-sm btn-submit-shop btn-block' onclick="loginshopshare();">
+                        <i class="fas fa-sign-in-alt"></i> Log-in
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- // เข้าบริหารจัดการร้านค้า -->
+
+
+    <div class="rounded bg-light pl-2 mt-5">
+        <div class="font-color-shop line-for-header pt-1 pb-1">
+            กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ
+        </div>
+        <div class="mt-3 pr-1">
+            <!--<span> เข้าบริหารจัดการร้านค้า อื่น :</span>-->
+            <div class="form-group row">
+                <div class="col-8 pr-0">
+                    Shared Key : <span class="text-gray-light2" id='shopsharenumber'></span>
+                </div>
+                <div class="col text-right d-flex d-inline ">
+                    <div class="ml-auto">
+                        <label class="switch">
+                            <input type="checkbox" id="sharethisshop" onchange="changeshopshare(this)">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
-
-            </div><!-- // เข้าบริหารจัดการร้านค้า -->
-
-
-            <div class="rounded bg-light pl-2 mt-5">
-                <div class="font-color-shop line-for-header pt-1 pb-1">
-                    กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ
+                <div class="col-12 mt-2">
+                    <small id="emailHelp" class="form-text text-muted">
+                        ** คุณสามารถ Share Key ให้สิทธิ์บุคคลอื่น จัดการร้านค้านี้ได้โดย ให้พิมพ์ข้อความ ตามหมายเลข นี้
+                        เมื่อเลิกการแชร์แล้ว ปิด ส่วนนี้ ผู้ที่ใช้งาน Share อยู่ก็จะไม่สามารถเข้าใช้ได้อีก
+                    </small>
                 </div>
-                <div class="mt-3 pr-1">
-                    <!--<span> เข้าบริหารจัดการร้านค้า อื่น :</span>-->
-                    <div class="form-group row">
-                        <div class="col-8 pr-0">
-                            Shared Key : <span class="text-gray-light2" id='shopsharenumber'></span>
-                        </div>
-                        <div class="col text-right d-flex d-inline ">
-                            <div class="ml-auto">
-                                <label class="switch">
-                                    <input type="checkbox" id="sharethisshop" onchange="changeshopshare(this)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                             <small id="emailHelp" class="form-text text-muted">
-                                 ** คุณสามารถ Share Key ให้สิทธิ์บุคคลอื่น จัดการร้านค้านี้ได้โดย ให้พิมพ์ข้อความ ตามหมายเลข นี้
-                    เมื่อเลิกการแชร์แล้ว ปิด ส่วนนี้ ผู้ที่ใช้งาน Share อยู่ก็จะไม่สามารถเข้าใช้ได้อีก
-                             </small>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- // กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ -->
-            <hr>
-            <div> Advance  ...<button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
-                                        <i class="fas fa-sign-in-alt"></i> For Multiple Shop
-                                    </button></div>
+            </div>
+        </div>
+    </div> <!-- // กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ -->
+    <hr>
+    <div> Advance  ...<button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
+            <i class="fas fa-sign-in-alt"></i> For Multiple Shop
+        </button></div>
 
 </div>
 <script>

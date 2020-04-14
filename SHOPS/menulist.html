@@ -1,8 +1,37 @@
+<style>
+.margin-top-under-navbar { margin-top: 55px;}    
+.btn-push {
+    z-index: 20;
+    position: absolute;
+    right: 10px;
+    bottom: 91.5px;   /* -21.5px;   */
+} 
+
+.button-circle {
+    position: relative;  /* relative */
+}
+.wrapper-button-circle {
+    top: 5px;
+    left: 12px;
+    border-radius: 100%;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: red;  /*#00bd29 */
+}
+    
+.btn-add-to-cart {     
+    border: 4px #fff solid;
+    border-radius: 25px;
+    background: #fff; 
+    font-size: 2.9em;
+}
+</style>
 <div class="fixed-top" id='top_shopping_cart'  style="display:none">
 
- <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+ <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top ">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon font-color-foodmall"></span>
     </button>
 
     <a class="navbar-brand" href="#">
@@ -15,7 +44,7 @@
 
   <div class="collapse navbar-collapse " id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
+<!--      <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -23,7 +52,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+      </li>-->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -39,10 +68,10 @@
 ##CART-totalitem## ในตระกร้า
 </button>-->
 </div> <!-- topmenu -->
-
+ 
 
 <!-- Slide -->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide margin-top-under-navbar" data-ride="carousel" >
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -71,82 +100,61 @@
 </div>
 <!-- // Slide การตลาดกำหนดขนาดมา-->
 
-<!-- Catagory  -->
+
+<!-- Category -->
+
+<div class="mt-5 mb-5">
+    Category Slide ค้างไว้ก่อนค่อยมาทำต่อ
+</div>
+<!-- // Category -->
 
 
-<!-- // Catagory -->
-
-<div class="container-fluid" id='mainview'>
+<div class="row" id='mainview' style="padding: 10px;">
   Loading..
 </div>
 
-<div class="container-fluid" id='template_mainview' style="display:none">
 
 
-    <div class="card-deck" id='main_menu_preview'>
-            <div class="card ">
-              <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">##menu-name## <span class="text-right">฿ ##menu-mainprice##</span></h5>
-                <p class="card-text font-weight-bold">รายละเอียด</p>
-                <p class="card-text">##menu-description##</p>
-                <p class="card-text"><small class="text-muted"><button onclick="addtocart(##menu-id##)">หยิบใส่ตะกร้า</button></small></p>
+<div class="row " id='template_mainview' style="display:none; ">
+    <div class="card-deck col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
+        <div class="card border border-0 shadow-sm rounded-lg">
+          <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top" alt="...">
+         
+         
+          
+          <div class="card-body pt-2">
+              <h6 class="card-title text-left mt-2" style="height:40px;">##menu-name## </h6>
+<!--                <p class="card-text font-color-foodmall-gray-light2">รายละเอียด</p>-->
+<!--                <p class="card-text">##menu-description##</p>-->
+            <div class="btn-push" onclick="addtocart(##menu-id##)">
+              <div class="button-circle">
+                 <i class="fas fa-plus-circle fa-3x btn-add-to-cart font-color-foodmall"></i>
               </div>
-            </div>
+          </div>
+            <div class="row p-0">
+                <div class="col-5 ">
+                    1 ชุด
+                </div>
+                 <div class="col-7 text-right">
+                    <span class="" >฿ ##menu-mainprice##</span>
+                </div>
+            </div>  <!-- // -->
+            
+             
+          </div>  <!-- // cardbody -->
+          
+
+<!--                <div> Review of Customer </div>
+            ...
+            <br>-->
+        </div>   <!-- // card --> 
+
+    </div> <!-- // card deck --> 
+</div> <!-- // row --> 
+  
 
 
-<!--            <div class="card ">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">##menu-description##</p>
-                 <p class="card-text">##menu-detail##</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>-->
-<!--            <div class="card ">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>-->
 
-<!--            <div class="card ">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>-->
-
-
-<!--    <div class="col-md-4 card-columns border border-danger" id='main_menu_preview' >
-
-
-      <div class="card border border-success">
-          <span > ##menu-name## </span>
-          <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top " style="width:50%;" >
-          ราคา ##menu-mainprice## บาท
-          <br>
-          ##menu-description##
-          <hr>
-          รายละเอียด<br>
-          ##menu-detail##
-
-          <button onclick="addtocart(##menu-id##)">หยิบใส่ตะกร้า</button>
-      </div>
-
-    </div>-->
-
-    <div> Review of Customer </div>
-...
-<br>
-</div>
-</div>
 <div class="modal fade " id="modal_priceselect" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">

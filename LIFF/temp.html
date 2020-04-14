@@ -13,10 +13,21 @@ $('#gmap_gps').load('/LIFF/modal_gps.html',function(){
     console.log(err)
   }
   call_modal_maps (latlng_default_startup,updategpslocation,showError);
-
-
-
 });
+
+// $('#gmap_gps').load('/LIFF/modal_map_radius.html',function(){
+//   var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
+//   function updategpslocation(loc){
+//     console.log(loc)
+//   }
+//   function showError(err){
+//     console.log(err)
+//   }
+
+//     // Map Radius
+//   latlng_default_startup.service_radius = 500;
+//   call_modal_radius_maps(latlng_default_startup,updategpslocation,showError);  // Map Radius
+// });
 
 
 

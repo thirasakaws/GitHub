@@ -198,7 +198,12 @@
                 <span class="h5"> ##CUS-displayName##</span> <br>
                 <div class="row">
                     <div class="col-12">
-                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-mobileno##</span>
+                     <strong>ชื่อลูกค้าปลายทาง</strong> : <span>##CUS-firstname##  ##CUS-lastname##</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-contact##</span>
                     </div>
                 </div>
                 <div class="row">
@@ -253,7 +258,6 @@
   STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
 
 function runApp(){
-    getcustomeraddress();
   $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
       if(res.result){
         working.orderlast = res.detail;
@@ -262,6 +266,15 @@ function runApp(){
           return;
         }
         if (working.orderlast) {
+
+          var address_array = []
+          for(var x=0;x<working.orderlast.length;x++){
+              address_array.push(working.orderlast[x].addressid);
+          }
+
+          if(address_array.length >0){
+            getorderaddress(address_array);
+          }
           //console.log("ORDER",working.orderlast);
           var order1=[],order2=[],order3=[],order5=[];
 
@@ -301,12 +314,12 @@ function runApp(){
 
 $('#gmap_cusgps').load('/LIFF/modal_gps.html');
 function find_location_order() {
-  console.log('cuslocate',ordercustomerlocation);
+  // console.log('cuslocate',ordercustomerlocation);
   var pos;
   if (ordercustomerlocation &&  Array.isArray(ordercustomerlocation.coordinates)) {
       // Already input Location
       pos = {lat: ordercustomerlocation.coordinates[0], lng: ordercustomerlocation.coordinates[1]};
-      console.log('pos',pos);
+      // console.log('pos',pos);
   } else {
                 alert('ไม่พบพิกัด');
                 return false;
@@ -315,26 +328,6 @@ function find_location_order() {
     setTimeout(()=>{ $('#hidecusmodal').click()},500);
 }
 
-
-function getcustomeraddress(){
-  console.log('id',working.orderlast);
-  $.postJSON('/api/liff/get/address', {_id: 57}, function (res) {
-    console.log('getadd',res);
-    if(res.result){
-      working.address = res.detail;
-      // console.log('getadd',res);
-      // obj = res.detail;
-      // for(var x=0;x<obj.length;x++){
-      //        if(obj[x]._id == working.order.addressid){
-      //           $('.ORDER_address').html(obj[x].address);
-      //        }
-      // }
-
-    }else{
-      // alert(res.detail);
-    }
-  });
-};
 
 function order_accept(obj,orderid,type){
   $(obj).hide();
@@ -348,42 +341,54 @@ function order_accept(obj,orderid,type){
       }
   });
 
-}
+};
+
+function getorderaddress(arr){
+      $.postJSON('/api/liff/get/orderaddress',{_id : arr}, function (res) {
+        if(res.result){
+          working.address = res.detail;
+        }
+      });
+};
+
 var template_customer = $('#modal_image_customer_preview').html();
-var ordercustomerlocation = '';
+var ordercustomerlocation = {};
 function previewcustomer(order_id){
   var address = false;
   var obj_cust;
     working.orderlast.map((obj)=>{
-      // console.log('add',working.address);
-      if(working.address){
-          for(var x=0;x<working.address.length;x++){
-                 if(working.address[x]._id == obj.addressid){
-                    obj.customerid.address = working.address[x].address;
-                    if(working.address[x].location){
-                        obj.customerid.location = working.address[x].location;
-                        ordercustomerlocation = obj.customerid.location;
-                    }else {
-                      ordercustomerlocation = '';
-                    }
-
-                    address = true;
-                    console.log('--',obj,address);
-                 }
-            }
-        }else {
-          return 'address not found'
+      console.log('order',obj);
+          if(working.address && working.address.length > 0){
+            var add = working.address;
+            for(var x=0;x<add.length;x++){
+                if(add[x].address){
+                   obj.customerid.address = add[x].address;
+                   if(add[x].location){
+                       obj.customerid.location = add[x].location;
+                       ordercustomerlocation = obj.customerid.location;
+                   }else {
+                     ordercustomerlocation = {};
+                   }
+                   address = true;
+                   // console.log('--',obj,address);
+                }else {
+                  alert('ไม่พบที่อยู่')
+                }
+          }
         }
+        obj.customerid.firstname = obj.firstname;
+        obj.customerid.lastname = obj.lastname;
+        obj.customerid.contact = obj.contact;
 
-      if(obj._id == order_id) obj_cust = obj.customerid
-    })
+      if(obj._id == order_id) obj_cust = obj.customerid;
+    });
     if(address){
       console.log('add',obj_cust);
         $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
         $('#modal_image_customer_preview').modal('show');
       }
       // address = !address;
-}
+};
 
 initializeLiff();
 

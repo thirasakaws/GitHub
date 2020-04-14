@@ -7,9 +7,9 @@
 <div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">ตำแหน่งร้านอาหาร และจัดส่งอาหาร</h5> <!-- Image Preview -->
-        </div>
+        <!-- <div class="modal-header">
+            <h5 class="modal-title">ตำแหน่งร้านอาหาร และจัดส่งอาหาร</h5>
+        </div> -->
 
         <div class="modal-body" style="width:500; height:500">
 
@@ -39,7 +39,8 @@
   var tempcbfnc_maps;
   var gmap;
   var themarker;
-  var themarker_image;
+  var themarker_seller_icon;
+  var themarker_customer_icon;
   var delay_marker;
   var geocoder;
   var infowindow;
@@ -169,15 +170,26 @@
       tempcbfnc_maps = cbfnc;
 
       if (latlng_have_save === true) {
-        // themarker_image = {
-        //   url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-        //   // This marker is 20 pixels wide by 32 pixels high.
-        //   size: new google.maps.Size(20, 32),
-        //   // The origin for this image is (0, 0).
-        //   origin: new google.maps.Point(0, 0),
-        //   // The anchor for this image is the base of the flagpole at (0, 32).
-        //   anchor: new google.maps.Point(0, 32)
-        // };
+        themarker_customer_icon = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(20, 32),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 32)
+        };
+
+        themarker_seller_icon = {
+          url: 'https://sv1.picz.in.th/images/2020/04/14/UYZJ6J.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          // size: new google.maps.Size(300, 370),
+          scaledSize: new google.maps.Size(30, 37),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(15, 33)
+        };
         
         // themarker = new google.maps.Marker({
         //   position: latlng_saved,
@@ -187,8 +199,8 @@
         //   title: 'Postition'
         // });
 
-        addMarker(latlng_default_startup);            // ADVWS
-        addMarker({lat:13.752569, lng:100.574740});   // RCA
+        addMarker(latlng_default_startup, themarker_seller_icon);            // ADVWS
+        addMarker({lat:13.752569, lng:100.574740}, themarker_customer_icon);   // RCA
         showMarkers();
 
         setTimeout(() => {
@@ -224,21 +236,11 @@
     $('#modal_google_gps').modal('hide');
   }
 
-  function addMarker(location) {
-    themarker_image = {
-      url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-      // This marker is 20 pixels wide by 32 pixels high.
-      size: new google.maps.Size(20, 32),
-      // The origin for this image is (0, 0).
-      origin: new google.maps.Point(0, 0),
-      // The anchor for this image is the base of the flagpole at (0, 32).
-      anchor: new google.maps.Point(0, 32)
-    };
-
+  function addMarker(location, icon) {
     themarker = new google.maps.Marker({
       position: location,
       map: gmap,
-      icon: themarker_image,
+      icon: icon,
       animation: google.maps.Animation.DROP,
       // title: 'Postition'
     });
@@ -247,8 +249,6 @@
   }
 
   function setMapOnAll(map) {
-    delete markers[0].icon;
-
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
