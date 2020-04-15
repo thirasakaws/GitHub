@@ -26,11 +26,14 @@
                 <div class="font-color-foodmall">
                   <span class="menu_menuprice">0.00</span> ฿
                 </div>
+                  <div class='menuoptionshow'></div>
               </div>
+
             </div>
               <small class="text-danger "  onclick="updatecartitem(this,'delete');">
               <i class="far fa-trash-alt"></i> ลบรายการ
             </small>
+
           </div>
           <div class="col-4">
               <div class="row">
@@ -106,31 +109,41 @@ var template_menulist = $('#ordermenulist').html();
                  TR.find('.show_menunote').show();
                }
                TR.attr('data-id',obj[x].menuid);
+               TR.attr('data-indexid',x);
+               if(Array.isArray(obj[x].option)){
+                  var html_option='';
+                  obj[x].option.map((ech)=>{
+                      html_option+=`<span  class='badge badge-success'>${ech}</span> `;
+                  });
+
+                  TR.find('.menuoptionshow').html(html_option)
+               }
+
                TR.show();
 
         }
     }
 
-    function showsalechannel(){
-
-
-    }
     function fnc_noprofile(){
       alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
       liff.login();
     }
 
     function updatecartitem(obj,type,comments){
+      var temp = $(obj).parents('.row_tablecontent');
       var menuid = $(obj).find_id();
+      var menuindex = temp.attr('data-indexid');    
       console.log(type+'#'+menuid);
       if(menuid > 0 ){
+          if(working.order.items[menuindex].menuid != menuid ){
+            alert("internal-Error , Notouf menu");
+            return;
+          }
+          var objmenu = working.order.items[menuindex];
         var datapost = {LINE_USER: LINE_USER,action:type,menuid:menuid};
         if(type=='add' || type=='remove'){    // Find oldprice
-          var temp = $(obj).parents('.row_tablecontent');
-          var detail = temp.find('.menu_pricedes').html();
-          var price = temp.find('.menu_menuprice').html();
-          selectedprice = {price:price,detail:detail};
-          datapost.selectedprice=selectedprice;
+          datapost.selectedprice = objmenu.price;
+          datapost.selectedoption = objmenu.option;
         }
 
         if(type=='comment'){

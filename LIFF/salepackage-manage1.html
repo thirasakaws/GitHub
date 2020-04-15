@@ -6,27 +6,21 @@
               <i class="fas fa-chevron-left"></i> Back
           </button>
       </div>
-      <div class="col-6  text-center" >
-          <span class="header-shop"> จัดการเมนูอาหาร</span>
+      <div class="col-9  text-left" >
+        <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id">MENU ID</span></span>
+        <h5>ชื่อเมนู : <span class='MENU_name font-color-shop' ></span></h5>
       </div>
-      <div class="col-3 p-0 text-right">
-          <!-- <button class='btn border border-0 text-secondary' >
-               Next <i class="fas fa-chevron-right"></i>
-          </button>  -->
-      </div>
+
   </div>
-<!-- 
+<!--
     <div class="box-head-title-shop text-center" >
         <span class="header-shop"> จัดการเมนูอาหาร</span>
     </div> -->
 
 
-    <div class="text-center">
-        <span class="text-gray-light2">รหัสเมนู #<span class="MENU_id">MENU ID</span></span>
-        <h5>ชื่อเมนู : <span class='MENU_name font-color-shop' ></span></h5>
-    </div>
 
-    <div class="form-group row mt-3 border-bottom border-light mt-3">
+
+    <div class="form-group row mt-3 border-bottom border-light">
         <label class="col-sm-4 text-gray-light " style="width:auto;">  กำหนดเมนู <span class="text-gray-light2">(ปิด - เปิด)</span> </label>
         <div class="col text-right d-flex d-inline ">
             <div class="ml-auto">
@@ -41,7 +35,8 @@
         </div>
     </div> <!-- // กำหนดเมนู (เปิด-ปิด) -->
 
-    <div class="form-group row mt-3 border-bottom border-light mt-3">
+
+    <div class="form-group row mt-3 border-bottom border-light">
         <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Manual - Auto)</span> </label>
         <div class="col text-right d-flex d-inline ">
             <div class="ml-auto">
@@ -56,21 +51,142 @@
         </div>
     </div> <!-- // การยืนยัน order auto-mannual -->
 
-    <div class="form-group row mt-3 border-bottom border-light mt-3">
+    <div class="form-group row mt-3 border-bottom border-light">
 
-        <div class="col-12">
-          <label class="col-sm-12 text-gray-light lable-left-35 " ><b> จำกัดต่อวัน  </b></label>
+
+<label class="col-sm-12 text-gray-light lable-left-35 " ><b> จำกัดต่อวัน  </b></label>
           <div class="col d-flex">
               <!--//template for save data one field-->
               <div class="float-left pl-2 mb-2 w-100 ">
+
                   <input id="limit_date" class="input_data_bn edit_data MENU_limit_date w-90 " placeholder="จำกัดต่อวัน" data-field="limit_date">
 
               </div>
               <!--//template for save data one field-->
           </div>
-        </div>
+
+
+          <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ตัวเลือกเสริม เลือกได้  </b>  <input  class="input_data_bn edit_data MENU_optionlimit w-10" data-field="optionlimit" > รายการ</label>
+
+          <div class="col d-flex">
+              <!--//template for save data one field-->
+              <div class="float-left pl-2 mb-2 w-100 ">
+                <select class="MENU_option button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="ตัวเลือกเสริม">
+                </select>
+                  <label class="col-sm-12 text-gray-light lable-left-35 " ><b> *ตัวเลือกเสริม (ที่ไม่เกี่ยวกับราคา)  </b></label>
+              </div>
+              <!--//template for save data one field-->
+          </div>
+
 
     </div> <!-- // จำกัดต่อวัน -->
+
+    <div class="form-group border-bottom border-light bg-secondary row">
+      <div class="col-12">
+        <div class="row">
+          <label class="col-sm-4 text-gray-light font-color-shop mt-2" style="width:auto;">จัดราคาโปรโมชั่น <span class="text-gray-light2">(ปิด - เปิด)</span> </label>
+          <div class="col text-right d-flex d-inline ">
+              <div class="ml-auto mt-2">
+                  <label class="switch">
+                      <input type="checkbox" id="menu_promote" onchange="changemenupromotion(this)">
+                      <span class="slider round"></span>
+                  </label>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+          </div>
+        </div>
+          <div class="form-group mt-3" id="show_promotion" style="display:none;" >
+            <div class="row">
+              <label class="col-sm-4 text-gray-light " style="width:auto;"> </label>
+              <div class="col text-right d-flex d-inline">
+                  <div class="ml-auto">
+                      <button type="button" name="button" style="border-radius: 20px;" class="btn btn-sm btn-submit-shop addnewmenuprice" onclick='show_addpackage();'>
+                          <i class="fas fa-plus"></i> เพิ่มโปรโมชั่น
+                      </button>
+                  </div>
+              </div>
+              </div>
+              <div class="form-group mt-1">
+                  <div class='show_addpackage mt-2 ' style='display:none; width:100%'>
+                      <div class="row mt-1">
+                          <div class="col-4">
+                              คำอธิบายโปรโมชั่น
+
+                          </div>
+                          <div class="col">
+                              <textarea type="text" id="pro_detail" class="form-control"></textarea>
+                              <small class="text-secondary text-light">(คำอธิบายหรือคำโฆษณา)</small>
+                          </div>
+                      </div>
+                      <div class="row mt-1">
+                          <div class="col-4">
+                              ราคาปกติ
+                          </div>
+                          <div class="col">
+                              <div class="input-group">
+                                  <input type="number" id="pro_normal_price" class="form-control">
+                                  <div class="input-group-prepend">
+                                      <div class="input-group-text">บาท</div>
+                                  </div>
+                              </div>
+                              <small class="text-secondary text-light">(ราคาปกติก่อนจัดโปรโมชั่น)</small>
+                          </div>
+                      </div>
+                      <div class="row mt-1">
+                          <div class="col-4">
+                              ราคาโปรโมชั่น
+                          </div>
+                          <div class="col">
+                              <div class="input-group">
+                                  <input type="number" id="pro_price" class="form-control">
+                                  <div class="input-group-prepend">
+                                      <div class="input-group-text">บาท</div>
+                                  </div>
+                              </div>
+                              <small class="text-secondary text-light">(ราคาที่จัดโปรโมชั่น)</small>
+                          </div>
+                      </div>
+                      <small class="text-light">**กรุณาเพิ่มข้อมูลราคา และรายละเอียดราคาให้ครบถ้วน</small>
+                      <button class="btn btn-sm btn-submit-shop btn-block mt-3" onclick="addpromotion();">+ เพิ่มรายการ</button>
+                      <hr>
+                  </div>
+              </div>
+              <small id="menu_promotelist">
+                  <div class="mt-1 row_tablecontent" style="display:none;">
+
+                      <div class="form-group row mt-3 border border-bottom border-light">
+                          <div class="col-6 d-inline pt-2" style="width: auto;">
+                              <span class="pro_detail text-title110" style="width:auto;"> </span>
+                              <div>
+                                  ราคา <span class="pro_price font-color-shop"></span> <span class="text-gray-light">บาท</span>  <br>
+                                  จากราคาปกติ <span class="pro_normal_price font-color-shop"></span> <span class="text-gray-light">บาท</span>
+                              </div>
+                          </div>
+                          <div class="col-3  p-2">
+                                <span class="btn btn-sm btn-light text-secondary" onclick="showeditpromote(this);">ตั้งค่า<i class="fas fa-cog"></i></span>
+                          </div>
+                          <div class="col text-right d-flex d-inline pt-2">
+                              <div class="ml-auto">
+                                  <label class="switch">
+                                      <input type="checkbox" class="pro_status" onchange="managethisprostatus(this);">
+                                      <span class="slider round"></span>
+                                  </label>
+                              </div>
+                          </div>
+                      </div> <!-- // จำกัดต่อวัน -->
+
+                  </div> <!--// row_tablecontent -->
+              </small>
+          </div> <!-- // กำหนดราคา -->
+      </div>
+
+
+    </div> <!-- // กำหนดเมนู (เปิด-ปิด) -->
+
 
 
     <div class="form-group row mt-3 border-bottom border-light mt-3">
@@ -92,7 +208,7 @@
 
                 </div>
                 <div class="col">
-                    <input type="text" id="newprice_detail" class="form-control">
+                    <textarea type="text" id="newprice_detail" class="form-control"></textarea>
                     <small class="text-secondary text-gray-light2">( เช่น ธรรมดา + เพิ่มใข่ดาว )</small>
                 </div>
             </div>
@@ -120,13 +236,13 @@
         <div class="mt-1 row_tablecontent" style="display:none;">
 
             <div class="form-group row mt-3 border border-bottom border-light">
-                <div class="col-4 d-inline pt-2" style="width: auto;">
+                <div class="col-6 d-inline pt-2" style="width: auto;">
                     <span class="menuprice_detail text-title110" style="width:auto;"> </span>
                     <div>
                         ราคา <span class="menuprice_price font-color-shop"></span> <span class="text-gray-light">บาท</span>
                     </div>
                 </div>
-                <div class="col-4  p-2">
+                <div class="col-3  p-2">
                       <span class="btn btn-sm btn-light text-secondary" onclick="showeditprice(this);">ตั้งค่า<i class="fas fa-cog"></i></span>
                 </div>
                 <div class="col text-right d-flex d-inline pt-2">
@@ -161,7 +277,7 @@
                   คำอธิบายเมนู
               </div>
               <div class="col">
-                  <input type="text" id="editpricedetail" class="form-control">
+                  <textarea type="text" id="editpricedetail" class="form-control"></textarea>
               </div>
           </div>
           <div class="row mt-1">
@@ -183,6 +299,58 @@
   </div>
 </div>
 
+<div class="modal fade" id="modal_edit_promotion"  tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-body" >
+          <div class="row">
+              <div class="col-6 text-left">
+                  <h5>จัดการข้อมูลโปรโมชั่น</h5>
+              </div>
+              <div class="col-6 text-right">
+                  <span class="btn btn-outline-danger btn-sm" onclick="editpromoteoption($('#editpro_price').val(),$('#editpro_detail').val(),$('#editpro_normalprice').val(),'delete');">ลบรายการ</span>
+              </div>
+          </div>
+          <div class="row mt-1">
+              <div class="col-4">
+                  คำอธิบายโปรโมชั่น
+              </div>
+              <div class="col">
+                  <textarea type="text" id="editpro_detail" class="form-control"></textarea>
+              </div>
+          </div>
+          <div class="row mt-1">
+              <div class="col-4">
+                  ราคาโปรโมชั่น
+              </div>
+              <div class="col">
+                  <div class="input-group">
+                      <input type="number" id="editpro_price" class="form-control">
+
+                  </div>
+              </div>
+          </div>
+          <div class="row mt-1">
+              <div class="col-4">
+                  ราคาปกติ(ก่อนจัดโปรโมชั่น)
+              </div>
+              <div class="col">
+                  <div class="input-group">
+                      <input type="number" id="editpro_normalprice" class="form-control">
+
+                  </div>
+              </div>
+          </div>
+          <button class="btn btn-sm btn-submit-shop btn-block mt-3" onclick="editpromoteoption($('#editpro_price').val(),$('#editpro_detail').val(),$('#editpro_normalprice').val(),'save');">บันทึก</button>
+          <hr>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+
 <script type="text/javascript">
     refresh_managemenupage();
 
@@ -194,7 +362,7 @@
       data[field] = obj.val();
 
       // console.log("data",data);
-      updatemenuprice(data)
+      update_menu(data,cb)
     },(obj)=>{
       return true;
     });
@@ -205,8 +373,11 @@
                 alert(res.detail);
                 return;
             }
+
             working.activemenu = res.detail;
             // Set Default
+            if (!working.activemenu.promotionstatus)
+                working.activemenu.promotionstatus = 4;
             if (!working.activemenu.status)
                 working.activemenu.status = 4;
             if (!working.activemenu.limit_date)
@@ -214,8 +385,14 @@
             if (!working.activemenu.price || Array.isArray(working.activemenu.price) == false)
                 working.activemenu.price = [];
 
+            if (!working.activemenu.promotion || Array.isArray(working.activemenu.promotion) == false)
+                working.activemenu.promotion = [];
+
             if (working.activemenu.price.length > 0) {
                 showmenuprice(working.activemenu.price);
+            }
+            if (working.activemenu.promotion.length > 0) {
+                showmenupromotion(working.activemenu.promotion);
             }
             if (working.activemenu.confirm_order == "auto") {
                 $('#confirm_order').prop('checked', true);
@@ -236,6 +413,7 @@
 
 
             setdatabyclass($('.main_data'), 'MENU', working.activemenu);
+            create_menuoption();
 
         });
     };
@@ -245,7 +423,7 @@
         var newprice = $('#newprice_price').val();
         var pricearr = working.activemenu.price;
         for (var x = 0; x < pricearr.length; x++) {
-            if (pricearr[x].price == newprice && pricearr[x].detail == detailprice) {
+            if (pricearr[x].active == true && pricearr[x].price == newprice && pricearr[x].detail == detailprice) {
                 alert('คุณมีข้อมูลนี้แล้ว');
                 return false;
             }
@@ -265,10 +443,85 @@
             return false;
         }
         // console.log(data);
-        updatemenuprice(data);
+        update_menu(data);
         $('.show_managemenuprice').hide();
-    }
-    ;
+        $('#newprice_detail').val('');
+        $('#newprice_price').val('');
+    };
+
+    function addpromotion() {
+        var prodetail = $('#pro_detail').val();
+        var normalprice = $('#pro_normal_price').val();
+        var proprice = $('#pro_price').val()
+
+        if (!prodetail) {
+            alert('กรุณาในข้อมูลคำอธิบายโปรโมชั่น');
+            return false;
+        }
+        if (!proprice) {
+            alert('กรุณากำหนดราคาโปรโมชั่น');
+            return false;
+        }
+        if (!normalprice) {
+            alert('กรุณากำหนดราคาปกติ(ก่อนจัดโปรโมชั่น)');
+            return false;
+        }
+
+        var proarr = working.activemenu.promotion;
+        for (var x = 0; x < proarr.length; x++) {
+            if (proarr[x].active == true && proarr[x].price == proprice && proarr[x].detail == prodetail && proarr[x].normal_price == normalprice ) {
+                alert('คุณมีข้อมูลนี้แล้ว');
+                return false;
+            }
+        }
+
+        if (!Array.isArray(working.activemenu.promotion)) {
+            working.activemenu.promotion = [];
+        }
+        working.activemenu.promotion.push({detail: prodetail, price: proprice,normal_price:normalprice, status: 1});
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, promotion: working.activemenu.promotion};
+        // console.log(data);
+        update_menu(data);
+        $('.show_addpackage').hide();
+        $('#pro_detail').val('');
+        $('#pro_normal_price').val('');
+        $('#pro_price').val('')
+    };
+
+
+    function addnewprice() {
+        var detailprice = $('#newprice_detail').val();
+        var newprice = $('#newprice_price').val();
+        var pricearr = working.activemenu.price;
+        for (var x = 0; x < pricearr.length; x++) {
+            if (pricearr[x].active == true && pricearr[x].price == newprice && pricearr[x].detail == detailprice) {
+                alert('คุณมีข้อมูลนี้แล้ว');
+                return false;
+            }
+        }
+
+        if (!Array.isArray(working.activemenu.price)) {
+            working.activemenu.price = [];
+        }
+        working.activemenu.price.push({detail: detailprice, price: newprice, status: 1});
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
+        if (!detailprice) {
+            alert('กรุณาในข้อมูลคำอธิบายราคา');
+            return false;
+        }
+        if (!newprice) {
+            alert('กรุณากำหนดราคา');
+            return false;
+        }
+        // console.log(data);
+        update_menu(data);
+        $('.show_managemenuprice').hide();
+        $('#newprice_detail').val('');
+        $('#newprice_price').val('');
+    };
+
+
+
     function changeconfirm_order(obj_con) {
         var dataid = working.activemenu._id;
         var confirm_order;
@@ -279,7 +532,7 @@
         }
         var data = {LINE_USER: LINE_USER, _id: dataid, confirm_order: confirm_order};
         // console.log("sending", data)
-        updatemenuprice(data);
+        update_menu(data);
     }
     function changemenustatus(obj) {
         if (!working.activemenu.price || working.activemenu.price.length <= 0) {
@@ -300,9 +553,25 @@
             menu_status = 4;
         }
         var data = {LINE_USER: LINE_USER, _id: dataid, status: menu_status};
-        // console.log("sending", data)
-        updatemenuprice(data);
+        console.log("sending", data)
+        update_menu(data);
     }
+
+    function changemenupromotion(obj) {
+        var dataid = working.activemenu._id;
+        var menu_statuspromote;
+        if ($(obj).is(':checked')) {
+          $('#show_promotion').show();
+            menu_statuspromote = 5;
+        } else {
+          $('#show_promotion').hide();
+            menu_statuspromote = 4;
+        }
+        var data = {LINE_USER: LINE_USER, _id: dataid, promotionstatus: menu_statuspromote};
+        // console.log("sending", data)
+        update_menu(data);
+    }
+
 
 
     var template_menuprice = $('#menupricelist').html();
@@ -322,6 +591,25 @@
         }
     }
 
+    var template_promote = $('#menu_promotelist').html();
+    function showmenupromotion(obj) {
+        $('#menu_promotelist').html(template_promote);
+        for (var x = 0; x < obj.length; x++) {
+            // if(!obj[x].status) obj[x].status = 1;
+            var TR = tablerow($("#menu_promotelist"), 'pro', obj[x], template_promote, false);
+            if (obj[x].status == 1) {
+                TR.find('.pro_status').prop('checked', true);
+            } else {
+                TR.find('.pro_status').prop('checked', false);
+            }
+            TR.attr('value-detail', obj[x].detail);
+            TR.attr('value-proprice', obj[x].price);
+            TR.attr('value-normalprice', obj[x].normal_price);
+
+            TR.show();
+        }
+    }
+
     var moremanagemenuprice = false;
     function show_moremanagemenuprice() {
         if (moremanagemenuprice) {
@@ -330,6 +618,16 @@
             $('.show_managemenuprice').show();
         }
         moremanagemenuprice = !moremanagemenuprice;
+    }
+
+    var addpackage = false;
+    function show_addpackage() {
+        if (addpackage) {
+            $('.show_addpackage').hide();
+        } else {
+            $('.show_addpackage').show();
+        }
+        addpackage = !addpackage;
     }
 
     function managepricestatus(obj) {
@@ -350,16 +648,41 @@
         }
         // console.log('peice ', working.activemenu.price);
         var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
-        // console.log(data);
-        updatemenuprice(data);
+        console.log(data);
+        update_menu(data);
     };
 
-  function updatemenuprice(data){
+    function managethisprostatus(obj) {
+        // var price = parseFloat(Number($(obj).parents('.row_tablecontent .menuprice_price')));
+        var price = $(obj).parents('.row_tablecontent').attr('value-proprice');
+        var value = $(obj).parents('.row_tablecontent').attr('value-detail');
+        var normalprice = $(obj).parents('.row_tablecontent').attr('value-normalprice');
+        var newstatus;
+        if ($(obj).is(':checked')) {
+            newstatus = 1;
+        } else {
+            newstatus = 0;
+        }
+
+        for (var x = 0; x < working.activemenu.promotion.length; x++) {
+            if (working.activemenu.promotion[x].price == price && working.activemenu.promotion[x].detail == value && working.activemenu.promotion[x].normal_price== normalprice ) {
+                working.activemenu.promotion[x].status = newstatus;
+            }
+        }
+        // console.log('peice ', working.activemenu.price);
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, promotion: working.activemenu.promotion};
+        console.log('data',data);
+        update_menu(data);
+    };
+
+  function update_menu(data,cb){
 
     $.postJSON('/api/liff/edit/menu', data, (res) => {
         if (!res.result) {
+            if(cb) cb(false);
             return alert(res.detail);
         } else {
+            if(cb) cb(true);
             refresh_managemenupage();
         }
 
@@ -385,9 +708,46 @@
      }
    };
 
+   var editpromotion ={};
+    function showeditpromote(obj){
+      var found;
+      var price = $(obj).parents('.row_tablecontent').attr('value-proprice');
+      var value = $(obj).parents('.row_tablecontent').attr('value-detail');
+      var normalprice = $(obj).parents('.row_tablecontent').attr('value-normalprice');
+      for (var x = 0; x < working.activemenu.promotion.length; x++) {
+          if (working.activemenu.promotion[x].price == price && working.activemenu.promotion[x].detail == value,working.activemenu.promotion[x].normal_price == normalprice) {
+               editpromotion = working.activemenu.promotion[x];
+               found = true;
+          }
+      }
+      if(found){
+        // $('.jsonshow').html(JSON.stringify(editmemuprice));
+        $('#editpro_price').val(editpromotion.price);
+        $('#editpro_detail').val(editpromotion.detail);
+        $('#editpro_normalprice').val(editpromotion.normal_price);
+        $('#modal_edit_promotion').modal('show');
+      }
+    };
+
+    function editpromoteoption(price,value,normalprice,action){
+      for (var x = 0; x < working.activemenu.promotion.length; x++) {
+            if (working.activemenu.promotion[x].price == Number(editpromotion.price) && working.activemenu.promotion[x].detail == editpromotion.detail && working.activemenu.promotion[x].normal_price == Number(editpromotion.normal_price)) {
+                 if (action == 'save') {
+                   working.activemenu.promotion[x].price = Number(price);
+                   working.activemenu.promotion[x].detail = value;
+                   working.activemenu.promotion[x].normal_price = Number(normalprice);
+                 }else if (action == 'delete') {
+                     working.activemenu.promotion.splice(x, 1);
+                 }
+            }
+      };
+      var data = {LINE_USER: LINE_USER, _id: working.menunow, promotion: working.activemenu.promotion};
+      update_menu(data);
+       $('#modal_edit_promotion').modal('hide');
+    };
+
    function editprice(price,value,action){
      for (var x = 0; x < working.activemenu.price.length; x++) {
-       for (var x = 0; x < working.activemenu.price.length; x++) {
            if (working.activemenu.price[x].price == Number(editmemuprice.price) && working.activemenu.price[x].detail == editmemuprice.detail) {
                 if (action == 'save') {
                   working.activemenu.price[x].price = Number(price);
@@ -396,10 +756,47 @@
                     working.activemenu.price.splice(x, 1);
                 }
            }
-       }
      };
      var data = {LINE_USER: LINE_USER, _id: working.menunow, price: working.activemenu.price};
-     updatemenuprice(data);
+     update_menu(data);
       $('#modal_edit_price').modal('hide');
    };
+
+   function create_menuoption(){
+
+     var seldata = `<option disabled> เช่น เผ็ด, เผ็ดมาก , สุกปานกลาง เป็นต้น</option>`;
+      if(Array.isArray(working.activemenu.option)){
+        for (var x = 0; x < working.activemenu.option.length; x++) {
+            seldata += '<option value="' +working.activemenu.option[x] + '" selected >' + working.activemenu.option[x] + '</option>';
+        }
+      }
+      $('.MENU_option').off('change.select2');
+      $('.MENU_option').html(seldata);
+
+
+     $('.MENU_option').select2({
+         tags: true,
+         tokenSeparators: [',', ' '],
+         allowClear: true,
+         createTag: function (params) {
+             if (params.term === '') {
+                 return null;
+             }
+             //if (allownewtag) {
+                 return {id: params.term, text: params.term};
+             //}
+             //return null;
+
+         }
+     });
+     $('.MENU_option').on('change.select2', function (e) {
+       var data = {LINE_USER: LINE_USER, _id: working.menunow, option: $('.MENU_option').val()};
+       // console.log(data);
+       $.postJSON('/api/liff/edit/menu', data, (res) => {
+           if (!res.result) {
+               return alert(res.detail);
+           }
+       });
+     });
+    }
 </script>

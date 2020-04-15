@@ -7,14 +7,10 @@
               <span class="header-foodmall"><i class="fas fa-chevron-left "></i> Back</span>
           </button>
       </div>
-      <div class="col-6  text-center " >
+      <div class="col-9  text-left " >
              <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i>  สรุปรายการสั่งซื้อ</span>
      </div>
-      <div class="col-3 p-0 text-right">
-          <!-- <button class='btn border border-0 text-secondary' >
-               Next <i class="fas fa-chevron-right"></i>
-          </button> <!--// onclick ยังไม่ได้ใส่ ให้นะ -->
-      </div>
+
   </div>
 
 
@@ -133,7 +129,10 @@
         </div>  <!--// จำนวน -->
 
         <div class="col-7">
-            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span>
+
+            <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+            <small class="menuoptionshow" ></small>
         </div> <!--// ชื่อเมนู -->
 
         <div class="col-3 text-right">
@@ -273,6 +272,14 @@
                if (obj[x].note) {
                   TR.find('.menu_notedate').show();
                }
+               if(Array.isArray(obj[x].option)){
+                  var html_option='';
+                  obj[x].option.map((ech)=>{
+                      html_option+=`<span  class='badge badge-success'>${ech}</span> `;
+                  });
+
+                  TR.find('.menuoptionshow').html(html_option)
+               }
 
                TR.show();
 
@@ -287,7 +294,7 @@
         var pos;
         if (working.order.location && Array.isArray(working.order.location.coordinates)) {
             // Already input Location
-            pos = {lat: working.order.location.coordinates[0], lng: working.order.location.coordinates[1]};
+            pos = {lat: working.order.location.coordinates[0], lng: working.order.location.coordinates[1],user_type:"customer"};
             // console.log('pos',pos);
         } else {
                       pos = {}
@@ -296,7 +303,7 @@
             // console.log('DataBack:', data);
             addcusaddress(data)
         });
-      }
+      };
       function addcusaddress(loc){
         var data = {
           LINE_USER : LINE_USER,

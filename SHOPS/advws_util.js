@@ -229,7 +229,12 @@ $.fn.Fusefield = function(callback,testfnc){
         return;
       }
     }
-    if(jq_obj.val() == oldvalue ) return false; // Nothing Change
+
+    if(Number(jq_obj.val()) == 0 &&  Number(jq_obj.val()) != Number(oldvalue)){
+        // Data Changed
+    }else{
+        if(jq_obj.val() == oldvalue ) return false; // Nothing Change
+    }
     var tempjq = $.parseHTML(`<div class="spinner-border text-warning spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>`);
     var viewOK = $.parseHTML(`<span><i class="fa fa-1x fa-check"></i></span>`);
     var viewFail = $.parseHTML(`<span><i class="fa fa-1x fa-times"></i></span>`);
