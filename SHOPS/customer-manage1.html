@@ -1,11 +1,23 @@
 <div id='gmap_cusgps'>
 </div>
 <div class="container-fluid main_data">
-    <div class="box-head-title-foodmall text-center  " >
-        <span class="header-foodmall">
-            โปรไฟล์ของฉัน
-        </span>
+    
+    <div class="row box-head-title-foodmall">
+        <div class="col-3 p-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-foodmall"> โปรไฟล์ของฉัน</span>
+        </div>
+        <div class="col-3 p-0 text-right">
+<!--            <button class='btn border border-0 text-secondary' >
+                 Next <i class="fas fa-chevron-right"></i>
+            </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
+        </div>
     </div>
+
 
         <div class="text-center">
             <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
@@ -64,12 +76,43 @@
                       </div>
                  </div>
              </div>  <!-- // -->
+             <div class="row mt-2">
+               <div class="col-12" onclick='showlist_address();'>
+                 <div class="btn btn-block">
+                     <strong class="text-secondary warn-cus"> <span>ดูรายการที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
+                 </div>
+               </div>
+             </div>
+             <div class="text-left card" id="showlist_address" style="display:none;">
+               <div class="card-body">
+                 <div class="row">
+                   <div class="col-12 text-center">
+
+                   </div>
+                 </div>
+                 <div class="" id="address_list">
+                   <div class="custom-control custom-radio row_tablecontent p-2" style="display:none;" >
+                     <div class="row">
+                       <div class="col-10">
+                         <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
+                         <label class="custom-control-label add_address radio_for" for=""></label>
+                       </div>
+                       <div class="col-2">
+                            <span class="text-danger btn btn-light" onclick="changethis_add(this,'disabled');"><i class="fas fa-trash-alt"></i></span>
+                       </div>
+
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div> <!--// -->
          </div>
        </div>
 
 </div> <!-- // container-fluid  -->
 
 <script>
+  var showlistadd_temp = $('#address_list').html();
     // setdatabyclass($('.main_data'), 'LINE', LINE_USER);
     refresh_cusmanage1();
 
@@ -89,16 +132,6 @@
       return true;
     });
 
-
-
-    $('#gmap_cusgps').load('/LIFF/modal_gps.html');
-      function find_location_cus() {
-          var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
-          call_modal_maps(detail, function (data) {
-              console.log('DataBack:', data);
-              updategpslocation(data)
-          });
-      }
 
       function updategpslocation(loc){
         var data = {
@@ -120,6 +153,7 @@
 function refresh_cusmanage1(){
         $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
           if(res.result){
+             getcustomeraddress();
             if(res.detail){
                 working.customer = res.detail;
                 if(!working.customer.firstname) working.customer.firstname ='';
@@ -134,16 +168,93 @@ function refresh_cusmanage1(){
             alert(res.detail);
           }
         });
-        $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
-          if(res.result){
-
-
-          }else{
-            alert(res.detail);
-          }
-        });
-
 };
+
+var template_warn_cus = $('.warn-cus').html();
+
+function getcustomeraddress(){
+  $('#address_list').html(showlistadd_temp);
+  $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
+    if(res.result){
+     $('.warn-cus').html(template_warn_cus);
+      obj = res.detail;
+      if(obj.length >0){
+          for(var x=0;x<obj.length;x++){
+                 var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
+                 TR.find('.radio_id').attr('id','add'+obj[x]._id);
+                 TR.find('.radio_for').attr('for','add'+obj[x]._id);
+                 TR.show();
+            }
+          }else {
+            $('.warn-cus').html("คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู่");
+          }
+
+    }else{
+      $('.warn-cus').html("คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู่");
+    }
+  });
+
+}
+
+function changethis_add(obj,action){
+    var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
+    if(confirm('ยืนยันที่จะลบที่อยู่นี้ ?')){
+      var data = {
+        LINE_USER : LINE_USER,
+        _id : dataid,
+        active : false
+        };
+
+      $.postJSON('/api/liff/update/address', data, function (res) {
+        // console.log("LOCATE",res);
+        if(res.result){
+            getcustomeraddress();
+        }else{
+          alert(res.detail);
+        }
+      });
+    }
+};
+
+
+
+$('#gmap_cusgps').load('/LIFF/modal_gps.html');
+  function find_location_cus() {
+    var pos ={user_type:"customer"};
+    call_modal_maps(pos, function (data) {
+        addcusaddress(data)
+    });
+  };
+
+function addcusaddress(loc){
+  var data = {
+    LINE_USER : LINE_USER,
+    address : loc.address
+    };
+  data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
+  // console.log('ORDER GPS',data);
+
+  $.postJSON('/api/liff/update/address', data, function (res) {
+    // console.log("LOCATE",res);
+    if(res.result){
+        // $('#writelocation_cus').show('slow').hide('slow');
+        getcustomeraddress();
+    }else{
+      alert(res.detail);
+    }
+  });
+};
+
+
+var showlist_address_temp=false;
+function showlist_address(){
+  if(showlist_address_temp){
+    $('#showlist_address').hide();
+  }else{
+      $('#showlist_address').show();
+  }
+  showlist_address_temp = !showlist_address_temp;
+}
 
 var showadd_address_temp=false;
 function showadd_address(){

@@ -359,7 +359,7 @@
     <div class="card-header p-1" id="heading5">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5" style=" text-decoration: none;">
-          <i class="fa fa-palette"></i> Theme Configuration 
+          <i class="fa fa-palette"></i> Theme Configuration
         </button>
       </h2>
     </div>
@@ -439,8 +439,8 @@
             working.shop.opendate = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         if (!working.shop.opening)
             working.shop.opening = 1;
-        if (!working.shop.paychannel)
-            working.shop.paychannel = 1;
+        if (!working.shop.paymenttype)
+            working.shop.paymenttype = 1;
     }
 
     function updatepaymenttype(){
@@ -459,7 +459,7 @@
         var data = {};
         data.LINE_USER = LINE_USER;
         data._id = working.shop._id;
-        data.paychannel = paymenttype;
+        data.paymenttype = paymenttype;
         $.postJSON('/api/liff/edit/shop', data, function (res) {
             if (!res.result) {
                 alert(res.detail);

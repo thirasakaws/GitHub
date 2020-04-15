@@ -35,7 +35,9 @@
         <div id='delivery_type1' class="mt-3">
             <div class="row  row_tablecontent pt-2 border-bottom-gray" data-id="##DELI-id##" >
                 <div class="">
-                    <label class="col-sm-4 text-gray-light lable-left-35 " ><span class="border-bottom-gray"><b>ระยะเริ่มต้น </b> </span><span><i class="fa fa-trash-alt text-danger fa-1x float-right"></i></span></label>
+                    <label class="col-sm-4 text-gray-light lable-left-35 " ><span class="border-bottom-gray"><b>ระยะเริ่มต้น </b> </span>
+                        <span class="float-right pr-4"><i class="fa fa-trash-alt text-danger fa-1x float-right" onclick="delete_delivery(this)"></i></span>
+                    </label>
 
                     <div class="col d-flex ">
                         <div class="float-left pl-2  w-100 ">
@@ -314,6 +316,22 @@
             return true;
         });
     }
+
+function delete_delivery(obj){
+    
+    var tempid = $(obj).find_id();
+    var data3 = {LINE_USER: LINE_USER, _id:tempid}
+    console.log(data3)
+    $.postJSON('/api/liff/delete/deliverytable', data3, function (res) {
+        console.log(res)
+        if (!res.result) {
+            alert(res.detail);
+        }else{
+            alert('ลบข้อมูลเรียบร้อยแล้ว')
+            get_delivery()
+        }
+    });
+}
 
     function addnewdelivery(type) {
 //

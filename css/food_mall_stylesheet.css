@@ -2,19 +2,20 @@
 สำหรับฝั่งลูกค้าเข้าใช้งาน  food mall style sheet 
 */
 
-.font-color-foodmall {  color: #fc7d10 !important; }
-.font-color-foodmall-2 { color: #545559 !important; } 
-.font-color-foodmall-gray-light { color: #545559; }
+.font-color-foodmall {  color: {{primary_color}} !important; }
+.font-color-foodmall-2 { color: {{secondary_color}} !important; } 
+
+.font-color-foodmall-gray-light { color: {{secondary_color}}; }
 .font-color-foodmall-gray-light2 { color: #9E9E9E !important; font-weight: 200;}
 .font-color-foodmall-gray-medium { color: #191919; }
 
 
 .box-head-title-foodmall { 
     background-color: #ffffff !important;
-    color: #fc7d10;
+    color: {{primary_color}};
     padding: 6px 4px;
-/*    border-bottom: 2px #fc7d10 solid;*/
-/*    border-top: 2px #fc7d10 solid;*/
+/*    border-bottom: 2px {{primary_color}} solid;*/
+/*    border-top: 2px {{primary_color}} solid;*/
 /*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;*/
     margin-bottom: 15px;
 }
@@ -26,25 +27,25 @@
 .text-indent-foodmall-50 { text-indent: 50px; }
 
 
-.btn-submit-foodmall{ background-color: #fc7d10 !important; color: #ffffff !important;}
+.btn-submit-foodmall{ background-color: {{primary_color}} !important; color: #ffffff !important;}
 .btn-submit-foodmall:hover { color: #fff !important; background-color: #f4690b; }
 .btn-submit-foodmall:active { color: #fff !important; background-color: #f4690b; }
 .btn-outline-submit-foodmall {   
-    color: #fc7d10 !important;
-    border-color: #fc7d10 !important;
+    color: {{primary_color}} !important;
+    border-color: {{primary_color}} !important;
 }
-.line-bottom-color-foodmall { border-bottom: 1px #fc7d10 solid; border-right: 0px #fff solid; border-left: 0px #fff solid;  }
+.line-bottom-color-foodmall { border-bottom: 1px {{primary_color}} solid; border-right: 0px #fff solid; border-left: 0px #fff solid;  }
 
 .btn-outline-submit-foodmall:hover {   
     color: #ffffff !important;
-    background-color: #fc7d10 !important;
-    border-color: #fc7d10 !important;
+    background-color: {{primary_color}} !important;
+    border-color: {{primary_color}} !important;
 }
 
 /* ปุ่มสีส้ม ขนาดเล็ก */
 .btn-outline-submit-foodmall-small {   
-    color: #fc7d10 !important;
-    border-color: #fc7d10 !important;
+    color: {{primary_color}} !important;
+    border-color: {{primary_color}} !important;
     padding-left: 7px !important;
     padding-right: 7px !important;
     padding-top : 1px !important;
@@ -52,15 +53,15 @@
 }
 .btn-outline-submit-foodmall-small:hover{   
     color: #ffffff !important;
-    background-color: #fc7d10 !important;
-    border-color: #fc7d10 !important;
+    background-color: {{primary_color}} !important;
+    border-color: {{primary_color}} !important;
     padding-left: 7px !important;
     padding-right: 7px !important;
     padding-top : 1px !important;
     padding-bottom: 1px !important; 
   
 }
-.badge-outline-foodhall { color: #fc7d10 !important;   border-color: #fc7d10 !important; }
+.badge-outline-foodhall { color: {{primary_color}} !important;   border-color: {{primary_color}} !important; }
 
 .border-bottom-gray {  border-bottom: solid 1px #eae9e9 !important; }
 

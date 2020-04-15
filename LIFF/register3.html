@@ -6,7 +6,7 @@
     <div class="row box-head-title-shop text-center" >
 
         <div class="col-3 p-0 text-left">
-            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+            <button class='btn border border-0 text-secondary alink' type="button" id="click_back" onclick="window.history.back()">
                 <i class="fas fa-chevron-left"></i> Back
             </button>
         </div>
@@ -226,7 +226,7 @@
         var pos;
         if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
             // Already input Location
-            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1]};
+            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],user_type:"seller"};
             call_modal_maps(pos, updategpslocation, showError);
         } else {
             if (navigator.geolocation) {
@@ -248,12 +248,15 @@
 
 
     }
+    
+    
+    
 
     function show_gps_raduis() {
         var pos;
         if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
             // Already input Location
-            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1]};
+            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],service_radius:working.branch.location.service_radius}
             call_modal_radius_maps(pos, updategpslocation_radius, showError);
         } else {
             if (navigator.geolocation) {
@@ -369,5 +372,6 @@
     function showError(error) {
         console.log("ERROR", error)
     }
+    
 
 </script>

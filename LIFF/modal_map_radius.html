@@ -76,10 +76,10 @@
 
     // Draw Circle Area
     circle_area = new google.maps.Circle({
-      strokeColor: '#FF0000',
+      strokeColor: '#00FF00',
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: '#FF0000',
+      fillColor: '#00FF00',
       fillOpacity: 0.35,
       map: gmap,
       center: gmap.getCenter(),
@@ -98,6 +98,18 @@
 
     // Event Map Screen Move
     // gmap.addListener('center_changed', showAddress);
+
+
+
+    // window.addEventListener("hashchange", function(e) {
+    //   if(e.oldURL.length > e.newURL.length)
+    //       alert("back")
+    // });
+
+    window.onhashchange = function() {
+    //blah blah blah
+      window.alert("xxxxxxxxxx");
+    }
   }
 
   function showAddress() {
@@ -193,7 +205,7 @@
       latlng_saved = latlng_default_startup;
     }
     // window.alert(JSON.stringify(latlng_saved) + "\r\nHave Location: " + latlng_have_save);
-    window.alert(JSON.stringify(setting));
+    // window.alert(JSON.stringify(setting));
 
     // $('#modal_google_gps_radius').modal('show');
     setTimeout(()=>{
@@ -270,4 +282,11 @@
     $('#modal_google_gps_radius').modal('hide');
   }
 
+
+//window.onpopstate = function() {
+//    if(){
+//        window.history.back()
+//    }
+//   
+//}
 </script>

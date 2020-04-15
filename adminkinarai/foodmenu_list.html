@@ -76,7 +76,9 @@
                     <td class="foodmenu_detail"></td>
                     <td class="foodmenu_category"></td>
                     <td class="foodmenu_tags"></td>
-                    <td class="foodmenu_price"></td>
+                    <td>                    
+                        <button class="btn btn-primary" type="button" onclick="view_menu_order(this)"><i class="fa fa-search order_items alink" ></i> Detail</button>
+                    </td>
                     <td class="foodmenu_createdate"></td>
                     <td class="foodmenu_lastupdate"></td>
                     <td>
@@ -114,6 +116,45 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="showmodal_menu" tabindex="-1" role="dialog" aria-labelledby="modalordermenu" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalordermenu">View Detail Menu | ID :<span id="id_order_menu"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <!--select status and confirm-->
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Detail</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody  id="menu-tag_list">
+                        <tr class="row_tablecontent" style="display:none">
+                            <td class="menu_detail"></td>
+                            <td class="menu_price"></td>
+                            <td class="menu_status"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var template_of_testtable = $('#mytable').first().html();
     var maintable = $('#mytable').first();
@@ -179,6 +220,41 @@
         go2View('/foodmenu_edit?foodmenu_id=' + tempid);
         return false;
     }
+    var temptag_modal_menu = $('#menu-tag_list').first().html();
+    var temp_menu = $('#menu-tag_list').first();
+    function view_menu_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/foodmenu_edit/' + res_id, function (result) {
+            console.log(result)
+            temp_menu.html(temptag_modal_menu);
+            if (result.price && result.price.length > 0) {
+                var objitem = result.price
+                for (var x = 0; x < result.price.length; x++) {
+                    var TR = tablerow(temp_menu, 'menu', objitem[x], temptag_modal_menu);
+                    TR.find('.menu_menuid').html()
+                    if (objitem[x].price) {
+                        if (objitem[x].price.detail) {
+                            TR.find('.menu_detail').html(addCommas(objitem[x].price.detail))
+                        }
+                        if (objitem[x].price.price) {
+                            TR.find('.menu_price').html(addCommas(objitem[x].price.price))
+                        }
+                        if (objitem[x].price.status) {
+                            TR.find('.menu_status').html(objitem[x].price.status)
+                        }
+                    }
+
+                    TR.show();
+                }
+
+            }
+        });
+
+        $('#id_order_menu').html(res_id)
+        $('#showmodal_menu').modal('show')
+
+    }
+
     function edit_status_foodmenu(foodmenu_id) {
         var res_id = $(foodmenu_id).find_id();
         $.get('/api/data/kinarai/foodmenu_edit/' + res_id, function (result) {

@@ -77,6 +77,24 @@
     text-decoration: none;
     text-decoration: none;
 }
+.btn-outline-submit-shop-small {   
+    color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top : 1px !important;
+    padding-bottom: 1px !important;
+}
+.btn-outline-submit-shop-small:hover{   
+    color: #ffffff !important;
+    background-color: #fc7d10 !important;
+    border-color: #fc7d10 !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top : 1px !important;
+    padding-bottom: 1px !important; 
+  
+}
 
 
 /* Edit for shop */

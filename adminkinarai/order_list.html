@@ -45,15 +45,19 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">#</th>
-                    <th>Customer</th>
-                    <th>Rider</th>
-                    <th>Transfer Detail </th>
-                    <th>Menu Detail</th>
-                    <th>Create Date</th>
-                    <th>Last Update</th>
-                    <th>Status</th>
+                    <th rowspan="2" class="text-center">#</th>
+                    <th rowspan="2">Customer</th>
+                    <th rowspan="2">Rider</th>
+                    <th colspan="2" class='text-center'>Transfer Detail </th>
+                    <th rowspan="2">Menu Detail</th>
+                    <th rowspan="2">Create Date</th>
+                    <th rowspan="2">Last Update</th>
+                    <th rowspan="2">Status</th>
 
+                </tr>
+                <tr>
+                    <th class='text-center'>Shop Address</th>
+                    <th class="text-center">Customer Address</th>
                 </tr>
             </thead>
             <tbody id='mytable'>
@@ -61,9 +65,14 @@
                     <td class="order_id"></td>
                     <td class="order_customerid"></td>
                     <td class="order_rider"></td>
-                    <td class="order_rider_detail"></td>
+                    <td class='text-center'>
+                        <button class="btn btn-warning order_logistic" style="display: none" type="button" onclick="view_shop_address_order(this)"><i class="fa fa-search  alink" ></i> Detail</button>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-danger order_addressid" style="display: none" type="button" onclick="view_cus_address_order(this)"><i class="fa fa-search  alink" ></i> Detail</button>
+                    </td>
                     <td >
-                        <button class="btn btn-primary"><i class="fa fa-search order_items"></i> Menu</button>
+                        <button class="btn btn-primary" type="button" onclick="view_menu_order(this)"><i class="fa fa-search order_items alink" ></i> Detail</button>
                     </td>
                     <td class="order_createdate"></td>
                     <td class="order_lastupdate"></td>
@@ -88,14 +97,15 @@
             <div class="modal-body">
                 <!--select status and confirm-->
                 <select id="status_order" class="form-control">
-                    <option class="text-warning" value="1">รอตรวจสอบ</option>
-                    <option class="text-dark" value="2">อยู่ระหว่างตรวจสอบ</option>
-                    <option class="text-success" value="3">ตรวจสอบแล้ว</option>
-                    <option class="text-danger" value="4">ปิดใช้งาน</option>
-                    <option class="text-primary" value="5">เปิดใช้งาน</option>
-                    <option class="text-primary" value="6">เลือกเมนู</option>
-                    <option class="text-primary" value="11">รอชำระเงิน</option>
-                    <option class="text-primary" value="15">ชำระแล้ว</option>
+                    <option class="text-primary" value="1">รายการใหม่</option>
+                    <option class="text-dark" value="5">รายการใหม่รอลูกค้ายืนยัน</option>
+                    <option class="text-warning" value="6">ยกเลิกแล้ว</option>
+                    <option class="text-warning" value="7">ลูกค้ารอร้านยืนยันรายการ</option>
+                    <option class="text-danger" value="10">รอการชำระเงินจากลูกค้า</option>
+                    <option class="text-success" value="11">ลูกค้าชำระเงินแล้ว</option>
+                    <option class="text-warning" value="12">ลูกค้าจะชำระเงินแบบ COD</option>
+                    <option class="text-primary" value="15">ร้านกำลังดำเนินการ</option>
+                    <option class="text-success" value="16">ร้านดำเนินการเสร็จแล้ว</option>
                 </select>
             </div>
             <div class="modal-footer">
@@ -105,6 +115,81 @@
         </div>
     </div>
 </div>
+<!--//modal edit status-->
+<div class="modal fade" id="showmodal_menu" tabindex="-1" role="dialog" aria-labelledby="modalordermenu" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalordermenu">View Detail Menu | ID :<span id="id_order_menu"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <!--select status and confirm-->
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Menu ID</th>
+                            <th>Shop ID</th>
+                            <th>Quantity</th>
+                            <th>Detail</th>
+                            <th>Price</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody  id="menu-tag_list">
+                        <tr class="row_tablecontent" style="display:none">
+                            <td class="menu_menuid"></td>
+                            <td class="menu_shopid"></td>
+                            <td class="menu_qty"></td>
+                            <td class="menu_detail"></td>
+                            <td class="menu_price"></td>
+                            <td class="menu_status"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             
+            </div>
+        </div>
+    </div>
+</div>
+<!--//view menu-->
+<!--<div class="modal fade" id="showmodal_rider" tabindex="-1" role="dialog" aria-labelledby="modalorderrider" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalorderrider">View Transfer Detail | ID :<span id="id_order_rider"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body  rider-tag_list">
+                select status and confirm
+                Status : <span id="rider_status"></span>
+                <div id="map"></div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div id='modal_gps_form'>
+</div>
+
+<!--//view transfer-->
+
+
+
 <script>
     var template_of_testtable = $('#mytable').first().html();
     var maintable = $('#mytable').first();
@@ -141,24 +226,40 @@
             console.log('data not found')
             for (var x = 0; x < objdata.length; x++) {
                 var TR = tablerow(maintable, 'order', objdata[x], template_of_testtable);
+                
+                if(objdata[x].logistic && objdata[x].addressid ){
+                    TR.find('.order_addressid').show()
+                    TR.find('.order_logistic').show()
+                }
                 if (objdata[x].status == 1) {
                     TR.find('.order_status').addClass('text-primary').html('รายการใหม่');
                 }
+                if (objdata[x].status == 5) {
+                    TR.find('.order_status').addClass('text-danger').html('รายการใหม่รอลูกค้ายืนยัน');
+                }
                 if (objdata[x].status == 6) {
-                    TR.find('.order_status').addClass('text-warning').html('เลือกเมนู');
+                    TR.find('.order_status').addClass('text-danger').html('ยกเลิกแล้ว');
+                }
+                if (objdata[x].status == 7) {
+                    TR.find('.order_status').addClass('text-primary').html('ลูกค้ารอร้านยืนยันรายการ');
+                }
+                if (objdata[x].status == 10) {
+                    TR.find('.order_status').addClass('text-warning').html('รอการชำระเงินจากลูกค้า');
                 }
                 if (objdata[x].status == 11) {
-                    TR.find('.order_status').addClass('text-black').html('รอชำระเงิน');
+                    TR.find('.order_status').addClass('text-black').html('ลูกค้าชำระเงินแล้ว');
+                }
+                if (objdata[x].status == 12) {
+                    TR.find('.order_status').addClass('text-success').html('ลูกค้าจะชำระเงินแบบ COD');
                 }
                 if (objdata[x].status == 15) {
-                    TR.find('.order_status').addClass('text-success').html('ชำระแล้ว');
+                    TR.find('.order_status').addClass('text-success').html('ร้านกำลังดำเนินการ');
                 }
-                if (objdata[x].status == 4) {
-                    TR.find('.order_status').addClass('text-danger').html('ปิด');
+                if (objdata[x].status == 16) {
+                    TR.find('.order_status').addClass('text-success').html('ร้านดำเนินการเสร็จแล้ว');
                 }
-                if (objdata[x].status == 5) {
-                    TR.find('.order_status').addClass('text-primary').html('เปิด');
-                }
+
+
                 if (objdata[x].createdate) {
                     TR.find('.order_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
                 }
@@ -195,7 +296,96 @@
         $('#showmodal').modal('show')
 
     }
+    var temptag_modal_menu = $('#menu-tag_list').first().html();
+    var temp_menu = $('#menu-tag_list').first();
+    
+    function view_menu_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/order_edit/' + res_id, function (result) {
+            console.log(result)
+            temp_menu.html(temptag_modal_menu);
+            if (result.items && result.items.length>0) {
+                var objitem = result.items
+                for(var x=0;x<result.items.length;x++){
+                     var TR = tablerow(temp_menu, 'menu', objitem[x], temptag_modal_menu);
+                     TR.find('.menu_menuid').html()
+                     if(objitem[x].price){
+                        if(objitem[x].price.detail){
+                            TR.find('.menu_detail').html(addCommas(objitem[x].price.detail))
+                        }
+                        if(objitem[x].price.price){
+                            TR.find('.menu_price').html(addCommas(objitem[x].price.price))
+                        }
+                        if(objitem[x].price.status){
+                            TR.find('.menu_status').html(objitem[x].price.status)
+                        }
+                     }
 
+                     TR.show();
+                }
+                
+            }
+        });
+
+        $('#id_order_menu').html(res_id)
+        $('#showmodal_menu').modal('show')
+
+    }
+    function view_cus_address_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/order_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.addressid) {
+                var dataposition = result.addressid.location.coordinates
+                var obj = {
+                    lat:dataposition[0],
+                    lng:dataposition[1]
+                }
+                find_location_data(obj)
+            }
+        });
+
+        $('#id_order_rider').html(res_id)
+        $('#showmodal_rider').modal('show')
+
+    }
+    
+        function view_shop_address_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/order_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.logistic) {
+                if(result.logistic.shopBranchId && result.logistic.shopBranchId.location){
+                    if(result.logistic.shopBranchId.location.coordinates){
+                        var dataposition = result.logistic.shopBranchId.location.coordinates
+                        var obj = {
+                            lat:dataposition[0],
+                            lng:dataposition[1]
+                        }
+                        find_location_data(obj)  
+                    }
+                }
+
+            }
+        });
+
+        $('#id_order_rider').html(res_id)
+        $('#showmodal_rider').modal('show')
+
+    }
+    
+        $('#modal_gps_form').load('/adminkinarai/modal_gps.html');
+    function find_location_data(objid) {
+        console.log(objid)
+        var detail = objid
+        call_modal_maps(detail, function (data) {
+            console.log('DataBack:', data);
+            $('#shop_location_longitude').val(data.lng)
+            $('#shop_location_latitude').val(data.lat)
+        });
+    }
+
+    
     function update_orderstatus(order_id1) {
         var postdata = {
             _id: order_id1,

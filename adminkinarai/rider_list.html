@@ -1,0 +1,146 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-8">
+            <h1><b><u>rider</u></b></h1>
+        </div>
+        <div class="col-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/rider_add")'>
+                    <i class="fa fa-plus"></i>
+                    Add rider
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3>ค้นหา วินมอเตอร์ไซค์</h3>
+                    <div class="col-md-2 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <!--                    <h3> สถานะ / Status</h3>
+                                        <div class="col col-md-2 mb-2">
+                    
+                                            <select id="status" class="form-control">
+                                                <option value="">ไม่ระบุ</option>
+                                                <option value="1">เปิดการใช้งาน</option>
+                                                <option value="0">ปิดการใช้งาน</option>
+                                            </select>
+                                        </div>-->
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " >  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Address</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="rider_id"></td>
+                    <td class="rider_name"></td>
+                    <td class="rider_location"></td>
+                    <td class="rider_address"></td>
+                    <td class="rider_category"></td>
+                    <td class="rider_tags"></td>
+                    <td class=" text-center">
+                        <button class="alink" onclick="edit_data_rider(this)"><i class="fa fa-pencil rider_action " ></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/shop_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_rider_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    function showdata_rider_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'rider', objdata[x], template_of_testtable);
+                TR.show();
+            }
+        }
+    }
+    function edit_data_rider(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/rider_edit?rider_id=' + tempid);
+        return false;
+    }
+    function filterFormsubmit_allotment() {
+
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+        if ($('#status').val()) {
+            search.status = $('#status').val();
+        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+        return false;
+    }
+</script>
