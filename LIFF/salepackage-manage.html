@@ -84,11 +84,18 @@
             </div>
         </div>
     </div>
-    <div class="form-group row mt-3 border-bottom border-light">
+    <div class="form-group row mt-3">
+      <div class="col-12">
+        <label class="col-6 text-gray-light lable-left-35 " > ประเภทเมนูอาหาร </label>
+        <select class="MENU_type button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="ประเภทเมนู">
+        </select>
+         <small  class="form-text text-muted"> *สามารถพิมพ์แล้วกดวรรคเพื่อเพิ่มประเภทได้ <br> (ใช้สำหรับการค้นหาอาหารตามประเภท) </small>
+      </div>
+    </div>
+    <!-- <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
             <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ประเภทเมนูอาหาร  </b></label>
             <div class="col d-flex">
-                <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
                     <select id="type  " class="input_data_bn  edit_data MENU_type" data-field="type" placeholder="ประเภทเมนู">
                         <option value="1">ขนมและของหวาน</option>
@@ -103,10 +110,9 @@
                     </select>
 
                 </div>
-                <!--//template for save data one field-->
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
             <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ระยะเวลาในการทำ  </b></label>
@@ -213,8 +219,8 @@
                 working.activemenu.detail = '';
             if (!working.activemenu.images)
                 working.activemenu.images = [];
-            if (!working.activemenu.type)
-                working.activemenu.type = '';
+            // if (!working.activemenu.type||!Array.isArray(working.activemenu.type));
+                // working.activemenu.type = [];
             if (!working.activemenu.timespent)
                 working.activemenu.timespent = '';
             if (!working.activemenu.size)
@@ -231,53 +237,7 @@
 
 
             setdatabyclass($('.main_data'), 'MENU', working.activemenu);
-
-            ADVWS.make_edittext($('.editable'), function (data, obj) {
-                edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-                // setTimeout(function() {      // Auto Show NEXT
-                //     $(obj).closest('span').next().find('.editable').editable('show');
-                // }, 200);
-            }, function (data2vilidate, field) {
-                if (field == 'price') {
-                    if (!(Number(data2vilidate) > 0)) {
-                        return "กำหนดราคาขั้นต่ำ 1 บาท";
-                    }
-                }
-                if (!data2vilidate)
-                    return "Invalid data";
-            });
-
-            // var array_weight = [{value: 1, text: 'ของหวาน'}, {value: 2, text: 'ของคาว'}];
-            // ADVWS.make_editselect($('.MENU_type'), array_weight, function (data, obj) {
-            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-            // }, function (data2vilidate) {
-            //     if (!data2vilidate)
-            //         return "Invalid data";
-            // });
-            //
-            // var array_weight = [{value: 1, text: 'น้อยกว่า 500 กรัม'}, {value: 2, text: '500-1000 กรัม'}];
-            // ADVWS.make_editselect($('.MENU_size'), array_weight, function (data, obj) {
-            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-            // }, function (data2vilidate) {
-            //     if (!data2vilidate)
-            //         return "Invalid data";
-            // });
-            //
-            // var array_weight = [{value: 1, text: 'น้อยกว่า 0.5 กก.'}, {value: 2, text: '0.5-1 กก.'}];
-            // ADVWS.make_editselect($('.MENU_weight'), array_weight, function (data, obj) {
-            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-            // }, function (data2vilidate) {
-            //     if (!data2vilidate)
-            //         return "Invalid data";
-            // });
-            //
-            // var array_weight = [{value: 1, text: 'น้อยกว่า 30 นาที'}, {value: 2, text: '30 นาที - 1 ชม.'}];
-            // ADVWS.make_editselect($('.MENU_timespent'), array_weight, function (data, obj) {
-            //     edtable_update_toserver(data, obj, '/api/liff/edit/menu');
-            // }, function (data2vilidate) {
-            //     if (!data2vilidate)
-            //         return "Invalid data";
-            // });
+            create_menutype();
 
         });
     }
@@ -343,6 +303,45 @@
         $('#menu_image_view_div').html(temphtml);
         $('.menu_image_view').show(temphtml);
     }
+
+    function create_menutype(){
+      var seldata = `<option disabled> เช่น ทอด, ต้มยำ , สลัด เป็นต้น</option>`;
+      console.log('type',working.activemenu.type);
+       if(Array.isArray(working.activemenu.type)){
+         for (var x = 0; x < working.activemenu.type.length; x++) {
+             seldata += '<option value="' +working.activemenu.type[x] + '" selected >' + working.activemenu.type[x] + '</option>';
+         }
+       }
+       $('.MENU_type').off('change.select2');
+       $('.MENU_type').html(seldata);
+
+
+      $('.MENU_type').select2({
+          tags: true,
+          tokenSeparators: [',', ' '],
+          allowClear: true,
+          createTag: function (params) {
+              if (params.term === '') {
+                  return null;
+              }
+              //if (allownewtag) {
+                  return {id: params.term, text: params.term};
+              //}
+              //return null;
+
+          }
+      });
+      $('.MENU_type').on('change.select2', function (e) {
+        var data = {LINE_USER: LINE_USER, _id: working.menunow, type: $('.MENU_type').val()};
+        // console.log(data);
+        $.postJSON('/api/liff/edit/menu', data, (res) => {
+            if (!res.result) {
+                return alert(res.detail);
+            }
+        });
+      });
+     }
+
     function previewimg(obj) {
         call_modal_image_menupreivew($(obj));
     }

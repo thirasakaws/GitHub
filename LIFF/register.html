@@ -16,15 +16,24 @@
             console.log("REsult back:");
             console.log(res);
             if (res.result ) {
+              if(res.shopowner && res.shopowner.status==2){ // Let Create Shop
+                  go2View('register1-1');
+                  return;
+              }
                 if (typeof(res.detail) =='object' && res.detail._id > 0) {    // มีร้านอยู่แล้ว
-
                     working.shop = res.detail;
                     go2View('register2');
                     return;
                 }
                go2View('register1-2');
             } else {
-                go2View('register1-1');
+                  go2View('register1-1');
+                // if(res.shopowner){
+                //     go2View('register1-1');
+                // }else{
+                //     go2View('register1-1');
+                // }
+
                 console.log("NOT MEMBER SHOW");
             }
         });

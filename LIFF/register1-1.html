@@ -1,15 +1,15 @@
-<!-- ลงทะเบียน ร้านค้า --> 
+<!-- ลงทะเบียน ร้านค้า -->
 
 <div class='container-fluid'>
-    
+
     <div class="box-head-title-shop text-center">
-        <span class="header-shop"> เปิดร้านของคุณในบริการของ Kitchen BOT </span>
+        <span class="header-shop"> เข้าใช้บริการของ Kitchen BOT </span>
     </div>
-    
+
     <div class="mt-3 mb-3">
         อยากให้ลูกค้านับพันได้ทานอาหารจากร้านของคุณหรือเปล่า เรายินดีให้บริการ
 เราจะตั้งร้านค้าออนไลน์ให้คุณ พร้อมช่วยรับและจัดการออเดอร์ให้ และรับ-ส่งอาหารไปบริการลูกค้าของคุณได้อย่างทันใจ
-สนใจไปด้วยกันไหม? เรามาเริ่มก้าวใหม่กับ Kitchen BOT ด้วยกันวันนี้ 
+สนใจไปด้วยกันไหม? เรามาเริ่มก้าวใหม่กับ Kitchen BOT ด้วยกันวันนี้
 
 
 <br>
@@ -21,28 +21,36 @@
 
     <hr>
     </div>
-    
+
     <div class="text-center">ยอมรับเงิ่อนไขการสมัครร่วมเป็นพาร์ทเนอร์กับเรา</div>
-    
+
     <div class="mt-5">
         <button onclick='return submitnewshopowner()' class='form-control btn btn-submit-shop'>
             <i class="fas fa-check-circle"></i> ยอมรับเงื่อนไข
         </button>
     </div>
-    
+
 </div>
 
 <script>
   function submitnewshopowner() {
-      console.log("POST /api/liff/register/shopowner")
+      //console.log("POST /api/liff/register/shopowner")
       $.postJSON('/api/liff/register/shopowner', {LINE_USER: LINE_USER}, function (res) {
           if (!res.result) {
               if (res.detail) {
                   alert(res.detail);
               }
-          } else {
-              go2View('register1-2');
+          }else{
+            if(typeof(res.detail) =='object'){
+               go2View('register1-2');
+               return;
+            }
+            alert(res.detail);
+             liff.closeWindow();
+              return;
           }
+          //    go2View('register1-2');
+
       });
   }
 </script>

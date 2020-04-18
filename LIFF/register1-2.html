@@ -1,5 +1,5 @@
 <div class="container-fluid main_data">
- 
+
      <div class="row box-head-title-shop">
         <div class="col-3 p-0 text-left">
             <button class='btn border border-0 text-secondary' onclick="window.history.back();">
@@ -15,9 +15,9 @@
             </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
         </div>
     </div>
-    
-    
-    
+
+
+
 
     <div class="col-sm-12 mt-2">
 
@@ -61,7 +61,7 @@
                     <option value="20">สุกี้,ชาบู</option>
                     <option value="21">อื่น ๆ</option>
                 </select>
-  
+
           </div> <!--// Restaurant Type / ประเภทร้าน -->
 
 
@@ -76,35 +76,35 @@
     <div class="col-sm-12">
         <hr>
     </div>
-    
-    
+
+
     <div class="col-sm-12 mt-2 pt-3">
-        
+
         <div class="rounded bg-light pl-2">
             <div class="font-color-shop line-for-header pt-1 pb-1"> จัดการบริหารร้านค้าอื่น <!-- หรือ เข้าจัดการร้านค้าให้บุคคลอื่น-->  </div>
-          
+
             <div class="mt-3">
                 <span>Login Code</span>
                 <div class="form-group row pt-1 pb-2 pr-1">
                     <div class="col-8 pr-0">
-                        <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'> 
+                        <input type='text' class='input-sm form-control form-control-sm' id='shopshareloginnumber'>
                         <small id="emailHelp" class="form-text text-muted">กรอกรหัสลับเพื่อเข้าจัดการบริหารร้านค้าอื่น</small>
                     </div>
                     <div class="col">
                         <button class='btn btn-sm btn-submit-shop btn-block' onclick="loginshopshare();">
-                            <i class="fas fa-sign-in-alt"></i> Login 
+                            <i class="fas fa-sign-in-alt"></i> Login
                         </button>
                     </div>
 
                 </div>
-            </div>       
-        </div>  
-        
-        
-    </div>  <!-- //  จัดการบริหารร้านค้าอื่น --> 
+            </div>
+        </div>
 
- 
-    
+
+    </div>  <!-- //  จัดการบริหารร้านค้าอื่น -->
+
+
+
 
 </div> <!-- // container-fluid  -->
 
@@ -117,6 +117,7 @@
       }
       var obj = {
           name: $('#shopname').val(),
+          shoptype: $('#shoptype').val(),
           LINE_USER: LINE_USER
       };
       $.postJSON('/api/liff/register/shop', obj, function (res) {

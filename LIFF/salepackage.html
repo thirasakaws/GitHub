@@ -16,11 +16,7 @@ Please wait...
             console.log("REsult back:");
             console.log(res);
             if (res.result) {
-                if(Array.isArray(res.detail) && res.detail.length > 0 ){    // มีร้านอยู่แล้ว
-                    working.shop = res.detail[0];
-                    go2View('salepackage1');
-                    return;
-                }
+                working.shop = res.detail
                 go2View('salepackage1');
             } else {
                 go2View('must-openshop');

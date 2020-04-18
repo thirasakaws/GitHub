@@ -1,20 +1,78 @@
-<div class="container-fluid">
-  <div class="row alert alert-secondary" role="alert" id="warn-order" style="display:none;">
-    <br>
+<style>
+    .w-40 {  width: 40%;   }
+    .w-50 {  width: 40%;   }
+    .margin-top-100 {  margin-top: 100px; }
+    .font-size-110 { font-size: 110% !important; }
+    .font-size-120 { font-size: 120% !important; }
+    .font-size-130 { font-size: 130% !important; }
+    .font-size-140 { font-size: 140% !important; }
+    .font-size-150 { font-size: 150% !important; }
+    .font-size-160 { font-size: 160% !important; }
+    .font-size-170 { font-size: 170% !important; }
 
-     <small class="text-secondary">ไม่พบรายการสั่งซื้อของคุณ</small>
-  </div>
+    .font-weight-300 { font-weight: 300 !important; }
+    .font-weight-400 { font-weight: 400 !important; }
+    .font-weight-500 { font-weight: 500 !important; }
+    .font-weight-600 { font-weight: 600 !important; }
+    .font-weight-700 { font-weight: 700 !important; }
+    .font-weight-800 { font-weight: 800 !important; }
+
+</style>
+<div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
+    <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
+        <div class="col-3 p-0 pl-1 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการอาหารในตะกร้า</div>
+        </div>
+        <div class="col-3 text-right">
+            <div class="d-block mr-4" onclick="go2View('cart')">
+                <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
+            </div>
+            <!--
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
+            -->
+        </div>
+    </div> <!--// menu -->
+
+</div> <!-- topmenu แสดงทุกหน้า -->
+
+
+
+<div class="container-fluid margin-top-100 " >
+  <div class="row" id="warn-order" style="display:none;">
+
+      <div class="mx-auto  text-center mb-3 mt-5">
+          <img src="/image/icon-menu.png" class="img-fluid w-40" alt=""/>
+      </div>
+
+      <div class="mx-auto text-center">
+          <div class="h5 font-size-120 ">เริ่มต้นสั่งอาหารกันเลย !</div>
+
+           <div class="font-color-foodmall-gray-light2 font-size-110 font-weight-300">เพิ่มรายการสินค้าลงตะกร้า<br>และกดสั่งซื้อ</div>
+      </div>
+
+      <div class="fixed-bottom">
+        <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="checkout_payment();"> สั่งซื้อ</button>
+
+      </div>
+
+  </div>  <!--// ไม่พบรายการสั่งซื้อของคุณ -->
   <!-- ตรวจสอบข้อมูลกรุณารอสักครู่...
   <div id='shopingcart'>
   </div> -->
 </div>
 <script>
     all_page = ['cart-manage','cart-manage1','cart-wait-confirm','cart-wait-payment','cart-show-cancel'];
-     var working={};
+    var working={};
     register_all_page();  // Register SubPAGE
     function runApp(){
+    //  alert("cart")
       $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
-          console.log('order',res);
+        //  alert("add cart")
           if(res.result){
             $('#warn-order').hide();
             working.order = res.detail;
@@ -50,7 +108,7 @@
         });
         }
     }
-    initializeLiff();
+    initializeLiff('cart');
 
 //  $('#body_mainbody').load('/LIFF/preload.html');
 </script>

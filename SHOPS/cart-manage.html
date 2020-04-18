@@ -1,50 +1,154 @@
-<div class="container-fluid">
-    <div class="box-head-title-foodmall text-center line-bottom-color-foodmall " >
-        <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i> รายการอาหารในตะกร้า #<span class="orderid"></span></span>
-    </div>
+<style>
+    .w-40 {  width: 40%;   }
+    .w-50 {  width: 40%;   }
+    .margin-top-100 {  margin-top: 100px; }
+    .margin-top-10 { margin-top: 10%; }
+    .margin-top-20 { margin-top: 20%; }
+    
+    .font-size-110 { font-size: 110% !important; }
+    .font-size-120 { font-size: 120% !important; }
+    .font-size-130 { font-size: 130% !important; }
+    .font-size-140 { font-size: 140% !important; }
+    .font-size-150 { font-size: 150% !important; }
+    .font-size-160 { font-size: 160% !important; }
+    .font-size-170 { font-size: 170% !important; }
+    
+    .font-weight-300 { font-weight: 300 !important; }
+    .font-weight-400 { font-weight: 400 !important; }
+    .font-weight-500 { font-weight: 500 !important; }
+    .font-weight-600 { font-weight: 600 !important; }
+    .font-weight-700 { font-weight: 700 !important; }
+    .font-weight-800 { font-weight: 800 !important; }
+    
+</style>
 
-    <div class="row alert alert-secondary" role="alert" id="warn_order_fail" style="display:none;">
-       <small class="text-secondary">ไม่พบรายการสั่งซื้อของคุณ</small>
-    </div>
 
-  <div class="text-secondary d-flex justify-content-between">
+<div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
+    
+    
+    <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
+        <div class="col-2 p-0 pl-1 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> 
+            </button>
+        </div>
+        <div class="col-7 p-0 text-center">
+            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการอาหารในตะกร้า #<span class="orderid"></span></div>
+        </div>
+        <div class="col-3 text-right">
+            <div class="d-block mr-4" onclick="go2View('cart')">
+                <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
+            </div>
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
+        </div>
+    </div> <!--// menu -->
 
-    <span class="btn btn-sm btn-outline-danger" id="menu_toporder"  onclick="resetorder();"> <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกรายการ</span>
-  </div>
-  <hr>
+</div> <!-- topmenu แสดงทุกหน้าหัวข้อเปลี่ยนเป็นของแต่ละหน้า -->
+
+
+
+<div class="container-fluid margin-top-under-navbar margin-top-20">
+    
+    <div class="row" id="warn_order_fail" style="display:none;">
+      <div class="mx-auto  text-center mb-3 mt-5">
+          <img src="/image/icon-menu.png" class="img-fluid w-40" alt=""/>
+      </div>
+
+      <div class="mx-auto text-center">
+          <div class="h5 font-size-120 ">เริ่มต้นสั่งอาหารกันเลย !</div>
+          
+           <div class="font-color-foodmall-gray-light2 font-size-110 font-weight-300">เพิ่มรายการสินค้าลงตะกร้า<br>และกดสั่งซื้อ</div>
+      </div>
+    </div>  <!-- // row ตะกร้าว่าง --> 
+    
+    <div class=" text-right">
+        <span class="btn btn-sm border border-0 text-danger" id="menu_toporder"  onclick="resetorder();"> 
+            <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกทั้งหมด
+        </span>
+    </div> <!-- // ยกเลิกรายการทั้งหมด --> 
+    <hr>
+    
+
+
+
+  
   <div class="" id="ordermenulist">
     <div class="row mt-3 border-bottom row_tablecontent" style="display:none;">
-          <div class="col-8">
+          <div class="col-9">
             <div class="row">
               <div class="col-4">
                   <img  class="menu_pic w-100 rounded" alt="">
-              </div>
+                  
+                 
+                  
+                  
+              </div> <!--// img --> 
+                
+                
               <div class="col-8">
-                <div class="menu_name">ชื่ออาหาร</div>
-                <small class="text-secondary menu_pricedes">รายละเอียด</small>
-                <small class="show_menunote" style="display:none;">(<span class="menu_note"></span>)</small>
-                <div class="font-color-foodmall">
+                  <div class="row ">
+                      <div class="col">
+                          
+                          <div class="menu_name">ชื่ออาหาร</div> 
+                          <div>
+                              <small class="text-secondary menu_pricedes">รายละเอียด</small>
+                          </div>
+                           <div class='menuoptionshow'></div>
+                            <small class="text-danger "  onclick="updatecartitem(this,'delete');">
+                                <i class="far fa-trash-alt"></i> ลบ
+                              </small>
+                      </div> <!--// left --> 
+                  
+                  </div> <!--// row --> 
+                  
+                  
+                  <div class="row">
+                      <div class="col-12"> 
+                            <small class="show_menunote" style="display:none;">(<span class="menu_note"></span>)</small>
+                      </div>
+                  </div> <!--// Note --> 
+                  
+                  
+                
+                <!--<small class="text-secondary menu_pricedes">รายละเอียด</small>-->
+                <!--<small class="show_menunote" style="display:none;">(<span class="menu_note"></span>)</small>-->
+<!--                <div class="font-color-foodmall">
                   <span class="menu_menuprice">0.00</span> ฿
-                </div>
-                  <div class='menuoptionshow'></div>
-              </div>
+                </div>-->
+                  <!--<div class='menuoptionshow'></div>-->
+              </div> <!-- col right --> 
 
-            </div>
-              <small class="text-danger "  onclick="updatecartitem(this,'delete');">
-              <i class="far fa-trash-alt"></i> ลบรายการ
-            </small>
+            </div> <!-- // row --> 
+              
 
-          </div>
-          <div class="col-4">
+          </div>  <!-- // col 8 -->
+          
+          
+          <div class="col-3">
               <div class="row">
-                  <div class="col-3">
-                      <i class="fas fa-minus font-color-foodmall " onclick="updatecartitem(this,'remove');"></i>
+                  <div class="col-12 text-right font-size-120">
+                      ฿ <span class="menu_menuprice">0.00</span> 
                   </div>
-                  <div class="col-auto text-center">
-                    <span class="menu_qty">0</span>
+              </div>
+              <div class="row">
+                  <div class="col-2">
+                      <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'remove');">
+                          <i class="fas fa-minus"></i>
+                      </button>
+<!--                      <i class="fas fa-minus font-color-foodmall " onclick="updatecartitem(this,'remove');"></i>-->
+                  
                   </div>
-                  <div class="col-3 text-left">
-                    <i class="fas fa-plus font-color-foodmall " onclick="updatecartitem(this,'add');"></i>
+                  <div class="col-2">
+                      
+<!--                      <span  style="font-size:150%;"> 1 </span> -->
+                    <div class="menu_qty text-center ml-1" style="font-size:150%;">0</div>
+                  </div>
+                  <div class="col-1 text-left pl-0">
+                      <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'add');">
+                        <i class="fas fa-plus"></i>
+                      </button>  
+                      
+<!--                    <i class="fas fa-plus font-color-foodmall " onclick="updatecartitem(this,'add');"></i>-->
                   </div>
               </div>
 

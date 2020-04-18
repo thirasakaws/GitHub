@@ -12,6 +12,7 @@
 
 <script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
 <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
 <link href="/css/fontawesome.min.css" rel="stylesheet" type="text/css"/>
 <script src="/js/fontawesome.min.js" type="text/javascript"></script>
 <script src="/js/moments.min.js" type="text/javascript"></script>
@@ -263,7 +264,7 @@ if(!starturl) starturl ='main'
 
 
 var alreadyinit = false;
-function initializeApp() {
+function initializeApp(liffpagename) {
     //console.log("init ok");
     if(typeof(alreadyinit) == 'function'){
       alreadyinit();
@@ -286,6 +287,12 @@ function initializeApp() {
           LINE_USER.getDecodedIDToken= liff.getDecodedIDToken().email;
           runApp();
           alreadyinit = runApp;
+          // First init
+          if(liffpagename){
+            $.postJSON('/engine/init-liff',{LINE_USER: LINE_USER,liffpagename:liffpagename},(r)=>{
+              //alert(liffpagename);
+            });
+          }
         }).catch(err => {
           if(typeof(fnc_noprofile) == 'function') fnc_noprofile();
           console.log("Error Getprofile, :liffid:"+myLiffId,err)
@@ -296,16 +303,20 @@ function initializeApp() {
         //show login Button
     }
 }
-function initializeLiff() {
+function initializeLiff(liffpagename) {
   //  console.log("INT LIFFID:"+myLiffId)
     if(alreadyinit) {
       if(typeof(runApp) =='function') runApp();
       return;
     }
-    liff.init({ liffId: myLiffId }, initializeApp , err => {
+    
+    liff.init({ liffId: myLiffId },
+      ()=>{initializeApp(liffpagename);} , err => {
       console.log(err.code, err.message)
 
     });
+
+
 }
 var LINE_USER = {};
 function displayLiffData() {

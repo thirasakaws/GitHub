@@ -3,12 +3,12 @@
 <div class="container-fluid">
 
   <div class="box-head-title-shop text-center line-bottom-color-shop mb-3" >
-        <span class="header-shop"> รายการออร์เดอร์ ย้อนหลัง</span>
+        <span class="header-shop"> รายการออร์เดอร์  <i class="fas fa-sync-alt" onclick="refresh_last_order();"></i></span>
   </div>
 
 
 
-  <div id="order_history">
+  <div id="order_last">
       Please Wait..
   </div>
   <style media="screen">
@@ -33,25 +33,16 @@
 
 
   <div id="order_template" style="display:none;">
-
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
-        	##ORDER-shopname## ##ORDER-shopbranch##
-        	
-        	Time : ##ORDER-time##
-              ##ORDER-statusshow## # ##ORDER-id##
-				
-				
-				จำนวนสั่งซื้อ ##ORDER-totalitems## รายการ
-				
+          <div class="text-center">
+              <strong class="card-title">##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span> </strong>
+          </div>
+
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
             </div>
-            ค่าสินค้า   ##ORDER-totalcost##
-            ส่ง   ##ORDER-logisticcost##
-            รวม   ##ORDER-grandtotal##
-            ระยะทาง   ##ORDER-totaldistance##
           </div>
 
           <div class="text-center">
@@ -77,12 +68,19 @@
           </div>
           <div class="col-4 text-right">
               <span class="font-color-shop">฿ ##MENU-priceshow##</span>
-              ##MENU-pricedetail##
-
           </div>
-          <span class="font-color-shop">##MENU-note##</span>
       </div>
+      <small class="row">
+        <div class="col-12">
+            <strong class="text-gray-light2 border-bottom-gray">รายละเอียด</strong>
+            <div class="mt-2">
+                ##MENU-qty## x  ##MENU-name## <span class="font-color-shop"> ##MENU-pricedetail##</span>
 
+                <span class="font-color-shop">##MENU-note##</span>
+            </div>
+        </div>
+
+      </small>
     </div>
   </div>
 </div>
@@ -146,38 +144,38 @@
     all_page = ["order_seller_latest1"];
     var working = {};
     register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-vPqbd5J7';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
   var template_main= $("#order_template").html();
   var order_template_menu = $('#order_template_menu').html();
 
   var STATUSSHOW =[];
-  STATUSSHOW[1] = 'มาใหม่';
   STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
-  STATUSSHOW[6] = 'ยกเลิก';
   STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
   STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
   STATUSSHOW[11]='ลูกค้าชำระเงินแล้ว';
   STATUSSHOW[12]='ลูกค้าจะชำระเงินแบบ COD';
   STATUSSHOW[15]='ร้านกำลังดำเนินการ';
   STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
-  STATUSSHOW[17]='Rider รับสินค้าแล้ว';
-  STATUSSHOW[26]='ลูกค้ายกเลิก หลังรอ Confirm จากร้าน';
 
 function runApp(){
-
-  $.postJSON('/api/liff/list/history/customerorder',{LINE_USER: LINE_USER},(res)=>{
+  alert("TEST");
+  return;
+  $.postJSON('/api/liff/list/history/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
       if(res.result){
         working.history = res.detail;
         if(working.history.length ==0){
-            $("#order_history").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_last").html("ไม่พบรายการสั่งซื้อ");
           return;
         }
         if (working.history) {
-           working.history.map((obj)=>{   // PREPARE ORDER DATA
-              if(obj.logistic && obj.logistic.distanceShopToCustomerInKM){
-                obj.totaldistance = obj.logistic.distanceShopToCustomerInKM;
-              }else{
-                obj.totaldistance =0;
-              }
+          //console.log("ORDER",working.history);
+          var order1=[],order2=[],order3=[],order5=[];
+
+           working.history.map((obj)=>{   // setting Some Default
+
              if(!obj.note) obj.note='';
                   obj.statusshow = STATUSSHOW[obj.status];
                   obj.items.map((item)=>{   // setting Some Default
@@ -187,13 +185,9 @@ function runApp(){
 
                 obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
            });
-           
-           working.history.totalitems = working.history.items.length;
-           working.history.time = moment(working.history.createdate,'X').format('H:i:m D/M/Y');
-           
            var html1  = hash_replace(template_main,'ORDER',working.history)
 
-           $("#order_history").html(html1);
+           $("#order_last").html(html1);
           }else {
             return 'ไม่พบเมนู'
           }
@@ -230,10 +224,9 @@ var ordercustomerlocation = {};
 function previewcustomer(order_id){
   var address = false;
   var obj_cust;
-    working.history.map((obj)=>{  // PREPARE Items Data
+    working.history.map((obj)=>{
       if(obj._id == order_id) obj_cust = obj.customerid;
     });
-
     if(obj_cust){
       console.log('add',obj_cust);
         $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
@@ -241,7 +234,7 @@ function previewcustomer(order_id){
       }
       // address = !address;
 };
-
+alert(myLiffId);
 initializeLiff();
 
 //  $('#body_mainbody').load('/LIFF/preload.html');

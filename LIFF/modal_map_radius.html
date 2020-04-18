@@ -1,4 +1,4 @@
-<!-- Modal for GPS -->
+    <!-- Modal for GPS -->
 <style media="screen">
   #googlemap_radius_radius {
       position: relative;
@@ -11,9 +11,11 @@
             <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5>
         </div> -->
 
-        <div class="modal-body" style="width:500; height:500">
+        <!-- <div class="modal-body" style="width:500; height:500"> -->
+          <div class="modal-body" style="width:100%; height:75vh">
 
-          <div    id='googlemap_radius' style="width: 100%; height: 300px" >
+          <!-- <div    id='googlemap_radius' style="width: 100%; height: 300px" > -->
+          <div    id='googlemap_radius' style="width: 100%; height: 100%" >
     			Gmaps
 
           </div>
@@ -23,7 +25,7 @@
           รัศมี
           <input id="input-radius" style="width: 20%" type="number" min="0" value="">
           <!-- <input id="submit" type="button" value="Reverse Geocode"> -->
-          เมตร
+          กิโลเมตร
         </div>
 
         <div class="modal-footer">
@@ -91,25 +93,13 @@
     input.oninput = inputRadiusHandler;
 
     function inputRadiusHandler(e) { 
-      service_radius = parseInt(e.target.value)
-      document.getElementById('input-radius').value = service_radius === 0 ? "":service_radius.toString();
-      circle_area.setRadius(service_radius);
+      service_radius = parseFloat(e.target.value);
+      // document.getElementById('input-radius').value = service_radius.toString();
+      circle_area.setRadius(service_radius * 1000.0);
     }
 
     // Event Map Screen Move
     // gmap.addListener('center_changed', showAddress);
-
-
-
-    // window.addEventListener("hashchange", function(e) {
-    //   if(e.oldURL.length > e.newURL.length)
-    //       alert("back")
-    // });
-
-    window.onhashchange = function() {
-    //blah blah blah
-      window.alert("xxxxxxxxxx");
-    }
   }
 
   function showAddress() {
@@ -251,7 +241,8 @@
           gmap.setZoom(15);
           gmap.panTo(themarker.getPosition());
           // showAddress();
-          document.getElementById('input-radius').value = service_radius === 0 ? "":service_radius.toString();
+          document.getElementById('input-radius').value = (service_radius / 1000.0).toString();
+          requestFullScreen();
         }, 500);
       }
     },100);
@@ -271,7 +262,7 @@
     // position.address = $('#address').val();
     position.lat = latlng_saved.lng;    // switch bewteen LAT to LNG for MongoDB
     position.lng = latlng_saved.lat;    // switch bewteen LAT to LNG for MongoDB
-    position.service_radius = parseInt($('#input-radius').val());
+    position.service_radius = Math.round(parseFloat($('#input-radius').val()) * 1000.0);
     console.log(position);
 
     if(tempcbfnc_maps){
@@ -282,11 +273,27 @@
     $('#modal_google_gps_radius').modal('hide');
   }
 
+  function requestFullScreen() {
 
-//window.onpopstate = function() {
-//    if(){
-//        window.history.back()
-//    }
-//   
-//}
+    var el = document.body;
+
+    // Supports most browsers and their versions.
+    var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen 
+    || el.mozRequestFullScreen || el.msRequestFullScreen;
+
+    if (requestMethod) {
+
+      // Native full screen.
+      requestMethod.call(el);
+
+    } else if (typeof window.ActiveXObject !== "undefined") {
+
+      // Older IE.
+      var wscript = new ActiveXObject("WScript.Shell");
+
+      if (wscript !== null) {
+        wscript.SendKeys("{F11}");
+      }
+    }
+}
 </script>

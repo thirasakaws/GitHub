@@ -45,6 +45,12 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
+            </div>
+          </div>
+
           <div class="text-center">
             ** ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
             <!-- <small>
@@ -73,6 +79,11 @@
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
             </div>
           </div>
           <div class="row">
@@ -107,6 +118,11 @@
                 ##ORDER-menudetail##
             </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
+            </div>
+          </div>
 
           <div class="row">
 
@@ -139,6 +155,11 @@
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
             </div>
           </div>
           <div class="text-center">
@@ -191,7 +212,7 @@
         <div class="modal-body" >
           <div class="row">
             <div class="col-4">
-              <img id='file_image_preview' src='##CUS-pictureUrl##' class="rounded" width='100%'>
+              <img id='file_image_preview' src='##CUS-customeruserId##' class="rounded" width='100%'>
             </div>
             <div class="col-8">
               <small>
@@ -208,7 +229,18 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                    <strong>ข้อมูลจัดส่ง</strong> : ##CUS-address##
+                    <strong>ช่องทางการชำระ</strong> : ##CUS-paymenttype##
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <strong>ข้อมูลจัดส่ง</strong> : ##CUS-addressname##
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <strong>ระยะทาง</strong> : ##CUS-distanceShopToCustomerInKM## กม. <br>
+                    <strong>ค่าจัดส่ง</strong> : ##CUS-deliveryTotalAmount## ฿.
                     </div>
                 </div>
                 <div class="row">
@@ -234,6 +266,47 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade bd-example-modal-sm" id="modal_onconfirmorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center p-2">
+              <h4 class="text-success">รับรายการเรียบร้อย</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" id="modal_onrejectorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body " id="reject-body">
+        <div class="text-center" id="frm_inputreject">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <h4 class="text-danger">ยืนยันการปฏิเสธรายการ !!</h4>
+
+
+            <div class="mt-1">
+                <textarea class="form-control" id="inputcommentreject" placeholder="ระบุเหตุผลการปฏิเสธรายการ"></textarea>
+                <button type="button" class="btn btn-danger btn-block mt-1" name="button" onclick="confirm_reject();">ยืนยันการปฏิเสธ</button>
+            </div>
+        </div>
+
+        <div class="text-center p-2" id="frm_showrejectstatus" style="display:none">
+              <h4 class="text-success warn_reject">ปฏิเสธรายการเรียบร้อย</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
     all_page = ["order_seller_latest1"];
     var working = {};
@@ -257,7 +330,7 @@
   STATUSSHOW[15]='ร้านกำลังดำเนินการ';
   STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
 
-function runApp(){
+function getorder(){
   $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
       if(res.result){
         working.orderlast = res.detail;
@@ -267,37 +340,47 @@ function runApp(){
         }
         if (working.orderlast) {
 
-          var address_array = []
-          for(var x=0;x<working.orderlast.length;x++){
-              address_array.push(working.orderlast[x].addressid);
-          }
-
-          if(address_array.length >0){
-            getorderaddress(address_array);
-          }
+          // var address_array = []
+          // for(var x=0;x<working.orderlast.length;x++){
+          //     address_array.push(working.orderlast[x].addressid);
+          // }
+          //
+          // if(address_array.length >0){
+          //   getorderaddress(address_array);
+          // }
           //console.log("ORDER",working.orderlast);
           var order1=[],order2=[],order3=[],order5=[];
 
-           working.orderlast.map((obj)=>{   // setting Some Default
+          setTimeout(()=>{
 
-             if(!obj.note) obj.note='';
-                  obj.statusshow = STATUSSHOW[obj.status];
-                  obj.items.map((item)=>{   // setting Some Default
-                      item.priceshow = item.price.price;
-                      item.pricedetail = item.price.detail;
-                  });
-                  if(obj.status==7) order1.push(obj);
-                  else if(obj.status==11 || obj.status==12) order2.push(obj);
-                  else if(obj.status==5 || obj.status==10) order5.push(obj);
-                  else if(obj.status==15) order3.push(obj);
-                  else order5.push(obj);
-                obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
-           });
-           var html1  = hash_replace(template1,'ORDER',order1)
-           var html2  = hash_replace(template2,'ORDER',order2)
-           var html3  = hash_replace(template3,'ORDER',order3)
-           var html5  = hash_replace(template5,'ORDER',order5)
-           $("#order_last").html(html1+html2+html3+html5);
+                 working.orderlast.map((obj)=>{   // setting Some Default
+                   if(working.shop_branch){
+                     for(var x=0;x<working.shop_branch.length;x++){
+                        if (working.shop_branch[x]._id == obj.shopbranch) {
+                              obj.shopbranchname = working.shop_branch[x].name;
+                        }
+                     }
+                   }
+
+                   if(!obj.note) obj.note='';
+                        obj.statusshow = STATUSSHOW[obj.status];
+                        obj.items.map((item)=>{   // setting Some Default
+                            item.priceshow = item.price.price;
+                            item.pricedetail = item.price.detail;
+                        });
+                        if(obj.status==7) order1.push(obj);
+                        else if(obj.status==11 || obj.status==12) order2.push(obj);
+                        else if(obj.status==5 || obj.status==10) order5.push(obj);
+                        else if(obj.status==15) order3.push(obj);
+                        else order5.push(obj);
+                      obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
+                 });
+                 var html1  = hash_replace(template1,'ORDER',order1)
+                 var html2  = hash_replace(template2,'ORDER',order2)
+                 var html3  = hash_replace(template3,'ORDER',order3)
+                 var html5  = hash_replace(template5,'ORDER',order5)
+                 $("#order_last").html(html1+html2+html3+html5);
+           },500);
           }else {
             return 'ไม่พบเมนู'
           }
@@ -329,64 +412,105 @@ function find_location_order() {
 }
 
 
+var temp_rejectbody = $('#reject-body').html();
+
+var reject_data = {};
+function confirm_reject(){
+    reject_data.rejectcomment = $('#inputcommentreject').val();
+  $.postJSON('/engine/order/shop',reject_data,(res)=>{
+      if(res.result){
+            $('#frm_inputreject').hide();
+            $('#frm_showrejectstatus').show();
+        setTimeout(()=>{
+            $('#inputcommentreject').val('');
+            $('#modal_onrejectorder').modal('hide');
+        },500);
+    }else {
+      $('#frm_inputreject').hide();
+      $('.warn_reject').css('color','red')
+      $('.warn_reject').html('การปฏิเสธไม่สำเร็จ')
+      $('#frm_showrejectstatus').show();
+    }
+    $('#reject-body').html(temp_rejectbody);
+    runApp();
+      });
+
+};
+
+
 function order_accept(obj,orderid,type){
+  reject_data = {};
   $(obj).hide();
   var data={LINE_USER: LINE_USER,
     orderid:orderid
   }
   data.action=type;
-  $.postJSON('/engine/order/shop',data,(res)=>{
-      if(res.result){
-        runApp();
-      }
-  });
+
+        if(type=='accept'){
+            $.postJSON('/engine/order/shop',data,(res)=>{
+                if(res.result){
+                $('#modal_onconfirmorder').modal('show');
+
+                setTimeout(()=>{
+                    $('#modal_onconfirmorder').modal('hide');
+                },500);
+              }
+              runApp();
+                });
+            }
+          else if(type=='reject'){
+            reject_data = data;
+            $('#modal_onrejectorder').modal('show');
+
+          }else {
+            $.postJSON('/engine/order/shop',data,(res)=>{
+                if(res.result){
+                  runApp();
+              }
+
+                });
+
+          }
 
 };
 
-function getorderaddress(arr){
-      $.postJSON('/api/liff/get/orderaddress',{_id : arr}, function (res) {
+function runApp(){
+    // $.postJSON('/api/liff/check/shopowner',{LINE_USER: LINE_USER}, function (res) {
+      $.postJSON('/api/liff/check/shopbranch',{LINE_USER: LINE_USER}, function (res) {
         if(res.result){
-          working.address = res.detail;
+          working.shop_branch = res.detail;
+          console.log('shop',working.shop_branch);
+          getorder();
+          // alert('shop',working.shop)
+        }else{
+          go2View("must-openshop");
+          //alert(res.detail)
         }
       });
 };
 
+
+
 var template_customer = $('#modal_image_customer_preview').html();
 var ordercustomerlocation = {};
 function previewcustomer(order_id){
-  var address = false;
-  var obj_cust;
+
+  var paymenttype_array = ['','Cash On Delivery','QR payment By Quickpay']
+  var obj_cust = {};
     working.orderlast.map((obj)=>{
       console.log('order',obj);
-          if(working.address && working.address.length > 0){
-            var add = working.address;
-            for(var x=0;x<add.length;x++){
-                if(add[x].address){
-                   obj.customerid.address = add[x].address;
-                   if(add[x].location){
-                       obj.customerid.location = add[x].location;
-                       ordercustomerlocation = obj.customerid.location;
-                   }else {
-                     ordercustomerlocation = {};
-                   }
-                   address = true;
-                   // console.log('--',obj,address);
-                }else {
-                  alert('ไม่พบที่อยู่')
-                }
-          }
-        }
-        obj.customerid.firstname = obj.firstname;
-        obj.customerid.lastname = obj.lastname;
-        obj.customerid.contact = obj.contact;
-
-      if(obj._id == order_id) obj_cust = obj.customerid;
+      ordercustomerlocation = obj.addresslocation;
+      obj.distanceShopToCustomerInKM = obj.logistic.distanceShopToCustomerInKM;
+      obj.deliveryTotalAmount = obj.logistic.deliveryTotalAmount;
+      obj.deliveryDistance = obj.logistic.deliveryDistance;
+      //
+      //
+      if(obj._id == order_id) obj_cust = obj;
+      obj_cust.paymenttype = paymenttype_array[obj.paymenttype];
     });
-    if(address){
-      console.log('add',obj_cust);
+      console.log('cusshow',obj_cust);
         $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
         $('#modal_image_customer_preview').modal('show');
-      }
       // address = !address;
 };
 

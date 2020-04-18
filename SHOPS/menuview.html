@@ -14,21 +14,32 @@
 <script>
 
   var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F','');
+  var working={};
+  var template = $('#template_mainview').html();
+  var template_cart = $('#top_shopping_cart').html();
+  $('#top_shopping_cart').html('').show();
+  //$('#main_menu_preview').html('').show();
+  
+	function RunApp (){
+	  $.get('/api/liff/get/menu/'+detail,function(res){
+	
+	      if(res && res.detail){
+	        //alert('OK')
+	        setdatabyclass($('#mainview'),'MENU',res.detail)
+	        var menu = res.detail;
+	        var allhtml = '';
+	        for(var x=0 ; x < menu.images.length;x++){
+	            allhtml += `<div class="card">
+	                <img src="https://www.kinarai.com/cdn/image/menu/${menu.images[x]}" class="card-img-top " >
+	            </div>`;
+	
+	        }
+	        $('#main_menu_preview').html(allhtml);
+	      }
+	  });	
+	}
 
-  $.get('/api/liff/get/menu/'+detail,function(res){
+  
+    initializeLiff('menuview');
 
-      if(res && res.detail){
-        //alert('OK')
-        setdatabyclass($('#mainview'),'MENU',res.detail)
-        var menu = res.detail;
-        var allhtml = '';
-        for(var x=0 ; x < menu.images.length;x++){
-            allhtml += `<div class="card">
-                <img src="https://www.kinarai.com/cdn/image/menu/${menu.images[x]}" class="card-img-top " >
-            </div>`;
-
-        }
-        $('#main_menu_preview').html(allhtml);
-      }
-  });
 </script>

@@ -17,9 +17,9 @@
 <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
 <link href="/css/fontawesome.min.css" rel="stylesheet" type="text/css"/>
 <script src="/js/fontawesome.min.js" type="text/javascript"></script>
-<link href="/css/themify-icons.css" rel="stylesheet" type="text/css"/> 
+<link href="/css/themify-icons.css" rel="stylesheet" type="text/css"/>
 
-<!-- time --> 
+<!-- time -->
 <script src="/js/moments.min.js" type="text/javascript"></script>
 
 <script src="/js/select2.min.js" type="text/javascript"></script>
@@ -156,7 +156,7 @@
 </footer>
 <script>
     var temp_url_permission
-    var all_page = ['main','test1', 'profile', 'faq_customer', 'customeregister', 'search', 'register', 'starter', 'sharetargetpicker', 'salepackage', 'order', 'menu', 'payment', 'must-openshop', 'addcart', 'cart', 'menuview', 'shopview','hash_replace'];
+    var all_page = ['main','test1', 'profile', 'faq_customer', 'customeregister', 'search', 'register', 'starter', 'sharetargetpicker', 'salepackage', 'order', 'menu', 'payment', 'must-openshop', 'addcart', 'cart', 'menuview', 'shopview','hash_replace','order_seller_history'];
 
     var firsttime_visit = true;
     function register_all_page() {
@@ -216,7 +216,11 @@
                 LINE_USER.userId = profile.userId;
                 LINE_USER.displayName = profile.displayName;
                 LINE_USER.statusMessage = profile.statusMessage;
-                LINE_USER.getDecodedIDToken = liff.getDecodedIDToken().email;
+                var tk =liff.getDecodedIDToken();
+                if(tk){
+                    LINE_USER.getDecodedIDToken = tk.email;
+                }
+
                 runApp();
                 alreadyinit = runApp;
             }).catch(err => {
@@ -232,13 +236,15 @@
     }
 
     function initializeLiff() {
+
       if(alreadyinit) {
         if(typeof(runApp) =='function') runApp();
         return;
       }
+        console.log("INIT ", myLiffId);
         liff.init({liffId: myLiffId}, initializeApp, err => {
-            console.log("INIT FAIL", )
-            console.log(err.code, error.message)
+            console.log("INIT FAIL", myLiffId)
+            console.log(err.code, err.message)
         });
     }
     var LINE_USER = {};

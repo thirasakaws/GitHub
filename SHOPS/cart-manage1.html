@@ -54,8 +54,8 @@
                 <div class="col">
                     <select id="paymenttype" class="input_data_bn  edit_data ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน">
                       <option value="" disabled selected>โปรดระบุ</option>
-                      <option value="1">Cash On Delivery</option>
-                      <option value="2">QR payment By Quickpay</option>
+                      <option value="1" disabled>Cash On Delivery</option>
+                      <option value="2" disabled>QR payment By Quickpay</option>
                   </select>
                 </div>
             </div> <!--// -->
@@ -153,6 +153,14 @@
               ฿ <span class="total_price">0 </span>
           </div>
       </div>
+      <div class="row" id='discount-shippingcost' style="display:none">
+          <div class="col-6">
+              ส่วนลดค่าจัดส่ง
+          </div>
+          <div class="col-6 text-right">
+               ฿ <span class="total_shippingdiscount">0 </span>
+          </div>
+      </div>
       <div class="row">
           <div class="col-6">
               ค่าจัดส่ง <span class="total_distance font-color-foodmall">0 </span> กม.
@@ -161,6 +169,7 @@
                ฿ <span class="total_shippingcost">0 </span>
           </div>
       </div>
+
       <hr>
 
       <div class="row ">
@@ -214,7 +223,7 @@
             setTimeout(()=>{
               showmwnuorderlist(working.order.items);
               setdatabyclass($('.main_data'), 'ORDER', working.order);
-            },500)
+            },500);
 
     }
 
@@ -256,10 +265,14 @@
       });
     };
 
+var array_shopid = [];
+
     function showmwnuorderlist(obj){
+      array_shopid = [];
       $('#listmenuorder').html(template_ordermenulist);
 
         for(var x=0;x<obj.length;x++){
+          array_shopid.push(obj[x].shopid);
           obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
         //  totalprice += obj[x].menuprice;
           obj[x].pricedes = obj[x].price.detail;
@@ -285,9 +298,43 @@
 
                /// +=delivery
         }
+          if(array_shopid.length > 0){
+            getorder_shop(array_shopid);
+          }
+
         update_ship_cost();
 
     }
+
+    function getorder_shop(array){
+
+      $.postJSON('/api/liff/check/order/shop', {_id : array}, function (res) {
+        // console.log("LOCATE",res);
+        if(res.result){
+          // var optiondata = '';
+          // optiondata += '<option value="" disabled selected>โปรดระบุ</option>';
+             working.ordershop = res.detail;
+             // var paymentoption = ['','Cash On Delivery','QR payment By Quickpay'];
+            paymenttype = [];
+             var arr = working.ordershop;
+             if(arr.length>0){
+                   for(var x=0;x<arr.length;x++){
+                        for(var y=0;y<arr[x].paymenttype.length;y++){
+                            if(paymenttype.indexOf(arr[x].paymenttype[y]) == -1){
+                                  // paymenttype.push(arr[x].paymenttype[y]);
+                                  // console.log('****'+$('#paymenttype option[value='+arr[x].paymenttype[y]+']').val());
+                                 $('#paymenttype option[value='+arr[x].paymenttype[y]+']').prop('disabled',false);
+                                    // optiondata += '<option value="' +arr[x].paymenttype[y] + '">' + paymentoption[arr[x].paymenttype[y]] + '</option>';
+                            }
+                        }
+                   }
+                 }
+                 // $('#paymenttype').html(optiondata);
+        }else{
+          // alert(res.detail);
+        }
+      });
+    };
 
     $('#gmap_ordergps').load('/LIFF/modal_gps.html');
       function find_location_order() {
@@ -386,10 +433,17 @@
       var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       order.totalcost ? $('.total_price').html(addCommas(order.totalcost)) : $('.total_price').html('0.00');
+      $('#discount-shippingcost').hide();
       if(order.logistic){
           grandtotal += order.logistic.deliveryTotalAmount;
           order.logistic.distanceShopToCustomerInKM ? $('.total_distance').html(addCommas(order.logistic.distanceShopToCustomerInKM)) : $('.total_distance').html('0.00');
           order.logistic.deliveryTotalAmount ? $('.total_shippingcost').html(addCommas(order.logistic.deliveryTotalAmount)) : $('.total_shippingcost').html('0.00');
+          if(Number(order.logistic.Discount) > 0){
+            var beforediscount = addCommas(order.logistic.deliveryTotalAmount + order.logistic.Discount);
+            $('#discount-shippingcost').show();
+            $('#total_shippingdiscount').html(addCommas(order.logistic.Discount));
+            $('.total_shippingcost').prepend("<strike>" +beforediscount + "</strike> ");
+          }
       }
 
       grandtotal ? $('.grandtotal').html(addCommas(grandtotal)) : $('.grandtotal').html('0.00');

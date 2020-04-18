@@ -1,10 +1,10 @@
 <link href="https://www.alakrbb.com/dist/common.425698d7a0766f1a48bc.css">
 <style>
 .font-color-foodmall {  color: #8AA43A !important; }
-.margin-top-under-navbar { margin-top: 49px;} 
+.margin-top-under-navbar { margin-top: 49px;}
 .bg-master-foodmall { background-color: #8AA43A; }
 .items-add-to-cart { right: 18%;  position: absolute; top: 25%; }
-.border-bottom-color-primary  { border-bottom :3px solid #8AA43A !important; } /* เขียว */ 
+.border-bottom-color-primary  { border-bottom :3px solid #8AA43A !important; } /* เขียว */
 .border-success-foodmall { border-color :#8AA43A !important; }
 /* ข้างบนนำขึ้น Server */
 
@@ -15,7 +15,7 @@
     right: 0px;
   /*  bottom: 91.5px;   // -21.5px; */
     padding-bottom: 10px;
-   
+
 }
 
 .button-circle {
@@ -27,14 +27,14 @@
     border-radius: 100%;
     position: absolute;
     width: 35px;
-    height: 35px; 
+    height: 35px;
     background: red;  /*#00bd29 */
 }
-    
-/*.btn-add-to-cart {     
+
+/*.btn-add-to-cart {
     border: 4px #fff solid;
     border-radius: 25px;
-    background: #fff; 
+    background: #fff;
     font-size: 2.5em;
 }*/
 /*  #8AA43A  */
@@ -43,7 +43,7 @@
  <!-- Link Swiper's CSS -->
 
 
-<div class="fixed-top shadow" id='top_shopping_cart'  style="display:none">
+<div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
     <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
         <div class="col-3 p-0 pl-1 text-left">
             <button class='btn border border-0 text-secondary' onclick="window.history.back();">
@@ -53,16 +53,16 @@
         <div class="col-6 p-0 text-center">
             <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สั่งอาหาร</div>
         </div>
-        <div class="col-3 text-right"> 
-            <div class="d-block mr-4" onclick="go2View('cart')"> 
+        <div class="col-3 text-right">
+            <div class="d-block mr-4" onclick="go2View('cart')">
                 <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
-            </div> 
-            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div> 
+            </div>
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
         </div>
     </div> <!--// menu -->
-        
-</div> <!-- topmenu -->
- 
+
+</div> <!-- topmenu แสดงทุกหน้าหัวข้อเปลี่ยนเป็นของแต่ละหน้า -->
+
 
 
 <!-- Slide banner  -->
@@ -107,84 +107,39 @@
 
 <!-- Category -->
 
-<div id="carouselExampleIndicators2" class="carousel slide margin-top-under-navbar" data-ride="carousel" >
-<!--  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol> ไม่แสดงให้กดซ้ายขวา แทน -->
 
-  <div class="carousel-inner">
-    <div class="carousel-item col-2 col-md-3 col-sm-2 active">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18322.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-    <div class="carousel-item col-2 col-md-3 col-sm-2">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18324.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-      <div class="carousel-item col-2 col-md-3 col-sm-2">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18324.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-      <div class="carousel-item col-2 col-md-3 col-sm-2">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18324.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-      <div class="carousel-item col-2 col-md-3 col-sm-2">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18324.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-    <div class="carousel-item col-2 col-md-3 col-sm-2">
-      <img src="https://img.freepik.com/free-photo/vegetarian-vietnamese-spring-rolls-with-spicy-shrimps-prawns-carrot-cucumber-red-cabbage-rice-noodle_2829-18343.jpg?size=626&ext=jpg" class="d-block img-fluid" alt="...">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-<div class="container container-category">
-    <div class="category-menu">
-        <div class="category-type-food item-right">
-            <div class="type-food-menu">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                        <div class="swiper-slide swiper-slide-active">
-                            <div class="type-food-item active"><div class="img-type"><img src="https://lh3.googleusercontent.com/DVYmkqwKcze5DVGH82-1DUCp4J5ZJETEjkwelayCEJ9sYKVH4IRexYi0YWxqXncYpPkrczk3GiR1zm2LRIScwO-0WH4xeis" class="icon"></div><h2 class="box-label">อาหารจานเดียว</h2></div></div><div class="swiper-slide swiper-slide-next"><div class="type-food-item"><div class="img-type"><img src="https://lh3.googleusercontent.com/RpYuEWMYah6DRX8GtgTJxHPC9eAvDfwPhUDSUQ4jXWhk7owxjCQF9d342elnB-LiuTfyeMLQuQQyXfgZ-0H7rqwWW4LcL6c" class="icon"></div><h2 class="box-label">เครื่องเคียง</h2></div></div></div></div><!----><!----></div></div></div></div>
-
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row mt-5 mb-5">
         <div class="col-10 ">
-            
+
             <iframe src="https://swiperjs.com/demos/110-slides-per-view.html"  style="width:100%" frameborder="0" ></iframe>
-            <!-- ตัวอย่าง https://swiperjs.com/demos/ --> 
+            <!-- ตัวอย่าง https://swiperjs.com/demos/ -->
             <!-- Slider for mobile  https://nickpiscitelli.github.io/Glider.js/index.html#demos  -->
-            
+
             <div class="row">
-                <div class="col border border-success-foodmall text-center rounded m-1 p-2">                    
+                <div class="col border border-success-foodmall text-center rounded m-1 p-2">
                     <span class="font-color-foodmall">ประเภท</span>
                 </div>
-                <div class="col border border-success-foodmall text-center rounded m-1 p-2">                   
+                <div class="col border border-success-foodmall text-center rounded m-1 p-2">
                     <span class="font-color-foodmall">ประเภท</span>
                 </div>
-                <div class="col border border-success-foodmall text-center rounded m-1 p-2">                    
+                <div class="col border border-success-foodmall text-center rounded m-1 p-2">
                     <span class="font-color-foodmall">ประเภท</span>
                 </div>
-                <div class="col border border-success-foodmall text-center rounded m-1 p-2">                   
+                <div class="col border border-success-foodmall text-center rounded m-1 p-2">
                     <span class="font-color-foodmall">ประเภท</span>
                 </div>
             </div>
-        </div> <!-- category --> 
-        
+        </div> <!-- category -->
+
         <div class="col-2 pl-1  text-center">
 
-            <div class="btn  mt-1 p-1" onclick="openSearch()" style="background-color: #f3f3f3;"> 
+            <div class="btn  mt-1 p-1" onclick="openSearch()" style="background-color: #f3f3f3;">
                 <img src="/image/icons8-search.svg" style="width:83%;">
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 
 
@@ -199,38 +154,41 @@
     <div class="card-deck col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
         <div class="card border border-0 shadow-sm rounded-lg border-bottom-color-primary" >
           <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top" alt="...">
-         
-         
-          
+
+
+
           <div class="card-body pt-2 pb-1">
               <h6 class="card-title text-center mt-2" style="height:40px;">##menu-name## </h6>
+
 <!--                <p class="card-text font-color-foodmall-gray-light2">รายละเอียด</p>-->
 <!--                <p class="card-text">##menu-description##</p>-->
-            
+
             <div class="row p-0">
                 <div class="col-8 pl-1">
                     <div class="font-color-foodmall-gray-medium mt-3 font-weight-bold" >
-                        ฿ ##menu-mainprice##
+                   ##menu-promotionprice##      ฿ ##menu-mainprice##
                     </div>
                 </div>
-                 <div class="col-4 text-right">
-                     <img src="/image/icons8-plus-green.svg" onclick="addtocart(##menu-id##)" style="width:153%">
 
+                <div class="col-4 text-right">
+                     <div class="d-block">
+                         <i class="fas fa-plus-circle fa-2x font-color-foodmall" ##menu-disable## onclick="addtocart(##menu-id##)"></i>
+                     </div>
+                     <!--<img src="/image/icons8-plus-green.svg" onclick="addtocart(##menu-id##)" style="width:153%">-->
                 </div>
             </div>  <!-- // -->
-            
-             
+
           </div>  <!-- // cardbody -->
-          
+
 
 <!--                <div> Review of Customer </div>
             ...
             <br>-->
-        </div>   <!-- // card --> 
+        </div>   <!-- // card -->
 
-    </div> <!-- // card deck --> 
-</div> <!-- // row --> 
-  
+    </div> <!-- // card deck -->
+</div> <!-- // row -->
+
 
 
 
@@ -238,19 +196,29 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
     <div class="form-group row mt-3 ">
-        <div id='menuprice-select' class="pl-3 alert alert-warning" style="width:100%">
-             <label for="inputEmail3" class="col-sm-2 col-form-label"> เลือกรายการ </label>
-             <div class="col-sm-9">
-                 <select class="" id='menu_select'></select>
+      <div id='menuprice-select' class="" style="width:100%">
+           <span class="font-color-foodmall pl-1"> เลือกรายการ </span>
+           <div class="form-group row pb-2">
 
+               <div class="col-10 pr-0" id="add_item_selectprice" style="display:none">
+                    กรุณาเลือกราคา
+                    <select class="form-control ml-1" id='menu_select' ></select>
+               </div>
+               <div class="col-10 pr-0"  id="add_item_selectoption" style="display:none">
+                    ตัวเลือก
+                    <select class="form-control ml-1" id='menu_option' placeholder="เลือกรายการ" ></select>
+               </div>
 
-             </div>
-         </div>
+           </div>
+
+       </div>
     </div>
 
     <div class="modal-footer">
 
-        <button onclick="updateselectprice()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> OK </button>
+      <button onclick='update_price()' class=' btn btn-md btn-submit-foodmall rounded-circle' id='managebranch'>
+         <i class="fas fa-plus"></i>
+      </button>
         <button onclick="$('#modal_priceselect').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
     </div>
 
@@ -272,28 +240,40 @@
   $('#top_shopping_cart').html('').show();
   //$('#main_menu_preview').html('').show();
 
-  function addtocart(menuid){
+  function addtocart(menuid,cb){
 
     var data2send ={
       LINE_USER: LINE_USER,
       menuid:menuid,
       selectedprice:working.selectedprice,
       main:main_web_site,
+      selectedoption:working.selectedoption,
       action:'add'
       }
     $.postJSON('/engine/order',data2send,(res)=>{
       //  alert("Add to Shopping Cart");
         if(res.result){
           if(res.action =='selectprice'){ // Show Select Price
-            working.menuid = menuid;
+            $('.select_price').show();
+              working.menuid = menuid;
+            if(res.detail.prices.length > 1){
+              working.selectprice = res.detail.prices;
+              set_selection(res.detail.prices);
+
+            }
+            if(res.detail.option && res.detail.option.length > 0){
+                set_select_option(res.detail);
+            }
             $('#modal_priceselect').modal('show');
-            working.selectprice = res.detail.prices;
-            set_selection(res.detail.prices);
+
             return;
           }else{
             working.order = res.detail;
             update_shoppingcart();
           }
+          working.selectedprice = undefined;
+          working.selectedoption =undefined;
+          if(cb) cb(true);
         }else{
             alert(res.detail);
         }
@@ -306,27 +286,70 @@
         html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
       }
           $('#menu_select').html(html);
+          $('#add_item_selectprice').show();
     }
+    function set_select_option(objdetail){
+
+      if(!(Number(objdetail.optionlimit) > 0) ){
+        objdetail.optionlimit =1;
+      }
+
+      var seldata = `<option disabled selected>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
+        if(objdetail.optionlimit > 1){
+          seldata = `<option disabled>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
+           $('#menu_option').attr(  "multiple","multiple" );
+      //    seldata = `<option value='' disabled selected>--เลือกรายการ--</option>`;
+        }
+         if(Array.isArray(objdetail.option)){
+           for (var x = 0; x < objdetail.option.length; x++) {
+               seldata += '<option value="' +objdetail.option[x] + '"  >' + objdetail.option[x] + '</option>';
+           }
+         }
+         //$('#menu_option').select2('destroy');
+         $('#menu_option').off('change.select2');
+         $('#menu_option').html(seldata);
+         $('#add_item_selectoption').show();
+         if(objdetail.optionlimit ==1) return;  // not Select2
+         var select2option = {
+             tags: false,
+             tokenSeparators: [',', ' '],
+             allowClear: true,
+             maximumSelectionLength: objdetail.optionlimit
+         }
+        $('#menu_option').select2(select2option);
+
+    }
+    function update_price(){
+        var index = $('#menu_select').val();
+      //
 
 
+        if(working.selectprice){
+            working.selectedprice = working.selectprice[index];
+        }
+        working.selectedoption = $('#menu_option').val();
+        addtocart(working.menuid,(re)=>{
+          if(re){
+            $('#modal_priceselect').modal('hide');
+          }
+        });
+
+    }
   function runApp() {
 
       $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
           if(res.result){
             working.order = res.detail;
-
-
-
           //alert("Found item" +  res.detail.items.length)
 
             // $('#shopingcart').html(JSON.stringify(res.detail));
           }else{
 
           }
+
           update_shoppingcart();
           //return false;
           $.postJSON('/engine/get/menulist',{LINE_USER: LINE_USER,menuid:undefined},(res)=>{
-
                 if(res && res.detail){
 
                 var menu = res.detail;
@@ -334,6 +357,11 @@
                 res.detail.map( (each)=>{
                     each.images ?  each.mainimage = each.images[0] : each.mainimage= 'kinarai.png';
                     each.price ?  each.mainprice = each.price[0].price : each.mainprice = '-';
+                    each.normal_price ? each.promotionprice = "<strike>฿ " + each.normal_price + "</strike>" : each.promotionprice = '';
+                    if(each.status !=1){
+                      each.disable = "disabled='disabled'"
+                    }
+                    
                 });
                 allhtml=hash_replace(template,'menu',res.detail);
                 // alert(allhtml);
@@ -356,16 +384,7 @@
       }
       $("#top_shopping_cart").html(hash_replace(template_cart,'CART',working.order))
   }
-  initializeLiff();
-  function updateselectprice(){
-      var index = $('#menu_select').val();
+  initializeLiff('menulist');
 
-      $('#modal_priceselect').modal('hide');
-      working.selectedprice = working.selectprice[index];
-    //  alert("INDEX:" + JSON.stringify(working.selectedprice));
-      addtocart(working.menuid);
-  }
 
 </script>
-
- 

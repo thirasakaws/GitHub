@@ -304,7 +304,7 @@
                     </div>
                     <div class="row button-top_gray pt-2 m-0 text-right">
                         <div class="col-9 text-left text-gray-light ">
-                            วันเสาร์ <span class="text-gray-light2" style="font-weight: 200;">(Saterday)</span>
+                            วันเสาร์ <span class="text-gray-light2" style="font-weight: 200;">(Saturday)</span>
                         </div>
                         <div class="col-3">
                             <label class="switch">
@@ -440,7 +440,7 @@
         if (!working.shop.opening)
             working.shop.opening = 1;
         if (!working.shop.paymenttype)
-            working.shop.paymenttype = 1;
+            working.shop.paymenttype = [];
     }
 
     function updatepaymenttype(){
@@ -487,6 +487,16 @@
         if (obj.length > 0) {
             for (var x = 0; x < obj.length; x++) {
                 $('#date_' + obj[x] + '').prop('checked', true);
+            }
+        }
+    }
+
+    setpaymentttype(working.shop.paymenttype);
+
+    function setpaymentttype(obj) {
+        if (obj.length > 0) {
+            for (var x = 0; x < obj.length; x++) {
+                $('#paytype-' + obj[x] + '').prop('checked', true);
             }
         }
     }
