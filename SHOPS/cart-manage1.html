@@ -43,7 +43,8 @@
             <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
                 <div class="col">
-                    <input class="input_data_bn edit_data ORDER_contact w-90 " type="text" min="10" max="10" placeholder="" data-field="contact">
+                    <input class="input_data_bn edit_data ORDER_contact w-90 " id="contact" type="number" min="10" max="10" placeholder="" data-field="contact" onkeyup="check_phonenumber();"> <br>
+                    <small class="warn_phoneinput text-danger" style="display:none;">**รูปแบบไม่ถูกต้อง</small>
                 </div>
             </div> <!--// -->
         </div>
@@ -224,6 +225,22 @@
               showmwnuorderlist(working.order.items);
               setdatabyclass($('.main_data'), 'ORDER', working.order);
             },500);
+
+    }
+    function check_phonenumber(){
+          var value = $('#contact').val();
+
+          if (isNaN(value) == true) {
+            $('.warn_phoneinput').show();
+          }else {
+          $('.warn_phoneinput').hide();
+          }
+
+          if (value.length > 10) {
+                  $('.warn_phoneinput').show();
+          }else {
+               $('.warn_phoneinput').hide();
+          }
 
     }
 

@@ -436,15 +436,19 @@ background: white;
   }
   var select_check_template=$('#select_check_option').html();
   function add_to_cart(obj){
-    $(obj).prop('disabled', true);
     var selectedprice,selectedcheckbox=[];
-
-    if(working.menu.prices.length > 1){ // select price ?
+    if(working.menu.status != 5 ) {
+      alert("เมนูไม่พร้อมให้บริการขณะนี้")
+      return;
+    }
+    if(working.menu.prices && working.menu.prices.length > 1){ // select price ?
       var temp= $('.price_check:checked').val();
       if(temp == undefined)  return alert("กรุณาเลือก ราคา");
        selectedprice = working.menu.prices[temp];
     }
-    if(working.menu.option.length > 0){  // select option?
+
+    if(working.menu.option && working.menu.option.length > 0){  // select option?
+
       var total_select = 0;
       $('.option_check:checked').each((i,el)=>{
           total_select++;
@@ -454,6 +458,7 @@ background: white;
         return alert("ตัวเลือกเพิ่ม สามารถเลือกได้สูงสุดไม่เกิน " +  working.menu.optionlimit + " รายการ");
       }
     }
+    $(obj).prop('disabled', true);
     addtocart(selectedprice,selectedcheckbox);
   }
   function addtocart(selectedprice,selectedcheckbox,cb){

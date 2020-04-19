@@ -37,13 +37,13 @@
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
         	##ORDER-shopname## ##ORDER-shopbranch##
-        	
+
         	Time : ##ORDER-time##
               ##ORDER-statusshow## # ##ORDER-id##
-				
-				
+
+
 				จำนวนสั่งซื้อ ##ORDER-totalitems## รายการ
-				
+
           <div class="row">
             <div class="col-12">
                 ##ORDER-menudetail##
@@ -164,7 +164,7 @@
 
 function runApp(){
 
-  $.postJSON('/api/liff/list/history/customerorder',{LINE_USER: LINE_USER},(res)=>{
+  $.postJSON('/engine/history/customerorder',{LINE_USER: LINE_USER},(res)=>{
       if(res.result){
         working.history = res.detail;
         if(working.history.length ==0){
@@ -187,10 +187,10 @@ function runApp(){
 
                 obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
            });
-           
+
            working.history.totalitems = working.history.items.length;
            working.history.time = moment(working.history.createdate,'X').format('H:i:m D/M/Y');
-           
+
            var html1  = hash_replace(template_main,'ORDER',working.history)
 
            $("#order_history").html(html1);
@@ -242,7 +242,7 @@ function previewcustomer(order_id){
       // address = !address;
 };
 
-initializeLiff();
+initializeLiff('orderlist');
 
 //  $('#body_mainbody').load('/LIFF/preload.html');
 </script>
