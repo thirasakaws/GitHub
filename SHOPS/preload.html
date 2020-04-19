@@ -25,7 +25,7 @@
 <link href="/css/all.css" rel="stylesheet" type="text/css"/>
 <script src="/js/all.js" type="text/javascript"></script>
 
-<script src="/SHOPS/advws_util.js?v=30" type="text/javascript"></script>
+<script src="/SHOPS/advws_util.js?v=31" type="text/javascript"></script>
 <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 
 <script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
@@ -210,9 +210,9 @@
 
 //////////
 var temp_url_permission
-var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','menulist','menuview','menu','menusearch','shopview'];
+var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','menulist','menuview','menuview4add','menu','menusearch','shopview'];
 var firsttime_visit =true;
-
+var working={};
 var temp =  window.location.pathname.split('/');
 //  #### Setting ########## For LINE APP
 var myLiffId =temp[2];  // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
@@ -309,7 +309,7 @@ function initializeLiff(liffpagename) {
       if(typeof(runApp) =='function') runApp();
       return;
     }
-    
+
     liff.init({ liffId: myLiffId },
       ()=>{initializeApp(liffpagename);} , err => {
       console.log(err.code, err.message)

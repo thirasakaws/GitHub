@@ -46,9 +46,11 @@
 <div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
     <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
         <div class="col-3 p-0 pl-1 text-left">
+           <!--
             <button class='btn border border-0 text-secondary' onclick="window.history.back();">
                 <i class="fas fa-chevron-left"></i> Back
             </button>
+             -->
         </div>
         <div class="col-6 p-0 text-center">
             <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สั่งอาหาร</div>
@@ -153,7 +155,8 @@
 <div class="row " id='template_mainview' style="display:none; ">
     <div class="card-deck col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
         <div class="card border border-0 shadow-sm rounded-lg border-bottom-color-primary" >
-          <img src="https://www.kinarai.com/cdn/image/menu/##menu-mainimage##" class="card-img-top" alt="...">
+
+          <img src="https://www.kinarai.com/##menu-mainimage##" class="card-img-top" alt="..." onclick='view_menu_id(##menu-id##);'>
 
 
 
@@ -166,7 +169,7 @@
             <div class="row p-0">
                 <div class="col-8 pl-1">
                     <div class="font-color-foodmall-gray-medium mt-3 font-weight-bold" >
-                   ##menu-promotionprice##      ฿ ##menu-mainprice##
+                ##menu-promotionprice##   ฿ ##menu-mainprice##
                     </div>
                 </div>
 
@@ -190,41 +193,6 @@
 </div> <!-- // row -->
 
 
-
-
-<div class="modal fade " id="modal_priceselect" tabindex="-1" role="dialog"  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-    <div class="form-group row mt-3 ">
-      <div id='menuprice-select' class="" style="width:100%">
-           <span class="font-color-foodmall pl-1"> เลือกรายการ </span>
-           <div class="form-group row pb-2">
-
-               <div class="col-10 pr-0" id="add_item_selectprice" style="display:none">
-                    กรุณาเลือกราคา
-                    <select class="form-control ml-1" id='menu_select' ></select>
-               </div>
-               <div class="col-10 pr-0"  id="add_item_selectoption" style="display:none">
-                    ตัวเลือก
-                    <select class="form-control ml-1" id='menu_option' placeholder="เลือกรายการ" ></select>
-               </div>
-
-           </div>
-
-       </div>
-    </div>
-
-    <div class="modal-footer">
-
-      <button onclick='update_price()' class=' btn btn-md btn-submit-foodmall rounded-circle' id='managebranch'>
-         <i class="fas fa-plus"></i>
-      </button>
-        <button onclick="$('#modal_priceselect').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
-    </div>
-
-    </div>
-    </div>
-</div>
 
 
 
@@ -256,16 +224,7 @@
           if(res.action =='selectprice'){ // Show Select Price
             $('.select_price').show();
               working.menuid = menuid;
-            if(res.detail.prices.length > 1){
-              working.selectprice = res.detail.prices;
-              set_selection(res.detail.prices);
-
-            }
-            if(res.detail.option && res.detail.option.length > 0){
-                set_select_option(res.detail);
-            }
-            $('#modal_priceselect').modal('show');
-
+            go2View('menuview4add');
             return;
           }else{
             working.order = res.detail;
@@ -280,61 +239,7 @@
 
     });
   }
-  function set_selection (allprice){
-      var html ='';
-      for(var x=0; x < allprice.length;x++){
-        html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
-      }
-          $('#menu_select').html(html);
-          $('#add_item_selectprice').show();
-    }
-    function set_select_option(objdetail){
 
-      if(!(Number(objdetail.optionlimit) > 0) ){
-        objdetail.optionlimit =1;
-      }
-
-      var seldata = `<option disabled selected>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
-        if(objdetail.optionlimit > 1){
-          seldata = `<option disabled>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
-           $('#menu_option').attr(  "multiple","multiple" );
-      //    seldata = `<option value='' disabled selected>--เลือกรายการ--</option>`;
-        }
-         if(Array.isArray(objdetail.option)){
-           for (var x = 0; x < objdetail.option.length; x++) {
-               seldata += '<option value="' +objdetail.option[x] + '"  >' + objdetail.option[x] + '</option>';
-           }
-         }
-         //$('#menu_option').select2('destroy');
-         $('#menu_option').off('change.select2');
-         $('#menu_option').html(seldata);
-         $('#add_item_selectoption').show();
-         if(objdetail.optionlimit ==1) return;  // not Select2
-         var select2option = {
-             tags: false,
-             tokenSeparators: [',', ' '],
-             allowClear: true,
-             maximumSelectionLength: objdetail.optionlimit
-         }
-        $('#menu_option').select2(select2option);
-
-    }
-    function update_price(){
-        var index = $('#menu_select').val();
-      //
-
-
-        if(working.selectprice){
-            working.selectedprice = working.selectprice[index];
-        }
-        working.selectedoption = $('#menu_option').val();
-        addtocart(working.menuid,(re)=>{
-          if(re){
-            $('#modal_priceselect').modal('hide');
-          }
-        });
-
-    }
   function runApp() {
 
       $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
@@ -355,13 +260,11 @@
                 var menu = res.detail;
                 var allhtml ='';
                 res.detail.map( (each)=>{
-                    each.images ?  each.mainimage = each.images[0] : each.mainimage= 'kinarai.png';
-                    each.price ?  each.mainprice = each.price[0].price : each.mainprice = '-';
-                    each.normal_price ? each.promotionprice = "<strike>฿ " + each.normal_price + "</strike>" : each.promotionprice = '';
-                    if(each.status !=1){
-                      each.disable = "disabled='disabled'"
-                    }
-                    
+                    each.mainimage = each.images && each.images[0] ?  `cdn/image/menu/${each.images[0]}` : "image/Kinarai.jpg"; //default image
+                    each.mainprice = each.price ?  each.price[0].price : '-';
+                    each.promotionprice =  each.normal_price ? `<strike>฿ ${each.normal_price}"</strike>` : '';
+                    each.disable = each.status !=1? "disabled='disabled'":'';
+
                 });
                 allhtml=hash_replace(template,'menu',res.detail);
                 // alert(allhtml);
@@ -374,6 +277,10 @@
       });
 
 
+  }
+  function view_menu_id(menuid){
+    working.menuid = menuid;
+    go2View('menuview4add');
   }
   function update_shoppingcart(){
       if(working.order && working.order.items){

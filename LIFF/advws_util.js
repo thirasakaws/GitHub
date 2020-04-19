@@ -194,7 +194,8 @@ function hash_replace(template,prefix,tempdata,notclear=false){
 
       }
       if(notclear) return html;
-      html = html.replace(/##\w+-\w+##/g,'');
+      var temp = new RegExp('##'+prefix+'-\\w+##','g');
+      html = html.replace(temp,'');
       return html;
 
 };

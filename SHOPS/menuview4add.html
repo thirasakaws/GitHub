@@ -238,7 +238,7 @@ background: white;
     <div class="fixed-top shadow" id='top_shopping_cart' >
     <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
         <div class="col-3 p-0 pl-1 text-left">
-            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+            <button class='btn border border-0 text-secondary' onclick="go2View('menulist')">
                 <i class="fas fa-chevron-left"></i>
             </button>
         </div>
@@ -361,13 +361,13 @@ background: white;
 
     <div class="row mb-3 ">
         <div class="col-12">
-            <button type='btn' class="btn btn-lg btn-block btn-submit-foodmall" onclick='add_to_cart();'>เพิ่มลงตะกร้า</button>
+            <button type='btn' id="btn_add_cart" class="btn btn-lg btn-block btn-submit-foodmall" onclick='add_to_cart(this);'>เพิ่มลงตะกร้า</button>
         </div>
     </div>
 
     <div class="row mb-4">
         <div class="col-12">
-            <button class="btn btn-lg btn-block btn-light border border-secondary">สั่งสินค้าเพิ่ม</button>
+            <button class="btn btn-lg btn-block btn-light border border-secondary" onclick = "go2View('menulist')" >สั่งสินค้าเพิ่ม</button>
         </div>
     </div>
 
@@ -376,36 +376,27 @@ background: white;
 
 
 <script>
-  var liffstring = '?liff.state=%2Fmenuid%3D';
-  var detail = window.location.search.replace(liffstring,'');
-  var menuid = detail;
-
-  var temp = window.location.href.replace(liffstring+detail,'');
-  if(menuid && window.location.href !== temp){
-      window.history.pushState({
-        callpath: 'menuview'
-      }, 'Add item to Shoppingcart', temp);
-  }
-
+  var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F','');
 
    var templatemain = $('#mainview').html();
+   var template_cart = $('#top_shopping_cart').html();
   // $('#top_shopping_cart').html('').show();
   //$('#main_menu_preview').html('').show();
-  if(!menuid){
-    if(working.menuid){
-
-
+  //alert('working.menuid' + working.menuid)
+  if(!working.menuid){
+    if(detail){
+        working.menuid = detail;
     }
-  }else{
-    working.menuid = menuid;
+  }else {
+    //alert("Menuid from menuid")
   }
   function showmenu(){
-
+    update_shoppingcart();
     if(! working.menu.images || !working.menu.images[0]){
         working.menu.imageshow = "https://www.kinarai.com/image/Kinarai.jpg"; //default image
     }else{
       working.menu.imageshow =`https://www.kinarai.com/cdn/image/menu/${working.menu.images[0]}`;
-    }        
+    }
     if(working.menu.prices.length ==1){
       working.menu.priceshow = '฿  '+ working.menu.prices[0].price;
     }
@@ -419,6 +410,7 @@ background: white;
 
   }
 	function runApp (){
+
     if(working.menu){
       return showmenu();
     }
@@ -443,7 +435,8 @@ background: white;
 
   }
   var select_check_template=$('#select_check_option').html();
-  function add_to_cart(){
+  function add_to_cart(obj){
+    $(obj).prop('disabled', true);
     var selectedprice,selectedcheckbox=[];
 
     if(working.menu.prices.length > 1){ // select price ?
@@ -482,13 +475,16 @@ background: white;
             return;
           }else{
             working.order = res.detail;
-            alert("Add Success");
 
           }
+
           working.menuid = undefined;
           working.menu =undefined;
+          update_shoppingcart();
+          go2View('menulist');
           if(cb) cb(true);
         }else{
+            $("#btn_add_cart").prop('disabled', false);
             alert(res.detail);
         }
 
@@ -520,6 +516,16 @@ background: white;
       if(temp <=1) temp=1;
       $('#qty_show').html(temp)
     }
-  initializeLiff('menuview');
+
+    function update_shoppingcart(){
+        if(working.order && working.order.items){
+            working.order.totalitem =0;
+            working.order.items.map((obj)=>{
+                working.order.totalitem +=obj.qty;
+            })
+        }
+        $("#top_shopping_cart").html(hash_replace(template_cart,'CART',working.order))
+    }
+  initializeLiff('menuviewadd');
 
 </script>

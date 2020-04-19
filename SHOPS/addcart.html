@@ -47,7 +47,6 @@
 </div>
 <script>
     // all_page = [''];
-     var working={};
     var liffstring = '?liff.state=%2Fmenuid%3D';
     var detail = window.location.search.replace(liffstring,'');
     var menuid = detail;
@@ -55,41 +54,59 @@
       alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
       liff.login();
     }
-
-    function runApp(cb){
-
-        var data2send ={
-          LINE_USER: LINE_USER,
-          menuid:menuid,
-          selectedprice:working.selectedprice,
-          main:main_web_site,
-          selectedoption:working.selectedoption,
-          }
+    function addtocart(menuid,cb){
+      var data2send ={
+        LINE_USER: LINE_USER,
+        menuid:menuid,
+        selectedprice:working.selectedprice,
+        main:main_web_site,
+        selectedoption:working.selectedoption,
+        action:'add'
+        }
       $.postJSON('/engine/order',data2send,(res)=>{
+        //  alert("Add to Shopping Cart");
           if(res.result){
             if(res.action =='selectprice'){ // Show Select Price
+              working.menuid = menuid;
+              working.menu = res.detail;
+              go2View('menuview4add');
+              return;
               $('.select_price').show();
+                working.menuid = menuid;
               if(res.detail.prices.length > 1){
-
                 working.selectprice = res.detail.prices;
                 set_selection(res.detail.prices);
+
               }
               if(res.detail.option && res.detail.option.length > 0){
                   set_select_option(res.detail);
               }
-
+              $('#modal_priceselect').modal('show');
 
               return;
+            }else{
+              working.order = res.detail;
+              update_shoppingcart();
             }
+            working.selectedprice = undefined;
+            working.selectedoption =undefined;
             if(cb) cb(true);
-
-            $("#result-add").html("เพิ่มสินค้าไปยังรถเข็นแล้ว").addClass('text-success pt-3 pb-3');
           }else{
-
-            $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
+              alert(res.detail);
           }
 
       });
+    }
+    function runApp(cb){
+        addtocart(menuid,(re)=>{
+
+          if(re){
+              $("#result-add").html("เพิ่มสินค้าไปยังรถเข็นแล้ว").addClass('text-success pt-3 pb-3');
+          }else{
+              $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
+          }
+
+        });
 
     }
     function set_selection (allprice){
