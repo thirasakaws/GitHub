@@ -10,54 +10,37 @@
                <div class="col-xs-12 ">
                  <nav>
                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                     <div class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</div>
-                     <div class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</div>
-                     <div class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</div>
+                     <div class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">รายการมาใหม่</div>
+                     <div class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">รายการรอทำ</div>
+                     <div class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">รอทำเสร็จ</div>
                    </div>
                  </nav>
                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                     Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                     <div id="order_last">
+                         Please Wait..
+                     </div>
                    </div>
                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                     Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                     <div id="order_waiting_payment">
+                         Please Wait..
+                     </div>
                    </div>
                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                     Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                     <div id="order_waiting_finish">
+                         Please Wait..
+                     </div>
                    </div>
                  </div>
 
                </div>
              </div>
        </div>
-  <!-- <div class="container">
-    <div class="row">
-    	<div class="col-md-12">
-            <div class="panel with-nav-tabs panel-default">
-                <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
-                            <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
-                            <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
-                        </ul>
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1default">Default 1</div>
-                        <div class="tab-pane fade" id="tab2default">Default 2</div>
-                        <div class="tab-pane fade" id="tab3default">Default 3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-</div> -->
 
 
-
-  <div id="order_last">
+  <!-- <div id="order_last">
       Please Wait..
-  </div>
+  </div> -->
   <style media="screen">
 
     .btn-circle {
@@ -98,18 +81,24 @@
             </div>
           </div>
 
-          <div class="text-center">
-            ** ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
-            <!-- <small>
-                <span>ข้อมูลจัดส่ง</span> <br>
-                  ##ORDER-addressid##
-            </small> -->
+          <div class="row">
+
+
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            </div>
           </div>
           <div class="row">
-            <div class="col-6 p-1">
+            <div class="col-5 p-1">
                 <button type="button" class="btn btn-danger btn-circle btn-xl float-left" onclick="order_accept(this,##ORDER-id##,'reject');" >ไม่รับ</button>
             </div>
-            <div class="col-6 p-1">
+            <div class="col-2 text-center">
+                  <button class="btn btn-outline-light btn-sm mt-2"onclick="order_accept(this,##ORDER-id##,'edit');"><span class="text-warning"> แก้ไข</span></button>
+            </div>
+            <div class="col-5 p-1">
                 <button type="button" class="btn btn-success btn-circle btn-xl float-right" onclick="order_accept(this,##ORDER-id##,'accept');" >รับ</button>
             </div>
           </div
@@ -154,6 +143,46 @@
         </div>
        </div>
     </div>
+
+    <div id="order_template2" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+              <strong class="card-title" >##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span></strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
+            </div>
+          </div>
+          <div class="row">
+
+
+          <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+          <div class="col-6 mt-3 mb-3 text-right">
+             <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                 <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+            </div>
+
+          <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
+              <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
+          </button>
+        </div>
+       </div>
+    </div>
+
+
     <div id="order_template3" style="display:none;">
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
@@ -193,6 +222,44 @@
        </div>
     </div>
 
+    <div id="order_template4" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+              <strong class="card-title" >##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span></strong>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              สาขา  ##ORDER-shopbranchname##
+            </div>
+          </div>
+          <div class="row">
+
+
+          <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+          <div class="col-6 mt-3 mb-3 text-right">
+             <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                 <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+            </div>
+
+          <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
+              <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
+          </button>
+        </div>
+       </div>
+    </div>
+
     <div id="order_template5" style="display:none;">
       <div class="card row_tablecontent mb-3" >
         <div class="card-body">
@@ -209,12 +276,19 @@
               สาขา  ##ORDER-shopbranchname##
             </div>
           </div>
-          <div class="text-center">
-            **ข้อมูลลูกค้า <button class="btn btn-outline-light btn-sm"onclick="previewcustomer(##ORDER-id##)"><span class="text-warning"> >>ดูข้อมูล<< </span></button><br>
-            <!-- <small>
-                <span>ข้อมูลจัดส่ง</span> <br>
-                  ##ORDER-addressid##
-            </small> -->
+          <div class="row">
+
+
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+              <!-- <small>
+                  <span>ข้อมูลจัดส่ง</span> <br>
+                    ##ORDER-addressid##
+              </small> -->
+            </div>
           </div>
         </div>
        </div>
@@ -353,6 +427,32 @@
   </div>
 </div>
 
+<div class="modal fade bd-example-modal-sm" id="modal_oneditorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body " id="reject-body">
+        <div class="text-center" id="frm_inputreject">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <h4 class="">แก้ไขรายการ</h4>
+
+
+            <div class="mt-1">
+                <textarea class="form-control" id="inputcommenedit" placeholder=""></textarea>
+                <button type="button" class="btn btn-warning btn-block mt-1" name="button" onclick="">ยืนยันการแก้ไข</button>
+            </div>
+        </div>
+<!--
+        <div class="text-center p-2" id="frm_showrejectstatus" style="display:none">
+              <h4 class="text-success warn_reject">แก้ไขรายการเรียบร้อย</h4>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
     all_page = ["order_seller_latest1"];
@@ -365,6 +465,7 @@
   var template1= $("#order_template1").html();    // Order Status = 7
   var template2= $("#order_template2").html();    // Order Status = 11
   var template3= $("#order_template3").html();    // Order Status = 15
+  var template4= $("#order_template4").html();    // Order Status = 14
   var template5= $("#order_template5").html();    // Order Status = 5/10
   var order_template_menu = $('#order_template_menu').html();
 
@@ -374,8 +475,164 @@
   STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
   STATUSSHOW[11]='ลูกค้าชำระเงินแล้ว';
   STATUSSHOW[12]='ลูกค้าจะชำระเงินแบบ COD';
+  STATUSSHOW[14]='ลูกค้าชำระเงิน/ยืนยันแล้ว';
   STATUSSHOW[15]='ร้านกำลังดำเนินการ';
   STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
+
+
+var orderstatus_page1 = [],orderstatus_page2 = [],orderstatus_page3 = [];
+
+setInterval(neworderCall, 1000*5);
+
+function neworderCall() {
+  var newrechord = [];
+  $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+        if(res.result){
+        console.log('data',res.detail);
+        var obj = res.detail;
+        working.orderlast = obj;
+        if(working.orderlast.length ==0){
+            $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+
+        draworderlast(obj);   // loop all
+
+            // if (obj && obj.length >0) {
+            //       for(var x=0;x<obj.length;x++){
+            //         var found;
+            //           if(obj[x].status == 7 || obj[x].status == 11 || obj[x].status ==12){
+            //                 for(var y=0;y<orderstatus_page1.length;y++){
+            //                    if (orderstatus_page1[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page1.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else if(obj[x].status == 5 || obj[x].status == 10 || obj[x].status ==14){
+            //                 for(var y=0;y<orderstatus_page2.length;y++){
+            //                    if (orderstatus_page2[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page2.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else if(obj[x].status == 15){
+            //                 for(var y=0;y<orderstatus_page3.length;y++){
+            //                    if (orderstatus_page3[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page3.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else {
+            //                 for(var y=0;y<orderstatus_page2.length;y++){
+            //                    if (orderstatus_page2[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page2.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }
+            //             if(!found){
+            //                 draworderlast(obj[x]);
+            //             }
+            //       }
+            // }   //end loop
+
+        }
+  });
+}
+
+function draworderlast(data){
+  var order1=[],order2=[],order3=[],order4=[],order5=[];
+
+
+if (Array.isArray(data)) {
+
+       data.map((obj)=>{   // out if is obj
+
+    if(working.shop_branch){
+      for(var x=0;x<working.shop_branch.length;x++){
+         if (working.shop_branch[x]._id == obj.shopbranch) {
+               obj.shopbranchname = working.shop_branch[x].name;
+         }
+      }
+    }
+
+    if(!obj.note) obj.note='';
+         obj.statusshow = STATUSSHOW[obj.status];
+         obj.items.map((item)=>{   // setting Some Default
+             item.priceshow = item.price.price;
+             item.pricedetail = item.price.detail;
+         });
+         if(obj.status==7){ order1.push(obj); orderstatus_page1.push(obj);}
+         else if(obj.status==11 || obj.status==12) {order2.push(obj); orderstatus_page1.push(obj);}
+         else if(obj.status==5 || obj.status==10) {order5.push(obj); orderstatus_page2.push(obj);}
+         else if(obj.status==14) {order4.push(obj); orderstatus_page2.push(obj);}
+         else if(obj.status==15) {order3.push(obj); orderstatus_page3.push(obj);}
+         else {order5.push(obj); orderstatus_page2.push(obj);}
+       obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
+
+       });
+
+  var html1  = hash_replace(template1,'ORDER',order1)
+  var html2  = hash_replace(template2,'ORDER',order2)
+  var html3  = hash_replace(template3,'ORDER',order3)
+  var html4  = hash_replace(template4,'ORDER',order4)
+  var html5  = hash_replace(template5,'ORDER',order5)
+  // $("#order_last").before(html1+html2);
+  // $("#order_waiting_payment").before(html5+html4);    // for add new rechord
+  // $("#order_waiting_finish").before(html3);
+  $("#order_last").html(html1+html2);
+  $("#order_waiting_payment").html(html5+html4);
+  $("#order_waiting_finish").html(html3);
+
+
+}else if (typeof(data)=='object') {
+
+ // var obj = data;
+ //    if(working.shop_branch){
+ //      for(var x=0;x<working.shop_branch.length;x++){
+ //         if (working.shop_branch[x]._id == obj.shopbranch) {
+ //               obj.shopbranchname = working.shop_branch[x].name;
+ //         }
+ //      }
+ //    }
+ //
+ //  if(!obj.note) obj.note='';
+ //       obj.statusshow = STATUSSHOW[obj.status];
+ //       obj.items.map((item)=>{   // setting Some Default
+ //           item.priceshow = item.price.price;
+ //           item.pricedetail = item.price.detail;
+ //       });
+ //       if(obj.status==7){ order1.push(obj); orderstatus_page1.push(obj);}
+ //       else if(obj.status==11 || obj.status==12) {order2.push(obj); orderstatus_page1.push(obj);}
+ //       else if(obj.status==5 || obj.status==10) {order5.push(obj); orderstatus_page2.push(obj);}
+ //       else if(obj.status==14) {order4.push(obj); orderstatus_page2.push(obj);}
+ //       else if(obj.status==15) {order3.push(obj); orderstatus_page3.push(obj);}
+ //       else {order5.push(obj); orderstatus_page2.push(obj);}
+ //     obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
+ //
+ //
+ //      var html1  = hash_replace(template1,'ORDER',order1)
+ //      var html2  = hash_replace(template2,'ORDER',order2)
+ //      var html3  = hash_replace(template3,'ORDER',order3)
+ //      var html4  = hash_replace(template4,'ORDER',order4)
+ //      var html5  = hash_replace(template5,'ORDER',order5)
+ //      // $("#order_last").before(html1+html2);
+ //      // $("#order_waiting_payment").before(html5+html4);    // for add new rechord
+ //      // $("#order_waiting_finish").before(html3);
+ //      $("#order_last").html(html1+html2);
+ //      $("#order_waiting_payment").html(html5+html4);
+ //      $("#order_waiting_finish").html(html3);
+
+}
+  return false;
+};
+
 
 function getorder(){
   $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
@@ -383,50 +640,14 @@ function getorder(){
         working.orderlast = res.detail;
         if(working.orderlast.length ==0){
             $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
           return;
         }
         if (working.orderlast) {
-
-          // var address_array = []
-          // for(var x=0;x<working.orderlast.length;x++){
-          //     address_array.push(working.orderlast[x].addressid);
-          // }
-          //
-          // if(address_array.length >0){
-          //   getorderaddress(address_array);
-          // }
-          //console.log("ORDER",working.orderlast);
-          var order1=[],order2=[],order3=[],order5=[];
-
           setTimeout(()=>{
 
-                 working.orderlast.map((obj)=>{   // setting Some Default
-                   if(working.shop_branch){
-                     for(var x=0;x<working.shop_branch.length;x++){
-                        if (working.shop_branch[x]._id == obj.shopbranch) {
-                              obj.shopbranchname = working.shop_branch[x].name;
-                        }
-                     }
-                   }
-
-                   if(!obj.note) obj.note='';
-                        obj.statusshow = STATUSSHOW[obj.status];
-                        obj.items.map((item)=>{   // setting Some Default
-                            item.priceshow = item.price.price;
-                            item.pricedetail = item.price.detail;
-                        });
-                        if(obj.status==7) order1.push(obj);
-                        else if(obj.status==11 || obj.status==12) order2.push(obj);
-                        else if(obj.status==5 || obj.status==10) order5.push(obj);
-                        else if(obj.status==15) order3.push(obj);
-                        else order5.push(obj);
-                      obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
-                 });
-                 var html1  = hash_replace(template1,'ORDER',order1)
-                 var html2  = hash_replace(template2,'ORDER',order2)
-                 var html3  = hash_replace(template3,'ORDER',order3)
-                 var html5  = hash_replace(template5,'ORDER',order5)
-                 $("#order_last").html(html1+html2+html3+html5);
+            draworderlast(working.orderlast);
            },500);
           }else {
             return 'ไม่พบเมนู'
@@ -442,7 +663,7 @@ function getorder(){
       // $('#shopi0ngcart').html(JSON.stringify(res.detail));
 };
 
-$('#gmap_cusgps').load('/LIFF/modal_gps.html');
+$('#gmap_cusgps').load('/LIFF/modal_gps_full.html');
 function find_location_order() {
   // console.log('cuslocate',ordercustomerlocation);
   var pos;
@@ -509,6 +730,10 @@ function order_accept(obj,orderid,type){
             reject_data = data;
             $('#modal_onrejectorder').modal('show');
 
+          }else if(type=='edit'){
+            reject_data = data;
+            $('#modal_oneditorder').modal('show');
+
           }else {
             $.postJSON('/engine/order/shop',data,(res)=>{
                 if(res.result){
@@ -522,6 +747,7 @@ function order_accept(obj,orderid,type){
 };
 
 function runApp(){
+  orderstatus_page1 = [];orderstatus_page2 = [];orderstatus_page3 = [];
     // $.postJSON('/api/liff/check/shopowner',{LINE_USER: LINE_USER}, function (res) {
       $.postJSON('/api/liff/check/shopbranch',{LINE_USER: LINE_USER}, function (res) {
         if(res.result){
@@ -545,16 +771,18 @@ function previewcustomer(order_id){
   var paymenttype_array = ['','Cash On Delivery','QR payment By Quickpay']
   var obj_cust = {};
     working.orderlast.map((obj)=>{
-      console.log('order',obj);
-      ordercustomerlocation = obj.addresslocation;
-      obj.distanceShopToCustomerInKM = obj.logistic.distanceShopToCustomerInKM;
-      obj.deliveryTotalAmount = obj.logistic.deliveryTotalAmount;
-      obj.deliveryDistance = obj.logistic.deliveryDistance;
-      //
-      //
+      // console.log('order-data',obj);
       if(obj._id == order_id) obj_cust = obj;
-      obj_cust.paymenttype = paymenttype_array[obj.paymenttype];
     });
+    obj_cust.paymenttype = paymenttype_array[obj_cust.paymenttype];
+    ordercustomerlocation = obj_cust.addresslocation;
+    if (obj_cust.logistic) {
+      obj_cust.distanceShopToCustomerInKM = obj_cust.logistic.distanceShopToCustomerInKM;
+      obj_cust.deliveryTotalAmount = obj_cust.logistic.deliveryTotalAmount;
+      obj_cust.deliveryDistance = obj_cust.logistic.deliveryDistance;
+    }
+    //
+    //
       console.log('cusshow',obj_cust);
         $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
         $('#modal_image_customer_preview').modal('show');
@@ -563,5 +791,4 @@ function previewcustomer(order_id){
 
 initializeLiff();
 
-//  $('#body_mainbody').load('/LIFF/preload.html');
 </script>

@@ -1,33 +1,257 @@
+<style>
+/* The Checkbok */
+.checkbox-style {
+display: block;
+position: relative;
+padding-left: 35px;
+/* margin-bottom: 12px; */
+cursor: pointer;
+/* font-size: 22px;*/
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-style input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+height: 0;
+width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox-checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 25px;
+width: 25px;
+/* background-color: #eee; */
+border:1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-style:hover input ~ .checkbox-checkmark {
+background-color: #fff;
+
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-style input:checked ~ .checkbox-checkmark {
+background-color: #8AA43A;
+}
+
+/* Create the checkbox-checkmark/indicator (hidden when not checked) */
+.checkbox-checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+
+/* Show the checkbox-checkmark when checked */
+.checkbox-style input:checked ~ .checkbox-checkmark:after {
+display: block;
+}
+
+/* Style the checkbox-checkmark/indicator */
+.checkbox-style .checkbox-checkmark:after {
+left: 9px;
+top: 5px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 3px 3px 0;
+-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+/*  // Checkbok  */
+</style>
+
+
+<style>
+/*--------------------  radio style -------------------- */
+.rediostyle {
+display: block;
+position: relative;
+padding-left: 35px;
+/* margin-bottom: 12px; */
+cursor: pointer;
+/* font-size: 22px; */
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.rediostyle input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 25px;
+width: 25px;
+border:1px solid #ccc;
+border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.rediostyle:hover input ~ .radio-checkmark {
+background-color: #fff;
+}
+
+/* When the radio button is checked, add a blue background */
+.rediostyle input:checked ~ .radio-checkmark {
+background-color: #8AA43A;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.rediostyle input:checked ~ .radio-checkmark:after {
+display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.rediostyle .radio-checkmark:after {
+top: 8px;
+left: 8px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: white;
+}
+
+</style>
+<style>
+  body { font-family: 'Kanit' !important; }
+  .btn-xl { padding: 1rem 1.75rem; font-size: 1.25rem; }
+  .fontmain { font-family: 'Kanit'; }
+  .btn-primary { color: #fff; background-color: #05B04E !important; border-color: #05B04E !important; }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: #05B04E;
+  }
+  a {
+      color: #05B04E;
+      /*color: #fff;*/
+      text-decoration: none;
+      background-color: transparent
+  }
+  a:hover {
+      color: #117964;
+      text-decoration: underline
+  }
+  a:not([href]):not([tabindex]) {
+      color: inherit;
+      text-decoration: none
+  }
+  a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+      color: inherit;
+      text-decoration: none
+  }
+  a:not([href]):not([tabindex]):focus {
+      outline: 0
+  }
+  .divider-custom {
+      margin: 1.25rem 0 1.5rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center
+  }
+  .divider-custom .divider-custom-line {
+      width: 100%;
+      max-width: 7rem;
+      height: .25rem;
+      background-color: #2c3e50;
+      border-radius: 1rem;
+      border-color: #2c3e50!important
+  }
+  .divider-custom .divider-custom-line:first-child {
+      margin-right: 1rem
+  }
+  .divider-custom .divider-custom-line:last-child {
+      margin-left: 1rem
+  }
+  .divider-custom .divider-custom-icon {
+      color: #2c3e50!important;
+      font-size: 2rem
+  }
+  .divider-custom.divider-light .divider-custom-line {
+      background-color: #fff
+  }
+  .divider-custom.divider-light .divider-custom-icon {
+      color: #fff!important
+  }
+
+  /* ซ้ำกับ เมนู List */
+ .margin-top-under-navbar { margin-top: 55px;}
+ .font-color-foodmall {  color: #fc7d10 !important; }
+  .font-color-foodmall-2 { color: #fc7d10 !important; }
+
+  .font-color-foodmall-gray-light { color: {{secondary_color}}; }
+  .font-color-foodmall-gray-light2 { color: #9E9E9E !important; font-weight: 200;}
+  .font-color-foodmall-gray-medium { color: #191919; }
+  .box-head-title-foodmall {
+          background-color: #ffffff !important;
+          color: #fc7d10;
+          padding: 6px 4px;
+      /*    border-bottom: 2px #fc7d10 solid;*/
+      /*    border-top: 2px #fc7d10 solid;*/
+      /*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;*/
+          margin-bottom: 15px;
+      }
+
+  .btn-outline-submit-foodmall {
+      color: #fc7d10 !important;
+      border-color: #fc7d10 !important;
+  }
+  .line-bottom-color-foodmall { border-bottom: 1px #fc7d10 solid; border-right: 0px #fff solid; border-left: 0px #fff solid;  }
+
+  .btn-outline-submit-foodmall:hover {
+      color: #ffffff !important;
+      background-color: #fc7d10 !important;
+      border-color: #fc7d10 !important;
+  }
+  .btn-submit-foodmall{ background-color: #fc7d10 !important; color: #ffffff !important;}
+  .btn-submit-foodmall:hover { color: #fff !important; background-color: #f4690b; }
+  .btn-submit-foodmall:active { color: #fff !important; background-color: #f4690b; }
+
+</style>
 <div class="container margin-top-under-navbar">
     <div class="fixed-top shadow" id='top_shopping_cart' >
-      <div class="row box-head-title-foodmall fixed-top shadow topmenu-navbar">
-          <div class="col-3 p-0 pl-1 text-left">
-             
-              <button class='btn border border-0 text-secondary' onclick="go2View('menulist');">
-                  <i class="fas fa-chevron-left"></i> 
-              </button>
-               
-          </div>
-          <div class="col-6 p-0 text-center">
-              <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
-              <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
-                <form onsubmit="return search_menusubmit();">
-                    <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
-                </form>
-              </div>
-          </div> <!--// center -->
-
-          <div class="col-3 pl-0 text-right ">
-            <div class="d-inline " onclick="openSearch()"  style="background-color: #f3f3f3; ">
-                <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:32%;">
+    <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
+        <div class="col-3 p-0 pl-1 text-left">
+            <button class='btn border border-0 text-secondary' onclick="go2View('menulist')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สั่งอาหาร</div>
+        </div>
+        <div class="col-3 text-right">
+            <div class="d-block mr-4" onclick="go2View('cart')">
+                <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
             </div>
-              <div class="d-inline pr-3 " onclick="go2View('cart')" style="width:50%;">
-                  <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
-              </div>
-              <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
-          </div> <!--// center -->
-
-      </div> <!--// menu -->
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
+        </div>
+    </div> <!--// menu -->
 
 </div> <!-- topmenu -->
 
@@ -115,7 +339,7 @@
     </div>  <!-- //top -->
 
 
-    <div class="row mt-2 mb-5 text-center">
+    <div class="row mt-2 mb-3 text-center">
         <div class="col-12">
              <button class="btn btn-md btn-outline-submit-foodmall" onclick="rmv_qty();">
                 <i class="fas fa-minus"></i>
@@ -134,19 +358,18 @@
 
 
 
-<div class="fixed-bottom m-1 bg-white">
-    <div class="row mb-1 ">
+
+    <div class="row mb-3 ">
         <div class="col-12">
             <button type='btn' id="btn_add_cart" class="btn btn-lg btn-block btn-submit-foodmall" onclick='add_to_cart(this);'>เพิ่มลงตะกร้า</button>
         </div>
     </div>
 
-<!--    <div class="row mb-1">
+    <div class="row mb-4">
         <div class="col-12">
-            <button class="btn btn-lg btn-block btn-light border border-secondary" onclick = "go2View('menulist')" >สั่งสินค้าเพิ่ม</button>
+            <button class="btn btn-lg btn-block btn-light border border-secondary" onclick = "liff.closeWindow();" >สั่งสินค้าเพิ่ม</button>
         </div>
-    </div>-->
-</div>
+    </div>
 
 
 </div>
@@ -237,6 +460,7 @@
     }
     $(obj).prop('disabled', true);
     addtocart(selectedprice,selectedcheckbox);
+
   }
   function addtocart(selectedprice,selectedcheckbox,cb){
 
@@ -263,7 +487,7 @@
           working.menuid = undefined;
           working.menu =undefined;
           update_shoppingcart();
-          go2View('menulist');
+          go2View('cart-main');
           if(cb) cb(true);
         }else{
             $("#btn_add_cart").prop('disabled', false);
@@ -307,11 +531,6 @@
             })
         }
         $("#top_shopping_cart").html(hash_replace(template_cart,'CART',working.order))
-        $('#icon_shoppingcart').animate({
-          width: '+=20px'
-      }, 200).animate({
-        width: '-=20px'
-    }, 200);;
     }
   initializeLiff('menuviewadd');
 

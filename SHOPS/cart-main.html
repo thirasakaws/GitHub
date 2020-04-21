@@ -1,7 +1,7 @@
 <div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
     <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
         <div class="col-3 p-0 pl-1 text-left">
-            <button class='btn border border-0 text-secondary' onclick="go2View('menulist');">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
                 <i class="fas fa-chevron-left"></i>
             </button>
         </div>
@@ -38,7 +38,7 @@
 
       <div class="fixed-bottom ">
           <div class="p-1">
-            <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="go2View('menulist');"> สั่งซื้อ</button>
+            <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="liff.closeWindow();"> สั่งซื้อ</button>
           </div>
       </div>
 
@@ -48,7 +48,7 @@
   </div> -->
 </div>
 <script>
-    all_page = ['cart-manage','cart-manage1','cart-wait-confirm','cart-wait-payment','cart-show-cancel','manage_address'];
+      all_page = ['cart-manage-main','cart-manage1-main','cart-wait-confirm','cart-wait-payment','cart-show-cancel','manage_address'];
     var working={};
     register_all_page();  // Register SubPAGE
     function runApp(){
@@ -59,7 +59,7 @@
             $('#warn-order').hide();
             working.order = res.detail;
             if(working.order.status <=5){
-              go2View('cart-manage'); // แก้ไขรายการได้  มียืนยัน ชำระกับยกเลิก
+              go2View('cart-manage-main'); // แก้ไขรายการได้  มียืนยัน ชำระกับยกเลิก
             }else if(working.order.status == 7 || working.order.status == 8 ){
               go2View('cart-wait-confirm'); // ยกเลิก ได้อย่างเดียว , เปลี่ยน เบอร์ติดต่อได้
             }else if(working.order.status == 9 ){
@@ -75,7 +75,7 @@
           }else{
 
             $('#warn-order').show();
-            // alert(res.detail);
+
           }
       });
 

@@ -1,0 +1,35 @@
+<div id='gmap_gps_radius'></div>
+<div class="container-fluid main_data">
+</div>
+<script>
+    $('#gmap_gps_radius').load('/LIFF/modal_map_radius.html');
+
+    show_gps_radius();
+
+    function show_gps_radius() {
+        // console.log("show_gps_radius");
+        window.alert(JSON.stringify(working.branch));
+
+        var pos;
+        if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
+            // Already input Location
+            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],service_radius:working.branch.location.service_radius}
+            call_modal_radius_maps(pos, updategpslocation_radius, showError);
+        } else {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log("GOT POSTIION", position);
+                    // if(!position.coords.latitude && !position.coords.longitude){
+                    pos = {}
+                    // }else {
+                    //   pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+                    // }
+
+                    // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+                    call_modal_radius_maps(pos, updategpslocation_radius, showError);
+                });
+                return;
+            }
+        }
+    }
+</script>

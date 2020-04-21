@@ -204,15 +204,26 @@
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style=" text-decoration: none;">
           <i class="fa fa-hamburger"></i>
-                 ประเภทร้านอาหาร
+                 ประเภทร้านอาหาร , หมวดแนะนำ
         </button>
       </h2>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         <div class=" mb-2">
+            เลือกประเภทร้านค้า
             <div class="row   pt-2 m-0" >
                 <select class="SHOP_type button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="เลือกประเภทร้านค้า"></select>
+            </div>
+        </div>
+
+
+      </div>
+      <div class="card-body">
+        <div class=" mb-2">
+           หมวดอาหาร แนะนำ ตาม tag
+            <div class="row   pt-2 m-0" >
+                <select class="SHOP_promotag button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="หมวดอาหาร"></select>
             </div>
         </div>
 
@@ -574,6 +585,43 @@
         });
     }, false);
 
+    function create_promotag(){
+      var seldata = `<option disabled> เช่น สเต็ก,ซุป , ซูชิ เป็นต้น</option>`;
+       if(Array.isArray(working.shop.promotag)){
+         for (var x = 0; x < working.shop.promotag.length; x++) {
+             seldata += '<option value="' +working.shop.promotag[x] + '" selected >' + working.shop.promotag[x] + '</option>';
+         }
+       }
+       $('.SHOP_promotag').off('change.select2');
+       $('.SHOP_promotag').html(seldata);
+
+
+      $('.SHOP_promotag').select2({
+          tags: true,
+          tokenSeparators: [',', ' '],
+          allowClear: true,
+          createTag: function (params) {
+              if (params.term === '') {
+                  return null;
+              }
+              //if (allownewtag) {
+                  return {id: params.term, text: params.term};
+              //}
+              //return null;
+
+          }
+      });
+      $('.SHOP_promotag').on('change.select2', function (e) {
+        var data = {LINE_USER: LINE_USER, _id: working.shop._id, promotag: $('.SHOP_promotag').val()};
+        // console.log(data);
+        $.postJSON('/api/liff/edit/shop', data, (res) => {
+            if (!res.result) {
+                return alert(res.detail);
+            }
+        });
+      });
+     }
+     create_promotag();
 
 
 

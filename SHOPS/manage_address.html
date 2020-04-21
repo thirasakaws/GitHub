@@ -1,0 +1,106 @@
+<div id='gmap_cusgps'>
+</div>
+<div class="container-fluid main_data">
+
+    <div class="row box-head-title-foodmall">
+        <div class="col-3 p-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-foodmall"> จัดการสถานที่อยู่ของคุณ</span>
+        </div>
+        <div class="col-3 p-0 text-right">
+        </div>
+    </div>
+      <hr>
+
+        <div class="row">
+         <div class="col-12">
+
+             <div class="form-group row">
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  ชื่อสถานที่  </label>
+               <div class="col">
+                   <input class="input_data_bn edit_data ADDRESS_name w-90 " id="name" type="text" placeholder="เช่น บ้าน ที่ทำงาน" data-field="name">
+               </div>
+             </div>   <!-- // -->
+
+             <div class="form-group row">
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  ที่อยู่  </label>
+               <div class="col">
+                   <textarea class="input_data_bn edit_data ADDRESS_address w-90 " id="address"  type="text"  placeholder="ที่อยู่ แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์" data-field="address"></textarea>
+               </div>
+             </div>   <!-- // -->
+
+             <div class="form-group row">
+               <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  รายละเอียดเพิ่มเติม  </label>
+               <div class="col">
+                   <input class="input_data_bn edit_data ADDRESS_detail w-90 " id="detail"  type="text"  placeholder="เช่น ชื่ออาคาร ชั้น หมายเลขห้อง" data-field="detail">
+               </div>
+             </div>   <!-- // -->
+
+
+         </div>
+       </div>
+
+       <div class="fixed-bottom">
+         <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="save_address();">บันทึกที่อยู่ </button>
+
+       </div>
+
+</div> <!-- // container-fluid  -->
+
+<script>
+
+  refresh_addpage();
+
+
+  //for input tag
+  $('.edit_data').Fusefield( (obj,cb,data)=>{
+    console.log("data",data,obj);
+    if (working.new_address._id) {
+      data._id = working.new_address._id
+    }
+    if (!data.address) {
+          data.address = working.new_address.address;
+    }
+    data.location = working.new_address.location;
+    data.LINE_USER = LINE_USER;
+    $.postJSON('/api/liff/update/address', data, function (res) {
+        if (!res.result) {
+            alert(res.detail);
+            cb(false);
+        }else {
+            res.detail ? working.new_address = res.detail : false;
+          cb(true);
+        }
+    })
+  },(obj)=>{
+    return true;
+  });
+
+
+  function refresh_addpage(){
+
+    if(working.new_address){
+          console.log('add',working.new_address);
+    }
+      setdatabyclass($('.main_data'), 'ADDRESS', working.new_address);
+  }
+
+
+  function save_address(){
+    if(!working.new_address.name){
+        alert('กรุณากรอกชื่อสถานที่')
+        return false;
+    }else {
+        window.history.back();
+    }
+      // console.log('add',working.new_address);
+      // go2View('cart-manage1');
+
+  }
+
+
+</script>

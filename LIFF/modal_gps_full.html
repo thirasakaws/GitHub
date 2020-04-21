@@ -30,39 +30,41 @@
     resize: none;
   }
 </style>
-<div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <!-- <div class="modal-header">
-            <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5>
+
+
+<div class="container-fluid" id="modal_google_gps" style="display:none" aria-hidden="true">
+<!--         <div class="modal-header">
+            <h5 class="modal-title">ตำแหน่งที่อยู่</h5>
         </div> -->
 
         <!-- <div class="modal-body" style="width:500; height:500"> -->
-        <div class="modal-body" style="width:100%; height:75vh">
+        <div class="row" style="height:75vh;">
+            <div class="col-12">
+                <!-- <div    id='googlemap' style="width: 100%; height: 300px" > -->
+                <input id="pac-input" class="form-control" type="text" splaceholder="">
+                <div    id='googlemap' style="width: 100%; height: 100%" >
+                              Gmaps
 
-          <!-- <div    id='googlemap' style="width: 100%; height: 300px" > -->
-          <input id="pac-input" class="form-control" type="text" splaceholder="ค้นหาที่อยู่">
-          <div    id='googlemap' style="width: 100%; height: 100%" >
-    			Gmaps
-
-          </div>
+                </div>
+            </div>
         </div>
-        <div id="floating-panel">
+        
+        
+        <div id="floating-panel mt-2">
           <!-- <input id="address" style="width: 100%" type="text" value=""> -->
           <!-- <input class="form-control p-3" id="address" style="width: 100%; height: 20%" type="text" value=""> -->
           <!-- <textarea class="form-control" id="address" style="width: 100%" type="text" value=""> -->
-          <textarea class="form-control" id="address" wrap="hard" style="width: 100%; height: 20%" type="text" value=""></textarea>
+          <textarea class="form-control mt-1" id="address" wrap="soft" style="width: 100%; height: 20%" type="text" value=""></textarea>
           <!-- <input id="submit" type="button" value="Reverse Geocode"> -->
         </div>
 
-        <div class="modal-footer">
+        <div class="fixed-bottom mx-auto text-center mb-4">
             <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ไปตำแหน่งปัจจุบัน</button>
-            <button onclick="btn_modal_map()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกที่อยู่นี้ </button>
-            <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+            <button onclick="btn_modal_map()" class="btn btn-sm btn-submit-foodmall"><i class="fa fa-fw fa-save"></i> บันทึกที่อยู่นี้ </button>
+            <button onclick="close_map();" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
         </div>
 
-    </div>
-  </div>
+
 </div>
 
 <script>
@@ -114,39 +116,35 @@
     pac_input = document.getElementById('pac-input');
     gmap.controls[google.maps.ControlPosition.TOP_CENTER].push(pac_input);
 
-    // console.log("user_type: " + user_type);
-    // if (user_type != "customer") {
-    //   console.log("Pass Seller");
-      searchBox = new google.maps.places.SearchBox(pac_input);
-      gmap.addListener('bounds_changed', function() {
-        searchBox.setBounds(gmap.getBounds());
-      });
+    searchBox = new google.maps.places.SearchBox(pac_input);
+    gmap.addListener('bounds_changed', function() {
+      searchBox.setBounds(gmap.getBounds());
+    });
 
-      searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
+      if (places.length == 0) {
+        return;
+      }
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
           return;
         }
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-          if (!place.geometry) {
-            console.log("Returned place contains no geometry");
-            return;
-          }
-
-          if (place.geometry.viewport) {
-            // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport);
-          } else {
-            bounds.extend(place.geometry.location);
-          }
-        });
-        gmap.fitBounds(bounds);
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
       });
-    // }
+      gmap.fitBounds(bounds);
+    });
   }
 
   function showAddress() {
@@ -162,6 +160,8 @@
       infowindow.setPosition(latlng_marker);
       infowindow.setContent(address);
       infowindow.open(gmap);
+      // document.getElementById('address').value = address;
+      $('#address').html(address);
       return;
     }
 
@@ -177,7 +177,8 @@
             infowindow.setPosition(latlng);
             infowindow.setContent(address);
             infowindow.open(gmap);
-            document.getElementById('address').value = address;
+            // document.getElementById('address').value = address;
+            $('#address').html(address);
             setTimeout(()=>{
               alreadyset = false;
             }, 150);
@@ -214,7 +215,8 @@
   function call_modal_maps(setting,cbfnc) {
     latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
     latlng_saved = {};
-
+    $('.main_data').hide();
+    $('#modal_google_gps').show();
     if ( ('lat' in setting) && ('lng' in setting) ) {
       if (setting.lat && setting.lng) {
         latlng_have_save = true;
@@ -239,7 +241,6 @@
     // $('#modal_google_gps').modal('show');
     setTimeout(()=>{
       initMap();
-      $('#modal_google_gps').modal('show');
       if(typeof(setting) == 'function'){
         cbfnc = setting;
         // setting ={lat:13.79607108667891,lng:100.71164142340422};
@@ -258,7 +259,7 @@
           origin: new google.maps.Point(0, 0),
           // The anchor for this image is the base of the flagpole at (0, 32).
           anchor: new google.maps.Point(15, 33)
-        }; 
+        };
         themarker_customer_icon = {
           url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
           // This marker is 20 pixels wide by 32 pixels high.
@@ -286,7 +287,7 @@
           gmap.setZoom(18);
           gmap.panTo(themarker.getPosition());
           showAddress();
-        }, 500); 
+        }, 500);
       } else {
         googlemap_geogetLocation();
       }
@@ -294,7 +295,7 @@
   }
 
 
-  $("#modal_google_gps").on("shown.bs.modal", function () {
+  $("#modal_google_gps").on("shown", function () {
     google.maps.event.trigger(gmap, "resize");
   });
 
@@ -312,9 +313,14 @@
     }else{
 
     }
-    $('#modal_google_gps').modal('hide');
+
+    close_map();
   }
 
+  function close_map(){
+    $('#modal_google_gps').hide();
+    $('.main_data').show();
+  }
   // google.maps.event.addDomListener(window, 'load', initMap);
 
 </script>

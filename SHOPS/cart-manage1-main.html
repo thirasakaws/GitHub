@@ -2,23 +2,22 @@
 </div>
 <div class="container-fluid main_data">
 
-        <div class="row box-head-title-foodmall nav-color-shop shadow mb-3 bg-light">
-             <div class="col-3 p-0 pl-1 text-left">
-                 <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
-                     <i class="fas fa-chevron-left"></i>
-                 </button>
-             </div>
-             <div class="col-6 p-0 text-center">
-                 <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ</div>
-             </div>
-             <div class="col-3 text-right">
-     <!--            <div class="d-block mr-4" onclick="go2View('cart')">
-                     <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
-                 </div>
-                 <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
-             </div>
-         </div> <!--// top menu -->
-
+   <div class="row box-head-title-foodmall fixed-top shadow" style="background-color: #F6F6F6 !important;">
+        <div class="col-3 p-0 pl-1 text-left">
+            <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="col-6 p-0 text-center">
+            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ</div>
+        </div>
+        <div class="col-3 text-right">
+<!--            <div class="d-block mr-4" onclick="go2View('cart')">
+                <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
+            </div>
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
+        </div>
+    </div> <!--// menu -->
 
 
 <!--  <div class="row box-head-title-foodmall line-bottom-color-foodmall ">
@@ -33,7 +32,7 @@
   </div>-->
 
 
-  <div class="text-secondary d-flex justify-content-between ">
+  <div class="text-secondary d-flex justify-content-between margin-top-15">
     <h6 class="font-color-foodmall-gray-medium">ข้อมูลการจัดส่ง</h6>
 
     <span class="btn btn-sm btn-outline-danger" onclick="resetorder();"> <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกรายการ</span>
@@ -192,7 +191,7 @@
               ส่วนลดค่าจัดส่ง
           </div>
           <div class="col-6 text-right">
-               ฿ -<span class="total_shippingdiscount">0 </span>
+               ฿ <span class="total_shippingdiscount">0 </span>
           </div>
       </div>
 
@@ -531,28 +530,27 @@ var array_shopid = [];
       }
     }
     function update_ship_cost(){
-      
+      var grandtotal = Number(working.order.totalcost);
       var order=working.order;
       checkorder_status();
-
       $('.total_price').html(order.totalcost ? addCommas(order.totalcost) : '0.00') ;
       $('#discount-shippingcost').hide();
       if(order.logistic){
-
+          grandtotal += order.logistic.deliveryTotalAmount;
           $('.total_distance').html( order.logistic.distanceShopToCustomerInKM ?  addCommas(order.logistic.distanceShopToCustomerInKM) : '0.00');
           $('.total_shippingcost').html(order.logistic.deliveryTotalAmount ? addCommas(order.logistic.deliveryTotalAmount) : '0.00');
 
           if(Number(order.logistic.Discount) > 0){
             var beforediscount = addCommas(order.logistic.deliveryTotalAmount + order.logistic.Discount);
             $('#discount-shippingcost').show();
-            $('.total_shippingdiscount').html(addCommas(order.logistic.Discount));
-            $('.total_shippingcost').html(addCommas(beforediscount));
+            $('#total_shippingdiscount').html(addCommas(order.logistic.Discount));
+            $('.total_shippingcost').prepend("<strike>" +beforediscount + "</strike> ");
           }else{
             $('#discount-shippingcost').hide();
           }
       }
-      var grandtotal = working.order.grandtotal ? working.order.grandtotal :  Number(order.totalcost) + Number(order.logistic.deliveryTotalAmount);
-       $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
+
+       $('.grandtotal').html(grandtotal ? addCommas(grandtotal) : '0.00');
 
     }
     function checkout_payment(){

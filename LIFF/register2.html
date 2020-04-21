@@ -161,7 +161,7 @@
     </div><!-- // เข้าบริหารจัดการร้านค้า -->
 
 
-    <div class="rounded bg-light pl-2 mt-5">
+    <div class="rounded bg-light pl-2 mt-5 ">
         <div class="font-color-shop line-for-header pt-1 pb-1">
             กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ
         </div>
@@ -308,49 +308,43 @@
     }
     function change_service_status(obj_service) {
         var service_status;
-        var textalert;
         if ($(obj_service).is(':checked')) {
             service_status = "online";
-            textalert = "คุณต้องการ เปิดให้บริการร้านใช่หรือไม่ ?"
         } else {
             service_status = "offline";
-            textalert = "คุณต้องการ ปิดให้บริการร้านใช่หรือไม่ ?"
         }
         var setdata2 = {LINE_USER: LINE_USER, _id: working.shop._id, service_status: service_status}
-        if (confirm(textalert) == true) {
+
             $.postJSON('/api/liff/edit/shop', setdata2, function (res) {
                 if (!res.result) {
                     return alert(res.detail);
                 }
             });
-        }
+
 
     }
     function changeshopshare(obj) {
         var shop_share;
         if ($(obj).is(':checked')) {
             shop_share = "share";
-            textalert = "คุณต้องการ เปิดให้ผู้อื่นจัดการร้านค้าของคุณ ?"
         } else {
             shop_share = "off";
-            textalert = "คุณต้องการ ปิดการจัดการร้านค้าของคุณจากบุคคลอื่น ?"
         }
         var setdata2 = {LINE_USER: LINE_USER, _id: working.shop._id, shop_share: shop_share}
-        if (confirm(textalert) == true) {
-            $.postJSON('/api/liff/edit/shop', setdata2, function (res) {
-                if (!res.result) {
-                    return alert(res.detail);
 
+        $.postJSON('/api/liff/edit/shop', setdata2, function (res) {
+            if (!res.result) {
+                return alert(res.detail);
+
+            } else {
+                if (shop_share == 'share' && res.detail) {
+                    $('#shopsharenumber').html(res.detail.shopsharenumber);
                 } else {
-                    if (shop_share == 'share' && res.detail) {
-                        $('#shopsharenumber').html(res.detail.shopsharenumber);
-                    } else {
-                        $('#shopsharenumber').html('');
-                    }
+                    $('#shopsharenumber').html('');
                 }
-            });
-        } else
-            return false;
+            }
+        });
+
     }
 
 

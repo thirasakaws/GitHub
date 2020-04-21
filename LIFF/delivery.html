@@ -62,16 +62,16 @@
                                     บาท
                                 </div>
                             </div> <!--//  -->
-
+<!--
                             <div class="form-group row">
-                                <label class="col-4 text-gray-light"> ค่าบริการต่อชิ้น</label>
+                                <span class="col-4 text-gray-light"> ค่าบริการต่อชิ้น</span>
                                 <div class="col-4">
                                     <input class="input_data_bn editable_delivery_t1 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##">
                                 </div>
-                                <div class="col-4 text-right text-gray-light">
+                                <span class="col-4 text-right text-gray-light">
                                     บาท
-                                </div>
-                            </div> <!--//  -->
+                                </span>
+                            </div> //  -->
                             <div class="form-group row">
                                 <label class="col-4 text-gray-light">  ค่าบริการต่อ  1 Km</label>
                                 <div class="col-4">
@@ -85,6 +85,15 @@
                             <u class="text-warning" onclick="show_condition_t1(this)" val_ch="0">ตั้งค่าขั้นสูง</u>
                             <div class="form-group row pl-3"  style="display: none">
                                 <b>เงื่อนไขพิเศษสำหรับการให้ส่วนลด</b>
+                                <div class="col-12">
+                                <span class=" text-gray-light"> ค่าบริการต่อชิ้น</span>
+                                <span>
+                                    <input class="input_data_bn editable_delivery_t1 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##">
+                                </span>
+                                <span class="text-right text-gray-light">
+                                    บาท
+                                </span>
+                            </div>
                                 <div class="col-12">
                                     <span class="text-gray-light">เงื่อนไข </span>
                                     <select class=" editable_delivery_t1 condition_type" data-field="condition_type">
@@ -143,7 +152,7 @@
                     </div>
                 </div> <!--//  -->
 
-                <div class="form-group row">
+<!--                <div class="form-group row">
                     <label class="col-4 text-gray-light">  ค่าบริการต่อชิ้น</label>
                     <div class="col-4">
                         <input class="input_data_bn editable_delivery_t2 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##">
@@ -151,7 +160,8 @@
                     <div class="col-4 text-right text-gray-light">
                         บาท
                     </div>
-                </div> <!--//  -->
+                </div> -->
+                <!--//  -->
                 <div class="form-group row">
                     <label class="col-4 text-gray-light">  ค่าบริการต่อ  1 Km</label>
                     <div class="col-4">
@@ -164,6 +174,15 @@
                 <u class="text-warning" onclick="show_condition_t1(this)" val_ch="0">ตั้งค่าขั้นสูง</u>
                 <div class="form-group row pl-3" style="display: none">
                     <b>เงื่อนไขพิเศษสำหรับการให้ส่วนลด</b>
+                                                    <div class="col-12">
+                                <span class=" text-gray-light"> ค่าบริการต่อชิ้น</span>
+                                <span>
+                                    <input class="input_data_bn editable_delivery_t2 " type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##">
+                                </span>
+                                <span class="text-right text-gray-light">
+                                    บาท
+                                </span>
+                            </div>
                     <div class="col-12">
                         <span class="text-gray-light">เงื่อนไข </span>
                         <select class=" editable_delivery_t2 condition_type" data-field="condition_type">
@@ -319,23 +338,23 @@
                         set_obj_fusefiled($('.editable_delivery_t2'), 2);
                     } else if (type == 1) {
                         // Find Max Of type1 find("[data-field=distance]").
-                        var maxfound = 0;
-                        $('.editable_delivery_t1[data-field=distance]').each((index, dmax) => {
-                            console.log(index)
-                            console.log(maxfound + "': " + $(dmax).val())
-                            if (maxfound < $(dmax).val())
-                                maxfound = $(dmax).val();
-                        });
-                        if (Number(maxfound) != Number($('#last_distance').val())) { // Update Lastest Distance
-                            var data2 = {LINE_USER: LINE_USER, type: 2, distance: maxfound}
-                            $('#last_distance').val(maxfound);
-                            data2._id = $('#last_distance').find_id();
-                            $.postJSON('/api/liff/edit/deliverytable', data2, function (res) {
-                                if (!res.result) {
-                                    alert(res.detail);
-                                }
-                            });
-                        }
+//                        var maxfound = 0;
+//                        $('.editable_delivery_t1[data-field=distance]').each((index, dmax) => {
+//                            console.log(index)
+//                            console.log(maxfound + "': " + $(dmax).val())
+//                            if (maxfound < $(dmax).val())
+//                                maxfound = $(dmax).val();
+//                        });
+//                        if (Number(maxfound) != Number($('#last_distance').val())) { // Update Lastest Distance
+//                            var data2 = {LINE_USER: LINE_USER, type: 2, distance: maxfound}
+//                            $('#last_distance').val(maxfound);
+//                            data2._id = $('#last_distance').find_id();
+//                            $.postJSON('/api/liff/edit/deliverytable', data2, function (res) {
+//                                if (!res.result) {
+//                                    alert(res.detail);
+//                                }
+//                            });
+//                        }
 
                     }
 
