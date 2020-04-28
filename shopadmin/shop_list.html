@@ -1,0 +1,227 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Shops</u></b></h1>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3> ค้นหาชื่อ ร้านค้า</h3>
+                    <div class="col-md-2 col-sm-12 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <h3> สถานะ</h3>
+                    <div class=" col-md-2 col-sm-12 mb-2">
+
+                        <select id="status" class="form-control">
+                            <option value="">แสดงทั้งหมด</option>
+                            <option class="text-warning" value="1">รอตรวจสอบ</option>
+                            <option class="text-dark" value="2">อยู่ระหว่างตรวจสอบ</option>
+                            <option class="text-success" value="3">ตรวจสอบแล้ว</option>
+                            <option class="text-danger" value="4">ปิดใช้งาน</option>
+                            <option class="text-primary" value="5">เปิดใช้งาน</option>
+                        </select>
+                    </div>
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " >  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Shop Name</th>
+                    <th>Owner</th>
+                    <th>type</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="text-center shop_id"></td>
+                    <td class="shop_name"></td>
+                    <td class="shop_shopowner"></td>
+                    <td class="shop_type"></td>
+                    <td class="shop_contact"></td>
+                    <td>
+                        <span class="shop_status"></span>
+                        <button type="button" class="float-right btn btn-primary btn-sm alink" onclick="edit_status_shop(this)"><i class="fa fa-pencil  " ></i> Status Edit</button>
+
+                    </td>
+                    <td class=" text-center">
+                        <button class="alink" onclick="edit_data_shop(this)"><i class="fa fa-pencil shop_action " ></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalshopstatus" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalshopstatus">Status Manage | ID :<span id="id_shop"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--select status and confirm-->
+                <select id="status_shop" class="form-control">
+                    <option class="text-warning" value="1">รอตรวจสอบ</option>
+                    <option class="text-dark" value="2">อยู่ระหว่างตรวจสอบ</option>
+                    <option class="text-success" value="3">ตรวจสอบแล้ว</option>
+                    <option class="text-danger" value="4">ปิดใช้งาน</option>
+                    <option class="text-primary" value="5">เปิดใช้งาน</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/shop_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_shop_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    function showdata_shop_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'shop', objdata[x], template_of_testtable);
+                if (objdata[x].status == 1) {
+                    TR.find('.shop_status').addClass('text-warning').html('รอตรวจสอบ');
+                }
+                if (objdata[x].status == 2) {
+                    TR.find('.shop_status').addClass('text-black').html('ตรวจสอบแล้ว');
+                }
+                if (objdata[x].status == 3) {
+                    TR.find('.shop_status').addClass('text-success').html('ตรวจสอบแล้ว');
+                }
+                if (objdata[x].status == 4) {
+                    TR.find('.shop_status').addClass('text-danger').html('ปิด');
+                }
+                if (objdata[x].status == 5) {
+                    TR.find('.shop_status').addClass('text-primary').html('เปิด');
+                }
+                if (objdata[x].shopowner) {
+                    if (objdata[x].shopowner.displayName) {
+                        TR.find('.shop_shopowner').html(objdata[x].shopowner.displayName);
+                    }
+
+                }
+                TR.show();
+            }
+
+        }
+
+    }
+    function edit_data_shop(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/shop_edit?shop_id=' + tempid);
+        return false;
+    }
+    function edit_status_shop(shop_id) {
+        var res_id = $(shop_id).find_id();
+        $.get('/api/data/kinarai/shop_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.status) {
+                $('#status_shop').val(result.status)
+            }
+        });
+
+        $('#id_shop').html(res_id)
+        $('#save_btn').attr('onclick', 'update_shopstatus(' + res_id + ')')
+        $('#showmodal').modal('show')
+
+    }
+
+    function update_shopstatus(shop_id1) {
+        var postdata = {
+            _id: shop_id1,
+            status: $('#status_shop').val()
+        }
+        $.postJSON('/api/data/kinarai/shop_update_status', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                $('#showmodal').modal('hide')
+                refreshpage()
+            }
+        });
+
+    }
+    function filterFormsubmit_allotment() {
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+        if ($('#status').val()) {
+            search.status = $('#status').val();
+        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+
+        return false;
+    }
+</script>

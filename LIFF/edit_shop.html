@@ -154,7 +154,7 @@
                                                             <span class='SHOP_contact editable_shop'>  </span>
                                                         </div>-->
                             <div class="float-left pl-2  w-100 ">
-                                <input class="input_data_bn edit_data SHOP_contact w-90" placeholder="เบอร์ติดต่อ" data-field="contact">
+                                <input class="input_data_bn edit_data SHOP_contact w-90" id="contact_shop" type="tel" placeholder="เบอร์ติดต่อ" data-field="contact" onkeypress="return isNumberKey(event)">
 
                             </div>
                         </div>
@@ -182,12 +182,16 @@
                             <div class="float-left pl-2  w-100 ">
                               <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-1" value="1">
-                                <label class="custom-control-label" for="paytype-1">Cash On Delivery</label>
+                                <label class="custom-control-label" for="paytype-1">เก็บเงินปลายทาง</label> <!-- // Cash On Delivery -->
                               </div>
                               <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-2" value="2">
                                 <label class="custom-control-label" for="paytype-2">QR payment By Quickpay</label>
-                              </div
+                              </div>
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-3" value="3">
+                                <label class="custom-control-label" for="paytype-3">ลูกค้ารับเองที่ร้าน</label>
+                              </div>
 
                             </div>
                         </div>
@@ -211,7 +215,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         <div class=" mb-2">
-            เลือกประเภทร้านค้า
+            <span class="text-gray-light2"> เลือกประเภทร้านค้า </span>
             <div class="row   pt-2 m-0" >
                 <select class="SHOP_type button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="เลือกประเภทร้านค้า"></select>
             </div>
@@ -221,7 +225,7 @@
       </div>
       <div class="card-body">
         <div class=" mb-2">
-           หมวดอาหาร แนะนำ ตาม tag
+            <span class="text-gray-light2"> หมวดอาหาร แนะนำ ตาม Tag</span>
             <div class="row   pt-2 m-0" >
                 <select class="SHOP_promotag button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="หมวดอาหาร"></select>
             </div>
@@ -453,6 +457,33 @@
         if (!working.shop.paymenttype)
             working.shop.paymenttype = [];
     }
+
+
+    function isNumberKey(e){
+      if(e){
+      if($('#contact_shop').val().toString().length>=10){
+        return false;
+      }
+    var charCode = (e.which) ? e.which : event.keyCode
+
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }else{
+    alert('not have event')
+  }
+}
+
+    const input_contact = document.getElementById('contact_shop');
+    input_contact.oninput = inputContactHandler;
+
+    function inputContactHandler(e) {
+      var last_val = e.target.value.substr(e.target.value.length - 1);
+      if (last_val < "0" || last_val > "9" || last_val == '.') {
+        e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+      }
+    }
+
 
     function updatepaymenttype(){
       var allcheck = $('.paymenttype:checked');

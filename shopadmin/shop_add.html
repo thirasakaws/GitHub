@@ -1,0 +1,199 @@
+<div id='modal_gps_form'>
+</div>
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Add Shop</u></b></h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/shop_list")'>
+                    <i class="fa fa-arrow-left"></i>
+                    Back
+                </button>
+                <button class="btn btn-outline-success alink" onclick="return submit_add_data()">
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return save_data_customer()">
+                <div class="form-row">
+                    <h3 style="padding-left:5px">เจ้าของร้าน </h3>
+                    <div class="col-md-2 mb-2">
+                        <select class="form-control" id="select_shopowner">
+                        </select>
+                    </div>
+                    <h3 style="padding-left:5px">ชื่อร้าน </h3>
+                    <div class="col-md-2 mb-2">
+                        <input type="text" id="shop_name"  name="shopname" class="form-control input-sm autoFilter" placeholder="ชื่อร้านค้า"  >
+                    </div>
+                    <h3 style="padding-left:5px">เบอร์โทรศัพท์ </h3>
+                    <div class="col-md-2 mb-2">
+                        <input  id="shop_phonenumber" pattern="[0-9]"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="เบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                    </div>
+                             <h3 style="padding-left:5px">สาขา </h3>
+                            <div class="col-md-2 mb-2">
+                                <select  id="shop_branch" class="form-control input-sm autoFilter"  >
+                                    
+                                </select>
+                            </div>
+
+                    <h3 style="padding-left:5px">พิกัดที่ตั้ง </h3>
+                    <div class="col-md-2 mb-2">
+                        <input type="text" id="shop_location_longitude"  name="longitude" class="form-control input-sm autoFilter" placeholder="longitude" >
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <input type="text" id="shop_location_latitude"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="latitude" >
+                    </div>
+                    <button type="button" class="btn btn-outline-success alink" onclick="find_location_data()" style="height: 40px">ค้นหาพิกัดในแผนที่</button>
+                    <h3 style="padding-left:5px">ประเภท ร้านอาหาร </h3>
+                    <div class="col-md-4 mb-2">
+                        <select id="select_shoptype"  name="shop_type" class="form-control input-sm autoFilter" multiple="multiple">
+
+                        </select>
+                    </div>
+                    <h3 style="padding-left:5px">วันเปิด-ปิด ร้าน </h3>
+                    <div class="col-md-6 mb-2">
+                        <select id="shop_opendate"  name="shop_type" class="form-control input-sm autoFilter" multiple="multiple">
+                            <option value="sun">Sunday</option>
+                            <option value="mon">Monday</option>
+                            <option value="tue">Tuesday</option>
+                            <option value="wed">Wednesday</option>
+                            <option value="thu">Thursday</option>
+                            <option value="fri">Friday</option>
+                            <option value="sat">Saturday</option>
+                        </select>
+                    </div>
+                    <h3 style="padding-left:5px">เจ้าของร้าน </h3>
+                    <div class="col-md-2 mb-2">
+                        <select class="form-control" id="select_status">
+                            <option value="1">ยังไม่ได้อนุมัติ</option>
+                            <option value="5">อนุมัติแล้ว</option>
+
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--<link href="/adminkinarai/modal_gps.html"/>-->
+<!--Modal
+<div class="modal fade" id="showmodallocation" tabindex="-1" role="dialog" aria-labelledby="modallocation" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modallocation">Find Location<span id="id_restaurant"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Map</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Get Location</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<script>
+    $('#modal_gps_form').load('/adminkinarai/modal_gps.html');
+    function find_location_data(objid) {
+        var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+        call_modal_maps(detail, function (data) {
+            console.log('DataBack:', data);
+            $('#shop_location_longitude').val(data.lng)
+            $('#shop_location_latitude').val(data.lat)
+        });
+    }
+
+    function back_tap(nowtap) {
+        console.log('back is stepX')
+    }
+    function next_tap(nowtap) {
+        console.log('Next is step X')
+    }
+    $('#shop_opendate').select2();
+    $('#shop_type').select2();
+//     function find_location_data() {
+//         $('#showmodallocation').modal("show")
+// //        call_modal_maps()
+//         return false
+//     }
+
+//    $('#select_owner').adv_select({
+//        url: '/api/data/kinarai/select_owner',
+//        name: 'displayName',
+//        id: '_id',
+//        maxshow: 10
+//    });
+
+    $.postJSON('/api/data/kinarai/shop_owner_list', {}, function (shopownerdata) {
+        create_select('select_shopowner', shopownerdata.obj, 'displayName')
+            $.get('/api/data/kinarai/shop_type', function (data1) {
+                create_select('select_shoptype', data1, 'name')
+                    $.postJSON('/api/data/kinarai/shop_branch_list', {},function (data2) {
+                        create_select('shop_branch', data2.obj, 'name')
+                    });
+            });
+    })
+
+
+    
+    $('#select_shoptype').select2()
+
+    function submit_add_data() {
+        var name = $('#shop_name').val()
+        var phonenumber = $('#shop_phonenumber').val()
+        var owner = $('#select_owner').val()
+        var texterror
+        if (!phonenumber) {
+            texterror = 'Phone Number'
+            $('#shop_phonenumber').removeClass('input_success').addClass('input_danger').focus()
+        } else {
+            $('#shop_phonenumber').removeClass('input_danger').addClass('input_success')
+        }
+        if (!name) {
+            texterror = 'Name'
+            $('#shop_name').removeClass('input_success').addClass('input_danger').focus()
+        } else {
+            $('#shop_name').removeClass('input_danger').addClass('input_success')
+        }
+        if (!owner) {
+            texterror = 'Owner'
+            $('#select_owner').removeClass('input_success').addClass('input_danger').focus()
+        } else {
+            $('#select_owner').removeClass('input_danger').addClass('input_success')
+        }
+        if (texterror) {
+            alert('กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน')
+        } else {
+
+            console.log('true')
+            var postdata = {
+                name: name,
+                mobileno: phonenumber
+            }
+            $.postJSON('/api/engine/register/shop_step1', postdata, function (res) {
+                console.log('success')
+                if (res) {
+                    alert('success')
+                    go2View('/shop_list');
+                }
+            });
+        }
+    }
+
+
+</script>

@@ -6,6 +6,7 @@
         font-size:2em !important;
     }
 </style>
+
 <div class="container-fluid main_data">
 
     <div class="row box-head-title-shop text-center" >
@@ -101,7 +102,7 @@
 
     <hr>
     <div id='shopbranch-select' class="row form-group p-2" >
-        <span  class="col-sm-12 col-xs-12 col-12 text-gray-light"> สาขา </span>
+        <span  class="col-sm-12 col-xs-12 col-12 text-gray-light"> สาขา <span id="total_branch"></span></span> 
         <div class="col-sm-12 col-xs-12 col-12">
             <select class="form-control " id='shopbranch' ></select>
         </div>
@@ -113,21 +114,22 @@
                 <i class="fas fa-plus"></i> สร้างสาขา
             </button>
         </div>
-        <span class="font-color-shop col-sm-4 col-xs-4 col-4 float-lg-right text-right" onclick='fncmanagebranch()' id='managebranch' style='display:none'>
+        
+        <span class="btn btn-sm font-color-shop col-sm-4 col-xs-4 col-4 float-lg-right text-right" onclick='fncmanagebranch()' id='managebranch' style='display:none'>
             <i class="fas fa-cogs"></i> ตั้งค่าสาขา
         </span>
     </div> <!-- // สร้างสาขา -->
 
     <div class="form-group row p-2 " style="">
         <div class='show_createbranch' style='display:none; width:100%'>
-            <label for="createbranch" class="col-sm-2 col-form-label"> สร้างสาขา  </label>
+            <label for="createbranch"  class="col-sm-2 col-form-label"> สร้างสาขา  </label>
             <div class="col-sm-12 d-flex">
                 <div class="" style="width:76%">
                     <input type='text' class='form-control form-control' id='shopbranchname' placeholder="ชื่อสาขา" >
                     <br>
                 </div>
                 <div class="ml-auto">
-                    <button class="btn btn-sm btn-outline-orange font-color-shop" onclick='createnewbranch()'>
+                    <button class="btn btn-sm btn-outline-submit-shop font-color-shop" onclick='createnewbranch()'>
                         <i class="fas fa-plus"></i> สาขาใหม่
                     </button>
                 </div>
@@ -161,15 +163,15 @@
     </div><!-- // เข้าบริหารจัดการร้านค้า -->
 
 
-    <div class="rounded bg-light pl-2 mt-5 ">
+    <div class="rounded bg-light pl-2 pb-2 mt-5 ">
         <div class="font-color-shop line-for-header pt-1 pb-1">
             กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ
         </div>
         <div class="mt-3 pr-1">
             <!--<span> เข้าบริหารจัดการร้านค้า อื่น :</span>-->
             <div class="form-group row">
-                <div class="col-8 pr-0">
-                    Shared Key : <span class="text-gray-light2" id='shopsharenumber'></span>
+                <div class="col-9 pr-0">
+                    Shared Key : <span class="text-gray-light2 " id='shopsharenumber'></span>
                 </div>
                 <div class="col text-right d-flex d-inline ">
                     <div class="ml-auto">
@@ -188,16 +190,59 @@
             </div>
         </div>
     </div> <!-- // กำหนดสิทธิ์ให้บุคคลอื่นเข้าช่วยบริหารร้านของคุณ -->
-    <hr>
-    <div> Advance  ...<button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
+
+    <!-- <hr> -->
+
+    <div class="rounded bg-light pl-2 mt-5 pb-2">
+        <div class="font-color-shop line-for-header pt-1 pb-1">
+            จัดการร้านค้าแบบหลายร้าน Multiple Shop
+        </div>
+        <div class="mt-3 pr-1">
+            <!--<span> เข้าบริหารจัดการร้านค้า อื่น :</span>-->
+            <div class="form-group row">
+                <div class="col-8 pr-0">
+                    ตั้งค่าแบบ Advance
+                </div>
+                <div class="col text-right d-flex d-inline ">
+                    <div class="ml-auto">
+                      <!-- // ข้อความอธิบาย -->
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
+                        <i class="fas fa-sign-in-alt"></i> For Multiple Shop
+                    </button>
+<!--                    <small id="emailHelp" class="form-text text-muted">
+                        ** คุณสามารถ Share Key ให้สิทธิ์บุคคลอื่น จัดการร้านค้านี้ได้โดย ให้พิมพ์ข้อความ ตามหมายเลข นี้
+                        เมื่อเลิกการแชร์แล้ว ปิด ส่วนนี้ ผู้ที่ใช้งาน Share อยู่ก็จะไม่สามารถเข้าใช้ได้อีก
+                    </small>-->
+                </div>
+            </div>
+        </div>
+    </div> <!-- // จัดการร้านค้าแบบหลายร้าน Multiple Shop  -->
+
+
+
+
+<!--    <div>
+        Advance  ...<button class='btn btn-sm btn-submit-shop btn-block' onclick="go2View('register-advance');">
             <i class="fas fa-sign-in-alt"></i> For Multiple Shop
-        </button></div>
+        </button>
+    </div>-->
 
 </div>
 <script>
+
+
+
+
     console.log("Setting", working.shop);
     var template_shop_image_view;
     $('#image_uploader').load('/LIFF/modal_file_upload.html', function () {
+            $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+        console.log(res.detail)
+        working.shop = res.detail;
+
         var data2post = {LINE_USER: LINE_USER, shopid: working.shop._id};
         call_modal_image_upload({url: '/api/liff/shop/uploader', postdata: data2post}, (res) => {
             // POST Image Finish
@@ -211,8 +256,14 @@
         });
         template_shop_image_view = $('#shop_image_view_div').html();
         show_shop_image();
+
+        loadnewdata()
+    });
+
+
     });
     $('#shop_image_preview_div').load('/LIFF/modal_view_shopimage.html');
+    function loadnewdata(){
     setdatabyclass($('.main_data'), 'LINE', LINE_USER);
     setdatabyclass($('.main_data'), 'SHOP', working.shop);
     if (working.shop.status == 1) {
@@ -246,6 +297,10 @@
         $('#sharethisshop').prop('checked', false);
         $('#shopsharenumber').html('-');
     }
+    check_shopbranch();
+
+
+}
     var shopbranch_select_template = $('#shopbranch-select').html();
     function check_shopbranch() {
         $.postJSON('/api/liff/check/shopbranch', {LINE_USER: LINE_USER, shopid: working.shop._id}, function (res) {
@@ -257,9 +312,10 @@
                 $('#shopbranch-select').html(shopbranch_select_template).removeClass('alert alert-warning').addClass('text-left');
                 $('.show_createbranch').hide();
                 $('#managebranch').show();
+                $('#total_branch').html('( ' +res.detail.length +' สาขา)');
             } else {
                 $('#shopbranch-select').addClass('text-danger text-center alert alert-warning').html('ดูเหมือน คุณจะยังไม่มีสาขา ? <br> สร้างสาขาใหญ่ ของคุณได้เลย')
-
+                $('#total_branch').html('');
             }
             setdata_selection($('#shopbranch'), res.detail);
         });
@@ -278,7 +334,7 @@
             }
         });
     }
-    check_shopbranch();
+
     var show_createbranch_show = false;
     function show_createbranch() {
         if (show_createbranch_show) {

@@ -4,6 +4,7 @@
 <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js"></script>
 
+
 <!--  Food Mall Style Sheet
 <link href="/css/food_mall_stylesheet.css?v=12" rel="stylesheet" type="text/css"/>
  ฝั่งลูกค้า-->
@@ -34,7 +35,13 @@
 
 <style>
     .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
-    .body { color: #545559; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }
+    .body {
+        color: #545559;
+        font-weight: 400;
+        line-height: 1.471;
+        background: #2772B8 !important;
+        height: 100%;
+    }
 
     /* custom css */
     .border-left-primary {
@@ -210,7 +217,7 @@
 
 //////////
 var temp_url_permission
-var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','menulist','menuview','menuview4add','menu','menusearch','shopview'];
+var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','cart-main','menulist','menuview','menuview4add','menu','menusearch','shopview'];
 var firsttime_visit =true;
 var working={};
 var temp =  window.location.pathname.split('/');

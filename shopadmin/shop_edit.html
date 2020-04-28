@@ -1,0 +1,676 @@
+<div id='modal_gps_form'>
+</div>
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Edit Shop</u></b></h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/shop_list")'>
+                    <i class="fa fa-arrow-left"></i>
+                    Back
+                </button>
+                <button class="btn btn-outline-success alink" onclick="return submit_add_data()">
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row" id="setdata_shop">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return save_data_customer()">
+                <div class="form-row">
+                    <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="row  m-3">
+                            <h3 style="padding-left:5px">เจ้าของร้าน </h3>
+                            <div class="col-lg-4 col-sm-12 col-md-12 col-12 mb-2">
+                                <select class="form-control shop_shopowner" id="select_shopowner">
+                                </select>
+                            </div>
+                            <h3 style="padding-left:5px">ชื่อร้าน </h3>
+                            <div class="col-lg-5 col-sm-12 col-md-12 col-12 mb-2">
+                                <input type="text" id="shop_name"  name="shopname" class="shop_name form-control input-sm autoFilter" placeholder="ชื่อร้านค้า"  >
+                            </div>
+
+                        </div>
+                    </div>
+                  <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="row m-3">
+                             <h3 style="padding-left:5px">เบอร์โทรศัพท์ </h3>
+                            <div class="col-lg-2 col-sm-12 col-md-12 col-12 mb-2">
+                                <input  id="shop_phonenumber" pattern="[0-9]"  name="phonenumber" class="form-control shop_contact input-sm autoFilter" placeholder="เบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                            </div>
+                            <h3 style="padding-left:5px">ที่อยู่ </h3>
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+                                <input type="text" id="shop_address"  name="shopname" class="shop_address form-control input-sm autoFilter" placeholder="ที่อยู่"  >
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                        <div class="row m-3">
+                             <h3 style="padding-left:5px">จังหวัด </h3>
+                            <div class="col-lg-4 col-sm-12 col-md-12 col-12 mb-2">
+                                <select  id="shop_province" class="shop_province form-control input-sm autoFilter"  >
+                                    
+                                </select>
+                            </div>
+                             <h3 style="padding-left:5px">เวลาเปิด-ปิดร้าน </h3>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4  ml-2">
+                                <div class="row"  style="padding-left:5px">
+                                <select id="open_time" class="col-4 col-sm-3 col-md-3 form-control input-sm autoFilter shop_open_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                    <h3>&nbsp;-&nbsp;</h3>
+                                <select id="close_time" class="col-4 col-sm-3 col-md-3 form-control input-sm autoFilter shop_close_time">
+                                        <option value="00:00">00:00</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="03:00">03:00</option>
+                                        <option value="04:00">04:00</option>
+                                        <option value="05:00">05:00</option>
+                                        <option value="06:00">06:00</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                             
+<!--                             
+                                <h3 style="padding-left:5px">พิกัดที่ตั้ง </h3>
+                                <div class="col-lg-2 col-sm-3 col-md-2 col-12  mb-2">
+                                    <input type="text" id="shop_location_longitude"  name="longitude" class="form-control input-sm autoFilter" placeholder="longitude" >
+                                </div>
+                                <div class="col-lg-2 col-sm-3 col-md-2 col-12 mb-2">
+                                    <input type="text" id="shop_location_latitude"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="latitude" >
+                                </div>
+                                <button type="button" class="btn btn-outline-success alink" onclick="find_location_data()" style="height: 40px">ค้นหาพิกัดในแผนที่</button>
+                        -->
+                        </div>
+                    </div>
+
+                  <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">ประเภท ร้านอาหาร </h3>
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+                                <select id="select_shoptype"  name="shop_type" class="form-control input-sm autoFilter shop_shoptype" multiple="multiple">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">หมวดอาหาร แนะนำตาม tag </h3>
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+                                <select id="select_promotag"  name="shop_type" class="form-control input-sm autoFilter shop_promotag" multiple="multiple">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">เลขบัญชี ธนาคาร </h3>
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-3">
+                                <input type="text" id="shop_bank_acco"  name="shopname" class="shop_bank_account form-control input-sm autoFilter" placeholder="xxxx-xxxx-xxxx-xxxx"  >
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                     <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                            <div class="row m-3">
+                                <h3 style="padding-left:5px">ช่องทางการชำระ </h3>
+                                    <div class='col-12 col-sm-12 col-md-12'>
+                                        <div class='row m-2'>
+                                        <div class="col-12 col-md-12 col-sm-12 col-lg-12 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input paymenttype " id="paytype-1" onclick="paymentcheck(this)" value="1">
+                                            <label class="custom-control-label" for="paytype-1">Cash On Delivery</label>
+                                          </div>
+                                          <div class="col-12 col-md-12 col-sm-12 col-lg-12 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input paymenttype "  id="paytype-2" onclick="paymentcheck(this)" value="2">
+                                            <label class="custom-control-label" for="paytype-2">QR payment By Quickpay</label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div> <!--// ช่องทางการชำระ  -->
+                        
+                  <div class="col-12 col-lg-6 col-sm-12 col-md-6 ">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">วันเปิด-ปิด ร้าน </h3>
+                            <div class="col-md-12 mb-2">
+<!--                                <select id="shop_opendate"  name="shop_type" class="form-control input-sm autoFilter" multiple="multiple">
+
+                                </select>-->
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+<!--                                    <input type="checkbox" value="sun">Sunday
+                                    <input type="checkbox" value="mon">Monday
+                                    <input type="checkbox" value="tue">Tuesday
+                                    <input type="checkbox" value="wed">Wednesday
+                                    <input type="checkbox" value="thu">Thursday
+                                    <input type="checkbox" value="fri">Friday
+                                    <input type="checkbox" value="sat" >Saturday-->
+
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันอาทิตย์ <span class="text-gray-light2">(Sunday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch" >
+                                                <input type="checkbox" id="date_sun" value="sun" class="toggle-date" onchange="add_day(this);" style="width:50px;">
+
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light  ">
+                                            วันจันทร์ <span class="text-gray-light2" style="font-weight: 200;">(Monday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_mon" value="mon" class="toggle-date" onchange="add_day(this)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันอังคาร <span class="text-gray-light2" style="font-weight: 200;">(Tuesday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_tue" value="tue" class="toggle-date" onchange="add_day(this)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันพุธ <span class="text-gray-light2" style="font-weight: 200;">(Wednesday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_wed" value="wed" class="toggle-date" onchange="add_day(this);">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันพฤหัสบดี <span class="text-gray-light2" style="font-weight: 200;">(Thursday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_thu" value="thu" class="toggle-date" onchange="add_day(this);">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row button-top_gray  text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันศุกร์ <span class="text-gray-light2" style="font-weight: 200;">(Friday) </span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_fri" value="fri" class="toggle-date" onchange="add_day(this)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row button-top_gray text-right">
+                                        <div class="col-9 text-left text-gray-light ">
+                                            วันเสาร์ <span class="text-gray-light2" style="font-weight: 200;">(Saturday)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="date_sat" value="sat" class="toggle-date" onchange="add_day(this)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-12 col-md-6">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">ตั้งค่า Theme</h3>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class='row'>
+                                    <label class="col-8 text-gray-light">สีพื้นหลัง / Background Color</label>
+                                    <input type="color" id="primary_color" class="shop_primary_color" >
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class='row'>
+                                    <label class="col-8 text-gray-light">สีตัวอักษร / Font Color </label>
+                                    <input type="color" id="secondary_color" class=" shop_secondary_color" >
+                                </div>
+                             </div>
+                        </div>
+                        </div>
+
+
+                        <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+                            <div class="row m-3">
+                                <h3 style="padding-left:5px">LINE APP Setting <span class="text-success">(for Premium shop)</span></h3>
+                                <div class=" col-lg-12 col-sm-12 col-md-12">
+                                      <div class=" row ">
+                                        <label class="text-gray-light col-12 col-md-4 col-sm-4" > LIFF Channel ID</label>
+                                        <div class="col-12  ">
+                                              <input type="text" id="shop_liffid"  name="shopname" class="shop_liffid form-control input-sm autoFilter"   >
+                                        </div>
+
+                                        </div>
+                                        <div class="  row ">
+                                           <label class="text-gray-light col-12 col-md-4 col-sm-4" >Channel Secret</label>
+                                            <div class="col-12 ">
+                                                <input type="text" id="shop_linechannel"  name="shopname" class="shop_linechannel form-control input-sm autoFilter"   >
+                                            </div>
+                                        </div>
+                                        <div class="  row ">
+                                            <label class="text-gray-light col-12 col-md-4 col-sm-4 " >Channel TOKEN</label>
+                                            <div class="col-12 ">
+                                                  <input type="text" id="shop_linetoken"  name="shopname" class="shop_linetoken form-control input-sm autoFilter" >
+                                            </div>
+                                        </div>
+                                </div>
+                             </div>
+                        </div>
+                            
+                            
+                                     
+
+  
+                  <div class="col-12 col-lg-12 col-sm-12">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">สถานะ </h3>
+                            <div class="col-md-12 col-12 col-sm-12 col-lg-6 mb-2">
+                                <select class="form-control shop_status" id="select_status">
+                                    <option class="text-warning" value="1">รอตรวจสอบ</option>
+                                    <option class="text-dark" value="2">อยู่ระหว่างตรวจสอบ</option>
+                                    <option class="text-success" value="3">ตรวจสอบแล้ว</option>
+                                    <option class="text-danger" value="4">ปิดใช้งาน</option>
+                                    <option class="text-primary" value="5">เปิดใช้งาน</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-12 col-md-6">
+                        <div class="row m-3">
+                            <h3 style="padding-left:5px">จัดการร้าน</h3>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class='row'>
+                                         <div class="col-9 text-left text-gray-light ">
+                                            การยืนยัน Order <span class="text-gray-light2" style="font-weight: 200;">(Manual - Auto)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="confirm_order"  class="toggle-date" >
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class='row'>
+                                         <div class="col-9 text-left text-gray-light ">
+                                            การปิด-เปิดร้าน <span class="text-gray-light2" style="font-weight: 200;">(Off - On)</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="switch">
+                                                <input type="checkbox" id="open_shop"  class="toggle-date" >
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                </div>
+                             </div>
+                        </div>
+                        </div>
+                            
+                            
+                            
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--<link href="/adminkinarai/modal_gps.html"/>-->
+<!--Modal
+<div class="modal fade" id="showmodallocation" tabindex="-1" role="dialog" aria-labelledby="modallocation" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modallocation">Find Location<span id="id_restaurant"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Map</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Get Location</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<script>
+//    $('#modal_gps_form').load('/adminkinarai/modal_gps.html');
+//    function find_location_data(objid) {
+//        var detail = {lat: 13.79607108667891, lng: 100.71164142340422};
+//        call_modal_maps(detail, function (data) {
+//            console.log('DataBack:', data);
+//            $('#shop_location_longitude').val(data.lng)
+//            $('#shop_location_latitude').val(data.lat)
+//        });
+//    }
+
+    $('#shop_opendate').select2();
+    $('#shop_type').select2();
+    $('#select_promotag').select2({
+        tags: true,
+        tokenSeparators: [',', ' ']
+    })
+    
+    
+    var array_day=[]
+    var chek_payment =[]
+//     function find_location_data() {
+//         $('#showmodallocation').modal("show")
+// //        call_modal_maps()
+//         return false
+//     }
+
+//    $('#select_owner').adv_select({
+//        url: '/api/data/kinarai/select_owner',
+//        name: 'displayName',
+//        id: '_id',
+//        maxshow: 10
+//    });
+
+
+    var shopid = getParameterByName('shop_id');
+    console.log(shopid)
+
+var check_date =['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+
+
+
+    $.postJSON('/api/data/kinarai/shop_owner_list', {}, function (shopownerdata) {
+        create_select('select_shopowner', shopownerdata.obj, 'displayName')
+            $.get('/api/data/kinarai/shop_type', function (data1) {
+                create_select('select_shoptype', data1, 'name',false,'name')
+                    $.get('/api/data/ticket/province_list',function(data){
+
+                                var selectoption =""
+                                selectoption += '<option value="">----เลือก-----</option>'
+                                for(var x=0;x<data.length;x++){
+                                    selectoption +='<option value="'+data[x]._id+'">'+data[x].name+'</option>'
+                                }
+                                $('#shop_province').html(selectoption)
+                                
+                                //load shopdata
+                                setdata()
+                                   
+                                
+                                
+                                
+                                
+                        })
+                
+//                    $.postJSON('/api/data/kinarai/shop_branch_list', {},function (data2) {
+//                        create_select('shop_branch', data2.obj, 'name')
+//                    });
+            });
+    })
+
+
+                                function setdata(){
+                                     $.get('/api/data/kinarai/shop_edit/' + shopid, function (result) {
+                                        console.log(result)
+                                               var objjquery = $('#setdata_shop');
+                                                setdatabyclass(objjquery, 'shop', result);
+                                                $("#select_shoptype").val(result.type)
+                                                $('#select_shoptype').trigger('change');
+                                                if(Array.isArray(result.paymenttype)&&result.paymenttype.length>0){
+                                                    var pay_mt =result.paymenttype
+                                                    for(var x=0;x<pay_mt.length;x++){
+                                                        if(pay_mt[x]==1){
+                                                            $('#paytype-1').attr('checked',true)
+                                                            chek_payment.push($('#paytype-1').val())
+                                                        }else if(pay_mt[x]==2){
+                                                            $('#paytype-2').attr('checked',true)
+                                                            chek_payment.push($('#paytype-2').val())
+                                                        }
+                                                    }
+                                                }
+                                                if(Array.isArray(result.opendate)&&result.opendate.length>0){
+                                                    var opendate =result.opendate
+                                                     for(var x=0;x<opendate.length;x++){
+                                                         $('#date_'+opendate[x]).attr('checked',true)
+                                                         array_day.push(opendate[x])
+                                                    }
+                                                }
+                                                if(result.service_status=='online'){
+                                                         $('#open_shop').attr('checked',true)
+                                                }else if(result.service_status=='offline'){
+                                                        $('#open_shop').attr('checked',false)
+                                                }
+                                                if(result.confirm_order=='auto'){
+                                                         $('#confirm_order').attr('checked',true)
+                                                }else if(result.confirm_order=='manual'){
+                                                        $('#confirm_order').attr('checked',false)
+                                                }
+                                                if(result.promotag){
+                                                    var select_option = ''
+                                                    for (var x = 0; x < result.promotag.length; x++) {
+                                                        select_option += '<option value="' + result.promotag[x] + '">' + result.promotag[x] + '</option>'
+                                                    }
+                                                    $('#select_promotag').html(select_option).val(result.promotag).trigger('change');
+
+                                                }
+                                    });
+                                }
+
+
+
+    function paymentcheck(tagcheck){
+        
+        paymentcheck
+    }
+
+
+    function add_day(tagobj) {
+        if($(tagobj).is( ":checked" )==true){
+            console.log($(tagobj).val())
+            array_day.push($(tagobj).val())
+        }else{
+            if(array_day.indexOf($(tagobj).val())>-1){
+                array_day.splice(array_day.indexOf($(tagobj).val()),1)
+            }
+             
+        }
+        console.log("array_day",array_day)
+    }
+    
+    $('#select_shoptype').select2()
+
+    function submit_add_data() {
+        var name = $('#shop_name').val()
+        var phonenumber = $('#shop_phonenumber').val()
+        var owner = $('#select_owner').val()
+        var shoptype = $('#select_shoptype').val()
+        var shopowner = $('#select_shopowner').val()
+        var address = $('#shop_address').val();
+        var bank_acco = $('#shop_bank_acco').val()
+        var open_time =$('#open_time').val()
+        var close_time =$('#close_time').val()
+        var province = $('#shop_province').val() 
+        var promotag = $('#select_promotag').val()
+        var primary_color = $('#primary_color').val()
+        var secondary_color = $('#secondary_color').val()
+        var status = $('#select_status').val()
+        var liffid =$('#shop_liffid').val()
+        var linechannel =$('#shop_linechannel').val()
+        var linetoken =$('#shop_linetoken').val()
+        var texterror
+//        if (!phonenumber) {
+//            texterror = 'Phone Number'
+//            $('#shop_phonenumber').removeClass('input_success').addClass('input_danger').focus()
+//        } else {
+//            $('#shop_phonenumber').removeClass('input_danger').addClass('input_success')
+//        }
+//        if (!name) {
+//            texterror = 'Name'
+//            $('#shop_name').removeClass('input_success').addClass('input_danger').focus()
+//        } else {
+//            $('#shop_name').removeClass('input_danger').addClass('input_success')
+//        }
+//        if (!owner) {
+//            texterror = 'Owner'
+//            $('#select_owner').removeClass('input_success').addClass('input_danger').focus()
+//        } else {
+//            $('#select_owner').removeClass('input_danger').addClass('input_success')
+//        }
+        if (texterror) {
+            alert('กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน')
+        } else {
+
+            console.log('true')
+            var postdata = {}
+            postdata.name= name,
+            postdata.contact=phonenumber
+            postdata._id = shopid
+           if(chek_payment){
+               postdata.paymenttype=chek_payment
+           }
+           if(array_day){
+               postdata.opendate=array_day
+           }
+           if(address){
+               postdata.address=address
+           }
+           if(shopowner){
+               postdata.shopowner=shopowner
+           }
+           if(bank_acco){
+               postdata.bank_account=bank_acco
+           }
+           if(open_time){
+               postdata.open_time=open_time
+           }
+           if(close_time){
+               postdata.close_time=close_time
+           }
+           if(province){
+               postdata.province=province
+           }
+           if(promotag){
+               postdata.promotag=promotag
+           }
+           if(shoptype){
+               postdata.type=shoptype
+           }
+           if(status){
+               postdata.status=status
+           }
+           if(liffid){
+               postdata.liffid=liffid
+           }
+           if(linechannel){
+               postdata.linechannel=linechannel
+           }
+           if(linetoken){
+               postdata.linetoken=linetoken
+           }
+           if(primary_color){
+               postdata.primary_color=primary_color
+           }
+           if(secondary_color){
+               postdata.secondary_color=secondary_color
+           }
+           if($('#confirm_order').is(":checked")==true){
+               postdata.confirm_order="auto"
+           }else{
+               postdata.confirm_order="manual"
+           }
+           if($('#open_shop').is(":checked")==true){
+               postdata.service_status="online"
+           }else{
+               postdata.service_status="offline"
+           }
+            console.log(postdata)
+            $.postJSON('/api/data/kinarai/shop_update', postdata, function (res) {
+                console.log('success')
+                if (res) {
+                    alert('success')
+                    go2View('/shop_list');
+                }
+            });
+        }
+    }
+
+</script>

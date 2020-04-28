@@ -1,0 +1,980 @@
+
+<div class="container-fluid">
+
+  <div class="box-head-title-shop text-center line-bottom-color-shop mb-3" onclick="refresh_last_order();">
+        <div class="header-shop" id="shop_name"></div>
+      <span class="header-shop"> รายการออเดอร์ <i class="fas fa-sync-alt" ></i></span>
+  </div>
+  <div class="container-">
+             <div class="row">
+               <div class="col-xs-12 ">
+                 <nav>
+                   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                     <div class="nav-item nav-link active" id="nav-new-tab" data-toggle="tab" href="#nav-new" role="tab" aria-controls="nav-home" aria-selected="true">รายการมาใหม่</div>
+                     <div class="nav-item nav-link" id="nav-wait-tab" data-toggle="tab" href="#nav-wait" role="tab" aria-controls="nav-profile" aria-selected="false">รายการรอทำ</div>
+                     <div class="nav-item nav-link" id="nav-finish-tab" data-toggle="tab" href="#nav-finish" role="tab" aria-controls="nav-contact" aria-selected="false">รอทำเสร็จ</div>
+                   </div>
+                 </nav>
+                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                   <div class="tab-pane fade show active" id="nav-new" role="tabpanel" aria-labelledby="nav-home-tab">
+                     <div id="order_last" class="w-100">
+                         Please Wait..
+                     </div>
+                   </div>
+                   <div class="tab-pane fade" id="nav-wait" role="tabpanel" aria-labelledby="nav-profile-tab">
+                     <div id="order_waiting_payment" class="w-100">
+                         Please Wait..
+                     </div>
+                   </div>
+                   <div class="tab-pane fade" id="nav-finish" role="tabpanel" aria-labelledby="nav-contact-tab">
+                     <div id="order_waiting_finish" class="w-100">
+                         Please Wait..
+                     </div>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
+       </div>
+
+
+  <!-- <div id="order_last">
+      Please Wait..
+  </div> -->
+  <style media="screen">
+
+    .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+    .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+}
+  </style>
+
+
+
+  <div id="order_template1" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+              <strong class="card-title">##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span> </strong>
+          </div>
+          <div class="mt-1 text-right">
+            <small>
+              อัพเดทล่าสุด <span class="badge badge-pill badge-success">  ##ORDER-timeupdate## </span>
+            </small>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+            <small class="row text-right">
+                    <div class="col-6">
+                        ราคาสุทธิ(รวมค่าจัดส่ง)
+                    </div>
+                    <div class="col-6">
+                         <span class="font-color-shop">##ORDER-grandtotalshow##</span> บาท <br>
+                    </div>
+
+              </small>
+
+          <div class="row">
+            <div class="col-12">
+                <small>สาขา  ##ORDER-shopbranchname##</small>
+            </div>
+          </div>
+
+          <div class="row">
+
+
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 p-1">
+                <button type="button" class="btn btn-danger btn-circle btn-xl float-left" onclick="order_accept(this,##ORDER-id##,'reject');" >ไม่รับ</button>
+            </div>
+            <div class="col-2 text-center">
+                  <button class="btn btn-outline-light btn-sm mt-2"onclick="order_accept(this,##ORDER-id##,'edit');"><span class="text-warning"> แก้ไข</span></button>
+            </div>
+            <div class="col-5 p-1">
+                <button type="button" class="btn btn-success btn-circle btn-xl float-right" onclick="order_accept(this,##ORDER-id##,'accept');" >รับ</button>
+            </div>
+
+            <div class="mt-2">
+                  ##ORDER-orderautodetail##
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
+
+    <div id="order_template2" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+              <strong class="card-title" >##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span></strong>
+          </div>
+          <div class="row">
+            <div class="col-5">
+                  <span class="btn btn-sm btn-outline-danger" onclick="order_accept(this,##ORDER-id##,'reject');"><i class="fas fa-ban"></i> ยกเลิกรายการ</span>
+            </div>
+            <div class="col-7">
+              <small class="text-right">
+                อัพเดทล่าสุด <span class="badge badge-pill badge-success">  ##ORDER-timeupdate## </span>
+              </small>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+            <small class="row text-right">
+                    <div class="col-6">
+                        ราคาสุทธิ(รวมค่าจัดส่ง)
+                    </div>
+                    <div class="col-6">
+                         <span class="font-color-shop">##ORDER-grandtotalshow##</span> บาท <br>
+                    </div>
+
+              </small>
+          <div class="row">
+            <div class="col-12">
+                <small> สาขา  ##ORDER-shopbranchname##</small>
+            </div>
+          </div>
+          <div class="row">
+
+
+          <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+          <div class="col-6 mt-3 mb-3 text-right">
+             <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                 <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            <!-- <small>
+                <span>ข้อมูลจัดส่ง</span> <br>
+                  ##ORDER-addressid##
+            </small> -->
+          </div>
+            </div>
+
+          <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
+              <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
+          </button>
+
+          <div class="mt-2">
+                ##ORDER-orderautodetail##
+          </div>
+
+        </div>
+       </div>
+    </div>
+
+
+
+    <div id="order_template3" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center mt-1 mb-1">
+              <strong class="card-title" >##ORDER-statusshow## #  <span class="text-success">##ORDER-id##</span></strong>
+          </div>
+          <div class="mt-1 text-right">
+            <small>
+              อัพเดทล่าสุด <span class="badge badge-pill badge-success">  ##ORDER-timeupdate## </span>
+            </small>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+            <small class="row text-right">
+                    <div class="col-6">
+                        ราคาสุทธิ(รวมค่าจัดส่ง)
+                    </div>
+                    <div class="col-6">
+                         <span class="font-color-shop">##ORDER-grandtotalshow##</span> บาท <br>
+                    </div>
+
+              </small>
+          <div class="row">
+            <div class="col-12">
+                <small> สาขา  ##ORDER-shopbranchname## </small>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+            </div>
+          </div>
+
+
+
+          <button type="button" class="btn btn-success btn-md btn-block"  onclick="order_accept(this,##ORDER-id##,'finish');" ><i class="fas fa-check-circle"></i> ตอบรับทำเสร็จแล้ว</button>
+
+          <div class="mt-2">
+                ##ORDER-orderautodetail##
+          </div>
+        </div>
+       </div>
+    </div>
+
+    <div id="order_template4" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+              <strong class="card-title" >##ORDER-statusshow## # <span class="font-color-shop">##ORDER-id##</span></strong>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <small>
+                  <span class="btn btn-sm btn-outline-danger" onclick="order_accept(this,##ORDER-id##,'reject');"><i class="fas fa-ban"></i> ยกเลิกรายการ</span>
+              </small>
+
+            </div>
+            <div class="col-7">
+              <small class="text-right">
+                อัพเดทล่าสุด <span class="badge badge-pill badge-success">  ##ORDER-timeupdate## </span>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+            <small class="row text-right">
+                    <div class="col-6">
+                        ราคาสุทธิ(รวมค่าจัดส่ง)
+                    </div>
+                    <div class="col-6">
+                         <span class="font-color-shop">##ORDER-grandtotalshow##</span> บาท <br>
+                    </div>
+
+              </small>
+          <div class="row">
+            <div class="col-12">
+                <small> สาขา  ##ORDER-shopbranchname## </small>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+
+          <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+          <div class="col-6 mt-3 mb-3 text-right">
+             <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                 <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+          </div>
+            </div>
+
+          <button type="button" class="btn btn-md btn-block btn-submit-shop" onclick="order_accept(this,##ORDER-id##,'working');" >
+              <i class="far fa-paper-plane"></i> ตอบรับทำรายการ
+          </button>
+          <div class="mt-2">
+                ##ORDER-orderautodetail##
+          </div>
+        </div>
+       </div>
+    </div>
+
+    <div id="order_template5" style="display:none;">
+      <div class="card row_tablecontent mb-3" >
+        <div class="card-body">
+          <div class="text-center">
+            <strong class="card-title" >##ORDER-statusshow## # ##ORDER-id##</strong>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <small>
+                  <span class="btn btn-sm btn-outline-danger" onclick="order_accept(this,##ORDER-id##,'reject');"><i class="fas fa-ban"></i> ยกเลิกรายการ</span>
+              </small>
+
+            </div>
+            <div class="col-7">
+              <small class="text-right">
+                อัพเดทล่าสุด <span class="badge badge-pill badge-success">  ##ORDER-timeupdate## </span>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                ##ORDER-menudetail##
+            </div>
+          </div>
+            <small class="row text-right">
+                    <div class="col-6">
+                        ราคาสุทธิ(รวมค่าจัดส่ง)
+                    </div>
+                    <div class="col-6">
+                         <span class="font-color-shop">##ORDER-grandtotalshow##</span> บาท <br>
+                    </div>
+
+              </small>
+          <div class="row">
+            <div class="col-12">
+                <small> สาขา  ##ORDER-shopbranchname## </small>
+            </div>
+          </div>
+          <div class="row">
+
+
+            <div class="col-6 mt-3 mb-3 ">ข้อมูลลูกค้า</div>
+
+            <div class="col-6 mt-3 mb-3 text-right">
+               <span class="btn btn-sm btn-outline-submit-shop-small rounded-pill" onclick="previewcustomer(##ORDER-id##)">
+                   <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span></span><br>
+              <!-- <small>
+                  <span>ข้อมูลจัดส่ง</span> <br>
+                    ##ORDER-addressid##
+              </small> -->
+            </div>
+          </div>
+          <div class="mt-2">
+                ##ORDER-orderautodetail##
+          </div>
+        </div>
+       </div>
+    </div>
+
+
+
+  <div id="order_template_menu" style="display:none;">
+    <div class="border rounded p-2 mt-1">
+      <div class="row">
+          <div class="col-8">
+              ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span>  <br>
+          </div>
+          <div class="col-4 text-right">
+              <span class="font-color-shop">฿ ##MENU-priceshow##</span>
+          </div>
+      </div>
+      <small class="row">
+        <div class="col-12">
+            <strong class="text-gray-light2 border-bottom-gray">รายละเอียด</strong>
+            <div class="mt-2">
+                ##MENU-qty## x  ##MENU-name## <span class="font-color-shop"> ##MENU-pricedetail##</span>
+                    <br>
+                      <span class="font-color-shop">##MENU-optionmenu##</span> <br>
+                note : <span class="font-color-shop">##MENU-note##</span>
+            </div>
+        </div>
+
+      </small>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modal_image_customer_preview"  tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ข้อมูลลูกค้า</h5> <!-- Image Preview -->
+      </div>
+
+        <div class="modal-body" >
+          <div class="row">
+<!--            <div class="col-4">
+              <img id='file_image_preview' src='##CUS-customeruserId##' class="rounded" width='100%'>
+            </div>-->
+            <div class="col-12">
+              <small>
+                <span class="h5"> ##CUS-displayName##</span> <br>
+                <div class="row">
+                    <div class="col-12">
+                     <strong>ชื่อลูกค้าปลายทาง</strong> : <span>##CUS-firstname##  ##CUS-lastname##</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <strong>เบอร์ติดต่อ</strong> : <span>##CUS-contact##</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <strong>ช่องทางการชำระ</strong> : ##CUS-paymenttype##
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <strong>ข้อมูลจัดส่ง</strong> : ##CUS-addressname##
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-1"></div>
+                    <div class="col-5 text-left">
+
+                    <strong>ระยะทาง</strong>
+                    </div>
+                    <div class="col-6">
+                    ##CUS-distanceShopToCustomerInKM## กม.
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-1"></div>
+                    <div class="col-5 text-left">
+                    <strong>ค่าอาหาร</strong>
+                    </div>
+                    <div class="col-6">
+                    ##CUS-totalcost## ฿.
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-1"></div>
+                    <div class="col-5 text-left">
+                    <strong>ค่าจัดส่ง</strong>
+                    </div>
+                    <div class="col-6">
+                    ##CUS-logisticcost## ฿.
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-1"></div>
+                    <div class="col-5 text-left">
+                    <strong>ส่วนลด</strong>
+                    </div>
+                    <div class="col-6">
+                   - ##CUS-deliveryDiscount## ฿.
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-1"></div>
+                    <div class="col-5 text-left">
+                    <strong>ราคาสุทธิ</strong>
+                    </div>
+                    <div class="col-6">
+                        <strong> ##CUS-grandtotalshow## ฿. </strong>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                      <button onclick='view_location();' class='btn btn-sm btn-outline-danger rounded-pill'>
+                        <i class="fas fa-map-marker-alt"></i> ดูพิกัด GPS
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      <!-- <span id='gpsvalue' style="display:none">Gps Data Hide Here</span>
+                        <button type='btn' class='btn btn-sm btn-outline-danger rounded-pill' onclick="copygps();" > COPY GPS </button> -->
+                    </div>
+                </div>
+                </small>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer" >
+
+            <button onclick="$('#modal_image_customer_preview').modal('hide');" id="hidecusmodal" class="btn btn-sm btn-light border border-secondary">
+                <i class="fa fa-fw fa-times"></i> Close
+            </button>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" id="modal_onconfirmorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center p-2">
+              <h4 class="text-success">รับรายการเรียบร้อย</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" id="modal_onrejectorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body " id="reject-body">
+        <div class="text-center" id="frm_inputreject">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <h4 class="text-danger">ยืนยันการปฏิเสธรายการ !!</h4>
+
+
+            <div class="mt-1">
+                <textarea class="form-control" id="inputcommentreject" placeholder="ระบุเหตุผลการปฏิเสธรายการ"></textarea>
+                <button type="button" class="btn btn-danger btn-block mt-1" name="button" onclick="confirm_reject();">ยืนยันการปฏิเสธ</button>
+            </div>
+        </div>
+
+        <div class="text-center p-2" id="frm_showrejectstatus" style="display:none">
+              <h4 class="text-success warn_reject">ปฏิเสธรายการเรียบร้อย</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" id="modal_oneditorder" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body " id="edit-body">
+        <div class="text-center" id="frm_inputedit">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <h4 class="">แก้ไขรายการ</h4>
+
+
+            <div class="mt-1">
+                <textarea class="form-control" id="inputcommenetdit" placeholder=""></textarea>
+                <button type="button" class="btn btn-warning btn-block mt-1" name="button" onclick="confirm_edit();">ยืนยันการแก้ไข</button>
+            </div>
+        </div>
+
+        <div class="text-center p-2" id="frm_showeditstatus" style="display:none">
+              <h4 class="text-success warn_edit">แก้ไขรายการเรียบร้อย</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    all_page = ["order_seller_latest1","order_seller_latest","order_seller_viewmap"];
+    var working = {};
+    register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987624-8WBq4nwD';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+  var template1= $("#order_template1").html();    // Order Status = 7
+  var template2= $("#order_template2").html();    // Order Status = 11
+  var template3= $("#order_template3").html();    // Order Status = 15
+  var template4= $("#order_template4").html();    // Order Status = 14
+  var template5= $("#order_template5").html();    // Order Status = 5/10
+  var order_template_menu = $('#order_template_menu').html();
+
+  var STATUSSHOW =[];
+  STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
+  STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
+  STATUSSHOW[10] ='รอการชำระเงินจากลูกค้า';
+  STATUSSHOW[11]='ลูกค้าชำระเงินแล้ว';
+  STATUSSHOW[12]='ลูกค้าจะชำระเงินแบบ COD';
+  STATUSSHOW[14]='รายการใหม่รอเริ่มทำ';
+  STATUSSHOW[15]='ร้านกำลังดำเนินการ';
+  STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
+
+
+var orderstatus_page1 = [],orderstatus_page2 = [],orderstatus_page3 = [];
+
+setInterval(neworderCall, 1000*5);
+
+function neworderCall() {
+  var newrechord = [];
+  $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+        if(res.result){
+        // console.log('data',res.detail);
+        var obj = res.detail;
+        working.orderlast = obj;
+        if(working.orderlast.length ==0){
+            $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+
+        draworderlast(obj);   // loop all
+
+            // if (obj && obj.length >0) {
+            //       for(var x=0;x<obj.length;x++){
+            //         var found;
+            //           if(obj[x].status == 7 || obj[x].status == 11 || obj[x].status ==12){
+            //                 for(var y=0;y<orderstatus_page1.length;y++){
+            //                    if (orderstatus_page1[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page1.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else if(obj[x].status == 5 || obj[x].status == 10 || obj[x].status ==14){
+            //                 for(var y=0;y<orderstatus_page2.length;y++){
+            //                    if (orderstatus_page2[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page2.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else if(obj[x].status == 15){
+            //                 for(var y=0;y<orderstatus_page3.length;y++){
+            //                    if (orderstatus_page3[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page3.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }else {
+            //                 for(var y=0;y<orderstatus_page2.length;y++){
+            //                    if (orderstatus_page2[y]._id == obj[x]._id) {
+            //                           found = true;
+            //                           orderstatus_page2.push(obj[x]);
+            //                           // alert('found')
+            //                    }
+            //                 }
+            //           }
+            //             if(!found){
+            //                 draworderlast(obj[x]);
+            //             }
+            //       }
+            // }   //end loop
+
+        }
+  });
+}
+
+function view_location(){
+    $('#hidecusmodal').click()
+  setTimeout(()=>{   go2View('order_seller_viewmap'); },500);
+}
+
+function draworderlast(data){
+  var order1=[],order2=[],order3=[],order4=[],order5=[];
+
+
+if (Array.isArray(data)) {
+
+       data.map((obj)=>{   // out if is obj
+
+    if(working.shop_branch){
+      for(var x=0;x<working.shop_branch.length;x++){
+         if (working.shop_branch[x]._id == obj.shopbranch) {
+               obj.shopbranchname = working.shop_branch[x].name;
+         }
+      }
+    }
+
+
+         obj.statusshow = STATUSSHOW[obj.status];
+         obj.items.map((item)=>{   // setting Some Default
+            if(!item.note) item.note='';
+            if(Array.isArray(item.option)){
+               var html_option='';
+               item.option.map((ech)=>{
+                   html_option+=`<span  class='badge badge-success'>${ech}</span> `;
+               });
+
+               item.optionmenu = html_option;
+            }
+
+            if(item.price.price<=0) {
+               item.priceshow = '0.00';
+            }else {
+              item.priceshow = addCommas(item.price.price);
+            }
+             // item.priceshow = item.price.price;
+             item.pricedetail = item.price.detail;
+         });
+
+         if (obj.orderauto) {
+                if (obj.orderauto==true) {
+                  obj.orderautodetail = '<span class="badge badge-pill badge-info">รายการรับแบบ Auto</span>'
+                }else {
+                  obj.orderautodetail = '<span class="badge badge-pill badge-warning">รายการรับแบบ Manual</span>'
+                }
+         }else {
+           obj.orderautodetail = '<span class="badge badge-pill badge-warning">รายการรับแบบ Manual</span>'
+         }
+         obj.time = moment(obj.createdate,'X').format('H:m:s D/M/Y');
+         obj.timeupdate = moment(obj.lastupdate,'X').format('H:m:s D/M/Y');
+         obj.totalitems = obj.items.length;
+         if (obj.grandtotal<=0) {
+            obj.grandtotalshow = '0.00';
+         }else {
+           obj.grandtotalshow = addCommas(obj.grandtotal);
+         }
+
+         if(obj.status==7){ order1.push(obj); orderstatus_page1.push(obj);}
+         else if(obj.status==11 || obj.status==12) {order2.push(obj); orderstatus_page1.push(obj);}
+         else if(obj.status==5 || obj.status==10) {order5.push(obj); orderstatus_page2.push(obj);}
+         else if(obj.status==14) {order4.push(obj); orderstatus_page2.push(obj);}
+         else if(obj.status==15) {order3.push(obj); orderstatus_page3.push(obj);}
+         else {order5.push(obj); orderstatus_page2.push(obj);}
+
+       obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
+       // if (obj._id == 573) {
+       //    console.log('obj',obj);
+       // }
+
+
+       });
+
+       replace_tab3(order3);
+
+  var html1  = hash_replace(template1,'ORDER',order1)
+  var html2  = hash_replace(template2,'ORDER',order2)
+  // var html3  = hash_replace(template3,'ORDER',order3)
+  var html4  = hash_replace(template4,'ORDER',order4)
+  var html5  = hash_replace(template5,'ORDER',order5)
+  // $("#order_last").before(html1+html2);
+  // $("#order_waiting_payment").before(html5+html4);    // for add new rechord
+  // $("#order_waiting_finish").before(html3);
+  $("#order_last").html(html1+html5);
+  $("#order_waiting_payment").html(html4+html2);
+  // $("#order_waiting_finish").html(html3);
+
+
+}else if (typeof(data)=='object') {
+
+
+}
+  return false;
+};
+
+function replace_tab3(obj) {
+      // console.log('tab3',obj);
+
+      // const sortoOrder = obj.sort((a, b) => b.lastupdate - a.lastupdate);
+      const sortoOrder = obj.sort((a, b) => a.lastupdate - b.lastupdate);
+      console.log('sort',sortoOrder);
+
+      var html3  = hash_replace(template3,'ORDER',sortoOrder);
+      $("#order_waiting_finish").html(html3);
+}
+
+
+function getorder(){
+  $.postJSON('/api/liff/list/new/shoporder',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
+      if(res.result){
+        working.orderlast = res.detail;
+        if(working.orderlast.length ==0){
+            $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
+            $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+        if (working.orderlast) {
+          setTimeout(()=>{
+
+            draworderlast(working.orderlast);
+           },500);
+          }else {
+            return 'ไม่พบเมนู'
+          }
+          // go2View('order_seller_latest1');
+        // $('#shopingcart').html(JSON.stringify(res.detail));
+      }else{
+        //$('#warn-order').show();
+        go2View('must-openshop');
+        // alert(res.detail);
+      }
+  });
+      // $('#shopi0ngcart').html(JSON.stringify(res.detail));
+};
+
+
+
+
+var temp_rejectbody = $('#reject-body').html();
+
+var reject_data = {};
+function confirm_reject(){
+    reject_data.shopcomment = $('#inputcommentreject').val();
+    console.log('reject_data',reject_data);
+  $.postJSON('/engine/order/shop',reject_data,(res)=>{
+      if(res.result){
+            $('#frm_inputreject').hide();
+            $('#frm_showrejectstatus').show();
+        setTimeout(()=>{
+            $('#inputcommentreject').val('');
+            $('#modal_onrejectorder').modal('hide');
+        },500);
+    }else {
+      $('#frm_inputreject').hide();
+      $('.warn_reject').css('color','red')
+      $('.warn_reject').html('การปฏิเสธไม่สำเร็จ')
+      $('#frm_showrejectstatus').show();
+    }
+    $('#reject-body').html(temp_rejectbody);
+    runApp();
+      });
+
+};
+
+
+var temp_edittbody = $('#edit-body').html();
+function confirm_edit(){
+    reject_data.shopcomment = $('#inputcommentedit').val();
+    console.log(reject_data);
+  $.postJSON('/engine/order/shop',reject_data,(res)=>{
+      if(res.result){
+            $('#frm_inputedit').hide();
+            $('#frm_showeditstatus').show();
+        setTimeout(()=>{
+            $('#inputcommentedit').val('');
+            $('#modal_oneditorder').modal('hide');
+        },500);
+    }else {
+      $('#frm_inputedit').hide();
+      $('.warn_edit').css('color','red')
+      $('.warn_edit').html('ตั้งค่ารายการไม่สำเร็จ')
+      $('#frm_showeditstatus').show();
+    }
+    $('#edit-body').html(temp_edittbody);
+    runApp();
+      });
+
+};
+
+
+function order_accept(obj,orderid,type){
+  reject_data = {};
+  $(obj).hide();
+  var data={LINE_USER: LINE_USER,
+    orderid:orderid
+  }
+  data.action=type;
+
+        if(type=='accept'){
+            $.postJSON('/engine/order/shop',data,(res)=>{
+                if(res.result){
+                $('#modal_onconfirmorder').modal('show');
+
+                setTimeout(()=>{
+                    $('#modal_onconfirmorder').modal('hide');
+                },500);
+              }
+              runApp();
+                });
+            }
+          else if(type=='reject'){
+            reject_data = data;
+            $('#modal_onrejectorder').modal('show');
+
+          }else if(type=='edit'){
+            reject_data = data;
+            $('#modal_oneditorder').modal('show');
+
+          }else {
+            $.postJSON('/engine/order/shop',data,(res)=>{
+                if(res.result){
+                  runApp();
+              }
+
+                });
+
+          }
+
+};
+
+function runApp(){
+  orderstatus_page1 = [];orderstatus_page2 = [];orderstatus_page3 = [];
+    // $.postJSON('/api/liff/check/shopowner',{LINE_USER: LINE_USER}, function (res) {
+      $.postJSON('/api/liff/check/shopbranch',{LINE_USER: LINE_USER}, function (res) {
+        if(res.result){
+            $('#shop_name').html(res.detail[0].shopid.name)
+          working.shop_branch = res.detail;
+          // console.log('shop',working.shop_branch);
+          getorder();
+          // alert('shop',working.shop)
+        }else{
+          go2View("must-openshop");
+          //alert(res.detail)
+        }
+      });
+};
+
+
+
+var template_customer = $('#modal_image_customer_preview').html();
+working.ordercustomerlocation = {};
+function previewcustomer(order_id){
+  working.ordercustomerlocation = {};
+  var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay','ลูกค้ารับเองที่ร้าน']
+  var obj_cust = {};
+    working.orderlast.map((obj)=>{
+      // console.log('order-data',obj);
+      if(obj._id == order_id) obj_cust = obj;
+    });
+    obj_cust.paymenttype = paymenttype_array[obj_cust.paymenttype];
+     working.ordercustomerlocation = obj_cust;
+    if (obj_cust.logistic) {
+      obj_cust.distanceShopToCustomerInKM = obj_cust.logistic.distanceShopToCustomerInKM;
+
+      if (obj_cust.logisticcost<=0) {
+         obj_cust.logisticcost = '0.00';
+      }else {
+        obj_cust.logisticcost = addCommas(obj_cust.logisticcost);
+      }
+      if (obj_cust.logistic.deliveryDistance<=0) {
+         obj_cust.deliveryDistance = '0.00';
+      }else {
+        obj_cust.deliveryTotalAmount = addCommas(obj_cust.logistic.deliveryDistance);
+      }
+      if (obj_cust.logistic.Discount<=0) {
+         obj_cust.deliveryDiscount = '0.00';
+      }else {
+        obj_cust.deliveryDiscount = addCommas(obj_cust.logistic.Discount);
+      }
+
+    }
+    if (obj_cust.grandtotal<=0) {
+       obj_cust.grandtotalshow = '0.00';
+    }else {
+      obj_cust.grandtotalshow = addCommas(obj_cust.grandtotal);
+    }
+    //
+    //
+      console.log('cusshow',obj_cust);
+        $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
+        $('#modal_image_customer_preview').modal('show');
+      // address = !address;
+};
+
+// function copygps(){
+//   copyToClipboard('#gpsvalue');
+// }
+//
+// function copyToClipboard(element) {
+//   console.log(element);
+//   var $temp = $("<input>");
+//   $("body").append($temp);
+//   $temp.val($(element).text()).select();
+//   document.execCommand("copy");
+//   console.log($temp);
+//   $temp.remove();
+// }
+
+
+initializeLiff();
+
+</script>

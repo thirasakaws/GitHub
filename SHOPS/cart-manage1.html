@@ -1,36 +1,25 @@
 <div id='gmap_ordergps'>
 </div>
 <div class="container-fluid main_data">
+    <div id="top_shopping_cart" class="row-fluid navbar w-100 shadow nav-color-shop box-head-title-foodmall topmenu-navbar">
 
-        <div class="row box-head-title-foodmall nav-color-shop shadow mb-3 bg-light">
-             <div class="col-3 p-0 pl-1 text-left">
-                 <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
-                     <i class="fas fa-chevron-left"></i>
-                 </button>
-             </div>
-             <div class="col-6 p-0 text-center">
-                 <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ</div>
-             </div>
-             <div class="col-3 text-right">
-     <!--            <div class="d-block mr-4" onclick="go2View('cart')">
-                     <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
-                 </div>
-                 <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
-             </div>
-         </div> <!--// top menu -->
+        <div class="col-1 pl-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
+                 <i class="fas fa-chevron-left"></i>
+             </button>
+        </div>
+        <div class="col text-center">
+            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ </div>
+        </div>
+        <div class="col-1 text-right">
+<!--            <div class="d-block mr-4" onclick="go2View('cart')">
+                <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
+            </div>
+            <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
+        </div>
+    </div> <!-- topmenu -->
 
 
-
-<!--  <div class="row box-head-title-foodmall line-bottom-color-foodmall ">
-      <div class="col-3 p-0 text-left">
-          <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
-              <span class="header-foodmall"><i class="fas fa-chevron-left "></i> </span>
-          </button>
-      </div>
-      <div class="col-9  text-left " >
-             <span class="header-foodmall"> <i class="fas fa-shopping-cart"></i>  สรุปรายการสั่งซื้อ</span>
-     </div>
-  </div>-->
 
 
   <div class="text-secondary d-flex justify-content-between ">
@@ -62,7 +51,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
                 <div class="col">
-                    <input class="input_data_bn edit_data ORDER_contact w-90 " id="contact" type="number" min="10" max="10" placeholder="" data-field="contact"> <br>
+                    <input class="input_data_bn edit_data ORDER_contact w-90 " id="contact" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)"> <br>
                     <small class="warn_phoneinput text-danger" style="display:none;">**รูปแบบไม่ถูกต้อง</small>
                 </div>
             </div> <!--// -->
@@ -74,8 +63,9 @@
                 <div class="col">
                     <select id="paymenttype" class="input_data_bn  edit_data ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน">
                       <option value="" disabled selected>โปรดระบุ</option>
-                      <option value="1" disabled>Cash On Delivery</option>
+                      <option value="1" disabled>เก็บเงินปลายทาง</option>
                       <option value="2" disabled>QR payment By Quickpay</option>
+                      <option value="3" disabled>ลูกค้ารับเองที่ร้าน</option>
                   </select>
                 </div>
             </div> <!--// -->
@@ -242,7 +232,15 @@
 
   //for input tag
   $('.edit_data').Fusefield( (obj,cb,data)=>{
-    console.log("data",data);
+    // console.log("data",data);
+    if (data.contact) {
+          if (data.contact.toString().length!= 10) {
+                alert('กรุณากรอกเบอร์โทรให้ถูกต้อง');
+                $('#contact').focus();
+                cb(false);
+               return false;
+          }
+    }
     $.postJSON('/engine/order/update', data, function (res) {
         if (!res.result) {
             alert(res.detail);
@@ -267,22 +265,64 @@
             setTimeout(()=>{
               showmwnuorderlist(working.order.items);
               setdatabyclass($('.main_data'), 'ORDER', working.order);
+
             },500);
 
     }
 
-    $('#contact').on('keyup keydown', function(e){
-        if ($(this).val().length >= 10
-            && e.keyCode !== 46
-            && e.keyCode !== 8
-           ) {
-           e.preventDefault();
-           // $('.warn_phoneinput').show();
-           // $(this).val(10);
-        }else {
-          // $('.warn_phoneinput').hide();
-        }
-    });
+
+
+
+    function isNumberKey(e){
+      if(e){
+      if($('#contact').val().toString().length>=10){
+        return false;
+      }
+      // if(!event.keyCode){
+      //   e.preventDefault();
+      // }
+    var charCode = (e.which) ? e.which : event.keyCode
+// alert(charCode)
+    // if (!charCode) {
+    //
+    // }
+
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }else{
+    alert('not have event')
+  }
+}
+
+    // $('#contact').on('keyup keydown', function(e){
+    //   // alert(e.keyCode);
+    //     if ($(this).val().length >= 10
+    //         // && e.keyCode !== 46
+    //         && e.keyCode !== 8
+    //        ) {
+    //        e.preventDefault();
+    //        // $('.warn_phoneinput').show();
+    //        // $(this).val(10);
+    //     }else {
+    //       // $('.warn_phoneinput').hide();
+    //     }
+    // });
+
+    const input_contact = document.getElementById('contact');
+    input_contact.oninput = inputContactHandler;
+
+    function inputContactHandler(e) {
+      // alert("inputContactHandler: " + e.target.value);
+      var last_val = e.target.value.substr(e.target.value.length - 1);
+      // alert(e.target.value.substr(e.target.value.length - 1));
+      if (last_val < "0" || last_val > "9" || last_val == '.') {
+        e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+      }
+      // service_radius = parseFloat(e.target.value);
+      // // document.getElementById('input-radius').value = service_radius.toString();
+      // circle_area.setRadius(service_radius * 1000.0);
+    }
 
     function getcustomeraddress(){
        $('#address_list').html(showlistadd_temp);
@@ -522,6 +562,10 @@ var array_shopid = [];
             $('#order_alert').html('*** ที่อยู่จัดส่งไม่ถูกต้อง').show('slow');
         }
         $('#goconfirmorder').prop('disabled',true);
+        $('.grandtotal').html('-');
+        $('.total_distance').html('-');
+        $('.total_shippingcost').html('-');
+        $('#discount-shippingcost').hide();
         return false;
       }else{
 
@@ -531,14 +575,13 @@ var array_shopid = [];
       }
     }
     function update_ship_cost(){
-      
+
       var order=working.order;
       checkorder_status();
 
       $('.total_price').html(order.totalcost ? addCommas(order.totalcost) : '0.00') ;
       $('#discount-shippingcost').hide();
       if(order.logistic){
-
           $('.total_distance').html( order.logistic.distanceShopToCustomerInKM ?  addCommas(order.logistic.distanceShopToCustomerInKM) : '0.00');
           $('.total_shippingcost').html(order.logistic.deliveryTotalAmount ? addCommas(order.logistic.deliveryTotalAmount) : '0.00');
 
@@ -551,7 +594,16 @@ var array_shopid = [];
             $('#discount-shippingcost').hide();
           }
       }
-      var grandtotal = working.order.grandtotal ? working.order.grandtotal :  Number(order.totalcost) + Number(order.logistic.deliveryTotalAmount);
+      var grandtotal = 0;
+        if(working.order.grandtotal){
+          grandtotal = Number( working.order.grandtotal);
+        }else{
+          grandtotal = Number(order.totalcost)
+          if(order.logistic && order.logistic.deliveryTotalAmount){
+            grandtotal +=order.logistic.deliveryTotalAmount;
+          }
+        }
+
        $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
 
     }
@@ -572,8 +624,9 @@ var array_shopid = [];
         return false;
       }
 
-      if(!working.order.contact || working.order.contact.length < 10){
-        alert('กรุณาระบุเบอร์ติดต่อ')
+      if(!working.order.contact || working.order.contact.toString().length != 10){
+        alert('กรุณาระบุเบอร์ติดต่อ');
+        $('#contact').focus();
         return false;
       }
       if(Number(working.order.paymenttype) > 0){

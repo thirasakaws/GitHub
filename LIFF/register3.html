@@ -1,7 +1,7 @@
 <div id='gmap_gps'>
 </div>
-<div id='gmap_gps_raduis'>
-</div>
+<!-- <div id='gmap_gps_raduis'> -->
+<!-- </div> -->
 <div class="container-fluid main_data">
     <div class="row box-head-title-shop text-center" >
 
@@ -34,6 +34,16 @@
             </div>
         </div>
     </div> <!-- // สาขา -->
+
+    <div class=" row mb-3">
+        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
+        <div class="col d-flex ">
+            <div class="float-left pl-2  w-100 ">
+                <input class="input_data_bn edit_data BRANCH_contact w-90" placeholder="เบอร์โทร" data-field="contact" id="contact_branch" type="tel"  onkeypress="return isNumberKey(event)">
+                <!--                <span class='BRANCH_contact editable_branch'>  </span>-->
+            </div>
+        </div>
+    </div> <!-- // เบอร์ติดต่อ -->
 
 
 
@@ -83,80 +93,228 @@
         </div>
 
     </div>
-    <div class=" row mb-3">
-        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เวลาเปิด-ปิด </label>
-        <div class="col d-flex ml-3 w-100">
-            <div class="float-left pl-2 mb-2 row  w-90">
-                <!--                <span class='BRANCH_openclose editable_branch'>  </span>-->
-                <span>เปิด&nbsp;
-                    <select id="open_time" class="input_data_bn  edit_data BRANCH_open_time" data-field="open_time">
-                        <option value="00:00">00:00</option>
-                        <option value="01:00">01:00</option>
-                        <option value="02:00">02:00</option>
-                        <option value="03:00">03:00</option>
-                        <option value="04:00">04:00</option>
-                        <option value="05:00">05:00</option>
-                        <option value="06:00">06:00</option>
-                        <option value="07:00">07:00</option>
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
-                    </select>
-                </span>
-                <span>&nbsp;ปิด&nbsp;
-                    <select id="close_time" class="input_data_bn edit_data BRANCH_close_time" data-field="close_time">
-                        <option value="00:00">00:00</option>
-                        <option value="01:00">01:00</option>
-                        <option value="02:00">02:00</option>
-                        <option value="03:00">03:00</option>
-                        <option value="04:00">04:00</option>
-                        <option value="05:00">05:00</option>
-                        <option value="06:00">06:00</option>
-                        <option value="07:00">07:00</option>
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
-                    </select>
-                </span>
-            </div>
-        </div>
-    </div> <!-- // เวลาเปิดปิด: -->
 
-    <div class=" row mb-3">
-        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
-        <div class="col d-flex ">
-            <div class="float-left pl-2  w-100 ">
-                <input class="input_data_bn edit_data BRANCH_contact w-90" placeholder="เบอร์โทร" data-field="contact">
-                <!--                <span class='BRANCH_contact editable_branch'>  </span>-->
-            </div>
+
+    <div class="accordion" id="accordionEditmenu">
+
+      <div class="card">
+        <div class="card-header p-1" id="headingDate">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="false" aria-controls="collapseDate" style=" text-decoration: none;">
+              <i class="far fa-calendar-alt"></i> วันที่เปิดให้บริการ
+                    <!--<i class="fa fa-caret-down" style=" float: right"></i>-->
+            </button>
+          </h2>
         </div>
-    </div> <!-- // เบอร์ติดต่อ -->
+        <div id="collapseDate" class="collapse" aria-labelledby="headingDate" data-parent="#accordionEditmenu">
+          <div class="card-body">
+              <div class=" mb-2" id="date-list">
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันอาทิตย์</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_sun" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('sun','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_sun" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('sun','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+
+
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันจันทร์</strong>
+                              </div>
+                              <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_mon" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('mon','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_mon" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('mon','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                              </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_mon" class="toggle-date" onchange="manage_opendate('mon','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันอังคาร</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_tue" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('tue','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_tue" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('tue','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_tue" class="toggle-date" onchange="manage_opendate('tue','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันพุธ</strong>
+                              </div>
+                              <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_wed" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('wed','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_wed" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('wed','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_wed" class="toggle-date" onchange="manage_opendate('wed','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันพฤหัสบดี</strong>
+                              </div>
+                              <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_thu" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('thu','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_thu" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('thu','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_thu" class="toggle-date" onchange="manage_opendate('thu','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันศุกร์</strong>
+                              </div>
+                              <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_fri" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('fri','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_fri" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('fri','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_fri" class="toggle-date" onchange="manage_opendate('fri','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                        <small class="row   pt-2 m-0  text-right">
+                            <div class="col-3 text-left text-gray-light ">
+                              <strong>วันเสาร์</strong>
+                              </div>
+                              <div class="col-6">
+                                <small class="row text-center mb-2">
+                                   <div class="col-6">
+                                     เวลาเปิด
+                                       <select id="opentime_sat" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('sat','open',this);">
+
+                                       </select>
+                                   </div>
+                                   <div class="col-6">
+                                     เวลาปิด
+                                       <select id="closetime_sat" class="timmmer_ btn btn-sm" name="" onchange="manage_opendate('sat','close',this);">
+
+                                       </select>
+                                   </div>
+
+                                </small>
+                            </div>
+                            <div class="col-3">
+                                <label class="switch">
+                                    <input type="checkbox" id="date_sat" class="toggle-date" onchange="manage_opendate('sat','action',this);">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </small>
+                    </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
 
     <!--    <div class=" row mb-3">
             <label class="col-sm-4 text-gray-light2 lable-left-35 " >  สถานะ </label>
@@ -166,7 +324,7 @@
                         <option value="1">เปิดร้าน</option>
                         <option value="2">ปิดร้าน</option>
                     </select>
-    
+
                 </div>
             </div>
         </div>  // สถานะ: -->
@@ -187,8 +345,24 @@
     </div> <!-- // การยืนยัน order auto-mannual -->
 
 
+
 </div>
 <script>
+
+  var time = ['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00',
+  '13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
+
+  var optiondata = '';
+  // optiondata += '<option value="" disabled selected>โปรดระบุ</option>';
+     if(time.length>0){
+           for(var x=0;x<time.length;x++){
+                optiondata += '<option value="' +time[x] + '">' + time[x] + '</option>';
+           }
+         }
+         $('.timmmer_').html(optiondata);
+
+
+
     console.log("Manage Branch", working.shopbranch);
 //    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
     setdatabyclass($('.main_data'), 'SHOP', working.shop);
@@ -201,6 +375,24 @@
             working.branch.contact = '-';
         if (!working.branch.opening)
             working.branch.opening = 1;
+        if (!working.branch.opendate)
+            working.branch.opendate = {
+              sun : {},mon : {},tue : {},wed : {},thu : {},fri : {},sat : {},
+            };
+        if (!working.branch.opendate.sun)
+            working.branch.opendate.sun = {};
+        if (!working.branch.opendate.mon)
+            working.branch.opendate.mon = {};
+        if (!working.branch.opendate.tue)
+            working.branch.opendate.tue = {};
+        if (!working.branch.opendate.wed)
+            working.branch.opendate.wed = {};
+        if (!working.branch.opendate.thu)
+            working.branch.opendate.thu = {};
+        if (!working.branch.opendate.fri)
+            working.branch.opendate.fri = {};
+        if (!working.branch.opendate.sat)
+            working.branch.opendate.sat = {};
 
     }
     $.get('/api/data/ticket/province_list', function (data) {
@@ -212,12 +404,124 @@
         }
         $('.BRANCH_province').html(selectoption)
         setdatabyclass($('.main_data'), 'BRANCH', working.branch);
+
+        $('#opentime_sun').val(working.branch.opendate.sun.open);
+        $('#opentime_mon').val(working.branch.opendate.mon.open);
+        $('#opentime_tue').val(working.branch.opendate.tue.open);
+        $('#opentime_wed').val(working.branch.opendate.wed.open);
+        $('#opentime_thu').val(working.branch.opendate.thu.open);
+        $('#opentime_fri').val(working.branch.opendate.fri.open);
+        $('#opentime_sat').val(working.branch.opendate.sat.open);
+
+        $('#closetime_sun').val(working.branch.opendate.sun.close);
+        $('#closetime_mon').val(working.branch.opendate.mon.close);
+        $('#closetime_tue').val(working.branch.opendate.tue.close);
+        $('#closetime_wed').val(working.branch.opendate.wed.close);
+        $('#closetime_thu').val(working.branch.opendate.thu.close);
+        $('#closetime_fri').val(working.branch.opendate.fri.close);
+        $('#closetime_sat').val(working.branch.opendate.sat.close);
+
         if (working.branch.opening == 1) {
             $('#status_branch').prop('checked', true);
         } else {
             $('#status_branch').prop('checked', false);
         }
-    })
+            if (working.branch.opendate.sun.status == 'open') {
+                $('#date_sun').prop('checked', true);
+            } else {
+                $('#date_sun').prop('checked', false);
+            }
+            if (working.branch.opendate.mon.status == 'open') {
+                $('#date_mon').prop('checked', true);
+            } else {
+                $('#date_mon').prop('checked', false);
+            }
+            if (working.branch.opendate.tue.status == 'open') {
+                $('#date_tue').prop('checked', true);
+            } else {
+                $('#date_tue').prop('checked', false);
+            }
+            if (working.branch.opendate.wed.status == 'open') {
+                $('#date_wed').prop('checked', true);
+            } else {
+                $('#date_wed').prop('checked', false);
+            }
+            if (working.branch.opendate.thu.status == 'open') {
+                $('#date_thu').prop('checked', true);
+            } else {
+                $('#date_thu').prop('checked', false);
+            }
+            if (working.branch.opendate.fri.status == 'open') {
+                $('#date_fri').prop('checked', true);
+            } else {
+                $('#date_fri').prop('checked', false);
+            }
+            if (working.branch.opendate.sat.status == 'open') {
+                $('#date_sat').prop('checked', true);
+            } else {
+                $('#date_sat').prop('checked', false);
+            }
+
+    });
+
+
+    function isNumberKey(e){
+      if(e){
+      if($('#contact_branch').val().toString().length>=10){
+        return false;
+      }
+    var charCode = (e.which) ? e.which : event.keyCode
+
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }else{
+    alert('not have event')
+  }
+}
+
+    const input_contact = document.getElementById('contact_branch');
+    input_contact.oninput = inputContactHandler;
+
+    function inputContactHandler(e) {
+      var last_val = e.target.value.substr(e.target.value.length - 1);
+      if (last_val < "0" || last_val > "9" || last_val == '.') {
+        e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+      }
+    }
+
+
+    function manage_opendate(day,action,obj) {
+        var data = {};
+        data.opendate = working.branch.opendate;
+        data.LINE_USER = LINE_USER;
+        data._id = working.branch._id;
+        data.shopid = working.shop._id;
+        if (action == "action"){
+              var newstatus;
+              if ($(obj).is(':checked')) {
+                  newstatus = "open";
+              } else {
+                  newstatus = "close";
+              }
+
+            data.opendate[day]['status']= newstatus;
+        } else {
+            data.opendate[day][action]= $(obj).val();
+          }
+
+
+        console.log('data',data)
+        $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                return false;
+            } else
+                return false;
+        });
+    }
+
+
 
 
     $('#gmap_gps').load('/LIFF/modal_gps_full.html');
@@ -248,9 +552,9 @@
 
 
     }
-    
-    
-    
+
+
+
 
     function show_gps_raduis() {
         go2View('map_area');
@@ -373,6 +677,6 @@
     function showError(error) {
         console.log("ERROR", error)
     }
-    
+
 
 </script>

@@ -1,35 +1,33 @@
-<div class="container margin-top-under-navbar">
-    <div class="fixed-top shadow" id='top_shopping_cart' >
-      <div class="row box-head-title-foodmall fixed-top shadow topmenu-navbar">
-          <div class="col-3 p-0 pl-1 text-left">
-             
-              <button class='btn border border-0 text-secondary' onclick="go2View('menulist');">
-                  <i class="fas fa-chevron-left"></i> 
-              </button>
-               
+<div id="top_shopping_cart" class="row-fluid navbar w-100 shadow box-head-title-foodmall nav-color-shop">
+
+    <div class="col-2 pl-0 text-left ">
+        <button class='btn border border-0 text-secondary' onclick="go2View('menulist')">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-7 text-center ">
+        <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
+          <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
+            <form onsubmit="return search_menusubmit();">
+                <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
+            </form>
           </div>
-          <div class="col-6 p-0 text-center">
-              <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
-              <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
-                <form onsubmit="return search_menusubmit();">
-                    <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
-                </form>
-              </div>
-          </div> <!--// center -->
-
-          <div class="col-3 pl-0 text-right ">
-            <div class="d-inline " onclick="openSearch()"  style="background-color: #f3f3f3; ">
-                <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:32%;">
-            </div>
-              <div class="d-inline pr-3 " onclick="go2View('cart')" style="width:50%;">
-                  <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
-              </div>
-              <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
-          </div> <!--// center -->
-
-      </div> <!--// menu -->
-
+    </div>
+    <div class="col-3 text-right">
+        <div class="d-inline " onclick="openSearch()"  style="background-color: #f3f3f3; ">
+            <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:32%;">
+        </div>
+          <div class="d-inline pr-3 " onclick="go2View('cart')" style="width:50%;">
+              <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
+          </div>
+          <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>
+    </div>
 </div> <!-- topmenu -->
+
+
+
+<div class="container-fluid">
+
 
 
 
@@ -41,25 +39,23 @@
         </div>
         <div class="col-12">
             <div class="row">
+                <div class="col-9 mt-4 mb-1">
+                    <span class="font-weight-bold header-foodmall">
+                      ##MENU-name##
+                    </span>
+                </div>
 
-                    <div class="col-9 mt-4 mb-1">
-                        <span class="font-weight-bold header-foodmall">
-                          ##MENU-id##    ##MENU-name##
-                        </span>
-                    </div>
-
-                    <div class="col mt-4 mb-1 text-right">
-                        <span class="font-weight-bold header-foodmall">   ##MENU-priceshow## </span>
-                    </div>
-
+                <div class="col mt-4 mb-1 text-right">
+                    <span class="font-weight-bold header-foodmall">   ##MENU-priceshow## </span>
+                </div>
             </div>
-            <p class="font-color-foodmall-gray-light mt-3 text-left" style="font-weight:200;">
+
+            <div class="font-color-foodmall-gray-light2 mt-3 text-left" style="font-weight:200;">
                  ##MENU-description##
-            </p>
+            </div>
 
             <div class="mt-3 text-left" id="select_price"  style="display:none" >
-                <hr>
-
+               <hr>
                <div class="border-bottom-gray mb-2">
                   <span class="text-secondary">
                       กรุณาเลือก
@@ -77,15 +73,12 @@
                          ฿ ##PRICE-price##
                     </div>
                 </div> <!--// form-group -->
-
-
             </div> <!--// กรุณาเลือก -->
 
 
 
-
             <div class="mt-3 text-left" id="select_check" style="display:none">
-                <hr>
+               <hr>
                <div class="border-bottom-gray mb-2">
                   <span class="text-secondary">
                       ตัวเลือกเพิ่มเติม
@@ -103,19 +96,19 @@
 
                     </div>
                 </div> <!--// form-group -->
-
-
-
-
-
             </div> <!--// topping -->
 
         </div>
+
+        <div class="col-12 text-right">
+            <small class="font-weight-300 text-light" style="color: #fbfbfb;"> ##MENU-id##</small>
+        </div>
         <hr>
+
     </div>  <!-- //top -->
 
 
-    <div class="row mt-2 mb-5 text-center">
+    <div class="row mt-2 text-center" style="margin-bottom: 80px;">
         <div class="col-12">
              <button class="btn btn-md btn-outline-submit-foodmall" onclick="rmv_qty();">
                 <i class="fas fa-minus"></i>
@@ -149,7 +142,7 @@
 </div>
 
 
-</div>
+</div> <!-- // container-fluid  -->
 
 
 <script>
@@ -306,7 +299,17 @@
                 working.order.totalitem +=obj.qty;
             })
         }
+        // if (Number(working.order.totalitem) <=0) {
+        //       $(".total_item").hide();
+        // }else {
+        //   $(".total_item").show();
+        // }
         $("#top_shopping_cart").html(hash_replace(template_cart,'CART',working.order))
+        // if (Number(working.order.totalitem) <=0) {
+        //       $(".total_item").html('');
+        // }else {
+        //   $(".total_item").html(working.order.totalitem);
+        // }
         $('#icon_shoppingcart').animate({
           width: '+=20px'
       }, 200).animate({

@@ -50,7 +50,7 @@
              <div class="form-group row">
                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ  </label>
                <div class="col">
-                   <input class="input_data_bn edit_data CUSTOMER_contact w-90 " id="contact"  type="number"  placeholder="เบอร์ติดต่อ" data-field="contact">
+                   <input class="input_data_bn edit_data CUSTOMER_contact w-90 " id="contact_customer" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)">
                </div>
              </div>   <!-- // -->
 
@@ -95,7 +95,10 @@
                      <div class="row">
                        <div class="col-10">
                          <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
-                         <label class="custom-control-label add_address radio_for" for=""></label>
+                         <label class="custom-control-label radio_for" for="">
+                            <span class="add_name"></span><br>
+                            <small class="add_address"></small>
+                         </label>
                        </div>
                        <div class="col-2">
                             <span class="text-danger btn btn-light" onclick="changethis_add(this,'disabled');"><i class="fas fa-trash-alt"></i></span>
@@ -133,22 +136,22 @@
     });
 
 
-      function updategpslocation(loc){
-        var data = {
-          LINE_USER : LINE_USER,
-          };
-        data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
-
-        $.postJSON('/api/liff/update/customerinfo',data,function(res){
-          console.log("RES",res);
-              if(!res.result){
-                alert(res.detail);
-                return;
-              }
-              working.customer.location = data.location ;
-              $('#writelocation_cus').show('slow').hide('slow');
-        });
-      }
+      // function updategpslocation(loc){
+      //   var data = {
+      //     LINE_USER : LINE_USER,
+      //     };
+      //   data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
+      //
+      //   $.postJSON('/api/liff/update/customerinfo',data,function(res){
+      //     console.log("RES",res);
+      //         if(!res.result){
+      //           alert(res.detail);
+      //           return;
+      //         }
+      //         working.customer.location = data.location ;
+      //         $('#writelocation_cus').show('slow').hide('slow');
+      //   });
+      // }
 
 function refresh_cusmanage1(){
         $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
@@ -169,6 +172,35 @@ function refresh_cusmanage1(){
           }
         });
 };
+
+
+function isNumberKey(e){
+  if(e){
+  if($('#contact_customer').val().toString().length>=10){
+    return false;
+  }
+var charCode = (e.which) ? e.which : event.keyCode
+
+if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+return true;
+}else{
+alert('not have event')
+}
+}
+
+
+const input_contact = document.getElementById('contact_customer');
+input_contact.oninput = inputContactHandler;
+
+function inputContactHandler(e) {
+  // alert("inputContactHandler: " + e.target.value);
+  var last_val = e.target.value.substr(e.target.value.length - 1);
+  // alert(e.target.value.substr(e.target.value.length - 1));
+  if (last_val < "0" || last_val > "9" || last_val == '.') {
+    e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+  }
+}
 
 var template_warn_cus = $('.warn-cus').html();
 
@@ -222,7 +254,18 @@ $('#gmap_cusgps').load('/LIFF/modal_gps_full.html');
   function find_location_cus() {
     var pos ={user_type:"customer"};
     call_modal_maps(pos, function (data) {
-        addcusaddress(data)
+        // addcusaddress(data)
+
+        working.new_address = {}
+        working.new_address.address = data.address;
+        working.new_address.location = { type: "Point", coordinates: [data.lat, data.lng] };
+
+        if (working.new_address.address) {
+          setTimeout(()=>{
+              go2View('manage_address');
+          },500)
+
+        }
     });
   };
 

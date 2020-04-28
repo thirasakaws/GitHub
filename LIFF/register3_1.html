@@ -6,11 +6,11 @@
     <div class="label-orange text-center mb-3" >
         <span class="header_title"><i class="fas fa-store"></i> ตั้งค่าสาขา</span>
     </div>
-    
-    <h4 class="text-orange"> 
-        <i class="fas fa-store"></i> <span class='SHOP_name'></span> 
+
+    <h4 class="text-orange">
+        <i class="fas fa-store"></i> <span class='SHOP_name'></span>
     </h4>
-    
+
     <div class="form-group row mt-3">
         <label class="col-sm-4 text-gray-light lable-left-35 " >  สาขา </label>
         <div class="col d-flex ">
@@ -18,8 +18,8 @@
                 <span class='BRANCH_name editable_branch text-orange'></span>
             </div>
         </div>
-    </div> <!-- // สาขา --> 
-    
+    </div> <!-- // สาขา -->
+
     <div class="form-group row mt-3">
         <label class="col-sm-4 text-gray-light lable-left-35 " >  Location </label>
         <div class="col d-flex ">
@@ -28,15 +28,15 @@
             </div>
         </div>
     </div> <!-- // สาขา -->
-    
-    
+
+
 
     สาขา: <span class='BRANCH_name editable_branch '></span>
-    
-    
+
+
 <h4><span class='SHOP_name'></span>: <span class='BRANCH_name editable_branch'></span></h4>
 Location:
-<button onclick='show_gps()' class='btn btn-sm btn-danger'>GPS ...</button> 
+<button onclick='show_gps()' class='btn btn-sm btn-danger'>GPS ...</button>
 <span id='writelocationok' class='badge badge-success' style='display:none'>recorded !</span>
 <br>
 Address: <span class='BRANCH_address editable_branch'>  </span><br>
@@ -103,7 +103,7 @@ ADVWS.make_edittext($('.editable_branch'),function(data,obj){
   if(!data2vilidate) return "Invalid data";
 });
 
-var array_status =[{value:1,text:'เปิด'},{value:2,text:'ปิด'}];
+var array_status =[{value:2,text:'ปิด'},{value:1,text:'เปิด'}];
 ADVWS.make_editselect($('.editable_branch_select'),array_status, function(data,obj){
   data.shopid = working.shop._id; // include shopid to check with Server
   edtable_update_toserver(data,obj,'/api/liff/edit/shopbranch');

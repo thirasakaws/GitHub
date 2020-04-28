@@ -1,20 +1,19 @@
 <div id='gmap_gps_radius'></div>
-<div class="container-fluid main_data">
-</div>
+<div class="container-fluid main_data"></div>
 <script>
     $('#gmap_gps_radius').load('/LIFF/modal_map_radius.html');
 
     show_gps_radius();
 
     function show_gps_radius() {
-        // console.log("show_gps_radius");
-        window.alert(JSON.stringify(working.branch));
-
         var pos;
         if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
             // Already input Location
             pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],service_radius:working.branch.location.service_radius}
-            call_modal_radius_maps(pos, updategpslocation_radius, showError);
+            // call_modal_radius_maps(pos, updategpslocation_radius, showError);
+            setTimeout(()=>{
+                call_modal_radius_maps(pos, updategpslocation_radius, showError);
+            }, 500);
         } else {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -26,10 +25,42 @@
                     // }
 
                     // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-                    call_modal_radius_maps(pos, updategpslocation_radius, showError);
+                    // call_modal_radius_maps(pos, updategpslocation_radius, showError);
+                    setTimeout(()=>{
+                        call_modal_radius_maps(pos, updategpslocation_radius, showError);
+                    }, 500);
                 });
                 return;
             }
         }
+    }
+
+    function updategpslocation_radius(loc) {
+        var data = {
+            LINE_USER: LINE_USER,
+            shopid: working.shop._id,
+            _id: working.branch._id
+        };
+        if (loc !== "close") {
+            data.location = {type: "Point", coordinates: [loc.lat, loc.lng], service_radius: loc.service_radius};
+
+            $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
+                if (!res.result) {
+                    alert(res.detail);
+                    return;
+                }
+                working.branch.location = data.location;
+                // $('#writelocationok_radius').show('slow').hide('slow');
+            })
+        }
+
+        setTimeout(() => {
+            go2View('register3');
+        }, 500);
+        
+    }
+
+    function showError(error) {
+        console.log("ERROR", error)
     }
 </script>

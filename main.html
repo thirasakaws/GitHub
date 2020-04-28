@@ -1,59 +1,490 @@
-<center>
-    <h1>
-        Kinarai ?
-    </h1>
-    <h2>
-        ไม่รู้ จะกินอะไร มากินกับเราไหม !
-    </h2>
 
-    <br>
-    <button onclick='return shoplogin();'>สำหรับร้านค้า Create / Login </button>
+<div class="swiper-container" id="homeSlider" style="border-bottom:7px solid #fc7d10">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" data-cover="/asset/img/kinarai-top.jpg" data-height="220px 350px 400px 430px 460px">
+        <div class=" align-items-end text-black d-flex justify-content-around">
+          <div class="text-center">
+            <h1 class="animated font-weight-bold" data-animate="fadeDown">ยิ่งเปิดร้านเร็ว<br/>ยิ่งมีโอกาสมากกว่า</h1>
+            <a href="/kitchenbot.html"  class="btn btn-primary rounded-pill animated mt-4" data-animate="fadeUp">เปิดร้านเลย</a>
+          </div>
+          <div class="d-none d-sm-block"><img src="/static/img/mockup-phone-top-02.png" style="height:250px; margin-top:100px;" alt="kitchenbot"></div>
+        </div>
+      </div>
 
-</center>
+
+      <div class="swiper-slide" data-cover="/asset/img/hero2.jpg" data-height="220px 350px 400px 430px 460px">
+        <div class="align-items-end text-white d-flex justify-content-around">
+        <div class="d-none d-sm-block"><img src="/static/img/mockup-phone-top-02.png" style="height:250px; margin-top:100px;" alt="kitchenbot"></div>
+          <div class="text-center">
+
+
+            <h1 class="text-white d-inline-block p-1 animated" data-animate="fadeDown">Kitchen Bot</h1>
+            <h1 class="animated font-weight-bold" data-animate="fadeLeft">ช่วยคุณจัดการร้านง่ายๆ</h1>
+            <a href="/kitchenbot.html" class="btn btn-warning rounded-pill animated mt-4" data-animate="fadeUp">เปิดร้านเลย!</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev autohide"><i class="material-icons">chevron_left</i></div>
+    <div class="swiper-button-next autohide"><i class="material-icons">chevron_right</i></div>
+  </div>
+  <div class="container-fluid mb-3">
+ <!-- <div class="card">
+   <div class="row gutters-3">
+
+      <div class="col-md-6">
+        <div class="media">
+            <a href="/kitchenbot.html" class="img img-zoom-in w-25">
+                <span data-cover="static/img/whyus-01.png" data-height="100%"></span>
+              </a>
+          <div class="media-body">
+            <h3>ปฏิวัติวงการ Food Delivery</h3>
+            <p class="">Kitchen Bot ให้คุณจัดการผ่าน LINE Official Account (LINE @) ได้ง่ายๆ ไม่ต้องสร้างแอพให้ลูกค้าต้อง download ให้ยุ่งยาก พร้อมมี AI คอยตอบไลน์ลูกค้าให้คุณ</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="media">
+          <a href="/kitchenbot.html" class="img img-zoom-in w-25">
+                <span data-cover="static/img/whyus-04.png" data-height="100%"></span>
+              </a>
+
+          <div class="media-body">
+            <h3>ระบบรับออเดอร์จนถึงจัดส่งสามารถจัดการได้อย่างง่ายดาย</h3>
+            <p class="">Kitchen Bot ให้คุณจัดการผ่าน LINE Official Account (LINE @) ได้ง่ายๆ ไม่ต้องสร้างแอพให้ลูกค้าต้อง download ให้ยุ่งยาก พร้อมมี AI คอยตอบไลน์ลูกค้าให้คุณ</p>
+            </div>
+        </div>
+      </div>
+ </div>
+ </div>-->
+<div class="d-grid grid-template-col-2 column-gap-1 column-gap-sm-3 my-3">
+      <div class="card card-style1 overflow-hidden">
+        <div class="d-grid grid-template-row-2 grid-template-row-md-none grid-template-col-md-2">
+          <div data-cover="/static/img/whyus-01.png" class="order-md-2" style="background-size:contain;"></div>
+          <div class="text-center p-3 order-md-1">
+            <h3>ปฏิวัติวงการ Food Delivery</h3>
+            <p class="text-center d-none d-md-block">ช่วยตอบแชท พร้อมส่งเมนูให้ลูกค้าดูอัตโนมัติ (สุดเจ๋ง!) ช่วยเพิ่มประสิทธิภาพในการจัดการออเดอร์ ตอบคำถาม และคำนวณค่าใช้จ่ายให้ทันที</p>
+
+          </div>
+        </div>
+      </div>
+      <div class="card card-style1 overflow-hidden">
+        <div class="d-grid grid-template-row-2 grid-template-row-md-none grid-template-col-md-2">
+          <div data-cover="/static/img/whyus-04.png" class="order-md-2" style="background-size:contain;"></div>
+          <div class="text-center p-3 order-md-1">
+            <h3>รับออเดอร์จนจัดส่งได้ง่ายดาย</h3>
+            <p class="text-center d-none d-md-block">ช่วยตอบแชท พร้อมส่งเมนูให้ลูกค้าดูอัตโนมัติ (สุดเจ๋ง!) ช่วยเพิ่มประสิทธิภาพในการจัดการออเดอร์ ตอบคำถาม และคำนวณค่าใช้จ่ายให้ทันที</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row gutters-3">
+
+      <div class="col-md-8 col-xl-9">
+
+
+        <div class="card card-style1">
+          <div class="card-body d-flex align-items-center py-2">
+            <h1 class="h4">ช่วงโควิด กินอะไรดี? ขอแนะนำ เมนูอาหารจานเด็ด</h1>
+
+          </div>
+        </div>
+
+       <div class="d-grid grid-template-col-sm-2 grid-template-col-xl-4 grid-gap-2 mt-3" id="mainmenu_list">
+
+
+            <div class="card card-style1">
+            <a href="/kinarai/##MENU-name##/##MENU-id##/menu" class="link img img-zoom-in"><img src="/cdn/image/menu/##MENU-mainimage##" class="w-100" alt="ซี่โครงสะพานโค้ง"></a>
+            <div class="card-body">
+            <a href="/kinarai/##MENU-name##/##MENU-id##/menu" class="link shop-link d-block d-flex"><i class="material-icons">house</i> ##MENU-shopname##</a>
+              <a href="/kinarai/##MENU-name##/##MENU-id##/menu" class="link menu-link d-block"><span>##MENU-name##</span></a>
+
+            </div>
+           <div class="card-footer justify-content-between" >
+
+           <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+           <div class="text-right"><div class="del-price">##MENU-promotionprice##</div><span class="h5">THB ##MENU-mainprice##</span></div>
+
+           </div>
+          </div>
+
+
+
+
+
+      </div>
+
+
+
+      </div>
+      <div class="col-md-4 col-xl-3">
+
+        <div class="card card-style1 mb-3 align-items-center">
+          <div class="card-body text-center" style="height:300px; background-color:#333333">
+          <a href="/kitchenbot.html"><img src="/static/img/site_logo.png" class="card-img" alt="kitchenbot"> </a>
+          <a href="/kitchenbot.html"><h2 style="color:white;" class="mt-3">ระบบจัดการร้านค้าอัจฉริยะ</h2></a>
+          </div>
+          </div>
+
+<div class="d-grid grid-template-col-1  grid-template-col-md-1 grid-gap-3 mt-3 mt-md-0">
+
+    <div class="card card-style1" style="background-color:transparent; box-shadow:none;">
+     <div class="card-body mb-2 mx-2" style="padding:0;">
+            <form role="form" action="/search" method="get">
+
+          <div class="form-row" style="margin-bottom:-13px;">
+
+
+       <div class="input-group">
+                        <input type="text" class="form-control" placeholder="ค้นหาเมนูอาหาร">
+                        <div class="input-group-append">
+                          <button class="btn btn-warning" type="button">ค้นหา</button>
+                        </div>
+                      </div>
+
+
+
+
+          </div>
+          </form>
+            </div>
+            </div>
+
+  <div class="card card-style1">
+
+
+
+    <h5 class="card-header">เมนูเด็ดมาใหม่ <span class="text-primary ml-1">แนะนำ</span></h5>
+    <div class="card-body">
+      <ul class="list-group list-group-flush list-group-sms">
+
+      <ul class="list-group list-group-flush list-group-sms">
+                 <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/6.jpg" class="img-fluid" alt="ไข่เจียวหมูสับ">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">ไข่เจียวหมูสับ</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+                   <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/5.jpg" class="img-fluid" alt="ผัดเปรี้ยวหวาน">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">ผัดเปรี้ยวหวาน</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+                   <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/4.jpg" class="img-fluid" alt="ต้มยำกุ้ง">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">ต้มยำกุ้ง</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+                   <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/3.jpg" class="img-fluid" alt="แกงเขียวหวาน">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">แกงเขียวหวาน</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+                   <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/2.jpg" class="img-fluid" alt="ข้าวผัดปู">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">ข้าวผัดปู</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+                   <li class="list-group-item px-0">
+          <div class="media">
+            <a href="/menu.html" class="w-25">
+              <img src="/asset/img/1.jpg" class="img-fluid" alt="กระเพราะไก่ไข่ดาว">
+            </a>
+            <div class="media-body ml-3">
+              <a href="/menu.html" class="card-link text-secondary">กระเพราะไก่ไข่ดาว</a>
+
+              <div class="d-flex align-items-center small mb-3">
+
+
+
+                   ร้าน โอ้กะจู๋
+
+            </div>
+
+            </div>
+          </div>
+        </li>
+
+
+
+      </ul>
+
+
+
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-style1">
+    <h5 class="card-header"><span class="text-primary mr-2">คำค้น</span> ยอดนิยม</h5>
+    <div class="card-body">
+      <div class="btn-group-scatter">
+              <a href="/search?q=กระเพราะไก่ไข่ดาว" class="btn btn-faded-light rounded-pill mb-1">กระเพราะไก่ไข่ดาว</a>
+
+               <a href="/search?q=ข้าวผัดปู" class="btn btn-faded-light rounded-pill mb-1">ข้าวผัดปู</a>
+
+               <a href="/search?q=แกงเขียวหวาน" class="btn btn-faded-light rounded-pill mb-1">แกงเขียวหวาน</a>
+
+               <a href="/search?q=ต้มยำกุ้ง" class="btn btn-faded-light rounded-pill mb-1">ต้มยำกุ้ง</a>
+
+               <a href="/search?q=ผัดเปรี้ยวหวาน" class="btn btn-faded-light rounded-pill mb-1">ผัดเปรี้ยวหวาน</a>
+
+               <a href="/search?q=ไข่เจียวหมูสับ" class="btn btn-faded-light rounded-pill mb-1">ไข่เจียวหมูสับ</a>
+
+             </div>
+    </div>
+  </div>
+</div>      </div>
+    </div>
+  </div>
+
+
+
+<!-- SIGN-IN MODAL -->
+  <div class="modal fade modal-content-right" id="signinModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+
+      <div class="modal-content" id="signinContent">
+        <div class="modal-header pb-0">
+          <div>
+            <h3 class="modal-title">Log in</h3>
+            <em>เข้าสู่ระบบสมาชิก</em>
+          </div>
+          <button class="btn btn-icon btn-sm btn-text-secondary rounded-circle" type="button" data-dismiss="modal">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formSignin">
+            <div class="form-group">
+              <span class="input-icon">
+                <i class="material-icons">mail_outline</i>
+                <input type="email" class="form-control" id="signInEmailInput" placeholder="Email address" required>
+              </span>
+            </div>
+            <div class="form-group">
+              <span class="input-icon">
+                <i class="material-icons">lock_open</i>
+                <input type="password" class="form-control" id="signInPasswordInput" placeholder="Password" required>
+              </span>
+            </div>
+            <div class="form-group d-flex justify-content-between">
+
+              <u><a href="#" class="text-primary small" id="showResetContent">ลืม Password ?</a></u>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+          </form>
+          <hr>
+          <p class="font-italic">ยังไม่มีบัญชี ? <u><a href="#" id="showSignupContent">สมัครสมาชิกใหม่</a></u></p>
+          <hr>
+
+        </div>
+      </div>
+
+      <div class="modal-content" id="signupContent" hidden>
+        <div class="modal-header pb-0">
+          <div>
+            <h3 class="modal-title">สมัครสมาชิกใหม่</h3>
+            <em>create an account</em>
+          </div>
+          <button class="btn btn-icon btn-sm btn-text-secondary rounded-circle" type="button" data-dismiss="modal">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formSignup">
+            <div class="form-group">
+              <input type="text" class="form-control" id="signUpNameInput" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" id="signUpEmailInput" placeholder="Email address" required>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="signUpPasswordInput" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="signUpPasswordConfirmInput" placeholder="Confirm password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">สมัครสมาชิกใหม่</button>
+          </form>
+          <hr>
+          <button class="btn btn-faded-light has-icon btn-sm showSigninContent" type="button">
+            <i class="material-icons">chevron_left</i> Back to sign in
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-content" id="resetContent" hidden>
+        <div class="modal-header pb-0">
+          <div>
+            <h3 class="modal-title">Reset Password</h3>
+            <em>enter your email address</em>
+          </div>
+          <button class="btn btn-icon btn-sm btn-text-secondary rounded-circle" type="button" data-dismiss="modal">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formReset">
+            <div class="form-group">
+              <span class="input-icon">
+                <i class="material-icons">mail_outline</i>
+                <input type="email" class="form-control" id="resetEmailInput" placeholder="Email address" required>
+              </span>
+            </div>
+            <button type="submit" class="btn btn-danger btn-block">RESET</button>
+          </form>
+          <hr>
+          <button class="btn btn-faded-light has-icon btn-sm showSigninContent" type="button">
+            <i class="material-icons">chevron_left</i> กลับไปหน้า Login
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-content" id="resetDoneContent" hidden>
+        <div class="modal-header pb-0 justify-content-end">
+          <button class="btn btn-icon btn-sm btn-text-secondary rounded-circle" type="button" data-dismiss="modal">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+        <div class="modal-body text-center pt-0">
+          <i class="material-icons text-primary display-4">check_circle_outline</i>
+          <h3>กรุณายืนยัน e-mail ของคุณ</h3>
+          <p>ระบบได้ส่งรหัสผ่านใหม่ ไปยัง e-mail ของท่านเรียบร้อยแล้วค่ะ</p>
+          <button class="btn btn-primary btn-block showSigninContent" type="button">Log in</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- /SIGN-IN MODAL --><!-- MENU MODAL -->
+<div class="modal fade modal-content-left" id="menuModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header align-items-center border-bottom shadow-sm z-index-1">
+        <a href="#"><img src="/img/logo.png" alt="กินอะไร" height="40"></a>
+        <button class="btn btn-icon btn-sm btn-text-secondary rounded-circle" type="button" data-dismiss="modal">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <div class="modal-body px-0 scrollbar-width-thin">
+        <ul class="menu" id="menu">
+           <li class="no-sub"><a href="/"><i class="material-icons">home</i> Home</a></li>
+
+          <li class="no-sub"><a href="/category"><i class="material-icons">home</i> หมวดอาหาร</a></li>
+           <li class="no-sub"><a href="/ranking"><i class="material-icons">home_work</i> เมนูเด็ด</a></li>
+
+             <li class="no-sub"><a href="/kitchenbot.html"><i class="material-icons">home</i> Kitchen Bot</a></li>
+
+               <li class="no-sub"><a href="/contact"><i class="material-icons">home</i> ติดต่อเรา</a></li>
+
+
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /MENU MODAL
+
+
+
+-->
+
+
+  <script src="/asset/js/nouislider/nouislider.min.js"></script>
+  <script src="/asset/js/swiper/swiper.min.js"></script>
+  <script src="/asset/js/app.min.js"></script>
+
 <script>
-  // see https://github.com/line/line-liff-v2-starter/blob/master/public/liff-starter.js
-  function shoplogin(){
-    //https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1234567890&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&state=12345abcde&scope=profile%20openid&nonce=09876xyz
-    
-    //initializeLiff('1653987624-3QNY4job');
-  }
 
+  		$(() => {
+          App.homeSlider('#homeSlider')
 
-  function initializeLiff(myLiffId) {
-    liff
-        .init({
-            liffId: myLiffId
-        })
-        .then(() => {
-            // start to use LIFF's api
-            initializeApp();
-        })
-        .catch((err) => {
-            console.log("ERROR");
-        });
-}
+      })
+      $(document).ready(build_A_link);
 
-function initializeApp() {
-    displayLiffData();
-
-    // check if the user is logged in/out, and disable inappropriate button
-    if (liff.isLoggedIn()) {
-        console.log("user Loged in");
-        //show logout button
-    } else {
-      console.log("user NOT LOG in");
-        //show login Button
-    }
-}
-
-
-function displayLiffData() {
-    var user_data = {};
-    user_data.browserLanguage = liff.getLanguage();
-    user_data.sdkVersion = liff.getVersion();
-    user_data.isInClient = liff.isInClient();
-    user_data.isLoggedIn = liff.isLoggedIn();
-    user_data.deviceOS = liff.getOS();
-    console.log(user_data);
-}
-</script>
+      var template = $('#mainmenu_list').html();
+      $.get('/website/api/menulist',(msg)=>{
+        $('#mainmenu_list').html(hash_replace(template,"MENU",msg))
+        build_A_link();
+        console.log(msg);
+      })
+  </script>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/css?family=Pridi:200,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/asset/img/favicon.png">
+<link rel="icon" type="image/x-icon" href="/asset/img/favicon.png">
+<link rel="icon" type="image/png" href="/asset/img/favicon.png">
+<link rel="apple-touch-icon" href="/asset/img/favicon.png">
+
+
+<link rel="stylesheet" href="/asset/js/nouislider/nouislider.min.css">
+<link rel="stylesheet" href="/asset/js/swiper/swiper.min.css">
+
+
+<link rel="stylesheet" href="/asset/css/style.css?u=2020-04-22 17:28">
+
+<title>กินอะไรดี แนะนำเมนูอาหารจานเด็ด</title>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+</header>
+<div class="breadcrumb-container">
+	<div class="container-fluid">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="/category/เนื้อ">เนื้อ</a></li>
+				<li class="breadcrumb-item active" aria-current="page">เลดี้ ริบส์ โอ้กะจู๋</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+
+<div class="container-fluid mb-3">
+	<div class="card card-style1">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4">
+				<div><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_3307-2-300x300.jpg" class="w-100" alt="เลดี้ ริบส์ โอ้กะจู๋"></div>
+				</div>
+				<div class="col-md-8 pt-3 pt-md-0">
+					<h4 class="card-title font-weight-normal mb-3">เลดี้ ริบส์ โอ้กะจู๋</h4>
+
+					<h3 class="price mb-3">
+					 ราคา <span class="del">THB 250</span>
+						<span style="font-size:1.5rem;"><strong>250 </strong> บาท</span>
+					</h3>
+					<form  action="#" method="post" id="order-form">
+						<input type="hidden"  name="action" value="add">
+					 <input type="hidden" id="product_id" name="product_id" value="xxx">
+
+						<div class="form-group">
+							<label class="font-weight-bold d-block">จานเล็ก</label>
+							<div class="btn-group btn-group-sm btn-group-toggle " data-toggle="buttons" style="display:inline-table;">
+
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="font-weight-bold d-block">Coupon ส่วนลด</label>
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-6 col-sm-4 col-md-5 col-lg-4">
+								<label class="d-block font-weight-bold">จำนวน</label>
+								<div class="custom-spinner">
+									<button class="btn btn-icon rounded-circle btn-faded-primary down" type="button"><i class="material-icons">remove</i></button>
+									<input type="number" name="quantity" class="form-control" value="1" min="1" max="999">
+									<button class="btn btn-icon rounded-circle btn-faded-primary up" type="button"><i class="material-icons">add</i></button>
+								</div>
+							</div>
+							<div class="form-group col-6 col-sm-8 col-md-7 col-lg-8 d-flex align-items-end">
+								<button class="btn rounded-pill btn-warning btn-block atc-demo" type="button" id="cart-add" data-title="สั่งอาหาร">สั่งอาหาร</button>
+							</div>
+						</div>
+					</form>
+					<hr>
+					<h5 class="text-primary">การจัดส่งสินค้า</h5>
+					<div>จัดส่งสินค้าโดย Lalamove หรือ Grab</div>
+					<hr>
+
+				</div>
+			</div>
+		</div>
+		<nav class="nav nav-tabs justify-content-center border-bottom mt-3">
+			<a class="nav-item nav-link has-icon active" href="#description-content" data-toggle="tab"><i class="material-icons mr-1">list</i>รายละเอียดสินค้า</a>
+
+		</nav>
+		<div class="tab-content pt-4">
+			<div class="tab-pane fade show active" id="description-content">
+			 รายละเอียดสินค้า
+			</div>
+
+		</div>
+	</div>
+
+	<h4 class="text-center mt-4">อาหารที่มักสั่งซื้อคู่กัน</h4>
+<div class="d-grid grid-template-col-sm-2 grid-template-col-xl-6 grid-gap-3 mt-3">
+					 <div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_5850-300x300.jpg" class="w-100" alt="ซี่โครงสะพานโค้ง"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>ซี่โครงสะพานโค้ง</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+			<div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_3307-2-300x300.jpg" class="w-100" alt="เลดี้ ริบส์ โอ้กะจู๋"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>เลดี้ ริบส์ โอ้กะจู๋</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+
+		 <div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_0509-300x300.jpg" class="w-100" alt="สลัดผลไม้"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>สลัดผลไม้</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+
+
+		 <div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_58461-300x300.jpg" class="w-100" alt="โอ้กะจู๋ไส้กรอกย่างรวม"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>โอ้กะจู๋ไส้กรอกย่างรวม</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+
+		 <div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/1111-300x300.jpg" class="w-100" alt="สเต็กซี่โครงอบน้ำผึ้งซอสพริกขี้หนูออแกนิค"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>สเต็กซี่โครงอบน้ำผึ้งซอสพริกขี้หนูออแกนิค</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+
+
+		 <div class="card card-style1">
+					<a href="/menu.html" class="img img-zoom-in"><img src="http://www.ohkajhuorganic.com/wp-content/uploads/2015/07/IMG_2775-300x300.jpg" class="w-100" alt="มะม่วง กีวี"></a>
+					<div class="card-body">
+					<a href="/menu.html" class="shop-link d-block d-flex"><i class="material-icons">house</i> ร้านโอ้กะจู๋</a>
+						<a href="/menu.html" class="menu-link d-block"><span>มะม่วง กีวี</span></a>
+
+					</div>
+				 <div class="card-footer justify-content-between">
+
+				 <div class="text-secondary">3.5K ขายแล้ว<br><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i><i class="material-icons text-warning">mood</i></div>
+				 <div class="text-right"><div class="del-price">500</div><span class="h5">THB 250</span></div>
+
+				 </div>
+				</div>
+
+
+
+
+
+		</div>
+</div>
+
+<div class="footer"> </div>
+
+ <script src="/asset/js/script.min.js"></script>
+<script src="/asset/js/nouislider/nouislider.min.js"></script>
+<script src="/asset/js/swiper/swiper.min.js"></script>
+<script src="/asset/js/app.min.js"></script>
+
+ <script type="text/javascript">
+		 $('header').load('/header.html');
+		$('.footer').load('/footer.html');
+
+	 $(() => {
+
+
+		App.homeSlider('#homeSlider')
+
+
+	})
+
+ </script>
+</body>
+
+</html>

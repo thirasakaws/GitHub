@@ -134,3 +134,31 @@ var ADVWS = {
     }); // end postdata
   }
 }
+function hash_replace(template,prefix,tempdata,notclear=false){
+    var html = '';
+    var data ;
+    if(!Array.isArray(tempdata)){
+      data=[tempdata];
+    }else{
+      data=tempdata;
+      if(data.length ==0 ) return '';
+    }
+    var keys = Object.keys(data[0]);
+
+      for(var x=0;x < data.length;x++){
+          var thisrow =template;
+          keys.map((ek)=>{
+
+            var temp_rex = new RegExp('##'+prefix+'-' + ek +'##','g');
+            if(ek == '_id')   temp_rex = new RegExp('##'+prefix+'-id##','g');
+            thisrow = thisrow.replace(temp_rex,data[x][ek]);
+          });
+          html +=thisrow;
+
+      }
+      if(notclear) return html;
+      var temp = new RegExp('##'+prefix+'-\\w+##','g');
+      html = html.replace(temp,'');
+      return html;
+
+};

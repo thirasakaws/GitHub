@@ -1,22 +1,46 @@
 <div class="container-fluid">
-
-  <div class="form-group row  border-light p-2">
-      Advanced For Multiple Shop Owner
-      <div class="" id="template_eachshop">
-          <div class="row in-line">
-            ##shop-name##
-            <button class='btn btn-sm btn-submit-shop btn-block' onclick="setshopactive(##shop-id##);">
-                      <i class="fas fa-sign-in-alt"></i> Set Active and Login
+    <div class="row box-head-title-shop text-center" >
+        <div class="col-3 p-0 text-left">
+            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
+                <i class="fas fa-chevron-left"></i> Back
             </button>
-          </div>
-          <hr>
-      </div>
-      <div class="col-sm-12">
-          <small class="text-warning mt-1 warn_status" style="display:none;"></small>
-      </div>
-  </div> <!-- // การยืนยัน order auto-mannual -->
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-shop"> จัดการร้านแบบหลายร้าน  </span>
+        </div>
+        <div class="col-3 p-0 text-right">
+            <!--            <button class='btn border border-0 text-secondary' >
+                             Next <i class="fas fa-chevron-right"></i>
+                        </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
+        </div>
 
-</div>
+    </div> <!-- // top menu -->  
+    
+    
+    <div id="template_eachshop" class="form-group row ">
+        <div class="col-12 text-center mb-2"> 
+            ร้าน <span class="font-color-shop header-sub-title">##shop-name##</span> 
+        </div> <!-- //  -->  
+        
+        <div class="col-12 mb-3 text-center"> 
+            <button class='btn btn-sm btn-submit-shop' onclick="setshopactive(##shop-id##);">
+                 <i class="fas fa-sign-in-alt"></i> Set Active and Login
+            </button>
+            <small id="emailHelp" class="form-text text-muted">จัดการร้านค้านี้</small>
+        </div> <!-- //  -->  
+         
+         <div class="col-12"> 
+             <small class="text-warning mt-1 warn_status" style="display:none;"></small>
+         </div> <!-- //  --> 
+         <hr>
+    </div> <!-- // form-group  -->  
+    
+    
+    
+
+
+</div> <!-- Container-fluid --> 
+
 <script>
 var template_shop = $('#template_eachshop').html();
 $('#template_eachshop').html('');

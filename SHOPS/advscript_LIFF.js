@@ -338,6 +338,7 @@ function triggerPageshow(anycondition) { // Register function
 
 }
 var adv_current_pushstate;
+var firsttimevisitwebsite;
 function go2View(anyinternalurl, titlename) {
   var rawurl = anyinternalurl;
   if(!anyinternalurl )return;
@@ -378,9 +379,20 @@ function go2View(anyinternalurl, titlename) {
 
   if (!titlename) titlename = subview + '/' + detailofview;
 
-  window.history.pushState({
-    callpath: anyinternalurl
-  }, titlename, rawurl);
+  if(!firsttimevisitwebsite){
+    firsttimevisitwebsite =true
+    window.history. replaceState({
+      callpath: anyinternalurl
+    }, titlename, rawurl);
+
+  }else{
+
+    window.history.pushState({
+      callpath: anyinternalurl
+    }, titlename, rawurl);
+
+  }
+
   adv_current_pushstat = anyinternalurl;
   // $('#view_timer_manage').show(); // Class or ID of DIV 2 Show;
   //  console.log("TRIGGER " + anyinternalurl);

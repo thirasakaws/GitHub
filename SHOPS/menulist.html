@@ -1,46 +1,43 @@
-<div class="fixed-top shadow" id='top_shopping_cart'  > <!-- // style="display:none"  -->
-    <div class="row box-head-title-foodmall fixed-top shadow topmenu-navbar">
-        <div class="col-3 p-0 pl-1 text-left">
-           <!--
-            <button class='btn border border-0 text-secondary' onclick="window.history.back();">
-                <i class="fas fa-chevron-left"></i> Back
-            </button>
-             -->
+<!--<link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
+<link href="https://getbootstrap.com/docs/4.4/examples/carousel/carousel.css" rel="stylesheet">-->
+
+<div id='top_shopping_cart' class="row-fluid navbar fixed-top nav-color-shop box-head-title-foodmall shadow">
+    <div class="col-2 pl-0 text-left">
+        <button class='btn border border-0 text-secondary' onclick="runApp();">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <div class="col-6  text-center">
+        <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
+        <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
+          <form onsubmit="return search_menusubmit();">
+              <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
+          </form>
         </div>
-        <div class="col-6 p-0 text-center">
-            <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
-            <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
-              <form onsubmit="return search_menusubmit();">
-                  <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
-              </form>
-            </div>
-        </div> <!--// center -->
+    </div> <!--// center -->
 
-        <div class="col-3 pl-0 text-right ">
-          <div class="d-inline " onclick="openSearch()"  style="background-color: #f3f3f3; ">
-              <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:30%;">
-          </div>
-            <div class="d-inline pr-3" onclick="go2View('cart')" style="width:50%;">
-                <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
-            </div>
-            <div class="items-add-to-cart badge badge-pill badge-danger" onclick="go2View('cart')">##CART-totalitem##</div>
-        </div> <!--// center -->
+    <div class="col-3  text-right ">
+      <div class="d-inline " onclick="openSearch()"  >
+          <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:30%;">
+      </div>
+        <div class="d-inline pr-3" onclick="go2View('cart')" style="width:50%;">
+            <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
+        </div>
+        <div  class="items-add-to-cart badge badge-pill badge-danger " onclick="go2View('cart')">##CART-totalitem##</div>
+    </div> <!--// center -->
+</div> <!--// menu -->
+ <!-- // container fluid -->
 
-    </div> <!--// menu -->
-</div>  <!-- topmenu แสดงทุกหน้าหัวข้อเปลี่ยนเป็นของแต่ละหน้า -->
+
+
 
 
 
 <!-- Slide banner  -->
 
-
-<div id="carouselcard" class="carousel slide margin-top-under-navbar" data-ride="carousel" style="max-height: 260px;
+<div id="carouselcard" class="carousel slide carousel-fade margin-top-10" data-ride="carousel" style="max-height: 260px;
     overflow: auto;">
-<!--  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol> ไม่แสดงให้กดซ้ายขวา แทน -->
 
   <div class="carousel-inner">
     <div class="carousel-item  active">
@@ -61,12 +58,20 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+</div>  <!-- // carousel -->
 
-</div>
 
-<div class="container-fluid text-center mx-auto" id='main_shop_image' style="position: absolute; width: 100%; z-index: 16;  top: 36%;">
-      <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-mainimage##" class="img-fluid rounded-circle shadow" alt="" style="width:25%; border: 5px #ffffff solid; background-color: #fff;"/>
+
+
+
+
+
+
+
+<div class="container-fluid text-center mx-auto w-100" id='main_shop_image'  style="position: absolute; z-index: 16;  top: 38%;">
+      <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-mainimage##" class="img-fluid rounded-circle shadow" alt="" onclick="runApp();" style="width:25%; border: 5px #ffffff solid; background-color: #fff;"/>
 </div> <!-- // logo website -->
+
 <!-- // Slide banner การตลาดกำหนดขนาดมา-->
 
 
@@ -75,8 +80,8 @@
 
 
 <!-- Category -->
-<div class="container-fluid mb-2 margin-top-15" >
-    <div class="row ">
+<div class="container-fluid " >
+    <div class="row mb-2 margin-top-15">
         <div class="col-12">
             <div class="row row-cols-4" id="SHOP_promotag">
             </div> <!-- // row-cols-4 คือ จำนวนคอลัม -->
@@ -88,15 +93,16 @@
 </div> <!-- // Category -->
 
 
-
-<div class="row" id='mainview' style="padding: 10px;">
-  Loading..
+<div class="container-fluid " >
+    <div class="row" id='mainview'>
+      Loading..
+    </div>
 </div>
 
-
-<div class="row " id='template_mainview' style="display:none; ">
-    <div class="card-deck col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
-        <div class="card border border-0 shadow-sm rounded-lg border-bottom-color-primary" >
+<!-- /// card-deck   -->
+<div class="row" id='template_mainview' style="display:none; ">
+    <div class="col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
+        <div class="border border-0 shadow-sm rounded-lg border-bottom-color-primary" >
 
           <img src="https://www.kinarai.com/##menu-mainimage##" class="card-img-top" alt="..." onclick='view_menu_id(##menu-id##);'>
 
@@ -133,6 +139,7 @@
 
     </div> <!-- // card deck -->
 </div> <!-- // row -->
+
 
 
 
@@ -201,7 +208,7 @@
 
             for(var x=0; x < working.shop.promotag.length;x++) {
               if(x > 7) break;
-              html +=`<div class="col p-1"><button class="btn-block bg-white border border-success-foodmall text-center rounded p-1 mb-1" onclick="list_menu('${working.shop.promotag[x]}');">
+              html +=`<div class="col pt-1 pb-1"><button class="btn-block bg-white border border-success-foodmall text-center rounded p-1 mb-1" onclick="list_menu('${working.shop.promotag[x]}');">
                   <span class="font-color-foodmall">${working.shop.promotag[x]}</span>
               </button></div>`;
             }
@@ -240,7 +247,13 @@
           res.detail.map( (each)=>{
               each.mainimage = each.images && each.images[0] ?  `cdn/image/menu/${each.images[0]}` : "image/Kinarai.jpg"; //default image
               each.mainprice = each.price ?  each.price[0].price : '-';
-              each.promotionprice =  each.normal_price ? `<small class="text-secondary"><strike>฿ ${each.normal_price}</strike></small><br>` : '';
+              // Find Promotion price
+              for(var x=0;x < each.price.length; x++){
+                  if(each.price[x].status==1 && each.price[x].normal_price > 0){  // Found Promotion
+                    each.promotionprice =  `<small class="text-secondary"><strike>฿ ${each.price[x].normal_price }</strike></small><br>`;
+                    break;
+                  }
+              }
               each.disable = each.status !=1? "disabled='disabled'":'';
 
           });
@@ -266,8 +279,14 @@
               working.order.totalitem +=obj.qty;
           })
       }
+
       var a=hash_replace(template_cart,'CART', working.order || {totalitem:0});
       $("#top_shopping_cart").html(a)
+      // if (Number(working.order.totalitem) <=0) {
+      //       $(".total_item").html('');
+      // }else {
+      //   $(".total_item").html(working.order.totalitem);
+      // }
       $('#icon_shoppingcart').animate({
         width: '+=20px'
     }, 200).animate({

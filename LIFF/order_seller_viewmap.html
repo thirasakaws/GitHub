@@ -1,0 +1,94 @@
+<div id='gmap_cusgps'>
+</div>
+<script type="text/javascript">
+  $('#gmap_cusgps').load('/LIFF/modal_map_marker_view.html');
+  // $('#gmap_cusgps').load('/LIFF/modal_map_full.html');
+  // $('#gmap_cusgps').load('/LIFF/modal_map_radius.html');
+
+
+// console.log(working.ordercustomerlocation);
+// console.log('branch',working.shop_branch);
+
+  find_location_order();
+
+  function find_location_order() {
+    // console.log('cuslocate',ordercustomerlocation);
+    var pos=[];
+    if (working.ordercustomerlocation &&  Array.isArray(working.ordercustomerlocation.addresslocation.coordinates)) {
+      var ordercustomerlocation = working.ordercustomerlocation.addresslocation;
+        // Already input Location
+        // pos.push({lat: ordercustomerlocation.coordinates[0], lng: ordercustomerlocation.coordinates[1]});
+        // console.log('pos',pos);
+
+        pos.push({
+            user_type: "customer",
+            location: {
+               lat: ordercustomerlocation.coordinates[0],
+               lng: ordercustomerlocation.coordinates[1]
+             }
+          });
+
+          if (working.shop_branch && Array.isArray(working.shop_branch)) {
+                var obj = working.shop_branch;
+                for(var x=0;x<obj.length;x++){
+                      if (obj[x]._id == working.ordercustomerlocation.shopbranch) {
+                        pos.push({
+                            user_type: "seller",
+                            location: {
+                               lat: obj[x].location.coordinates[0],
+                               lng: obj[x].location.coordinates[1]
+                             }
+                          });
+                      }
+                }
+          }else {
+                alert('ไม่พบพิกัดสาขา');
+                return false;
+          }
+      } else {
+                    alert('ไม่พบพิกัด');
+                    return false;
+      }
+      console.log('pos',pos);
+        // call_modal_maps(pos, function (data) {
+        //       console.log(data);
+        // });
+
+      setTimeout(() => {
+        // $('.main_data').hide();
+        // $('#gmap_cusgps').modal('show');
+        call_modal_maps_marker_view(pos, updategpslocation, showError);
+      }, 500);
+  }
+
+  function updategpslocation(loc) {
+      console.log("updategpslocation: " + loc);
+      // alert("updategpslocation: loc = " + JSON.stringify(loc));
+    //     var data = {
+    //         LINE_USER: LINE_USER,
+    //         shopid: working.shop._id,
+    //         _id: working.branch._id
+    //     };
+    //     data.location = {type: "Point", coordinates: [loc.lat, loc.lng]};
+
+    //     $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
+    //         if (!res.result) {
+    //             alert(res.detail);
+    //             return;
+    //         }
+    //         working.branch.location = data.location;
+    //         $('#writelocationok').show('slow').hide('slow');
+    //     });
+
+      // $('#gmap_cusgps').modal('hide');
+      // $('.main_data').show();
+      setTimeout(() => {
+        go2View('order_seller_latest');
+      }, 500);
+    }
+
+    function showError(error) {
+        console.log("ERROR", error)
+    }
+
+</script>

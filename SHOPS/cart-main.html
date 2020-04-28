@@ -48,7 +48,7 @@
   </div> -->
 </div>
 <script>
-      all_page = ['cart-manage-main','cart-manage1-main','cart-wait-confirm','cart-wait-payment','cart-show-cancel','manage_address'];
+      all_page = ['cart-manage-main','cart-manage1-main','cart-wait-confirm-main','cart-wait-payment-main','cart-show-cancel-main','manage_address-main'];
     var working={};
     register_all_page();  // Register SubPAGE
     function runApp(){
@@ -61,11 +61,11 @@
             if(working.order.status <=5){
               go2View('cart-manage-main'); // แก้ไขรายการได้  มียืนยัน ชำระกับยกเลิก
             }else if(working.order.status == 7 || working.order.status == 8 ){
-              go2View('cart-wait-confirm'); // ยกเลิก ได้อย่างเดียว , เปลี่ยน เบอร์ติดต่อได้
+              go2View('cart-wait-confirm-main'); // ยกเลิก ได้อย่างเดียว , เปลี่ยน เบอร์ติดต่อได้
             }else if(working.order.status == 9 ){
-              go2View('cart-show-cancel'); // ร้านค้าไม่สามารถทำได้ แสดง หน้ายอมรับการยกเลิก
+              go2View('cart-show-cancel-main'); // ร้านค้าไม่สามารถทำได้ แสดง หน้ายอมรับการยกเลิก
             }else if(working.order.status == 10 ){    //ร้านค้ายืนยันแล้วว่ามีของพร้อม
-              go2View('cart-wait-payment'); //หน้านี้แสดง QR Payment ด้วย รอจ่ายเงิน หรือไม่ก็ ยกเลิก
+              go2View('cart-wait-payment-main'); //หน้านี้แสดง QR Payment ด้วย รอจ่ายเงิน หรือไม่ก็ ยกเลิก
             }else{
               alert("status:" + working.order.status)
             }

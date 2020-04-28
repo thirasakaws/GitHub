@@ -1,0 +1,76 @@
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Shop Type</u></b></h1>
+        </div>
+        <!--        <div class="col-12 col-sm-12 col-md-4  text-right"  >
+        
+                </div>-->
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group alink" style="margin-bottom:6px;"  onsubmit="return add_new_shop_type()">
+                <div class="form-row">
+                    <h3> เพิ่มประเภทอาหาร</h3>
+                    <div class="col-md-2 col-sm-12 mb-2">
+                        <input type="text" id="shoptype" name="search" class="form-control input-sm autoFilter alink"  onsubmit="return add_new_shop_type()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary" type="button" onclick="return add_new_shop_type()">
+                            <i class="fa fa-plus"></i>
+                            Add
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+    </div> <!-- // row  -->
+    <div style="padding-top: 20px">
+        <div id="add_type">
+
+        </div>
+    </div>
+</div>
+<script>
+
+    function refreshpage(rawdata) {
+        console.log('true')
+        $.get('/api/data/kinarai/shop_type', function (data) {
+            console.log(data)
+            $('#add_type').empty()
+            if (data) {
+                var html_btn = ''
+                for (var x = 0; x < data.length; x++) {
+                    html_btn += '<button id="type_tag' + data[x]._id + '" class="btn btn-md btn-primary" style="margin:3px">' + data[x].name + '<i  class="btn fas fa-times" onclick="delete_type(' + data[x]._id + ')"></i></button>'
+                }
+
+                $('#add_type').html(html_btn)
+
+            }
+        });
+    }
+    function delete_type(data_id) {
+        console.log(data_id)
+        $.postJSON('/api/data/kinarai/shop_type_delete', {_id: data_id}, function (res) {
+            if (res) {
+                console.log(res)
+
+            }
+            refreshpage()
+        });
+
+    }
+
+    function add_new_shop_type() {
+        var nametype = $('#shoptype').val()
+        $.postJSON('/api/data/kinarai/shop_type_add', {name: nametype}, function (res) {
+            if (res) {
+                console.log(res)
+            }
+            refreshpage()
+        });
+    }
+</script>

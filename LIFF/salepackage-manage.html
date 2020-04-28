@@ -19,7 +19,7 @@
 
 
     <div class="text-center">
-        <h5>ชื่อเมนู : <input class="input_data_bn edit_data MENU_name text-center" placeholder="ชื่อเมนู" data-field="name"></h5>
+        <h5><span class="text-gray-light2">ชื่อเมนู</span>  : <input class="input_data_bn edit_data MENU_name text-center" placeholder="ชื่อเมนู" data-field="name"></h5>
     </div>
     <hr>
 
@@ -32,19 +32,28 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <button class='btn btn-sm btn-outline-submit-shop mt-3' onclick='show_moremanagemenu();'>
-            รูปภาพเมนูอาหาร
-            <i class="fa fa-angle-double-down double-down" aria-hidden="true"></i>
-            <i class="fa fa-angle-double-up double-up" style="display:none;" aria-hidden="true"></i>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+            <button class='btn btn-sm btn-outline-submit-shop mt-3' onclick='show_moremanagemenu();'>
+                รูปภาพเมนูอาหาร
+                <i class="fa fa-angle-double-down double-down" aria-hidden="true"></i>
+                <i class="fa fa-angle-double-up double-up" style="display:none;" aria-hidden="true"></i>
+            </button>
+        </div>
+      </div>
+      <div class="col-6 text-right">
+        <button class='btn btn-sm btn-secondary mt-3' onclick="go2View('salepackage-manage1');">
+          <i class="fas fa-cogs"></i>  จัดการราคาอาหาร
         </button>
+      </div>
     </div>
     <div class="form-group mt-1" style="">
         <div class='show_moremanagemenu' style='display:none; width:100%'>
 
             <div class="card mt-1">
                 <div class="card-body">
-                    <strong class="card-title">รูปภาพเมนูอาหาร</strong> <br>
+                    <strong class="card-title text-gray-light2">รูปภาพเมนูอาหาร</strong> <br>
 
                     <span class="text-warning">**ภาพแรกจะกลายเป็นภาพหลักของเมนูคุณ</span>
 
@@ -60,7 +69,9 @@
 
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
-            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> คำอธิบาย  </b></label>
+            <label class="col-sm-12 text-gray-light lable-left-35 " >
+                <span class="text-gray-light2"> คำอธิบาย  </span>
+            </label>
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
@@ -73,7 +84,9 @@
     </div>
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
-            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> รายละเอียด  </b></label>
+            <label class="col-sm-12 text-gray-light lable-left-35 " >
+                <span class="text-gray-light2"> รายละเอียด  </span>
+            </label>
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
@@ -86,7 +99,9 @@
     </div>
     <div class="form-group row mt-3">
       <div class="col-12">
-        <label class="col-6 text-gray-light lable-left-35 " > ประเภทเมนูอาหาร </label>
+        <label class="col-6 text-gray-light lable-left-35 " >
+            <span class="text-gray-light2"> ประเภทเมนูอาหาร </span>
+        </label>
         <select class="MENU_type button-top_gray col-12 col-sm-12 p-2 "  multiple="multiple" placeholder="ประเภทเมนู">
         </select>
          <small  class="form-text text-muted"> *สามารถพิมพ์แล้วกดวรรคเพื่อเพิ่มประเภทได้ <br> (ใช้สำหรับการค้นหาอาหารตามประเภท) </small>
@@ -115,7 +130,9 @@
     </div> -->
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
-            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ระยะเวลาในการทำ  </b></label>
+            <label class="col-sm-12 text-gray-light lable-left-35 " >
+                <span class="text-gray-light2"> ระยะเวลาในการทำ  </span>
+            </label>
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
@@ -131,7 +148,9 @@
     </div>
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
-            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> ขนาด  </b></label>
+            <label class="col-sm-12 text-gray-light lable-left-35 " >
+                <span class="text-gray-light2"> ขนาด  </span>
+            </label>
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
@@ -147,7 +166,7 @@
     </div>
     <div class="form-group row mt-3 border-bottom border-light">
         <div class="col-12">
-            <label class="col-sm-12 text-gray-light lable-left-35 " ><b> น้ำหนัก  </b></label>
+            <label class="col-sm-12 text-gray-light lable-left-35 " ><span class="text-gray-light2"> น้ำหนัก  </span></label>
             <div class="col d-flex">
                 <!--//template for save data one field-->
                 <div class="float-left pl-2 mb-2 w-100 ">
@@ -305,7 +324,7 @@
     }
 
     function create_menutype(){
-      var seldata = `<option disabled> เช่น ทอด, ต้มยำ , สลัด เป็นต้น</option>`;
+      var seldata = `<option disabled>เมนูเครื่องเคียง เช่น มันบด เฟรนช์ฟราย </option>`;
       console.log('type',working.activemenu.type);
        if(Array.isArray(working.activemenu.type)){
          for (var x = 0; x < working.activemenu.type.length; x++) {

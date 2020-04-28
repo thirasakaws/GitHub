@@ -336,7 +336,7 @@ function triggerPageshow(anycondition) { // Register function
   console.log("check Page Register Fail for ",con2check);
 
 }
-var adv_current_pushstate;
+var adv_current_pushstate,firsttimevisitwebsite;
 function go2View(anyinternalurl, titlename) {
   if(!anyinternalurl )return;
   console.log("go2View " + anyinternalurl);
@@ -378,9 +378,20 @@ function go2View(anyinternalurl, titlename) {
 
   console.log("PUSH STATE " + anyinternalurl);
 
-  window.history.pushState({
-    callpath: anyinternalurl
-  }, titlename, registerurl);
+  if(!firsttimevisitwebsite){
+    firsttimevisitwebsite =true
+    window.history. replaceState({
+      callpath: anyinternalurl
+    }, titlename, registerurl);
+
+  }else{
+
+    window.history.pushState({
+      callpath: anyinternalurl
+    }, titlename, registerurl);
+
+  }
+
   adv_current_pushstat = anyinternalurl;
   // $('#view_timer_manage').show(); // Class or ID of DIV 2 Show;
   //  console.log("TRIGGER " + anyinternalurl);

@@ -1,22 +1,35 @@
 <div id='gmap_gps'>
   GMAP
+
 </div>
-
+<span id='gpsvalue' style="display:none">Gps Data Hide Here</span>
+<button type='btn' onclick="copygps();" > test COPY </button>
 <script>
+  function copygps(){
+    copyToClipboard('#gpsvalue');
+  }
 
-  // $('#gmap_gps').load('/LIFF/modal_gps.html',function(){
-    $('#gmap_gps').load('/LIFF/modal_gps_full.html',function(){
-  // $('#gmap_gps').load('/SHOPS/modal_gps_full.html',function(){
-    var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
-    function updategpslocation(loc){
-      console.log(loc)
-    }
-    function showError(err){
-      console.log(err)
-    }
-    // latlng_default_startup.user_type = "customer";
-    call_modal_maps(latlng_default_startup,updategpslocation,showError);
-  });
+  function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+
+  // // $('#gmap_gps').load('/LIFF/modal_gps.html',function(){
+  //   $('#gmap_gps').load('/LIFF/modal_gps_full.html',function(){
+  // // $('#gmap_gps').load('/SHOPS/modal_gps_full.html',function(){
+  //   var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
+  //   function updategpslocation(loc){
+  //     console.log(loc)
+  //   }
+  //   function showError(err){
+  //     console.log(err)
+  //   }
+  //   // latlng_default_startup.user_type = "customer";
+  //   call_modal_maps(latlng_default_startup,updategpslocation,showError);
+  // });
 
 // $('#gmap_gps').load('/LIFF/modal_map_radius.html',function(){
 //   var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
@@ -31,6 +44,30 @@
 //   latlng_default_startup.service_radius = 1500;
 //   call_modal_radius_maps(latlng_default_startup,updategpslocation,showError);  // Map Radius
 // });
+
+  // $('#gmap_gps').load('/LIFF/modal_map_marker_view.html',function(){
+  //   var latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
+  //   var pos = [
+  //     {
+  //       user_type: "customer",
+  //       location: {
+  //         lat:13.752569,
+  //         lng:100.574740
+  //       }
+  //     },
+  //     {
+  //       user_type: "seller",
+  //       location: latlng_default_startup
+  //     }
+  //   ];
+  //   function updategpslocation(loc){
+  //     console.log(loc)
+  //   }
+  //   function showError(err){
+  //     console.log(err)
+  //   }
+  //   call_modal_maps(pos, updategpslocation, showError);
+  // });
 
 
 

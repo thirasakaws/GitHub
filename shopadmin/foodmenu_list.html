@@ -1,0 +1,304 @@
+
+<div style="bfoodmenu:solid 1px ;margin: 2%;bfoodmenu-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Food Menu</u></b></h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/foodmenu_add")'>
+                    <i class="fa fa-plus"></i>
+                    Add Food Menu
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
+                <div class="form-row">
+                    <h3>ค้นหาชื่อ เมนูอาหาร </h3>
+                    <div class="col-md-2 mb-2">
+
+                        <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <!--                    <h3> สถานะ / Status</h3>
+                                        <div class="col col-md-2 mb-2">
+                    
+                                            <select id="status" class="form-control">
+                                                <option value="">ไม่ระบุ</option>
+                                                <option value="1">เปิดการใช้งาน</option>
+                                                <option value="0">ปิดการใช้งาน</option>
+                                            </select>
+                                        </div>-->
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div> <!-- // form-row  -->
+            </form>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " style="padding-bottom:30px">  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+    <div class="table-responsive" style="padding-top: 20px">
+        <table class="table table-striped table-bfoodmenued table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Food Name</th>
+                    <th>Description</th>
+                    <th>Detail</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th>Price</th>
+                    <th>Create Date</th>
+                    <th>Last Update</th>
+                    <th class="text-center">Action</th>
+
+                </tr>
+            </thead>
+            <tbody id='mytable'>
+                <tr class='row_tablecontent' style='display:none'>
+                    <td class="foodmenu_id"></td>
+                    <td class="foodmenu_name"></td>
+                    <td class="foodmenu_description"></td>
+                    <td class="foodmenu_detail"></td>
+                    <td class="foodmenu_category"></td>
+                    <td class="foodmenu_tags"></td>
+                    <td>                    
+                        <button class="btn btn-primary" type="button" onclick="view_menu_order(this)"><i class="fa fa-search order_items alink" ></i> Detail</button>
+                    </td>
+                    <td class="foodmenu_createdate"></td>
+                    <td class="foodmenu_lastupdate"></td>
+                    <td>
+                        <span class="foodmenu_status"></span>
+                        <button type="button" class="float-right btn btn-primary btn-sm alink" onclick="edit_status_foodmenu(this)"><i class="fa fa-pencil  " ></i> Status Edit</button>
+                    </td>
+                    <td class=" text-center">
+                        <button class="alink" onclick="edit_data_foodmenu(this)"><i class="fa fa-pencil foodmenu_action " ></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalfoodmenustatus" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalfoodmenustatus">Status Manage | ID :<span id="id_foodmenu"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--select status and confirm-->
+                <select id="status_foodmenu" class="form-control">
+                    <option class="text-danger" value="4">ปิดใช้งาน</option>
+                    <option class="text-primary" value="5">เปิดใช้งาน</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showmodal_menu" tabindex="-1" role="dialog" aria-labelledby="modalordermenu" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalordermenu">View Detail Menu | ID :<span id="id_order_menu"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <!--select status and confirm-->
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Detail</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody  id="menu-tag_list">
+                        <tr class="row_tablecontent" style="display:none">
+                            <td class="menu_detail"></td>
+                            <td class="menu_price"></td>
+                            <td class="menu_status"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var template_of_testtable = $('#mytable').first().html();
+    var maintable = $('#mytable').first();
+    var searchobj = {};
+    var fncsearch;
+    var search_setting = {
+        posturl: '/api/data/kinarai/foodmenu_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: showdata_foodmenu_list,
+        limit: 20,
+    }
+    function refreshpage(rawdata) {
+
+        console.log("REFRESH CALLED");
+
+        var pagenumber = getParameterByName('page', window.location.search);
+        if (pagenumber > 1) {
+            search_setting.page = pagenumber;
+        }
+        fncsearch = ADV_search(search_setting);   // Defult always search at first
+        return false;
+    }
+    function showdata_foodmenu_list(objdata, totalrecord) {
+
+//         var path = '/api/data/ticket/allotment_list';
+        console.log('data :', objdata);
+        maintable.html(template_of_testtable);
+        $("#total_item").text(' ' + totalrecord);
+
+        if (objdata.length == 0) {
+            $('#mytable').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        } else {
+            console.log('data not found')
+            for (var x = 0; x < objdata.length; x++) {
+                var TR = tablerow(maintable, 'foodmenu', objdata[x], template_of_testtable);
+                if (objdata[x].createdate) {
+                    TR.find('.foodmenu_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                }
+                if (objdata[x].lastupdate) {
+                    TR.find('.foodmenu_lastupdate').html(moment(objdata[x].lastupdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                } else {
+                    if (objdata[x].createdate) {
+                        TR.find('.foodmenu_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                    }
+                }
+                if (objdata[x].price) {
+                    TR.find('.foodmenu_price').html(addCommas(objdata[x].price));
+                }
+                if (objdata[x].status == 4) {
+                    TR.find('.foodmenu_status').addClass('text-danger').html('ปิดใช้งาน');
+                }
+                if (objdata[x].status == 5) {
+                    TR.find('.foodmenu_status').addClass('text-primary').html('เปิดใช้งาน');
+                }
+                TR.show();
+            }
+
+        }
+    }
+    function edit_data_foodmenu(obj) {
+        var tempid = $(obj).find_id();
+        go2View('/foodmenu_edit?foodmenu_id=' + tempid);
+        return false;
+    }
+    var temptag_modal_menu = $('#menu-tag_list').first().html();
+    var temp_menu = $('#menu-tag_list').first();
+    function view_menu_order(order_id) {
+        var res_id = $(order_id).find_id();
+        $.get('/api/data/kinarai/foodmenu_edit/' + res_id, function (result) {
+            console.log(result)
+            temp_menu.html(temptag_modal_menu);
+            if (result.price && result.price.length > 0) {
+                var objitem = result.price
+                for (var x = 0; x < result.price.length; x++) {
+                    var TR = tablerow(temp_menu, 'menu', objitem[x], temptag_modal_menu);
+                    TR.find('.menu_menuid').html()
+                    if (objitem[x].price) {
+                        if (objitem[x].price.detail) {
+                            TR.find('.menu_detail').html(addCommas(objitem[x].price.detail))
+                        }
+                        if (objitem[x].price.price) {
+                            TR.find('.menu_price').html(addCommas(objitem[x].price.price))
+                        }
+                        if (objitem[x].price.status) {
+                            TR.find('.menu_status').html(objitem[x].price.status)
+                        }
+                    }
+
+                    TR.show();
+                }
+
+            }
+        });
+
+        $('#id_order_menu').html(res_id)
+        $('#showmodal_menu').modal('show')
+
+    }
+
+    function edit_status_foodmenu(foodmenu_id) {
+        var res_id = $(foodmenu_id).find_id();
+        $.get('/api/data/kinarai/foodmenu_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.status) {
+                $('#status_foodmenu').val(result.status)
+            }
+        });
+
+        $('#id_foodmenu').html(res_id)
+        $('#save_btn').attr('onclick', 'update_foodmenustatus(' + res_id + ')')
+        $('#showmodal').modal('show')
+
+    }
+
+    function update_foodmenustatus(foodmenu_id1) {
+        var postdata = {
+            _id: foodmenu_id1,
+            status: $('#status_foodmenu').val()
+        }
+        $.postJSON('/api/data/kinarai/foodmenu_update_status', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                $('#showmodal').modal('hide')
+                refreshpage()
+            }
+        });
+
+    }
+    function filterFormsubmit_allotment() {
+
+        var search = {}
+
+        if ($('#search_allotment').val()) {
+            search.text = $('#search_allotment').val();
+        }
+//        if ($('#status').val()) {
+//            search.status = $('#status').val();
+//        }
+        var searchquery = {
+            search: search
+        }
+        console.log("Searching ", searchquery)
+        fncsearch(searchquery);
+        return false;
+    }
+</script>

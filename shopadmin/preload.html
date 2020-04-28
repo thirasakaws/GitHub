@@ -1,0 +1,278 @@
+<link href="/css/glyphicons.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/css/pagination.css" rel="stylesheet" type="text/css"/>
+
+<!--      <script src="/js/bootstrap/bootstrap.min.js"></script>-->
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
+<script src="/js/pagination.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
+<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
+</script>
+<!--Fonts font-awesome -->
+<link href="/css/all.css" rel="stylesheet" type="text/css"/>
+<!--<link href="/css/font-awesome.css" rel="stylesheet" type="text/css"/>-->
+<!--<link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>-->
+<!--<link href="/css/fontawesome5-overrides.min.css" rel="stylesheet" type="text/css"/>-->
+<script src="https://kit.fontawesome.com/a35a8bdf3f.js" crossorigin="anonymous"></script>
+
+<link href="/css/themify-icons.css" rel="stylesheet" type="text/css"/>
+<link href="/css/fonts.css" rel="stylesheet" type="text/css"/>
+<link href="/css/_navbar.scss"/>
+<link href="/css/Navigation-with-Button.css" rel="stylesheet" type="text/css"/>
+<!-- Style Css OLD
+<link href="/css/stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="http://fonts.googleapis.com/css?family=Raleway:400,200" type="text/css">
+-->
+
+<link href="/css/select2.min.css" rel="stylesheet" />
+<script src="/js/select2.min.js"></script>
+<script src="/js/moments.min.js" type="text/javascript"></script>
+<script src="/js/advws_util.js?v=2" type="text/javascript"></script>
+<link href="/css/custom.css?v=1" rel="stylesheet" />
+<style>
+    .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
+    .body { color: #73879C; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }
+
+    /* custom css */
+    .border-left-primary {
+        border-left: .25rem solid #4e73df!important;
+    }
+    .border-left-success {
+        border-left: .25rem solid #1cc88a!important;
+    }
+    .border-left-info {
+        border-left: .25rem solid #36b9cc!important;
+    }
+
+    .border-left-warning {
+        border-left: .25rem solid #f6c23e!important;
+    }
+    .text_alert{
+        margin-top: 13px;
+        color: red;
+        padding-left: 5px;
+    }
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+    .align-items-center {
+        align-items: center!important;
+    }
+
+    .no-gutters > .col, .no-gutters > [class*=col-] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .mb-0, .my-0 {
+        margin-bottom: 0!important;
+    }
+    .text-gray-300 {
+        color: #dddfeb!important;
+    }
+    .mr-3, .mx-3 {
+        margin-right: 1rem!important;
+    }
+    .progress {
+        display: flex;
+        height: 1rem;
+        overflow: hidden;
+        font-size: .75rem;
+        background-color: #eaecf4;
+        border-radius: .35rem;
+    }
+
+
+    /* Footer */
+    .scroll-to-top:hover {
+        background: #5a5c69;
+    }
+
+    .scroll-to-top:focus, .scroll-to-top:hover {
+        color: #fff;
+    }
+
+    a:focus {
+        outline: none;
+    }
+
+
+    a:hover {
+        color: #224abe;
+        text-decoration: underline;
+    }
+    .select2 {
+        width:100%!important;
+    }
+    .scroll-to-top {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        display: none;
+        width: 2.75rem;
+        height: 2.75rem;
+        text-align: center;
+        color: #fff;
+        background: rgba(90,92,105,.5);
+        line-height: 46px;
+    }
+
+    .ticket_navbar_floragolf  {
+        background-color : #40281E;
+    }
+
+</style>
+<header id='inc_menu_header'>  </header>
+
+
+<div id='mainpage_body' style="margin-top: 50px !important;">
+    Staff Section
+    <br>
+    <!--    <center>
+            <div class=" spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
+                <span class="sr-only" >Loading...</span>
+            </div>
+        </center>-->
+</div>
+<div class="modal fade bd-example-modal-lg" id="preload" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="d-flex justify-content-center" style="margin:auto;color:#ffffff;">
+            <div class="spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
+                <span class="sr-only" >Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<footer style="margin-left: 0px !important;">
+    <div class="container-fluid my-auto">
+        <div class="text-center my-auto copyright"><span>© Copyright Kinarai.com <br /></span>
+        </div>
+    </div>
+
+    <span class="TicketOrgID" style=" color: #ffffff;"></span>
+
+</footer>
+<script>
+    var temp_url_permission
+    var all_page = ['main','', 'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list','shop_list', 'shop_add', 'shop_edit',
+     'foodmenu_list', 'foodmenu_edit', 'foodmenu_add',];
+
+         var firsttime_visit = true;
+         function register_all_page() {
+             for (var x = 0; x < all_page.length; x++) {
+                 var prefix = '/control/'
+                 if (all_page[x].indexOf('/') !== -1) {
+                     prefix = '/'
+                 }
+                 onPageshow(prefix + all_page[x], {obj: '#mainpage_body', url: '/LIFF/' + all_page[x] + '.html'}, function () {
+                     // obj is main_div  url ,real-url
+                     var url = window.location.href;
+                     var querysplit = url.split('/');
+                     var detailofview = querysplit[5];
+                     //screen_page_byname(detailofview);
+                 });
+
+             }
+         }
+         register_all_page();
+
+
+
+         if (!starturl)
+             starturl = 'main'
+         if (starturl == '/undefined') {
+             starturl = 'main'
+         }
+         if (starturl[0] == '/') {
+             starturl = starturl.replace('/', '');
+         }
+         if (!starturl)
+             starturl = 'main'
+
+
+         var alreadyinit = false;
+         function initializeApp() {
+             //console.log("init ok");
+             if (typeof (alreadyinit) == 'function') {
+                 alreadyinit();
+                 return;
+             }
+             if (alreadyinit)
+                 return;
+             //alreadyinit =true;
+             displayLiffData();
+             // check if the user is logged in/out, and disable inappropriate button
+             if (liff.isLoggedIn()) {
+                  var token = liff.getAccessToken();
+                  console.log("TOKEN R");
+                  console.log(token);
+                 //console.log("user Loged in");
+                 //show logout button
+                 liff.getProfile().then(profile => {
+                     LINE_USER.pictureUrl = profile.pictureUrl;
+                     LINE_USER.userId = profile.userId;
+                     LINE_USER.displayName = profile.displayName;
+                     LINE_USER.statusMessage = profile.statusMessage;
+                     console.log(profile);
+                     var tk =liff.getDecodedIDToken();
+                     if(tk){
+                        console.log("TOKEN",tk);
+                         LINE_USER.getDecodedIDToken = tk.email;
+                     }
+
+                     runApp();
+                     alreadyinit = runApp;
+                 }).catch(err => {
+                     if (typeof (fnc_noprofile) == 'function')
+                         fnc_noprofile();
+                     console.log("Error Getprofile", err)
+                 });
+             } else {
+                 console.log("user NOT LOG in");
+                 liff.login();
+                 //show login Button
+             }
+         }
+
+         function initializeLiff() {
+
+           if(alreadyinit) {
+             if(typeof(runApp) =='function') runApp();
+             return;
+           }
+             console.log("INIT ", myLiffId);
+             liff.init({liffId: myLiffId}, initializeApp, err => {
+                 console.log("INIT FAIL", myLiffId)
+                 console.log(err.code, err.message)
+             });
+         }
+         var LINE_USER = {};
+         function displayLiffData() {
+
+             LINE_USER.browserLanguage = liff.getLanguage();
+             LINE_USER.sdkVersion = liff.getVersion();
+             LINE_USER.isInClient = liff.isInClient();
+             LINE_USER.isLoggedIn = liff.isLoggedIn();
+             LINE_USER.deviceOS = liff.getOS();
+             //console.log(LINE_USER);
+         }
+     // First Time
+
+         var firstgourl = starturl;
+         var tempsharp = starturl.indexOf('#');
+         if (tempsharp !== -1) {
+             firstgourl = starturl.substr(0, tempsharp);
+         }
+         var tempsharp = firstgourl.indexOf('?');
+         if (tempsharp !== -1) {
+             firstgourl = firstgourl.substr(0, tempsharp);
+         }
+     //console.log("LOAD "+firstgourl);
+
+     //go2View(starturl);
+         $('#mainpage_body').load('/shopadmin/' + firstgourl + '.html');
+
+
+     </script>

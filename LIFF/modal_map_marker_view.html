@@ -1,278 +1,216 @@
-<!-- Modal for GPS -->
-<style media="screen">
-  #googlemap {
-      position: relative;
-  }
-</style>
-<div class="modal fade " id="modal_google_gps" tabindex="-1" role="dialog"  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <!-- <div class="modal-header">
-            <h5 class="modal-title">ตำแหน่งร้านอาหาร และจัดส่งอาหาร</h5>
-        </div> -->
-
-        <!-- <div class="modal-body" style="width:500; height:500"> -->
-          <div class="modal-body" style="width:100%; height:75vh">
-
-          <!-- <div    id='googlemap' style="width: 100%; height: 300px" > -->
-            <div    id='googlemap' style="width: 100%; height: 100%" >
-    			Gmaps
-
-          </div>
-
-        </div>
-        <div id="floating-panel">
-          <!-- <input id="address" style="width: 100%" type="text" value=""> -->
-          <!-- <input id="submit" type="button" value="Reverse Geocode"> -->
-        </div>
-
-        <div class="modal-footer">
-            <!-- <button onclick="btn_modal_map_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button>
-            <button onclick="btn_modal_map()" class="btn btn-sm btn-orange"><i class="fa fa-fw fa-save"></i> บันทึกที่อยู่นี้ </button> -->
-            <button onclick="$('#modal_google_gps').modal('hide');" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
-        </div>
-
-    </div>
-  </div>
-</div>
-
-<script>
-
-  var tempcbfnc_maps;
-  var gmap;
-  var themarker;
-  var themarker_seller_icon;
-  var themarker_customer_icon;
-  var delay_marker;
-  var geocoder;
-  var infowindow;
-  var latlng;
-  var latlng_marker;
-  var address;
-  var latlng_saved;
-  var latlng_default_startup;
-  var alreadyset = false;
-  var markers = [];
-  var bounds;
-  
-  function initMap() {
-    console.log("init Map");
-    // Initialize Map
-    gmap = new google.maps.Map(document.getElementById('googlemap'), {
-      center: latlng_saved,
-      zoom: 10,
-      disableDefaultUI: true,
-      gestureHandling: 'greedy'
-    });
-
-    geocoder = new google.maps.Geocoder;
-    infowindow = new google.maps.InfoWindow;
-    bounds = new google.maps.LatLngBounds;
-
-    // Event Map Click
-    // google.maps.event.addListener(gmap, 'click', function(event) {
-    //   gmap.setZoom(18);
-    //   gmap.panTo(event.latLng);
-    // });
-
-    // Event Map Screen Move
-    // gmap.addListener('center_changed', showAddress);
-  }
-
-  function showAddress() {
-    // Start Count Timer Again Before Time Runs Out
-    clearTimeout(delay_marker);
-    infowindow.close();
-
-    if(alreadyset){
-      setTimeout(()=>{
-        alreadyset = false;
-      }, 150);
-      gmap.panTo(latlng_marker);
-      infowindow.setPosition(latlng_marker);
-      infowindow.setContent(address);
-      infowindow.open(gmap);
-      return;
-    }
-
-    delay_marker = window.setTimeout(function() {
-      // Show Address via Latitude Longtitude Location
-      latlng = gmap.getCenter();
-      geocoder.geocode({'location': latlng}, function(results, status) {
-        if (status === 'OK') {
-          if (results[0]) {
-            alreadyset = true;
-            address = results[0].formatted_address;
-            latlng_marker = latlng;
-            infowindow.setPosition(latlng);
-            infowindow.setContent(address);
-            infowindow.open(gmap);
-            // document.getElementById('address').value = address;
-            setTimeout(()=>{
-              alreadyset = false;
-            }, 150);
-          } else {
-            window.alert('No results found');
-          }
-        } else {
-          window.alert('Geocoder failed due to: ' + status);
-        }
-      });
-
-    }, 1000);
-  }
-
-  function btn_modal_map_current(){
-      googlemap_geogetLocation();
-  }
-  function googlemap_geogetLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position){
-        var pos = {lat:position.coords.latitude,lng: position.coords.longitude};
-        gmap.setZoom(18);
-        gmap.panTo(pos);
-      } ,show_modal_mapError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-  function show_modal_mapError(error) {
-    console.log(error);
-    alert("error No GPS Allowed")
-  }
-
-  function call_modal_maps(setting,cbfnc) {
-    var latlng_have_save;
-    latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS
-
-    if ( ('lat' in setting) && ('lng' in setting) ) {
-      latlng_have_save = true;
-      latlng_saved = {};
-      latlng_saved.lat = setting.lng;    // switch bewteen LAT to LNG from MongoDB    
-      latlng_saved.lng = setting.lat;    // switch bewteen LAT to LNG from MongoDB`
-    } else {
-      latlng_have_save = false;
-      latlng_saved = latlng_default_startup;
-
-      // Test
-      latlng_have_save = true;
-    }
-    // window.alert(JSON.stringify(latlng_saved));
-
-    // $('#modal_google_gps').modal('show');
-    setTimeout(()=>{
-      initMap();
-      $('#modal_google_gps').modal('show');
-      if(typeof(setting) == 'function'){
-        cbfnc = setting;
-        // setting ={lat:13.79607108667891,lng:100.71164142340422};
-      }else{
+    <!-- Modal for GPS -->
+    <style media="screen">
+      #googlemap_marker_view {
+          position: relative;
       }
-
-      tempcbfnc_maps = cbfnc;
-
-      if (latlng_have_save === true) {
-        themarker_customer_icon = {
-          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-          // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(20, 32),
-          // The origin for this image is (0, 0).
-          origin: new google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(0, 32)
-        };
-
-        themarker_seller_icon = {
-          url: 'https://sv1.picz.in.th/images/2020/04/14/UYZJ6J.png',
-          // This marker is 20 pixels wide by 32 pixels high.
-          // size: new google.maps.Size(300, 370),
-          scaledSize: new google.maps.Size(30, 37),
-          // The origin for this image is (0, 0).
-          origin: new google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(15, 33)
-        };
-        
-        // themarker = new google.maps.Marker({
-        //   position: latlng_saved,
-        //   map: gmap,
-        //   icon: themarker_image,
-        //   animation: google.maps.Animation.DROP,
-        //   title: 'Postition'
-        // });
-
-        addMarker(latlng_default_startup, themarker_seller_icon);            // ADVWS
-        addMarker({lat:13.752569, lng:100.574740}, themarker_customer_icon);   // RCA
-        showMarkers();
-
-        setTimeout(() => {
-          gmap.fitBounds(bounds);
-          // gmap.setZoom(18);
-          // gmap.panTo(themarker.getPosition());
-          // showAddress();
-        }, 500);
-        
-      }
-    }, 100);
-  }
-
-
-  $("#modal_google_gps").on("shown.bs.modal", function () {
-    google.maps.event.trigger(gmap, "resize");
-  });
-
-  function btn_modal_map(){
-    var position = {};
-    // position.lat = latlng.lat();
-    // position.lng = latlng.lng();
-    position.lat = latlng.lng();    // switch bewteen LAT to LNG for MongoDB
-    position.lng = latlng.lat();    // switch bewteen LAT to LNG for MongoDB
-    // position.address = $('#address').val();
-    console.log(position);
-
-    if(tempcbfnc_maps){
-      tempcbfnc_maps(position);
-    }else{
-
-    }
-    $('#modal_google_gps').modal('hide');
-  }
-
-  function addMarker(location, icon) {
-    themarker = new google.maps.Marker({
-      position: location,
-      map: gmap,
-      icon: icon,
-      animation: google.maps.Animation.DROP,
-      // title: 'Postition'
-    });
-    markers.push(themarker);
-    bounds.extend(themarker.position);
-  }
-
-  function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-    }
+    </style>
+    <div class="modal fade " id="modal_google_map_marker_view" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title">ตำแหน่งที่ตั้งสาขา</h5>
+            </div> -->
     
-    infowindow.setPosition(markers[0].position);
-    infowindow.setContent("ร้านอาหาร");
-    infowindow.open(map, markers[0]);
+            <!-- <div class="modal-body" style="width:500; height:500"> -->
+            <div class="modal-body" style="width:100%; height:75vh">
+    
+              <!-- <div    id='googlemap_marker_view' style="width: 100%; height: 300px" > -->
+              <div    id='googlemap_marker_view' style="width: 100%; height: 100%" >
+              Gmaps
+    
+              </div>
+    
+            </div>
+            
+            
+    <!--        
+            <div id="floating-panel">
+              รัศมี
+              <input id="input-radius" style="width: 20%" type="number" min="0" value="">
+               <input id="submit" type="button" value="Reverse Geocode"> 
+              กิโลเมตร
+            </div>-->
+            
+            
+    
+            <div class="modal-footer">
+                <button onclick="close_page()" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+            </div>
+    
+        </div>
+      </div>
+    </div>
+    
+    <script>
+    
+      var tempcbfnc_maps;
+      var gmap;
+      var themarker;
+      var themarker_image;
+      var delay_marker;
+      // var geocoder;
+      var infowindow;
+      var latlng;
+      var latlng_marker;
+      var address;
+      var latlng_saved;
+      var latlng_default_startup;
+      var alreadyset = false;
+      // var circle_area;
+      var service_radius = 0;
+      var latlng_have_save = false;
+      var markers = [];
+      var bounds;
+      
+      function initMap() {
+        console.log("init Map");
+        // Initialize Map
+        gmap = new google.maps.Map(document.getElementById('googlemap_marker_view'), {
+          center: latlng_saved,
+          zoom: 15,
+          disableDefaultUI: true,
+          gestureHandling: 'greedy'
+        });
+    
+        infowindow = new google.maps.InfoWindow;
+        bounds = new google.maps.LatLngBounds;
+      }
+    
+      function call_modal_maps_marker_view(setting,cbfnc) {
+        latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
+        latlng_saved = latlng_default_startup;
+        latlng_have_save = true;
+        var index_customer, index_seller;
+        var location_customer = {}, location_seller = {};
 
-    markers[0].addListener('click', function() {
-      infowindow.setPosition(markers[0].position);
-      infowindow.setContent("ร้านอาหาร");
-      infowindow.open(map, markers[0]);
-    });
-    markers[1].addListener('click', function() {
-      infowindow.setPosition(markers[1].position);
-      infowindow.setContent("ส่งอาหาร");
-      infowindow.open(map, markers[1]);
-    });
-  }
+        $('.main_data').hide();
+        $('#modal_google_map_marker_view').modal('show');
 
-  function showMarkers() {
-    setMapOnAll(gmap);
-  }
+        if ( ("location" in setting[0]) && ("location" in setting[1]) ) {
+          // alert("Customer and Seller Have Locations");
+          latlng_have_save = true;
 
-</script>
+          if (setting[0].user_type === "customer") {    // Check Customer Index 0
+            index_customer = 0;
+            index_seller = 1;
+          } else {
+            index_customer = 1;
+            index_seller = 0;
+          }
+
+          // alert("Customer Location: " + setting[index_customer].location.lat + ", " + setting[index_customer].location.lng);
+          // alert("Seller Location: " + setting[index_seller].location.lat + ", " + setting[index_seller].location.lng);
+
+          // // Location Customer
+          if (setting[index_customer].location.lat > setting[index_customer].location.lng) {  // Check Lat, Lng Switch
+            // alert("Customer Lat > Lng");
+            location_customer.lat = setting[index_customer].location.lng;      // switch bewteen LAT to LNG from MongoDB
+            location_customer.lng = setting[index_customer].location.lat;      // switch bewteen LAT to LNG from MongoDB
+          } else {
+            // alert("Customer Lat and Lng OK");
+            location_customer = setting[index_customer].location;
+          }
+
+          // Location Seller
+          if (setting[index_seller].location.lat > setting[index_seller].location.lng) {  // Check Lat, Lng Switch
+            // alert("Seller Lat > Lng");
+            location_seller.lat = setting[index_seller].location.lng;      // switch bewteen LAT to LNG from MongoDB
+            location_seller.lng = setting[index_seller].location.lat;      // switch bewteen LAT to LNG from MongoDB
+          } else {
+            // alert("Customer Lat and Lng OK");
+            location_seller = setting[index_seller].location;
+          }
+
+        } else {
+
+        }
+
+        setTimeout(()=>{
+          initMap();
+          if(typeof(setting) == 'function'){
+            cbfnc = setting;
+          }else{
+          }
+    
+          tempcbfnc_maps = cbfnc;
+    
+          if (latlng_have_save === true) {
+            addMarker(location_customer, setting[index_customer].user_type);
+            addMarker(location_seller, setting[index_seller].user_type);
+            
+            setTimeout(() => {
+              setInfoWindow();
+              gmap.fitBounds(bounds);
+            }, 500);
+          }
+        }, 500);
+      }
+
+      function  addMarker(location, usertype) {
+        var icon;
+        if (usertype == "customer") {
+          icon = {
+            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(20, 32),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(0, 32)
+          };
+        } else {
+          icon = {
+            url: 'https://sv1.picz.in.th/images/2020/04/14/UYZJ6J.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            // size: new google.maps.Size(300, 370),
+            scaledSize: new google.maps.Size(30, 37),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(15, 33)
+          };
+        }
+
+        themarker = new google.maps.Marker({
+          position: location,
+          map: gmap,
+          icon: icon,
+          animation: google.maps.Animation.DROP
+        });
+
+        markers.push(themarker);
+        bounds.extend(themarker.position);
+      }
+
+      function setInfoWindow() {
+        infowindow.setPosition(markers[0].position);
+        infowindow.setContent("ที่จัดส่ง");
+        infowindow.open(gmap, markers[0]);
+
+        markers[0].addListener('click', function() {
+          infowindow.setPosition(markers[0].position);
+          infowindow.setContent("ที่จัดส่ง");
+          infowindow.open(gmap, markers[0]);
+        });
+        markers[1].addListener('click', function() {
+          infowindow.setPosition(markers[1].position);
+          infowindow.setContent("ร้านอาหาร");
+          infowindow.open(gmap, markers[1]);
+        });
+      }
+
+      $("#modal_google_map_marker_view").on("shown.bs.modal", function () {
+        google.maps.event.trigger(gmap, "resize");
+      });
+    
+      function close_page() {
+        if(tempcbfnc_maps){
+          tempcbfnc_maps("close");
+        }else{
+
+        }
+        $('#modal_google_map_marker_view').modal('hide');
+        $('.main_data').show();
+      }
+    </script>
+    
