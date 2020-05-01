@@ -1,0 +1,23 @@
+<div id="testarea">
+  OK
+  </div>
+<script>
+
+
+  var working={};
+
+
+  function runApp() {
+    var data2send ={
+      LINE_USER: LINE_USER,
+      shopid:13
+      }
+    $.postJSON('/wallet/checkbalance',data2send,(res)=>{
+      alert("Hi");
+        $('#testarea').html(JSON.stringify(res));
+    });
+  }
+  initializeLiff('wallet');
+
+
+</script>

@@ -1,0 +1,105 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-8">
+            <h1 class="text-header_page"><b><u>Shops AI</u></b></h1>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div id="filterForm" class="form form-group" style="margin-bottom:6px;border:solid 1px ;border-radius: 10px;padding:25px" >
+                <div class="form-row">
+                    <h3>Shop Name</h3>
+                    <div class="col-md-2 col-sm-12 mb-2">
+                        <select  id="select_shop" name="search" class="form-control input-sm autoFilter"></select>
+                        
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+                    <h3> Admin</h3>
+                    <div class="col-md-2 col-sm-12 mb-2">
+
+                        <select  id="select_shopowner" name="search" class="form-control input-sm autoFilter"></select>
+                        <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
+                    </div>
+
+                    <div class="col col-md-2 mb-2" >
+                        <button class="btn btn-primary alink" type="button" onclick="add_shop_ai()">
+                            <i class="fa fa-plus"></i>
+                            Add Admin For AI
+                        </button>
+                        
+                    </div>
+                    
+                    <div class="col-12 col-md-12 mb-12" >
+                        <hr>
+                        <div class="p-3" style="background-color: #ddd;border-radius: 10px;padding: 10px">
+                            <h6 class="text-danger" ><b>*หมายเหตุ</b> สามารถกำหนด Admin ให้ร้านค้าได้เพียงครั้งเดียวเท่านั้น หากกำหนด Admin ให้กับร้านค้าใดๆแล้วจะไม่สามารถแก้ไข้ข้อมูลได้ กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนทำการเพิ่มข้อมูล</h6>
+                        </div>
+                    </div>
+                </div> <!-- // form-row  -->
+            </div>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="float-right" >
+                <div class="pagination_bar " >  
+                </div>
+            </div>
+        </div> <!-- แบ่งหน้า -->
+    </div> <!-- // row  -->
+</div>
+<script>
+var checkobj =[]
+
+    function refreshpage(rawdata) {
+     $.postJSON('/api/data/kinarai/shop_owner_list', {}, function (shopownerdata) {
+           create_select('select_shopowner', shopownerdata.obj, 'displayName')
+           $.postJSON('/api/data/kinarai/shop_list', {}, function (objdata) {
+                checkobj= objdata.obj
+                 create_select('select_shop', objdata.obj, 'name')
+           })
+              
+       })
+
+    }
+    function add_shop_ai() {
+        
+      var temp_id= getobjbyid(checkobj,$('#select_shop').val())
+        console.log(temp_id)
+        if(temp_id.admin_active||temp_id.admin_active==true){
+            alert('This Shop Is Used!')
+        }else{
+                var postdata = {
+                    shopid: $('#select_shop').val(),
+                    ownerid: $('#select_shopowner').val()
+                }
+                console.log('test',postdata)
+                $.postJSON('https://ai.kinarai.com/api/create/kinarai', postdata, function (resdata2) {
+                    console.log('success',resdata2)
+                    if (resdata2.result==true) {
+                        update_shopstatus($('#select_shop').val())
+                    }else{
+                        refreshpage()
+                        alert('ไม่สามารถเพิ่มข้อมูลได้')
+                    }
+                });
+            }
+        }
+
+    function update_shopstatus(shop_id1) {
+        var postdata = {
+            _id: shop_id1,
+            admin_active:true
+        }
+        $.postJSON('/api/data/kinarai/shop_update_status', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                alert('เพิ่มข้อมูลเรียบร้อย')
+                refreshpage()
+            }
+        });
+
+    }
+</script>

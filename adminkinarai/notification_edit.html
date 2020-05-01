@@ -1,0 +1,131 @@
+
+<div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="text-header_page"><b><u>Edit Notification</u></b></h1>
+        </div>
+        <div class="col-4 text-right"  >
+            <div>
+                <button class="btn btn-outline-primary alink" onclick='go2View("/notification_list")'>
+                    <i class="fa fa-arrow-left"></i>
+                    Back
+                </button>
+                <button class="btn btn-outline-success alink" onclick='edit_data_notification()'>
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row" id='setdata_notification'>
+        <div class="col-lg-12 col-md-12">
+            <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return save_data_customer()">
+                <div class="form-row">
+                    <h3>ร้าน </h3>
+                    <div class="col-md-2 mb-2">
+                        <select  name="search" id="select_shop" class="notify_shopid form-control input-sm autoFilter" >
+
+                        </select>
+                    </div>
+                    <h3>สาขา </h3>
+                    <div class="col-md-2 mb-2">
+                        <select  name="search" id="select_branch" class="notify_branchid form-control input-sm autoFilter" >
+
+                        </select>
+                    </div>
+                    <h3>เจ้าของร้าน </h3>
+                    <div class="col-md-4 mb-4">
+                        <select  name="search" multiple="multiple" id="select_shopowner" class="notify_shopownerid form-control input-sm autoFilter" >
+
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+    var res_id = getParameterByName('notification_id');
+    console.log(res_id)
+    $.get('/api/data/kinarai/notification_edit/' + res_id, function (result) {
+        console.log(result)
+        if (result.shopid) {
+            load_new_branch(result.shopid)
+        }
+        $.postJSON('/api/data/kinarai/shop_list', {}, function (shopdata) {
+            console.log(shopdata)
+            create_select('select_shop', shopdata.obj, '', true)
+            $.postJSON('/api/data/kinarai/shop_owner_list', {}, function (shopownerdata) {
+                create_select('select_shopowner', shopownerdata.obj, 'displayName')
+                setdata(result)
+            })
+
+        })
+
+    });
+    $('#select_shopowner').select2();
+    function setdata(obj) {
+        if (obj) {
+            //load shopid select option
+            //setdata to select option function query new branch by 
+
+            var objjquery = $('#setdata_notification');
+            setdatabyclass(objjquery, 'notify', obj);
+            $("#select_shopowner").val(obj.shopownerid)
+            $('#select_shopowner').trigger('change');
+        }
+    }
+
+    $('#select_shop').change(function () {
+        var new_id = $('#select_shop').val()
+        load_new_branch(new_id)
+    })
+
+
+    function load_new_branch(val_id) {
+        var postdata = {
+            search: {shopid: val_id}
+        }
+        $.postJSON('/api/data/kinarai/shop_branch_list', postdata, function (resdata) {
+            console.log(resdata)
+            var objdata = resdata.obj
+            create_select('select_branch', objdata, '', true)
+
+        })
+    }
+
+
+
+    function edit_data_notification() {
+        var postdata = {}
+        var shopid = $('#select_shop').val()
+        var shopbranch = $('#select_branch').val()
+        var shopowner = $('#select_shopowner').val()
+        postdata._id = res_id
+        if (shopid) {
+            postdata.shopid = shopid
+        }
+        if (shopbranch) {
+            postdata.branchid = shopbranch
+        }
+        if (shopowner) {
+            postdata.shopownerid = shopowner
+        }
+        console.log(postdata)
+        $.postJSON('/api/data/kinarai/notification_update', postdata, function (re) {
+            console.log(re)
+            alert('บันทึกข้อมูลเรียบร้อย')
+            go2View("/notification_list")
+        })
+        return false
+    }
+
+
+</script>

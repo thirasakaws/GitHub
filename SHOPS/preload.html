@@ -217,7 +217,7 @@
 
 //////////
 var temp_url_permission
-var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','cart-main','menulist','menuview','menuview4add','menu','menusearch','shopview'];
+var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','cart-main','menulist','menuview','menuview4add','menu','menusearch','shopview','test'];
 var firsttime_visit =true;
 var working={};
 var temp =  window.location.pathname.split('/');
@@ -285,7 +285,11 @@ function initializeApp(liffpagename) {
     if (liff.isLoggedIn()) {
         //console.log("user Loged in");
         //show logout button
-        liff.getProfile().then(profile => {
+        var token = liff.getAccessToken();
+       //console.log("user Loged in");
+       //show logout button
+       liff.getProfile().then(profile => {
+           LINE_USER.token = token;
         //  alert("loading Data");
           LINE_USER.pictureUrl  = profile.pictureUrl;
           LINE_USER.userId = profile.userId;

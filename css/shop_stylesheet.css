@@ -15,9 +15,9 @@
     background-color: #ffffff !important;
     color: #fc7d10;
     padding: 6px 4px;
-/*    border-bottom: 2px #fc7d10 solid;*/
-/*    border-top: 2px #fc7d10 solid;*/
-/*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;*/
+/*    border-bottom: 2px #fc7d10 solid; */
+/*    border-top: 2px #fc7d10 solid; */
+/*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; */
     margin-bottom: 15px;
 }
 
@@ -166,3 +166,12 @@
 .border-bottom-gray {  border-bottom: solid 1px #eae9e9 !important; }
 
 .border-top-gray {  border-top: solid 1px #eae9e9 !important; }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #fc7d10 !important;
+}
+.nav-pills .nav-link, .nav-pills .show>.nav-link {
+    color: #fc7d10;
+    /*background-color: #fc7d10;*/
+}

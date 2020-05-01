@@ -8,7 +8,7 @@
             <div>
                 <button class="btn btn-outline-primary alink" onclick='go2View("/shop_image_add")'>
                     <i class="fa fa-plus"></i>
-                    Add Food Menu
+                    Add Image
                 </button>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="col-lg-12 col-md-12">
             <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
                 <div class="form-row">
-                    <h3>ค้นหาชื่อ เมนูอาหาร </h3>
+                    <h3>ค้นหา ชื่อ,ไอดี </h3>
                     <div class="col-md-2 mb-2">
 
                         <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
@@ -56,31 +56,23 @@
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th>Food Name</th>
-                    <th>Description</th>
-                    <th>Detail</th>
-                    <th>Category</th>
-                    <th>Tags</th>
-                    <th>Price</th>
-                    <th>Create Date</th>
-                    <th>Last Update</th>
+                    <th>Image</th>
+                    <th style="width: 300px">File Name</th>
+                    <th style="width: 300px">Shop Name</th>
+                    <th style="width: 300px">Uploaded Date</th>
                     <th class="text-center">Action</th>
 
                 </tr>
             </thead>
             <tbody id='mytable'>
                 <tr class='row_tablecontent' style='display:none'>
-                    <td class="foodmenu_id"></td>
-                    <td class="foodmenu_name"></td>
-                    <td class="foodmenu_description"></td>
-                    <td class="foodmenu_detail"></td>
-                    <td class="foodmenu_category"></td>
-                    <td class="foodmenu_tags"></td>
-                    <td class="foodmenu_price"></td>
-                    <td class="foodmenu_createdate"></td>
-                    <td class="foodmenu_lastupdate"></td>
+                    <td class="shopimage_id"></td>
+                     <td ><img class="shopimage_image" width="90"></td>
+                    <td class="shopimage_name" ></td>
+                    <td class="shopimage_shop" ></td>
+                    <td class="shopimage_uploadDate" ></td>
                     <td class=" text-center">
-                        <button class="alink" onclick="edit_data_foodmenu(this)"><i class="fa fa-pencil foodmenu_action " ></i></button>
+                        <button class="alink" onclick="edit_data_shopimage(this)"><i class="fa fa-pencil shopimage_action " ></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -93,10 +85,10 @@
     var searchobj = {};
     var fncsearch;
     var search_setting = {
-        posturl: '/api/data/kinarai/foodmenu_list',
+        posturl: '/api/data/kinarai/shop_image_list',
         paginationDIV: $('.pagination_bar'),
         pagesize: 10,
-        showfunction: showdata_foodmenu_list,
+        showfunction: showdata_shopimage_list,
         limit: 20,
     }
     function refreshpage(rawdata) {
@@ -110,7 +102,7 @@
         fncsearch = ADV_search(search_setting);   // Defult always search at first
         return false;
     }
-    function showdata_foodmenu_list(objdata, totalrecord) {
+    function showdata_shopimage_list(objdata, totalrecord) {
 
 //         var path = '/api/data/ticket/allotment_list';
         console.log('data :', objdata);
@@ -122,28 +114,40 @@
         } else {
             console.log('data not found')
             for (var x = 0; x < objdata.length; x++) {
-                var TR = tablerow(maintable, 'foodmenu', objdata[x], template_of_testtable);
-                if (objdata[x].createdate) {
-                    TR.find('.foodmenu_createdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
+                var TR = tablerow(maintable, 'shopimage', objdata[x], template_of_testtable);
+
+                if (objdata[x]._id) {
+                    TR.find('.shopimage_image').attr('src','/api/liff/shop/image/'+objdata[x]._id);
                 }
-                if (objdata[x].lastupdate) {
-                    TR.find('.foodmenu_lastupdate').html(moment(objdata[x].lastupdate, "X").format('DD/MM/YYYY H:mm:ss'));
-                } else {
-                    if (objdata[x].createdate) {
-                        TR.find('.foodmenu_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
-                    }
+                
+                
+                if (objdata[x].uploadDate) {
+                    var date = Math.floor(new Date(objdata[x].uploadDate)/1000)
+                    TR.find('.shopimage_uploadDate').html(moment(date, "X").format('DD/MM/YYYY H:mm:ss'))
                 }
-                if (objdata[x].price) {
-                    TR.find('.foodmenu_price').html(addCommas(objdata[x].price));
+                if (objdata[x].filename) {
+                    TR.find('.shopimage_name').html(objdata[x].filename)
                 }
+                if(objdata[x].shop_data){
+                     TR.find('.shopimage_shop').html('('+objdata[x].shop_data._id+') '+objdata[x].shop_data.name)
+                }
+                
+//                        if (Array.isArray(working.shop.images)) {
+//            for (var x = 0; x < working.shop.images.length; x++) {
+//                temphtml += template_shop_image_view.replace('#imgsrc', working.shop.images[x]);
+//            }
+//        }
+                
+                
+                
                 TR.show();
             }
 
         }
     }
-    function edit_data_foodmenu(obj) {
+    function edit_data_shopimage(obj) {
         var tempid = $(obj).find_id();
-        go2View('/foodmenu_edit?foodmenu_id=' + tempid);
+        go2View('/shopimage_edit?shopimage_id=' + tempid);
         return false;
     }
 

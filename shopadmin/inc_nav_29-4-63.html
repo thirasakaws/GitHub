@@ -1,0 +1,132 @@
+<!-- ส่วน Topmenu ปรับที่นี่ -->
+<style >
+
+
+    /* Modify Nav bar  */
+   /* .nav-bg-color { background-color : #F6F6F7 !important; color: #fc7d10; }  */ 
+    .nav-bg-color { background-color : #545559 !important; color: #fff; }
+    .navbar-light .navbar-nav .nav-link { color: #ffffff !important;  }
+    .navbar-light .navbar-nav .nav-link:hover { color: #ffffff !important;  }
+    
+    
+    
+    .clean-navbar .navbar-nav .nav-item {
+        padding-right: 1rem;
+        padding-top: 10px;  
+    }
+
+    .clean-navbar.fixed-bottom, .clean-navbar.fixed-top {
+        box-shadow: 0 0 15px rgba(0,0,0,.1);
+    }
+
+    .navbar {
+        font-family: "Helvetica Neue", 
+            Arial, sans-serif; 
+        font-weight: 400; font-size: calc (1rem + 6.vw);
+    }
+
+    .nav > li > a:hover {
+
+        color:#ffffff !important;
+        background-color: #fc7d10 ;  /* #ff137c  */ 
+    }
+    .selected_menu {
+        backgroud-color:#aaa;
+    }
+    .click_active {
+        text-align: left;
+        color:#ffffff !important;
+        padding-left:7px !important
+            
+        /*
+            text-align: left;
+        color:#ff137c !important;
+        padding-left:10px !important
+
+        */
+    }
+
+    .dropdown-menu {
+        font-size: 0.9rem;
+    }
+    .navbar {
+        padding: 0.1rem 1rem;
+    }
+</style>
+
+
+<nav id="topmenu" class="navbar navbar-light navbar-expand-lg fixed-top clean-navbar shadow ticket_navbar_color nav-bg-color" >
+    <div class="container-fluid">
+        <a class="navbar-brand logo alink" onclick='go2View("/main")'>
+            <!-- <img src="/image/logo_ticket_system.png" alt="Ticket System" width="90"/>-->
+            <img src="/image/Kinarai.jpg"  alt="Kinarai" width="30" style=" border-radius: 10px;"/>
+            <!-- Ticket System-->
+        </a>
+
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navcol-1" >
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="main" href="#" onclick='go2View("main")'>
+                        <i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav-link text-capitalize alink btn click_active" data-toggle="dropdown" aria-expanded="false" href="#" >
+                        <i class="fas fa-store"></i>&nbsp;Shops
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item alink text-capitalize dropdown_display" href="#" onclick='go2View("shop_list")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop List
+                        </a>
+
+                        <div class="dropdown-divider " ></div>
+
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_branch_list")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop Branch List
+                        </a>
+                        <div class="dropdown-divider " ></div>
+
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_owner_list")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop Owner List
+                        </a>
+                        <div class="dropdown-divider " ></div>
+
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_type_list")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop Type List
+                        </a>
+                        <div class="dropdown-divider " ></div>
+
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_image_list")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop Image List
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="foodmenu_list" href="#" onclick='go2View("foodmenu_list")'>
+                        <i class="fas fa-utensils"></i>&nbsp;Foods Menu
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $('li,a, .click_active').click(function () {
+        console.log('active')
+        $('.click_active').removeClass(' selected_menu').removeAttr('style')
+        $(this).children("a").addClass(' selected_menu').attr('style', 'background-color:#fc7d10; color:#ffffff !important')
+//        $('#navcol-1').slideUp().removeAttr('style')
+    });
+    
+    $('.dropdown_display').click(function(){
+        console.log('true click')
+        $('div .navbar-collapse').collapse('hide');
+    });
+    
+</script>

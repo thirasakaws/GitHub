@@ -5,12 +5,12 @@
             <h1 class="text-header_page"><b><u>Shop Branch</u></b></h1>
         </div>
         <div class="col-12 col-sm-12 col-md-4  text-right"  >
-            <div>
+<!--            <div>
                 <button class="btn btn-outline-primary alink" onclick='go2View("/shop_branch_add")'>
                     <i class="fa fa-plus"></i>
                     Add shop_branch
                 </button>
-            </div>
+            </div>-->
         </div>
     </div>
     <br>
@@ -18,21 +18,13 @@
         <div class="col-lg-12 col-md-12">
             <form id="filterForm" method="GET" class="form form-group" style="margin-bottom:6px;"  onsubmit="return filterFormsubmit_allotment()">
                 <div class="form-row">
-                    <h3> ค้นหาชื่อ ร้านค้า</h3>
+                    <h3> ค้นหาชื่อ สาขา</h3>
                     <div class="col-md-2 col-sm-12 mb-2">
 
                         <input type="text" id="search_allotment" name="search" class="form-control input-sm autoFilter" placeholder=""  onsubmit="return filterFormsubmit_allotment()">
                         <!--  <small id="emailHelp" class="form-text text-muted"></small>-->
                     </div>
-                    <h3> สถานะ</h3>
-                    <div class=" col-md-2 col-sm-12 mb-2">
 
-                        <select id="status" class="form-control">
-                            <option value="">แสดงทั้งหมด</option>
-                            <option value="1">ยังไม่อนุมัติ</option>
-                            <option value="5">อนุมัตืแล้ว</option>
-                        </select>
-                    </div>
 
                     <div class="col col-md-2 mb-2" >
                         <button class="btn btn-primary">
@@ -58,8 +50,12 @@
                     <th class="text-center">#</th>
                     <th>Branch Name</th>
                     <th>Shop</th>
+                    <th>Contact</th>
+                    <th>Open Time</th>
+                    <th>Close Time</th>
                     <th>Create Date</th>
                     <th>Last Update</th>
+                    <th>Opening</th>
                     <th>Action</th>
 
                 </tr>
@@ -69,8 +65,12 @@
                     <td class="text-center shop_branch_id"></td>
                     <td class="shop_branch_name"></td>
                     <td class="shop_branch_shopid"></td>
+                    <td class="shop_branch_contact"></td>
+                    <td class="shop_branch_open_time"></td>
+                    <td class="shop_branch_close_time"></td>
                     <td class="shop_branch_createdate"></td>
-                    <td class="shop_branch_lastupdate"></td>
+                    <td class="shop_branch_lastupdate"></td>.
+                    <td class="shop_branch_opening"></td>
                     <td class=" text-center">
                         <button class="alink" onclick="edit_data_shop_branch(this)"><i class="fa fa-pencil shop_branch_action " ></i></button>
                     </td>
@@ -129,12 +129,14 @@
                         TR.find('.shop_branch_lastupdate').html(moment(objdata[x].createdate, "X").format('DD/MM/YYYY H:mm:ss'));
                     }
                 }
-
-                if (objdata[x].status == 1) {
-                    TR.find('.shop_branch_status').addClass('text-red').html('ยังไม่ได้อนุมัติ');
+                if (objdata[x].shopid) {
+                    TR.find('.shop_branch_shopid').html('('+objdata[x].shopid._id+') '+objdata[x].shopid.name)
                 }
-                if (objdata[x].status == 5) {
-                    TR.find('.shop_branch_status').addClass('text-green').html('อนุมัติแล้ว');
+                if (objdata[x].opening == 1) {
+                    TR.find('.shop_branch_opening').addClass('text-success').html('เปิดการใช้งาน');
+                }
+                if (objdata[x].opening == 2) {
+                    TR.find('.shop_branch_opening').addClass('text-danger').html('ปิดการใช้งาน');
                 }
                 if (objdata[x].shop_branchowner) {
                     if (objdata[x].shop_branchowner.displayName) {

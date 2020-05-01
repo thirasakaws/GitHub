@@ -51,7 +51,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
                 <div class="col">
-                    <input class="input_data_bn edit_data ORDER_contact w-90 " id="contact" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)"> <br>
+                    <input class="input_data_bn edit_data ORDER_contact w-90 " oninput="inputContactHandler(event);" id="contact" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)"> <br>
                     <small class="warn_phoneinput text-danger" style="display:none;">**รูปแบบไม่ถูกต้อง</small>
                 </div>
             </div> <!--// -->
@@ -309,8 +309,6 @@
     //     }
     // });
 
-    const input_contact = document.getElementById('contact');
-    input_contact.oninput = inputContactHandler;
 
     function inputContactHandler(e) {
       // alert("inputContactHandler: " + e.target.value);

@@ -1,7 +1,7 @@
 
 <div style="border:solid 1px ;margin: 2%;border-radius:10px;padding:20px">
     <div>
-        <h1><b><u>Orders</u></b></h1>
+        <h1 class="text-header_page"><b><u>Orders</u></b></h1>
     </div>
     <br>
     <div class="row">
@@ -97,7 +97,7 @@
             <div class="modal-body">
                 <!--select status and confirm-->
                 <select id="status_order" class="form-control">
-                    <option class="text-primary" value="1">รายการใหม่</option>
+<!--                    <option class="text-primary" value="1">รายการใหม่</option>
                     <option class="text-dark" value="5">รายการใหม่รอลูกค้ายืนยัน</option>
                     <option class="text-warning" value="6">ยกเลิกแล้ว</option>
                     <option class="text-warning" value="7">ลูกค้ารอร้านยืนยันรายการ</option>
@@ -105,7 +105,7 @@
                     <option class="text-success" value="11">ลูกค้าชำระเงินแล้ว</option>
                     <option class="text-warning" value="12">ลูกค้าจะชำระเงินแบบ COD</option>
                     <option class="text-primary" value="15">ร้านกำลังดำเนินการ</option>
-                    <option class="text-success" value="16">ร้านดำเนินการเสร็จแล้ว</option>
+                    <option class="text-success" value="16">ร้านดำเนินการเสร็จแล้ว</option>-->
                 </select>
             </div>
             <div class="modal-footer">
@@ -125,8 +125,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body " >
                 <!--select status and confirm-->
+                <div class="table-responsive" style="padding-top: 20px">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -150,7 +151,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -198,12 +199,20 @@
     var search_setting = {
         posturl: '/api/data/kinarai/order_list',
         paginationDIV: $('.pagination_bar'),
-        pagesize: 10,
+        pagesize: 5,
         showfunction: showdata_order_list,
         limit: 20,
     }
+    
+    var objstatus
     function refreshpage(rawdata) {
-
+        
+        $.get('/api/data/kinarai/orderstatus',function(data){
+           objstatus= data
+            create_select('status_order', data, 'textdisplay',false,'_id','styletext')
+//            create_select(tag_id, dataobj, fielddisplay, default_temp,setvalue,fieldsetstyle) 
+           
+        });
         console.log("REFRESH CALLED");
 
         var pagenumber = getParameterByName('page', window.location.search);
@@ -231,33 +240,46 @@
                     TR.find('.order_addressid').show()
                     TR.find('.order_logistic').show()
                 }
-                if (objdata[x].status == 1) {
-                    TR.find('.order_status').addClass('text-primary').html('รายการใหม่');
+                if (objdata[x].status) {
+                if(Array.isArray(objstatus)){
+                    for(var y=0;y<objstatus.length;y++){
+                        if(objstatus[y]._id==objdata[x].status){
+                            TR.find('.order_status').html(objstatus[y].textdisplay).attr('style',objstatus[y].styletext)
+                        }
+                    }
                 }
-                if (objdata[x].status == 5) {
-                    TR.find('.order_status').addClass('text-danger').html('รายการใหม่รอลูกค้ายืนยัน');
-                }
-                if (objdata[x].status == 6) {
-                    TR.find('.order_status').addClass('text-danger').html('ยกเลิกแล้ว');
-                }
-                if (objdata[x].status == 7) {
-                    TR.find('.order_status').addClass('text-primary').html('ลูกค้ารอร้านยืนยันรายการ');
-                }
-                if (objdata[x].status == 10) {
-                    TR.find('.order_status').addClass('text-warning').html('รอการชำระเงินจากลูกค้า');
-                }
-                if (objdata[x].status == 11) {
-                    TR.find('.order_status').addClass('text-black').html('ลูกค้าชำระเงินแล้ว');
-                }
-                if (objdata[x].status == 12) {
-                    TR.find('.order_status').addClass('text-success').html('ลูกค้าจะชำระเงินแบบ COD');
-                }
-                if (objdata[x].status == 15) {
-                    TR.find('.order_status').addClass('text-success').html('ร้านกำลังดำเนินการ');
-                }
-                if (objdata[x].status == 16) {
-                    TR.find('.order_status').addClass('text-success').html('ร้านดำเนินการเสร็จแล้ว');
-                }
+            }
+                
+                
+//                if (objdata[x].status == 1) {
+//                    TR.find('.order_status').addClass('text-primary').html('รายการใหม่');
+//                }
+//                if (objdata[x].status == 5) {
+//                    TR.find('.order_status').addClass('text-danger').html('รายการใหม่รอลูกค้ายืนยัน');
+//                }
+//                if (objdata[x].status == 6) {
+//                    TR.find('.order_status').addClass('text-danger').html('ยกเลิกแล้ว');
+//                }
+//                if (objdata[x].status == 7) {
+//                    TR.find('.order_status').addClass('text-primary').html('ลูกค้ารอร้านยืนยันรายการ');
+//                }
+//                if (objdata[x].status == 10) {
+//                    TR.find('.order_status').addClass('text-warning').html('รอการชำระเงินจากลูกค้า');
+//                }
+//                if (objdata[x].status == 11) {
+//                    TR.find('.order_status').addClass('text-black').html('ลูกค้าชำระเงินแล้ว');
+//                }
+//                if (objdata[x].status == 12) {
+//                    TR.find('.order_status').addClass('text-success').html('ลูกค้าจะชำระเงินแบบ COD');
+//                }
+//                if (objdata[x].status == 15) {
+//                    TR.find('.order_status').addClass('text-success').html('ร้านกำลังดำเนินการ');
+//                }
+//                if (objdata[x].status == 16) {
+//                    TR.find('.order_status').addClass('text-success').html('ร้านดำเนินการเสร็จแล้ว');
+//                }
+
+
 
 
                 if (objdata[x].createdate) {

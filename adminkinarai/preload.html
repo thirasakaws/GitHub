@@ -7,8 +7,8 @@
 <script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
 <script src="/js/pagination.min.js" type="text/javascript"></script>
 <script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
-<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
-</script>
+<!--<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
+</script>-->
 <!--Fonts font-awesome -->
 <link href="/css/all.css" rel="stylesheet" type="text/css"/>
 <!--<link href="/css/font-awesome.css" rel="stylesheet" type="text/css"/>-->
@@ -24,12 +24,16 @@
 <link href="/css/stylesheet.css" rel="stylesheet" type="text/css"/>
 <link href="http://fonts.googleapis.com/css?family=Raleway:400,200" type="text/css">
 -->
-<script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+
 <link href="/css/select2.min.css" rel="stylesheet" />
 <script src="/js/select2.min.js"></script>
 <script src="/js/moments.min.js" type="text/javascript"></script>
 <script src="/js/advws_util.js?v=2" type="text/javascript"></script>
 <link href="/css/custom.css?v=1" rel="stylesheet" />
+<script src="/js/custom.js?v=3" type="text/javascript"></script>
+<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34&libraries=places&language=th&region=TH">
+</script>
+
 <style>
     .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
     .body { color: #73879C; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }
@@ -123,6 +127,66 @@
         background-color : #40281E;
     }
 
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
 </style>
 <header id='inc_menu_header'>  </header>
 
@@ -145,6 +209,16 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade bd-example-modal-lg" id="preload_2" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status" style="color:#ffffff;margin:auto">
+                <span class="sr-only" style="width:5rem;height: 5rem;border:.50em solid currentColor">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
 <footer style="margin-left: 0px !important;">
     <div class="container-fluid my-auto">
         <div class="text-center my-auto copyright"><span>© Copyright advws.com <br /></span>
@@ -156,9 +230,10 @@
 </footer>
 <script>
     var temp_url_permission
-    var all_page = ['mytest', 'test', 'testmap', 'main', 'page2', 'shop_list', 'shop_add', 'shop_edit', 'customer_list', 'customer_add', 'customer_edit', 'order_list',
+    var all_page = ['notallow', 'test', 'testmap', 'main', 'page2', 'shop_list', 'shop_add', 'shop_edit', 'customer_list', 'customer_add', 'customer_edit', 'order_list',
         'restaurant_list', 'restaurant_add', 'restaurant_edit', 'foodmenu_list', 'foodmenu_edit', 'foodmenu_add', 'rider_list', 'rider_add', 'rider_edit', 'transaction_list',
-        'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list'
+        'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list',
+        'notification_list', 'notification_edit', 'notification_add','shop_ai','report_order','map_area'
     ];
     console.log("START URL =" + starturl)
     for (var x = 0; x < all_page.length; x++) {
@@ -187,8 +262,95 @@
     if (!starturl)
         starturl = 'main'
     console.log("starturl", starturl)
-    go2View(starturl);
+  //  go2View(starturl);
+  var myLiffId = '1653987624-bV7d3Lj6';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+  var alreadyinit = false;
+  var working ={};
+  function initializeApp() {
+      //console.log("init ok");
+      if (typeof (alreadyinit) == 'function') {
+          alreadyinit();
+          return;
+      }
+      if (alreadyinit)
+          return;
+      //alreadyinit =true;
+      displayLiffData();
+      // check if the user is logged in/out, and disable inappropriate button
+      if (liff.isLoggedIn()) {
+           var token = liff.getAccessToken();
+          //console.log("user Loged in");
+          //show logout button
+          liff.getProfile().then(profile => {
+              LINE_USER.token = token;
+              LINE_USER.pictureUrl = profile.pictureUrl;
+              LINE_USER.userId = profile.userId;
+              LINE_USER.displayName = profile.displayName;
+              LINE_USER.statusMessage = profile.statusMessage;
+              console.log(profile);
+              var tk =liff.getDecodedIDToken();
+              if(tk){
+                 console.log("TOKEN:",JSON.stringify(tk));
+                  LINE_USER.getDecodedIDToken = tk.email;
+              }
+
+              runApp();
+              alreadyinit = runApp;
+          }).catch(err => {
+              if (typeof (fnc_noprofile) == 'function')
+                  fnc_noprofile();
+              console.log("Error Getprofile", err)
+          });
+      } else {
+          console.log("user NOT LOG in");
+         // alert("LOGIN")
+          liff.login();  // Web Login
+          //show login Button
+      }
+  }
+
+  function initializeLiff() {
+
+    if(alreadyinit) {
+      if(typeof(runApp) =='function') runApp();
+      return;
+    }
+      console.log("INIT ", myLiffId);
+      liff.init({liffId: myLiffId}, initializeApp, err => {
+          console.log("INIT FAIL", myLiffId)
+          console.log(err.code, err.message)
+      });
+  }
+  var LINE_USER = {};
+  function displayLiffData() {
+
+      LINE_USER.browserLanguage = liff.getLanguage();
+      LINE_USER.sdkVersion = liff.getVersion();
+      LINE_USER.isInClient = liff.isInClient();
+      LINE_USER.isLoggedIn = liff.isLoggedIn();
+      LINE_USER.deviceOS = liff.getOS();
+      //console.log(LINE_USER);
+  }
 
 
-    $('#inc_menu_header').load('/adminkinarai/inc_nav.html');
+  function runApp() {
+      console.log("RUN APP");
+      $.postJSON('/api/liff/check/adminlogin', {LINE_USER: LINE_USER}, function (res) {
+          if (res.result) {
+              $('#inc_menu_header').load('/adminkinarai/inc_nav.html');
+              //  go2View('register2');
+                 go2View(starturl);
+                return;
+
+          }else{
+            alert(res.detail)
+          }
+      });
+
+  }
+  initializeLiff();
+
+
 </script>

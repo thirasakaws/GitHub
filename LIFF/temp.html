@@ -17,6 +17,41 @@
     $temp.remove();
   }
 
+
+  function check_obj(obj){
+    if(obj && Array.isArray(obj)){    // input IS Array
+        var html = "<Array> "
+      for(var x=0; x < obj.length ; x++){
+            var result = check_obj(obj[x]);
+           html += result + ",";
+      }
+      return html + "</Array>";
+
+    }else if(obj && typeof(obj) =='object' ){     // input is Object
+        var allkey  = Object.keys(obj);
+          var html = '';
+          for(var x=0; x < allkey.length ; x++){
+            if(allkey[x] =='skipme') continue;  // SKIP KEYNAME SKIP
+            var each_object = obj[allkey[x]];
+                var result = check_obj(each_object);
+                html += "<object>Key " + allkey[x] + " : " + result + "</object>";
+          }
+          return html;
+    }else if(obj){      // input is Value
+        return obj;
+    }
+
+    return '';  // Finish
+  }
+
+  var a={f1:'test',
+          f2:{f21:'test21',f22:['a','b','c'],skipme:{'testja':'test'}},
+          f3:['a3','a4']
+        }
+
+
+      var html = check_obj(a);
+      console.log(html);
   // // $('#gmap_gps').load('/LIFF/modal_gps.html',function(){
   //   $('#gmap_gps').load('/LIFF/modal_gps_full.html',function(){
   // // $('#gmap_gps').load('/SHOPS/modal_gps_full.html',function(){

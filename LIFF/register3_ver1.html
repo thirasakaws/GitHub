@@ -39,7 +39,7 @@
         <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
         <div class="col d-flex ">
             <div class="float-left pl-2  w-100 ">
-                <input class="input_data_bn edit_data BRANCH_contact w-90" placeholder="เบอร์โทร" data-field="contact" id="contact_branch" type="tel"  onkeypress="return isNumberKey(event)">
+                <input class="input_data_bn edit_data BRANCH_contact w-90" oninput="inputContactHandler(event);" placeholder="เบอร์โทร" data-field="contact" id="contact_branch" type="tel"  onkeypress="return isNumberKey(event)">
                 <!--                <span class='BRANCH_contact editable_branch'>  </span>-->
             </div>
         </div>
@@ -229,9 +229,6 @@
     alert('not have event')
   }
 }
-
-    const input_contact = document.getElementById('contact_branch');
-    input_contact.oninput = inputContactHandler;
 
     function inputContactHandler(e) {
       var last_val = e.target.value.substr(e.target.value.length - 1);

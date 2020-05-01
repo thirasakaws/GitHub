@@ -27,8 +27,7 @@
                 <div class="form-row">
                     <h3 style="padding-left:5px">เจ้าของร้าน </h3>
                     <div class="col-md-2 mb-2">
-                        <select class="form-control" id="select_owner">
-                            <option></option>
+                        <select class="form-control" id="select_shopowner">
                         </select>
                     </div>
                     <h3 style="padding-left:5px">ชื่อร้าน </h3>
@@ -37,12 +36,15 @@
                     </div>
                     <h3 style="padding-left:5px">เบอร์โทรศัพท์ </h3>
                     <div class="col-md-2 mb-2">
-                        <input type="number" id="shop_phonenumber"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="เบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                        <input  id="shop_phonenumber" pattern="[0-9]"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="เบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                     </div>
-                    <h3 style="padding-left:5px">สาขา </h3>
-                    <div class="col-md-2 mb-2">
-                        <input type="text" id="shop_branch"  name="phonenumber" class="form-control input-sm autoFilter" placeholder="สาขา" >
-                    </div>
+                             <h3 style="padding-left:5px">สาขา </h3>
+                            <div class="col-md-2 mb-2">
+                                <select  id="shop_branch" class="form-control input-sm autoFilter"  >
+                                    
+                                </select>
+                            </div>
+
                     <h3 style="padding-left:5px">พิกัดที่ตั้ง </h3>
                     <div class="col-md-2 mb-2">
                         <input type="text" id="shop_location_longitude"  name="longitude" class="form-control input-sm autoFilter" placeholder="longitude" >
@@ -53,14 +55,8 @@
                     <button type="button" class="btn btn-outline-success alink" onclick="find_location_data()" style="height: 40px">ค้นหาพิกัดในแผนที่</button>
                     <h3 style="padding-left:5px">ประเภท ร้านอาหาร </h3>
                     <div class="col-md-4 mb-2">
-                        <select id="shop_type"  name="shop_type" class="form-control input-sm autoFilter" multiple="multiple">
-                            <option value="อาหารจานเดียว">อาหารจานเดียว</option>
-                            <option value="อาหารร้อน">อาหารร้อน</option>
-                            <option value="อาหารเย็น">อาหารเย็น</option>
-                            <option value="ของหวาน">ของหวาน</option>
-                            <option value="ของคาว">ของคาว</option>
-                            <option value="อาหารแห้ง">อาหารแห้ง</option>
-                            <option value="อาหารแห้ง">อาหารตามสั่ง</option>
+                        <select id="select_shoptype"  name="shop_type" class="form-control input-sm autoFilter" multiple="multiple">
+
                         </select>
                     </div>
                     <h3 style="padding-left:5px">วันเปิด-ปิด ร้าน </h3>
@@ -136,12 +132,26 @@
 //         return false
 //     }
 
-    $('#select_owner').adv_select({
-        url: '/api/data/kinarai/select_owner',
-        name: 'displayName',
-        id: '_id',
-        maxshow: 10
-    });
+//    $('#select_owner').adv_select({
+//        url: '/api/data/kinarai/select_owner',
+//        name: 'displayName',
+//        id: '_id',
+//        maxshow: 10
+//    });
+
+    $.postJSON('/api/data/kinarai/shop_owner_list', {}, function (shopownerdata) {
+        create_select('select_shopowner', shopownerdata.obj, 'displayName')
+            $.get('/api/data/kinarai/shop_type', function (data1) {
+                create_select('select_shoptype', data1, 'name')
+                    $.postJSON('/api/data/kinarai/shop_branch_list', {},function (data2) {
+                        create_select('shop_branch', data2.obj, 'name')
+                    });
+            });
+    })
+
+
+    
+    $('#select_shoptype').select2()
 
     function submit_add_data() {
         var name = $('#shop_name').val()

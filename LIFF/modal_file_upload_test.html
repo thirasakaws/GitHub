@@ -1,0 +1,210 @@
+<link rel="stylesheet" href="/css/croppie.css" />
+<script src="/js/croppie.js"></script>
+<div class="">
+  <div class="action">
+    <label class="btn btn-sm btn-orange btn-upload ml-auto" for="image_uploader_btn" title="Upload image file">
+          <input type="file" class="sr-only" id="image_uploader_btn" name="file" accept="*">
+          <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+              <strong class="btn btn-submit-shop btn-sm"><i class="fas fa-plus"></i> Upload</strong>
+          </span>
+     </label>
+
+  </div>
+
+  <div class="w-100 p-2 text-center">
+        <img id="viewupload_image"  class="my-image w-50" src="/image/Kinarai.jpg" />
+
+  </div>
+  <div class="text-center row" id="getcrop_img" style="display:none;">
+    <div class="col-4 text-right">
+        <button class="vanilla-rotate btn btn-info btn-sm" data-deg="-90">Rotate Left</button>
+    </div>
+    <div class="col-4 text-left">
+        <button class="vanilla-rotate btn btn-info btn-sm" data-deg="90">Rotate Right</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-md btn-success m-auto" onclick="get_image()">Get Image</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center">
+        <div id="view_demo" class="w-50 p-2"></div>
+    </div>
+  </div>
+
+
+</div>
+<script>
+
+
+var resize;
+function readURL(input) {
+  $('#getcrop_img').show();
+  resize = '';
+   if (input.files && input.files[0]) {
+     // alert('have')
+       var reader = new FileReader();
+
+       reader.onload = function (e) {
+           $('#viewupload_image').attr('src', e.target.result);
+           var re = $('#viewupload_image').attr('src')
+           var el = document.getElementById('viewupload_image');
+           resize = new Croppie(el, {
+               viewport: { width: 250, height: 250 },
+               boundary: { width: 300, height: 300 },
+              // showZoomer: false,
+           //    enableResize: true,
+              enableOrientation: true,
+           //    mouseWheelZoom: 'ctrl'
+           });
+           resize.bind({
+               url: re,
+           });
+
+           //var el = document.getElementById('dddd');
+
+
+       }
+
+       reader.readAsDataURL(input.files[0]);
+   }
+}
+$('.vanilla-rotate').on('click', function(ev) {
+ resize.rotate(parseInt($(this).data('deg')));
+});
+
+$("#image_uploader_btn").change(function(){
+  if (resize) {
+      resize.destroy()
+  }
+
+   readURL(this);
+});
+
+function get_image(){
+    resize.result('base64','viewport').then(function(blob) {
+      // console.log(blob);
+        // do something with cropped blob
+        // tempimagefile4upload = blob;
+        doUploadImage(blob)
+        // $('#view_demo').html(blob)
+    });
+}
+
+
+var tempimagefile4upload;
+var upload_url ='';
+var postdata = undefined;
+// function upload_shopimage(obj){
+//   $('#imageuploading').show();
+//   // var file = $(obj)[0].files[0];
+//   tempimagefile4upload =obj;
+//  var reader = new FileReader();
+//  reader.onload = function(e) {
+//    // mankproppie(e.target.result)
+//      // $('#image').attr('src', e.target.result).show();
+//      // image4crop();
+//      // doUploadImage();
+//  };
+//  reader.readAsDataURL(file);
+// }
+
+function clear_upload_area(){
+   $('#viewupload_image').attr('src', '/image/Kinarai.jpg').hide();
+   $('#getcrop_img').hide();
+}
+
+function OnProgress(e){
+    //Progress bar
+//    console.log(e);
+    var pt= Math.ceil(e.loaded* 100/ (e.total))  ;
+    //console.log(total);
+  //  console.log(pt);
+    $('#pt').html(pt+ '%'); //update status text
+}
+
+function doUploadImage(obj){
+  tempimagefile4upload = obj;
+  alert(tempimagefile4upload)
+    if(tempimagefile4upload){
+        if(tempimagefile4upload.size > 10000000){
+            clear_upload_area();
+            alert("Allow Only image < 10 MB");
+            return;
+        }
+
+        //console.log(tempimagefile4upload);
+        var formData = new FormData();
+        formData.append('file', tempimagefile4upload);
+
+
+        if(postdata){
+          var allhead = Object.keys(postdata);
+          for(var x=0; x < allhead.length ; x++){
+              var val = postdata[allhead[x]];
+              if(typeof(val) == 'object'){
+                try{
+                  val = JSON.stringify(val);
+                  console.log("STRINGIFY")
+                }catch(e){
+
+                }
+              }
+              formData.append(  allhead[x],val);
+          }
+        }
+
+
+        //
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+        if(request.readyState == 4){
+            tempimagefile4upload =null;
+            clear_upload_area();
+            try {
+                var resp = JSON.parse(request.response);
+            } catch (e){
+                var resp = {
+                    status: 'error',
+                    data: 'Unknown error occurred: [' + request.responseText + ']'
+                };
+                alert(request.responseText);
+                return;
+            }
+
+                afterUploadfileSuccess(resp);
+            }
+         };
+
+    request.upload.addEventListener('progress', OnProgress, false);
+    request.open('POST', upload_url);
+    request.send(formData);
+    console.log("Sending File");
+
+    }
+}
+
+
+var tempcbfnc_image_upload;
+function call_modal_image_upload(setting,cbfnc){
+  upload_url = setting.url;
+  if(setting.postdata){
+    postdata = setting.postdata;
+  }
+  console.log("SETTING ",upload_url);
+  console.log(postdata);
+  if(typeof(cbfnc)=='function') tempcbfnc_image_upload =cbfnc;
+
+}
+function afterUploadfileSuccess (imagedata){
+    console.log("afterUploadfileSuccess Called")
+    if(tempcbfnc_image_upload){
+      tempcbfnc_image_upload(imagedata);
+    }else{
+      console.error("NO CBFNC FOR IMAGE UPLOAD");
+    }
+};
+
+
+</script>

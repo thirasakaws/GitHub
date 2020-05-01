@@ -7,14 +7,16 @@
     }
 </style>
 
-<div class="container-fluid main_data">
 
+
+<div class="container-fluid main_data">
     <div class="row box-head-title-shop text-center" >
         <div class="col-3 p-0 text-left">
             <button class='btn border border-0 text-secondary' onclick="window.history.back();">
                 <i class="fas fa-chevron-left"></i> Back
             </button>
         </div>
+        
         <div class="col-6 p-0 text-center">
             <span class="header-shop"> จัดการร้านอาหาร</span>
         </div>
@@ -27,7 +29,7 @@
     </div>
 
 
-    <div class="text-center p-2 row" id="edit_image_shop"  >
+    <div class="text-center p-2 row" id="edit_image_shop">
         <div class="col-sm-12 text-center mb-3" id='shop_image_view_div' style="padding: auto !important ;margin: auto !important;">
             <div id='image_uploader' style="display:none"></div>
             <img class='shop_image_view rounded border border-light img-front-shop' onclick="fncmanageimage()" src='/api/liff/shop/image/#imgsrc'  >
@@ -42,23 +44,27 @@
     </div>
 
 
-    <div class="form-group row p-2">
-        <span  class="text-gray-light col-8 col-sm-8">
-            ชื่อร้าน :  <span class='SHOP_name font-color-shop'></span>
-        </span>
-
-        <div class="col-sm-4 col-4 text-rigth ">
-            <span class="font-color-shop float-lg-right"  onclick="edit_shop();">
-                <i class="fas fa-cogs"></i> ตั้งค่าร้าน
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <span  class="text-gray-light">
+                ชื่อร้าน :  <span class='SHOP_name font-color-shop'></span>
             </span>
         </div>
-
-    </div> <!-- // ชื่อร้าน -->
-
-
-    <div class="form-group row p-2">
-        <span  class="text-gray-light col-12 col-sm-12"> สถานะ : <span class="badge badge-pill badge-success SHOP_status"></span></span>
+        <div class="font-color-shop float-lg-right"  onclick="edit_shop();">
+                <i class="fas fa-cogs"></i> ตั้งค่าร้าน
+        </div>
+    </div>  <!-- // ชื่อร้าน -->
+    
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <span  class="text-gray-light "> สถานะ :</span>
+        </div>
+        <div>
+            <span class="badge badge-pill badge-success SHOP_status"></span>
+        </div>
     </div> <!-- // สถานะ -->
+
+ 
 
     <div class="form-group row  border-light p-2">
         <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Manual-Auto)</span> </label>

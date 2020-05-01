@@ -154,7 +154,7 @@
                                                             <span class='SHOP_contact editable_shop'>  </span>
                                                         </div>-->
                             <div class="float-left pl-2  w-100 ">
-                                <input class="input_data_bn edit_data SHOP_contact w-90" id="contact_shop" type="tel" placeholder="เบอร์ติดต่อ" data-field="contact" onkeypress="return isNumberKey(event)">
+                                <input class="input_data_bn edit_data SHOP_contact w-90" oninput="inputContactHandler(event);" id="contact_shop" type="tel" placeholder="เบอร์ติดต่อ" data-field="contact" onkeypress="return isNumberKey(event)">
 
                             </div>
                         </div>
@@ -474,8 +474,6 @@
   }
 }
 
-    const input_contact = document.getElementById('contact_shop');
-    input_contact.oninput = inputContactHandler;
 
     function inputContactHandler(e) {
       var last_val = e.target.value.substr(e.target.value.length - 1);

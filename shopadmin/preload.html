@@ -1,14 +1,17 @@
 <link href="/css/glyphicons.css" rel="stylesheet">
-<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<!--<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 <link href="/css/pagination.css" rel="stylesheet" type="text/css"/>
 
 <!--      <script src="/js/bootstrap/bootstrap.min.js"></script>-->
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
+<script src="/js/popper.min.js"></script> 
+
+
+<!--<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>-->
 <script src="/js/pagination.min.js" type="text/javascript"></script>
 <script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
 <script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
 </script>
+
 <!--Fonts font-awesome -->
 <link href="/css/all.css" rel="stylesheet" type="text/css"/>
 <!--<link href="/css/font-awesome.css" rel="stylesheet" type="text/css"/>-->
@@ -24,18 +27,20 @@
 <link href="/css/stylesheet.css" rel="stylesheet" type="text/css"/>
 <link href="http://fonts.googleapis.com/css?family=Raleway:400,200" type="text/css">
 -->
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link href="/css/select2.min.css" rel="stylesheet" />
 <script src="/js/select2.min.js"></script>
 <script src="/js/moments.min.js" type="text/javascript"></script>
 <script src="/js/advws_util.js?v=2" type="text/javascript"></script>
 <link href="/css/custom.css?v=1" rel="stylesheet" />
+<link href="/css/dashboard.css" rel="stylesheet">
+<link href="/css/custom_2.css?v=1" rel="stylesheet" />
 <style>
-    .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
-    .body { color: #73879C; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }
+/*    .main-content { background: #fff; padding: 20px; margin-top: 48px; border:1px solid #fff;}
+    .body { color: #73879C; font-weight: 400;  line-height: 1.471; background: #2772B8 !important;  }*/
 
     /* custom css */
-    .border-left-primary {
+/*    .border-left-primary {
         border-left: .25rem solid #4e73df!important;
     }
     .border-left-success {
@@ -82,11 +87,11 @@
         font-size: .75rem;
         background-color: #eaecf4;
         border-radius: .35rem;
-    }
+    }*/
 
 
     /* Footer */
-    .scroll-to-top:hover {
+/*    .scroll-to-top:hover {
         background: #5a5c69;
     }
 
@@ -121,21 +126,33 @@
 
     .ticket_navbar_floragolf  {
         background-color : #40281E;
-    }
+    }*/
 
+
+
+    /*  ----- dashboard ------ */
+    
 </style>
 <header id='inc_menu_header'>  </header>
 
+<div class="container-fluid"> 
+    <div class="row">
+       <div id="inc_nav_left"></div>
+       <main id='mainpage_body' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-3 mb-3">
 
-<div id='mainpage_body' style="margin-top: 50px !important;">
-    Staff Section
-    <br>
-    <!--    <center>
-            <div class=" spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
-                <span class="sr-only" >Loading...</span>
-            </div>
-        </center>-->
-</div>
+            Staff Section
+            <br>
+            <!--    <center>
+                    <div class=" spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
+                        <span class="sr-only" >Loading...</span>
+                    </div>
+                </center>-->
+        </main> <!-- // Content  --> 
+     </div> <!-- // Row  --> 
+</div> <!-- // Container-fluid  --> 
+
+
+
 <div class="modal fade bd-example-modal-lg" id="preload" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="d-flex justify-content-center" style="margin:auto;color:#ffffff;">
@@ -145,18 +162,24 @@
         </div>
     </div>
 </div>
+
+
 <footer style="margin-left: 0px !important;">
-    <div class="container-fluid my-auto">
-        <div class="text-center my-auto copyright"><span>© Copyright Kinarai.com <br /></span>
-        </div>
+    <div class="container-fluid my-auto">    
+        <div class="d-flex justify-content-around">© Copyright KinArai.com</div>     
     </div>
-
-    <span class="TicketOrgID" style=" color: #ffffff;"></span>
-
+    <span class="TicketOrgID" style=" color: red;"></span>
 </footer>
+
+
+<script src="/js/feather.min.js" type="text/javascript"></script>
+<!--<script src="/js/Chart.min.js" type="text/javascript"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="/js/dashboard.js" type="text/javascript"></script>
+
 <script>
-    var temp_url_permission
-    var all_page = ['main','', 'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list','shop_list', 'shop_add', 'shop_edit',
+    var temp_url_permission,  working={};
+    var all_page = ['main','notallow', 'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list','shop_list', 'shop_add', 'shop_edit',
      'foodmenu_list', 'foodmenu_edit', 'foodmenu_add',];
 
          var firsttime_visit = true;
@@ -166,7 +189,7 @@
                  if (all_page[x].indexOf('/') !== -1) {
                      prefix = '/'
                  }
-                 onPageshow(prefix + all_page[x], {obj: '#mainpage_body', url: '/LIFF/' + all_page[x] + '.html'}, function () {
+                 onPageshow(prefix + all_page[x], {obj: '#mainpage_body', url: '/shopadmin/' + all_page[x] + '.html'}, function () {
                      // obj is main_div  url ,real-url
                      var url = window.location.href;
                      var querysplit = url.split('/');
@@ -206,11 +229,10 @@
              // check if the user is logged in/out, and disable inappropriate button
              if (liff.isLoggedIn()) {
                   var token = liff.getAccessToken();
-                  console.log("TOKEN R");
-                  console.log(token);
                  //console.log("user Loged in");
                  //show logout button
                  liff.getProfile().then(profile => {
+                     LINE_USER.token = token;
                      LINE_USER.pictureUrl = profile.pictureUrl;
                      LINE_USER.userId = profile.userId;
                      LINE_USER.displayName = profile.displayName;
@@ -218,7 +240,7 @@
                      console.log(profile);
                      var tk =liff.getDecodedIDToken();
                      if(tk){
-                        console.log("TOKEN",tk);
+                        console.log("TOKEN:",JSON.stringify(tk));
                          LINE_USER.getDecodedIDToken = tk.email;
                      }
 
@@ -231,7 +253,8 @@
                  });
              } else {
                  console.log("user NOT LOG in");
-                 liff.login();
+                // alert("LOGIN")
+                 liff.login();  // Web Login
                  //show login Button
              }
          }
@@ -272,7 +295,39 @@
      //console.log("LOAD "+firstgourl);
 
      //go2View(starturl);
-         $('#mainpage_body').load('/shopadmin/' + firstgourl + '.html');
 
+      // $('#mainpage_body').load('/shopadmin/' + firstgourl + '.html');
+
+       //  #### Setting ########## For LINE APP
+         var myLiffId = '1653987624-42LYP6Vk';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+       //  #### END  Setting ########## For LINE APP
+
+       function runApp() {
+           console.log("RUN APP");
+           $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+               if (res.result) {
+                 $('#inc_menu_header').load('/shopadmin/inc_nav.html');
+                 $('#inc_nav_left').load('/shopadmin/inc_nav_left.html');
+                 
+                 console.log(res);
+                 if (typeof(res.detail) =='object' && res.detail._id > 0) {    // มีร้านอยู่แล้ว
+                     working.shop = res.detail;
+                     working.shopowner = res.shopowner;
+                   //  go2View('register2');
+                      go2View(firstgourl);
+                     return;
+                 }else{
+                   alert("ร้านค้าคุณยังไม่สามารถเข้าใช้งานในระบบได้")
+                   go2View('notallow');
+                 }
+
+               }else{
+                 alert(res.detail)
+               }
+           });
+
+       }
+       initializeLiff();
 
      </script>

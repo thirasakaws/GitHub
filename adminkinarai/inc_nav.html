@@ -55,7 +55,7 @@
         <div class="collapse navbar-collapse " id="navcol-1" >
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active " id="main" href="#" onclick='go2View("main")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="main" href="#" onclick='go2View("main")'>
                         <i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard
                     </a>
                 </li>
@@ -64,29 +64,34 @@
                         <i class="fas fa-store"></i>&nbsp;Shops
                     </a>
                     <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item alink text-capitalize" href="#" onclick='go2View("shop_list")'>
+                        <a class="dropdown-item alink text-capitalize dropdown_display" href="#" onclick='go2View("shop_list")'>
                             <i class="fas fa-list-ul"></i>&nbsp;Shop List
                         </a>
 
                         <div class="dropdown-divider " ></div>
 
-                        <a class="dropdown-item alink text-capitalize"  href="#" onclick='go2View("shop_branch_list")'>
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_branch_list")'>
                             <i class="fas fa-list-ul"></i>&nbsp;Shop Branch List
                         </a>
                         <div class="dropdown-divider " ></div>
 
-                        <a class="dropdown-item alink text-capitalize"  href="#" onclick='go2View("shop_owner_list")'>
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_owner_list")'>
                             <i class="fas fa-list-ul"></i>&nbsp;Shop Owner List
                         </a>
                         <div class="dropdown-divider " ></div>
 
-                        <a class="dropdown-item alink text-capitalize"  href="#" onclick='go2View("shop_type_list")'>
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_type_list")'>
                             <i class="fas fa-list-ul"></i>&nbsp;Shop Type List
                         </a>
                         <div class="dropdown-divider " ></div>
 
-                        <a class="dropdown-item alink text-capitalize"  href="#" onclick='go2View("shop_image_list")'>
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_image_list")'>
                             <i class="fas fa-list-ul"></i>&nbsp;Shop Image List
+                        </a>
+                        <div class="dropdown-divider " ></div>
+
+                        <a class="dropdown-item alink text-capitalize dropdown_display"  href="#" onclick='go2View("shop_ai")'>
+                            <i class="fas fa-list-ul"></i>&nbsp;Shop AI
                         </a>
                     </div>
                 </li>
@@ -101,36 +106,47 @@
                                     </a>
                                 </li>-->
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active" id="foodmenu_list" href="#" onclick='go2View("foodmenu_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="foodmenu_list" href="#" onclick='go2View("foodmenu_list")'>
                         <i class="fas fa-utensils"></i>&nbsp;Foods Menu
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active" id="customer_list" href="#" onclick='go2View("customer_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="customer_list" href="#" onclick='go2View("customer_list")'>
                         <i class="fas fa-user"></i>&nbsp;Customers
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active" id="rider_list" href="#" onclick='go2View("rider_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="rider_list" href="#" onclick='go2View("rider_list")'>
                         <i class="fas fa-motorcycle"></i>&nbsp;riders
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active" id="restaurant_list" href="#" onclick='go2View("restaurant_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display" id="restaurant_list" href="#" onclick='go2View("restaurant_list")'>
                         <i class="fas fa-store-alt"></i>&nbsp;Restaurants
                     </a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active "  id="order_list" href="#" onclick='go2View("order_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display"  id="order_list" href="#" onclick='go2View("order_list")'>
                         <i class="fas fa-list"></i>&nbsp;Orders
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-capitalize  alink btn click_active "  id="order_list" href="#" onclick='go2View("transaction_list")'>
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display"  id="order_list" href="#" onclick='go2View("transaction_list")'>
                         <i class="fas fa-list"></i>&nbsp;Transactions
                     </a>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display"  id="notification_list" href="#" onclick='go2View("notification_list")'>
+                        <i class="fas fa-list"></i>&nbsp;Notification
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-capitalize  alink btn click_active dropdown_display"  id="report_order" href="#" onclick='go2View("report_order")'>
+                        <i class="fas fa-list"></i>&nbsp;Report Order
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -142,4 +158,9 @@
         $(this).children("a").addClass(' selected_menu').attr('style', 'background-color:#ff137c;color:#b5c1aa !important')
 //        $('#navcol-1').slideUp().removeAttr('style')
     });
+    $('.dropdown_display').click(function(){
+        console.log('true click')
+        $('div .navbar-collapse').collapse('hide');
+    });
+    
 </script>

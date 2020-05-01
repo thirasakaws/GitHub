@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 30, 2020, 5:06:55 PM
+    Author     : 7391
+*/
+
+ion-icon {
+  font-size: 16px;
+  /*color:blue;*/
+}
+
+
+.bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+  
+     a:hover { color: #fc7d10 !important; }
+    .font-color-shop { color: #fc7d10 !important; }	  
+    .bg-color-shop { background-color: #fc7d10 !important; }
+    .logo-size { height: 37px; }
+    .bg-body-shop { background-color: #F6F6F7;  }  /* สีพื้นเทา่ออน มาก ๆ*/ 
+    .sidebar .nav-link.active {  color: #fc7d10 !important;  }
+    .profile-icons { width: 48px; border: 3px solid #fff; }

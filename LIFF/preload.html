@@ -144,8 +144,8 @@
     }
 
 
-    
-    
+
+
     /* CSS For Shop  */
 
 
@@ -214,7 +214,11 @@
         if (liff.isLoggedIn()) {
             //console.log("user Loged in");
             //show logout button
-            liff.getProfile().then(profile => {
+            var token = liff.getAccessToken();
+           //console.log("user Loged in");
+           //show logout button
+           liff.getProfile().then(profile => {
+                LINE_USER.token = token;
                 LINE_USER.pictureUrl = profile.pictureUrl;
                 LINE_USER.userId = profile.userId;
                 LINE_USER.displayName = profile.displayName;

@@ -5,12 +5,12 @@
             <h1 class="text-header_page"><b><u>Shop Owner</u></b></h1>
         </div>
         <div class="col-12 col-sm-12 col-md-4  text-right"  >
-            <div>
+<!--            <div>
                 <button class="btn btn-outline-primary alink" onclick='go2View("/shop_owner_add")'>
                     <i class="fa fa-plus"></i>
                     Add Shops Owner
                 </button>
-            </div>
+            </div>-->
         </div>
     </div>
     <br>
@@ -29,8 +29,11 @@
 
                         <select id="status" class="form-control">
                             <option value="">แสดงทั้งหมด</option>
-                            <option value="1">ยังไม่อนุมัติ</option>
-                            <option value="5">อนุมัตืแล้ว</option>
+                            <option value="0">มาใหม่</option>
+                            <option value="1">ปกติ</option>
+                            <option value="2">สร้างร้านค้าได้</option>
+                            <option value="3">บริหารได้อย่างเดียว</option>
+
                         </select>
                     </div>
 
@@ -61,7 +64,7 @@
                     <th>Create Date</th>
                     <th>Last Update</th>
                     <th>Status</th>
-                    <th>Action</th>
+
 
                 </tr>
             </thead>
@@ -72,16 +75,40 @@
                     <td><img src="" class="shop_owner_pictureUrl" width="50" height="50"></td>
                     <td class="shop_owner_createdate"></td>
                     <td class="shop_owner_lastupdate"></td>
-                    <td class="shop_owner_status"></td>
-                    <td class=" text-center">
-                        <button class="alink" onclick="edit_data_shop_owner(this)"><i class="fa fa-pencil shop_owner_action " ></i></button>
+                     <td>
+                        <span class="shop_owner_status"></span>
+                        <button type="button" class="float-right btn btn-primary btn-sm alink" onclick="edit_status_shopowner(this)"><i class="fa fa-pencil  " ></i> Status Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
+<div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalshopownerstatus" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalshopownerstatus">Status Manage | ID :<span id="id_shopowner"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--select status and confirm-->
+                <select id="status_shopowner" class="form-control">
+                    <option value="0" class="text-primary">มาใหม่</option>
+                    <option value="1" class="text-danger">ปกติ</option>
+                    <option value="2" class="text-success">สร้างร้านค้าได้</option>
+                    <option value="3" class="text-warning">บริหารได้อย่างเดียว</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
 
@@ -132,11 +159,18 @@
                     }
                 }
 
-                if (objdata[x].status == 1) {
-                    TR.find('.shop_owner_status').addClass('text-success').html('เปิดใช้งาน');
-                }
+
                 if (objdata[x].status == 0) {
-                    TR.find('.shop_owner_status').addClass('text-danger').html('ปิดใช้งาน');
+                    TR.find('.shop_owner_status').addClass('text-primary').html('มาใหม่');
+                }
+                if (objdata[x].status == 1) {
+                    TR.find('.shop_owner_status').addClass('text-danger').html('ปกติ');
+                }
+                                if (objdata[x].status == 2) {
+                    TR.find('.shop_owner_status').addClass('text-success').html('สร้างร้านค้าได้');
+                }
+                                if (objdata[x].status == 3) {
+                    TR.find('.shop_owner_status').addClass('text-warning').html('บริหารได้อย่างเดียว');
                 }
                 if (objdata[x].pictureUrl) {
                     TR.find('.shop_owner_pictureUrl').attr('src', objdata[x].pictureUrl)
@@ -148,11 +182,39 @@
         }
 
     }
-    function edit_data_shop_owner(obj) {
-        var tempid = $(obj).find_id();
-        go2View('/shop_owner_edit?shop_owner_id=' + tempid);
-        return false;
+
+    
+    function edit_status_shopowner(shopowner_id) {
+        var res_id = $(shopowner_id).find_id();
+        $.get('/api/data/kinarai/shopowner_edit/' + res_id, function (result) {
+            console.log(result)
+            if (result.status) {
+                $('#status_shopowner').val(result.status)
+            }
+        });
+
+        $('#id_shopowner').html(res_id)
+        $('#save_btn').attr('onclick', 'update_shopownerstatus(' + res_id + ')')
+        $('#showmodal').modal('show')
+
     }
+
+    function update_shopownerstatus(shopowner_id1) {
+        var postdata = {
+            _id: shopowner_id1,
+            status: $('#status_shopowner').val()
+        }
+        $.postJSON('/api/data/kinarai/shopowner_update_status', postdata, function (res) {
+            console.log('success')
+            if (res) {
+                $('#showmodal').modal('hide')
+                refreshpage()
+            }
+        });
+
+    }
+    
+    
     function filterFormsubmit_allotment() {
         var search = {}
 

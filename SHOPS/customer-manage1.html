@@ -50,7 +50,7 @@
              <div class="form-group row">
                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ  </label>
                <div class="col">
-                   <input class="input_data_bn edit_data CUSTOMER_contact w-90 " id="contact_customer" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)">
+                   <input class="input_data_bn edit_data CUSTOMER_contact w-90 " oninput="inputContactHandler(event);" id="contact_customer" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)">
                </div>
              </div>   <!-- // -->
 
@@ -188,10 +188,6 @@ return true;
 alert('not have event')
 }
 }
-
-
-const input_contact = document.getElementById('contact_customer');
-input_contact.oninput = inputContactHandler;
 
 function inputContactHandler(e) {
   // alert("inputContactHandler: " + e.target.value);

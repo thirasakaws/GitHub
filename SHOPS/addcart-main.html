@@ -1,181 +1,355 @@
+<div id="top_shopping_cart" class="row-fluid navbar w-100 shadow box-head-title-foodmall nav-color-shop">
+
+  <div class="col-2 pl-0 text-left ">
+    <button class='btn border border-0 text-secondary' onclick="go2View('menulist')">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+  <div class="col-7 text-center ">
+    <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
+  </div>
+  <div class="col-3 text-right">
+    <div class="d-inline pr-3 " onclick="go2View('cart-main')" style="width:50%;">
+      <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt=""
+        style="width:29%;" />
+    </div>
+    <div class="items-add-to-cart badge badge-pill badge-danger" style="margin-left:-10%;">##CART-totalitem##</div>
+  </div>
+</div> <!-- topmenu -->
+
+
+
 <div class="container-fluid">
-<div id='result-add'>
-<!--Processing...-->
-<div class="box-head-title-foodmall text-center" >
-        <span class="header-foodmall"> กรุณาเลือกเมนูอาหารที่ต้องการสั่ง</span>
+  <div id='result-add'>
+    <!--Processing...-->
+    <div class="box-head-title-foodmall text-center">
+      <span class="header-foodmall"> กรุณาเลือกเมนูอาหารที่ต้องการสั่ง</span>
     </div>
+  </div>
 
-</div>
 
-<div class="p-1 mt-3 select_price bg-light rounded mt-1" style="display:none">
-    <div id='menuprice-select' class="" style="width:100%">
-         <span class="font-color-foodmall pl-1"> เลือกรายการ </span>
-         <div class="form-group row pb-2">
-
-             <div class="col-10 pr-0" id="add_item_selectprice" style="display:none">
-                  กรุณาเลือกราคา
-                  <select class="form-control ml-1" id='menu_select' ></select>
-             </div>
-             <div class="col-10 pr-0"  id="add_item_selectoption" style="display:none">
-                  ตัวเลือก
-                  <select class="form-control ml-1" id='menu_option' placeholder="เลือกรายการ" ></select>
-             </div>
-              <div class="col-2 pl-0 pr-0 pl-2">
-                <button onclick='update_price()' class=' btn btn-md btn-submit-foodmall rounded-circle' id='managebranch'>
-                   <i class="fas fa-plus"></i>
-                </button>
-             </div>
-         </div>
-
-     </div>
-</div>
-
-    <div class="row mt-3">
-        <div class="col-4 text-left">
-            <button type='button' class="btn btn-outline-secondary" onclick="liff.closeWindow();">
-                <i class="fas fa-times"></i> ปิด
-            </button>
+  <div class="row" id='mainview' style="display:none">
+    <div class="col-12 text-center">
+      <img class="img-fluid" src="##MENU-imageshow##">
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-9 mt-4 mb-1">
+          <span class="font-weight-bold header-foodmall">
+            ##MENU-name##
+          </span>
         </div>
 
-        <div class="col text-right">
-            <button type='button' class="btn btn-outline-submit-foodmall" onclick="go2View('cart-main')">
-               <i class="fas fa-shopping-basket"></i> ดูรถเข็นของคุณ
-                <!--                See your Shopping Cart -->
-            </button>
+        <div class="col mt-4 mb-1 text-right">
+          <span class="font-weight-bold header-foodmall"> ##MENU-priceshow## </span>
         </div>
+      </div>
+
+      <div class="font-color-foodmall-gray-light2 mt-3 text-left" style="font-weight:200;">
+        ##MENU-description##
+      </div>
+
+      <div class="mt-3 text-left" id="select_price" style="display:none">
+        <hr>
+        <div class="border-bottom-gray mb-2">
+          <span class="text-secondary">
+            กรุณาเลือก
+          </span>
+        </div>
+        <div class="form-group row" id="select_price_option">
+          <div class="col-8">
+            <label class="rediostyle">
+              <input type="radio" name="price_check" class="price_check" value="##PRICE-index##">
+              <span class="radio-checkmark">##PRICE-detail##</span>
+            </label>
+          </div>
+          <div class="col-4 text-right">
+            ##PRICE-price## ฿
+          </div>
+        </div>
+        <!--// form-group -->
+      </div>
+      <!--// กรุณาเลือก -->
+
+
+
+      <div class="mt-3 text-left" id="select_check" style="display:none">
+        <hr>
+        <div class="border-bottom-gray mb-2">
+          <span class="text-secondary">
+            ตัวเลือกเพิ่มเติม
+            <small class="font-color-foodmall-gray-light2 float-right">เลือกได้สูงสุด ##MENU-optionlimit##
+              รายการ</small>
+          </span>
+        </div>
+        <div class="form-group row" id="select_check_option">
+          <div class="col-8">
+            <label class="checkbox-style">
+              <input type="checkbox" value="##CHECK-name##" class='option_check'>
+              <span class="checkbox-checkmark">##CHECK-name##</span>
+            </label>
+          </div>
+          <div class="col-4 text-right">
+
+          </div>
+        </div>
+        <!--// form-group -->
+      </div>
+      <!--// topping -->
+
     </div>
-</div>
+
+    <div class="col-12 text-right">
+      <small class="font-weight-300 text-light" style="color: #fbfbfb;"> ##MENU-id##</small>
+    </div>
+    <hr>
+
+  </div> <!-- //top -->
+
+
+  <div class="row mt-2 text-center" id="btn_qty_ad" style="margin-bottom: 80px;">
+    <div class="col-12">
+      <button class="btn btn-md btn-outline-submit-foodmall" onclick="rmv_qty();">
+        <i class="fas fa-minus"></i>
+      </button>
+
+
+      <div class=" d-inline pl-4 pr-4">
+        <span style="font-size:150%;" id="qty_show"> 1 </span>
+      </div>
+
+      <button class="btn btn-md btn-outline-submit-foodmall" onclick="add_qty();">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div> <!-- // ปุ่มสั่งอาหาร  -->
+
+
+
+  <div class="fixed-bottom m-1 bg-white">
+    <div class="row mb-1 ">
+      <div class="col-12">
+        <button type='btn' id="btn_add_cart" class="btn btn-lg btn-block btn-submit-foodmall"
+          onclick='add_to_cart(this);'>เพิ่มลงตะกร้า</button>
+      </div>
+    </div>
+  </div>
+
+
+</div> <!-- // container-fluid  -->
 <script>
-    // all_page = [''];
-    var liffstring = '?liff.state=%2Fmenuid%3D';
-    var detail = window.location.search.replace(liffstring,'');
-    var menuid = detail;
-    function fnc_noprofile(){
-      alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
-      liff.login();
+  // all_page = [''];
+  var liffstring = '?liff.state=%2Fmenuid%3D';
+  var detail = window.location.search.replace(liffstring, '');
+  var menuid = detail;
+
+  var templatemain = $('#mainview').html();
+  var template_cart = $('#top_shopping_cart').html();
+
+  function fnc_noprofile() {
+    alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
+    liff.login();
+  }
+  function addtocart(menuid, cb) {
+    var data2send = {
+      LINE_USER: LINE_USER,
+      menuid: menuid,
+      selectedprice: working.selectedprice,
+      main: main_web_site,
+      selectedoption: working.selectedoption,
+      qty: Number($('#qty_show').html()),
+      action: 'add'
     }
-    function addtocart(menuid,cb){
-      var data2send ={
-        LINE_USER: LINE_USER,
-        menuid:menuid,
-        selectedprice:working.selectedprice,
-        main:main_web_site,
-        selectedoption:working.selectedoption,
-        action:'add'
-        }
-      $.postJSON('/engine/order',data2send,(res)=>{
-          //alert("Add to Shopping Cart" + res.action );
-          if(res.result){
-            if(res.action =='selectprice'){ // Show Select Price
-              working.menuid = menuid;
-              working.menu = res.detail;
-              // go2View('menuview4add-main');
-              // return;
-              $('.select_price').show();
-                working.menuid = menuid;
-              if(res.detail.prices.length > 1){
-                working.selectprice = res.detail.prices;
-                set_selection(res.detail.prices);
+    $.postJSON('/engine/order', data2send, (res) => {
+      //alert("Add to Shopping Cart" + res.action );
+      console.log('log',res);
+      if (res.result) {
+        if (res.action == 'selectprice') { // Show Select Price
+          working.menuid = menuid;
+          working.menu = res.detail;
+          // alert(working.menuid)
+          // go2View('menuview4add-main');
+          // return false;
+          //   $('.select_price').show();
+          //   working.menuid = menuid;
+          //   if (res.detail.prices.length > 1) {
+          //     working.selectprice = res.detail.prices;
+          //     set_selection(res.detail.prices);
 
-              }
-              if(res.detail.option && res.detail.option.length > 0){
-                  set_select_option(res.detail);
-              }
+          //   }
+          //   if (res.detail.option && res.detail.option.length > 0) {
+          //     set_select_option(res.detail);
+          //   }
 
 
-              return;
-            }else{
-              working.order = res.detail;
-
-            }
-            $('.select_price').hide();
-            working.selectedprice = undefined;
-            working.selectedoption =undefined;
-            if(cb) cb(true);
-          }else{
-              alert(res.detail);
+          //   return;
+        } else {
+          working.order = res.detail;
+          if (working.order) {
+            update_shoppingcart();
+            $('#btn_add_cart').hide();
+            $('#mainview').hide();
+            $('#btn_qty_ad').hide();
+            $("#result-add").html("<strong>เพิ่มสินค้าไปยังรถเข็นเรียบร้อย</strong>").addClass('text-success pt-3 pb-3');
+            return false;
           }
 
+
+        }
+        // $('.select_price').hide();
+        working.selectedprice = undefined;
+        working.selectedoption = undefined;
+        if (cb) cb(true);
+      } else {
+        alert(res.detail);
+      }
+
+    });
+  }
+  function runApp(cb) {
+    addtocart(menuid, (re) => {
+
+      if (re) {
+        $("#result-add").html("<small>เพิ่มสินค้าไปยังรถเข็นแล้ว กรุณาเลือกราคาอาหาร</small>").addClass('text-success pt-3 pb-3');
+        showmenu();
+      } else {
+        $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
+      }
+
+    });
+
+  }
+
+  function showmenu() {
+    // update_shoppingcart();
+    if (!working.menu.images || !working.menu.images[0]) {
+      working.menu.imageshow = "https://www.kinarai.com/image/Kinarai.jpg"; //default image
+    } else {
+      working.menu.imageshow = `https://www.kinarai.com/cdn/image/menu/${working.menu.images[0]}`;
+    }
+    if (working.menu.prices.length == 1) {
+      working.menu.priceshow = '฿  ' + working.menu.prices[0].price;
+    }
+
+    $('#mainview').html(hash_replace(templatemain, 'MENU', working.menu)).show();
+    set_selection(working.menu.prices);
+
+    if (working.menu.option && working.menu.option.length > 0) {
+      set_select_option(working.menu);
+    }
+
+  }
+  function set_select_option(objdetail) {
+    // alert('option');
+    seldata = [];
+    if (!(Number(objdetail.optionlimit) > 0)) {
+      objdetail.optionlimit = 1;
+    }
+    if (Array.isArray(objdetail.option)) {
+      for (var x = 0; x < objdetail.option.length; x++) {
+        seldata.push({ name: objdetail.option[x] });
+      }
+    }
+
+    var select_check_template = $('#select_check_option').html();
+
+    $('#select_check_option').html(hash_replace(select_check_template, 'CHECK', seldata));
+    $('#select_check').show();
+
+  }
+
+  var select_price_template = $('#select_price_option').html();
+  function set_selection(allprice) {
+    if (allprice.length < 2) return;
+    for (var x = 0; x < allprice.length; x++) {
+      allprice[x].index = x;
+    }
+
+    $('#select_price_option').html(hash_replace(select_price_template, 'PRICE', allprice));
+    $('#select_price').show();
+
+  }
+
+  function add_qty() {
+    var temp = Number($('#qty_show').html());
+    temp++;
+    $('#qty_show').html(temp)
+  }
+  function rmv_qty() {
+    var temp = Number($('#qty_show').html());
+    temp--;
+    if (temp <= 1) temp = 1;
+    $('#qty_show').html(temp)
+  }
+
+
+  var temp = window.location.href.replace(liffstring + detail, '');
+  if (window.location.href !== temp) {
+    window.history.pushState({
+      callpath: 'addcart'
+    }, 'Add item to Shoppingcart', temp);
+  }
+
+  function add_to_cart(obj) {
+    var selectedprice, selectedcheckbox = [];
+    if (working.menu.status != 5) {
+      alert("เมนูไม่พร้อมให้บริการขณะนี้")
+      return;
+    }
+    if (working.menu.prices && working.menu.prices.length > 1) { // select price ?
+      var temp = $('.price_check:checked').val();
+      if (temp == undefined) return alert("กรุณาเลือก ราคา");
+      selectedprice = working.menu.prices[temp];
+    }
+
+    if (working.menu.option && working.menu.option.length > 0) {  // select option?
+
+      var total_select = 0;
+      $('.option_check:checked').each((i, el) => {
+        total_select++;
+        selectedcheckbox.push($(el).val());
       });
-    }
-    function runApp(cb){
-        addtocart(menuid,(re)=>{
-
-          if(re){
-              $("#result-add").html("เพิ่มสินค้าไปยังรถเข็นแล้ว").addClass('text-success pt-3 pb-3');
-          }else{
-              $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
-          }
-
-        });
-
-    }
-    function set_selection (allprice){
-
-        var html ='';
-        for(var x=0; x < allprice.length;x++){
-          html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
-        }
-            $('#menu_select').html(html);
-            $('#add_item_selectprice').show();
-
+      if (total_select > working.menu.optionlimit) {
+        return alert("ตัวเลือกเพิ่ม สามารถเลือกได้สูงสุดไม่เกิน " + working.menu.optionlimit + " รายการ");
       }
-      function update_price(){
-          var index = $('#menu_select').val();
-        //
+    }
+    $(obj).prop('disabled', true);
+    working.selectedprice = selectedprice;
+    working.selectedoption = selectedcheckbox;
+    addtocart(menuid, (re) => {
 
-
-          if(working.selectprice){
-              working.selectedprice = working.selectprice[index];
-          }
-          working.selectedoption = $('#menu_option').val();
-          runApp((re)=>{
-            if(re){
-              $('.select_price').hide('slow');
-            }
-          });
-
+      if (re) {
+        $('#btn_add_cart').hide();
+        $('#mainview').hide();
+        $('#btn_qty_ad').hide();
+        $("#result-add").html("<strong>เพิ่มสินค้าไปยังรถเข็นเรียบร้อย</strong>").addClass('text-success pt-3 pb-3');
+        setTimeout(() => {
+          liff.closeWindow();
+        }, 2000)
+      } else {
+        $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
       }
 
-    var temp = window.location.href.replace(liffstring+detail,'');
-    if(window.location.href !== temp){
-        window.history.pushState({
-          callpath: 'addcart'
-        }, 'Add item to Shoppingcart', temp);
+    });
+  }
+
+  function update_shoppingcart() {
+    if (working.order && working.order.items) {
+      working.order.totalitem = 0;
+      working.order.items.map((obj) => {
+        working.order.totalitem += obj.qty;
+      })
     }
+    $("#top_shopping_cart").html(hash_replace(template_cart, 'CART', working.order))
+    $('#icon_shoppingcart').animate({
+      width: '+=20px'
+    }, 200).animate({
+      width: '-=20px'
+    }, 200);;
+  }
 
-    function set_select_option(objdetail){
 
-      if(!(Number(objdetail.optionlimit) > 0) ){
-        objdetail.optionlimit =1;
-      }
-
-      var seldata = `<option disabled selected>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
-        if(objdetail.optionlimit > 1){
-          seldata = `<option disabled>เลือกรายการ ${objdetail.optionlimit} รายการ </option>`;
-           $('#menu_option').attr(  "multiple","multiple" );
-      //    seldata = `<option value='' disabled selected>--เลือกรายการ--</option>`;
-        }
-         if(Array.isArray(objdetail.option)){
-           for (var x = 0; x < objdetail.option.length; x++) {
-               seldata += '<option value="' +objdetail.option[x] + '"  >' + objdetail.option[x] + '</option>';
-           }
-         }
-         //$('#menu_option').select2('destroy');
-         $('#menu_option').off('change.select2');
-         $('#menu_option').html(seldata);
-         $('#add_item_selectoption').show();
-         if(objdetail.optionlimit ==1) return;  // not Select2
-         var select2option = {
-             tags: false,
-             tokenSeparators: [',', ' '],
-             allowClear: true,
-             maximumSelectionLength: objdetail.optionlimit
-         }
-        $('#menu_option').select2(select2option);
-
-    }
-    initializeLiff('addcart');
+  initializeLiff('addcart');
 
 //  $('#body_mainbody').load('/LIFF/preload.html');
 </script>

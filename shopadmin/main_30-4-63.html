@@ -1,0 +1,23 @@
+HELLO MAIN PAGE : /SHOPADMIN
+YOUR SHOP DETAIL22
+<span id='testshop'>
+    SHOPNAME : ##SHOP-name##
+
+    <hr>
+
+    SHOP OWNER = "##OWNER-displayName##"
+    <img src="##OWNER-pictureUrl##">
+  </span>
+  <hr>
+
+<script>
+  all_page = [];
+
+  register_all_page();  // Register SubPAGE
+
+  var template  = $('#testshop').html();
+  var temp1 = hash_replace(template,"SHOP",working.shop);
+$('#testshop').html(temp1);
+$('#testshop').html(hash_replace(temp1,"OWNER",working.shopowner));
+//$('#testshop').html(JSON.stringify(working.shop));
+  </script>
