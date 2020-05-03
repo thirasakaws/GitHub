@@ -1,0 +1,36 @@
+<script>
+
+//For Customer Register at QR Point or, any Require  LIFF APP
+
+all_page = ["register_first","covid19-form"];
+register_all_page();  // Register SubPAGE
+
+function runApp(){
+
+  //document.title =
+  //alert(firstgourl);
+  var shopid= working.shop ? working.shopid : undefined;
+  $.postJSON('/api/liff/check/customerinfo',{LINE_USER: LINE_USER ,shopid:shopid},(res)=>{
+
+
+
+
+    if(res.result){
+        working.customer  = res.detail;
+        if(working.customer.shopid && working.customer.shopid.length == 1 ){
+          //working.shopid = working.customer.shopid[0];
+        }
+        if(working.customer.approved){
+
+          go2View('covid19-form')
+
+        }else{
+
+          go2View('register_first')
+
+        }
+    }
+  });
+}
+initializeLiff('register');
+</script>

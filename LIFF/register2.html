@@ -16,7 +16,7 @@
                 <i class="fas fa-chevron-left"></i> Back
             </button>
         </div>
-        
+
         <div class="col-6 p-0 text-center">
             <span class="header-shop"> จัดการร้านอาหาร</span>
         </div>
@@ -54,7 +54,7 @@
                 <i class="fas fa-cogs"></i> ตั้งค่าร้าน
         </div>
     </div>  <!-- // ชื่อร้าน -->
-    
+
     <div class="d-flex justify-content-between mb-3">
         <div>
             <span  class="text-gray-light "> สถานะ :</span>
@@ -64,7 +64,7 @@
         </div>
     </div> <!-- // สถานะ -->
 
- 
+
 
     <div class="form-group row  border-light p-2">
         <label class="col-sm-4 text-gray-light " style="width:auto;">  การยืนยัน Order <span class="text-gray-light2">(Manual-Auto)</span> </label>
@@ -108,7 +108,7 @@
 
     <hr>
     <div id='shopbranch-select' class="row form-group p-2" >
-        <span  class="col-sm-12 col-xs-12 col-12 text-gray-light"> สาขา <span id="total_branch"></span></span> 
+        <span  class="col-sm-12 col-xs-12 col-12 text-gray-light"> สาขา <span id="total_branch"></span></span>
         <div class="col-sm-12 col-xs-12 col-12">
             <select class="form-control " id='shopbranch' ></select>
         </div>
@@ -120,7 +120,7 @@
                 <i class="fas fa-plus"></i> สร้างสาขา
             </button>
         </div>
-        
+
         <span class="btn btn-sm font-color-shop col-sm-4 col-xs-4 col-4 float-lg-right text-right" onclick='fncmanagebranch()' id='managebranch' style='display:none'>
             <i class="fas fa-cogs"></i> ตั้งค่าสาขา
         </span>
@@ -244,30 +244,18 @@
 
     console.log("Setting", working.shop);
     var template_shop_image_view;
-    $('#image_uploader').load('/LIFF/modal_file_upload.html', function () {
-            $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+
+    $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
         console.log(res.detail)
         working.shop = res.detail;
 
-        var data2post = {LINE_USER: LINE_USER, shopid: working.shop._id};
-        call_modal_image_upload({url: '/api/liff/shop/uploader', postdata: data2post}, (res) => {
-            // POST Image Finish
-            console.log('UPload finish', res);
-            if (res.result) {
-                if (res.detail && res.detail.images) {
-                    working.shop = res.detail;
-                    show_shop_image();
-                }
-            }
-        });
+
         template_shop_image_view = $('#shop_image_view_div').html();
         show_shop_image();
 
         loadnewdata()
     });
 
-
-    });
     $('#shop_image_preview_div').load('/LIFF/modal_view_shopimage.html');
     function loadnewdata(){
     setdatabyclass($('.main_data'), 'LINE', LINE_USER);

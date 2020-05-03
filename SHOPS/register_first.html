@@ -1,0 +1,166 @@
+<div class="container-fluid main_data">
+
+    <div class="row box-head-title-foodmall">
+        <div class="col-3 p-0 text-left">
+        </div>
+        <div class="col-6 p-0 text-center">
+            <span class="header-foodmall"> ลงทะเบียนผู้ใช้งาน</span>
+        </div>
+        <div class="col-3 p-0 text-right">
+<!--            <button class='btn border border-0 text-secondary' >
+                 Next <i class="fas fa-chevron-right"></i>
+            </button> // onclick ยังไม่ได้ใส่ ให้นะ -->
+        </div>
+    </div>
+
+
+        <div class="text-center">
+            <img class="CUSTOMER_pictureUrl img-fluid rounded-circle img-thumbnail mx-auto d-block" width="100px" height="100px" alt="...">
+           <div class="mt-3 mb-3">
+             <span class="text-center h4  CUSTOMER_displayName font-color-foodmall header-sub-title-foodmal"></span>
+           </div>
+        </div>  <!-- // Line Profile -->
+
+        <div class="row card">
+         <div class="card-body">
+
+             <div class="form-group row">
+               <div class="col in-line">
+                  Full Name :<input class="input_data_bn edit_data CUSTOMER_fullname w-90 " id="firstname" type="text" placeholder="Name-Last Name/ชื่อ-นามสกุล" data-field="fullname">
+               </div>
+             </div>   <!-- // -->
+ <!--
+             <div class="form-group row">
+               <div class="col d-inline d-inline-block ">
+                  Sex :
+
+                    <input name="gender" class="d-inline input_data_bn edit_data CUSTOMER_sex w-90 " id="male"  type="radio"  placeholder="Mr" data-field="sex"  value="Mr">
+                    <label for="male">Mr.</label><br>
+
+                   <input name="gender" class="d-inline input_data_bn edit_data CUSTOMER_sex w-90 " id="female"  type="radio"  placeholder="Msr" data-field="sex"   value="Msr">
+
+                  <label for="female">Ms.</label><br>
+
+
+               </div>
+             </div>   // -->
+
+             <div class="form-group row">
+               <div class="col">
+                   Age/อายุ : <input class="input_data_bn edit_data CUSTOMER_age w-90 " id="lastname"  type="text"  placeholder="Age/อายุ" data-field="age">
+               </div>
+             </div>   <!-- // -->
+
+             <div class="form-group row">
+               <div class="col">
+                   Mobile/เบอร์โทรศัพท์ : <input class="input_data_bn edit_data CUSTOMER_contact w-90 " placeholder="Mobile/เบอร์โทรศัพท์" oninput="inputContactHandler(event);" id="contact_customer" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)">
+               </div>
+             </div>   <!-- // -->
+
+
+              <div class="form-group row">
+                 <label class="col-12 font-color-foodmall-gray-light">** ยอมรับเงื่อนไขการใช้บริการ</label>
+             </div>  <!-- // -->
+
+
+             <div class="form-group row">
+               <div class="col">
+                  <button class='btn btn-success' onclick="return approvedata();">Register</button>
+                  <button class='btn btn-danger' onclick="liff.closeWindow();">Cancel</button>
+
+               </div>
+             </div>   <!-- // -->
+
+       </div>
+
+</div> <!-- // container-fluid  -->
+
+<script>
+  var showlistadd_temp = $('#address_list').html();
+    // setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+
+
+    //for input tag
+    $('.edit_data').Fusefield( (obj,cb,data)=>{
+      console.log("data",data);
+      $.postJSON('/api/liff/update/customerinfo', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+              cb(false);
+          }else {
+              res.detail ? working.customer = res.detail : false;
+            cb(true);
+          }
+      })
+    },(obj)=>{
+      return true;
+    });
+
+
+    function approvedata(){
+      var data= {LINE_USER: LINE_USER,approved:true,shopid:working.shop._id};
+
+          data.gender =  $('input:radio[name="gender"]:checked') ? $('input:radio[name="gender"]:checked') .val() :'male';
+
+      $.postJSON('/api/liff/validate/customerinfo', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+          }else {
+              res.detail ? working.customer = res.detail : false;
+              go2View('covid19-form');
+          }
+      })
+    }
+
+function refresh_cusmanage1(){
+        $.postJSON('/api/liff/check/customerinfo', {LINE_USER: LINE_USER}, function (res) {
+          if(res.result){
+            if(res.detail){
+                working.customer = res.detail;
+                if(!working.customer.firstname) working.customer.firstname ='';
+                if(!working.customer.lastname) working.customer.lastname ='';
+                if(!working.customer.mobileno) working.customer.mobileno ='';
+                setdatabyclass($('.main_data'), 'CUSTOMER', working.customer);
+                // return;
+            }
+            // $('#customerdetail').html(JSON.stringify(res.detail));
+
+          }else{
+            alert(res.detail);
+          }
+        });
+};
+    refresh_cusmanage1();
+
+function isNumberKey(e){
+  if(e){
+  if($('#contact_customer').val().toString().length>=10){
+    return false;
+  }
+var charCode = (e.which) ? e.which : event.keyCode
+
+if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+  return true;
+  }else{
+    alert('not have event')
+  }
+}
+
+function inputContactHandler(e) {
+  // alert("inputContactHandler: " + e.target.value);
+  var last_val = e.target.value.substr(e.target.value.length - 1);
+  // alert(e.target.value.substr(e.target.value.length - 1));
+  if (last_val < "0" || last_val > "9" || last_val == '.') {
+    e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+  }
+}
+
+
+
+
+
+
+
+
+  </script>

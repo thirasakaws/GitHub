@@ -1,0 +1,233 @@
+<link href="/css/glyphicons.css" rel="stylesheet">
+<!--<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+<link href="/css/pagination.css" rel="stylesheet" type="text/css"/>
+
+<!--      <script src="/js/bootstrap/bootstrap.min.js"></script>-->
+<script src="/js/popper.min.js"></script>
+
+
+<!--<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>-->
+<script src="/js/pagination.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
+<script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
+</script>
+
+<!--Fonts font-awesome -->
+<link href="/css/all.css" rel="stylesheet" type="text/css"/>
+<!--<link href="/css/font-awesome.css" rel="stylesheet" type="text/css"/>-->
+<!--<link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css"/>-->
+<!--<link href="/css/fontawesome5-overrides.min.css" rel="stylesheet" type="text/css"/>-->
+<script src="https://kit.fontawesome.com/a35a8bdf3f.js" crossorigin="anonymous"></script>
+
+<link href="/css/themify-icons.css" rel="stylesheet" type="text/css"/>
+<link href="/css/fonts.css" rel="stylesheet" type="text/css"/>
+<link href="/css/_navbar.scss"/>
+<link href="/css/Navigation-with-Button.css" rel="stylesheet" type="text/css"/>
+<!-- Style Css OLD
+<link href="/css/stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="http://fonts.googleapis.com/css?family=Raleway:400,200" type="text/css">
+-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="/css/select2.min.css" rel="stylesheet" />
+<script src="/js/select2.min.js"></script>
+<script src="/js/moments.min.js" type="text/javascript"></script>
+<script src="/js/advws_util.js?v=2" type="text/javascript"></script>
+<link href="/css/custom.css?v=1" rel="stylesheet" />
+<link href="/css/dashboard.css" rel="stylesheet">
+<link href="/css/custom_2.css?v=1" rel="stylesheet" />
+
+<header id='inc_menu_header'>  </header>
+
+<div class="container-fluid">
+    <div class="row">
+       <div id="inc_nav_left"></div>
+       <main id='mainpage_body' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-3 mb-3">
+
+            Staff Section
+            <br>
+            <!--    <center>
+                    <div class=" spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
+                        <span class="sr-only" >Loading...</span>
+                    </div>
+                </center>-->
+        </main> <!-- // Content  -->
+     </div> <!-- // Row  -->
+</div> <!-- // Container-fluid  -->
+
+
+
+<div class="modal fade bd-example-modal-lg" id="preload" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="d-flex justify-content-center" style="margin:auto;color:#ffffff;">
+            <div class="spinner-border text-primary" style="width:8rem;height: 8rem; font-size: 50px;" role="status" >
+                <span class="sr-only" >Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer style="margin-left: 0px !important;">
+    <div class="container-fluid my-auto">
+        <div class="d-flex justify-content-around">© Copyright KinArai.com</div>
+    </div>
+    <span class="TicketOrgID" style=" color: red;"></span>
+</footer>
+
+
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+
+<script>
+    var temp_url_permission,  working={};
+    var all_page = ['main','notallow'];
+
+         var firsttime_visit = true;
+         function register_all_page() {
+             for (var x = 0; x < all_page.length; x++) {
+                 var prefix = '/covid19/'
+                 if (all_page[x].indexOf('/') !== -1) {
+                     prefix = '/'
+                 }
+                 onPageshow(prefix + all_page[x], {obj: '#mainpage_body', url: '/covid/' + all_page[x] + '.html'}, function () {
+                     // obj is main_div  url ,real-url
+                     var url = window.location.href;
+                     var querysplit = url.split('/');
+                     var detailofview = querysplit[5];
+                     //screen_page_byname(detailofview);
+                 });
+
+             }
+         }
+         register_all_page();
+
+
+
+         if (!starturl)
+             starturl = 'main'
+         if (starturl == '/undefined') {
+             starturl = 'main'
+         }
+         if (starturl[0] == '/') {
+             starturl = starturl.replace('/', '');
+         }
+         if (!starturl)
+             starturl = 'main'
+
+
+         var alreadyinit = false;
+         function initializeApp() {
+             //console.log("init ok");
+             if (typeof (alreadyinit) == 'function') {
+                 alreadyinit();
+                 return;
+             }
+             if (alreadyinit)
+                 return;
+             //alreadyinit =true;
+             displayLiffData();
+             // check if the user is logged in/out, and disable inappropriate button
+             if (liff.isLoggedIn()) {
+                  var token = liff.getAccessToken();
+                 //console.log("user Loged in");
+                 //show logout button
+                 liff.getProfile().then(profile => {
+                     LINE_USER.token = token;
+                     LINE_USER.pictureUrl = profile.pictureUrl;
+                     LINE_USER.userId = profile.userId;
+                     LINE_USER.displayName = profile.displayName;
+                     LINE_USER.statusMessage = profile.statusMessage;
+                     console.log(profile);
+                     var tk =liff.getDecodedIDToken();
+                     if(tk){
+                        console.log("TOKEN:",JSON.stringify(tk));
+                         LINE_USER.getDecodedIDToken = tk.email;
+                     }
+
+                     runApp();
+                     alreadyinit = runApp;
+                 }).catch(err => {
+                     if (typeof (fnc_noprofile) == 'function')
+                         fnc_noprofile();
+                     console.log("Error Getprofile", err)
+                 });
+             } else {
+                 console.log("user NOT LOG in");
+                // alert("LOGIN")
+                 liff.login();  // Web Login
+                 //show login Button
+             }
+         }
+
+         function initializeLiff() {
+
+           if(alreadyinit) {
+             if(typeof(runApp) =='function') runApp();
+             return;
+           }
+             console.log("INIT ", myLiffId);
+             liff.init({liffId: myLiffId}, initializeApp, err => {
+                 console.log("INIT FAIL", myLiffId)
+                 console.log(err.code, err.message)
+             });
+         }
+         var LINE_USER = {};
+         function displayLiffData() {
+
+             LINE_USER.browserLanguage = liff.getLanguage();
+             LINE_USER.sdkVersion = liff.getVersion();
+             LINE_USER.isInClient = liff.isInClient();
+             LINE_USER.isLoggedIn = liff.isLoggedIn();
+             LINE_USER.deviceOS = liff.getOS();
+             //console.log(LINE_USER);
+         }
+     // First Time
+
+         var firstgourl = starturl;
+         var tempsharp = starturl.indexOf('#');
+         if (tempsharp !== -1) {
+             firstgourl = starturl.substr(0, tempsharp);
+         }
+         var tempsharp = firstgourl.indexOf('?');
+         if (tempsharp !== -1) {
+             firstgourl = firstgourl.substr(0, tempsharp);
+         }
+     //console.log("LOAD "+firstgourl);
+
+     //go2View(starturl);
+
+      // $('#mainpage_body').load('/shopadmin/' + firstgourl + '.html');
+
+       //  #### Setting ########## For LINE APP
+         var myLiffId = '1653987624-42LYP6Vk';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+       //  #### END  Setting ########## For LINE APP
+
+       function runApp() {
+           console.log("RUN APP");
+           $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
+               if (res.result) {
+                 $('#inc_menu_header').load('/covid/inc_nav.html');
+                 $('#inc_nav_left').load('/covid/inc_nav_left.html');
+                 console.log("LOGED in")
+                 console.log(res);
+                 if (typeof(res.detail) =='object' && res.detail._id > 0) {    // มีร้านอยู่แล้ว
+                     working.shop = res.detail;
+                     working.shopowner = res.shopowner;
+                   //  go2View('register2');
+                      go2View(firstgourl);
+                     return;
+                 }else{
+                   alert("ร้านค้าคุณยังไม่สามารถเข้าใช้งานในระบบได้")
+                   go2View('notallow');
+                 }
+
+               }else{
+                 alert(res.detail)
+               }
+           });
+
+       }
+       initializeLiff();
+
+     </script>

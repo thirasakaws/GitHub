@@ -11,7 +11,7 @@
 //  #### END  Setting ########## For LINE APP
 
     function runApp() {
-        console.log("RUN APP");
+        console.log("RUN APP");        
         $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
             console.log("REsult back:");
             console.log(res);
@@ -25,7 +25,7 @@
                     go2View('register2');
                     return;
                 }
-    
+
                go2View('register1-2');
             } else {
 

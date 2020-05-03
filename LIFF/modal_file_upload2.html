@@ -7,7 +7,7 @@
 <label class="btn btn-sm btn-orange btn-upload ml-auto" for="image_uploader_btn" title="Upload image file">
       <input type="file" class="sr-only" id="image_uploader_btn" name="file" accept="*" onchange="upload_shopimage(this);">
       <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
-          <span class="btn btn-submit-shop btn-sm"><i class="fas fa-plus"></i> เพิ่มรูป (10Mb Max)</span>
+          <span class="btn btn-submit-shop btn-sm"><i class="fas fa-plus"></i> เพิ่มรูป (10Mb Max...)</span>
       </span>
  </label>
 </div>
@@ -43,88 +43,39 @@
 var upload_url ='';
 var resize = false;
 var postdata = undefined;
-
-
-
-
-
 function upload_shopimage(obj){
-  if (typeof(resize)=='object' && resize) {
-      try{
-          resize.destroy()
-      }catch(e){
-//        alert(e)
-      }
-
-      resize=false;
-  }
-  $('#viewupload_image').off("load");
-  $('#viewupload_image').on("load", function() {
-
-
-         var image_resize =  $('#viewupload_image').attr('src');
-         var img = document.getElementById( 'viewupload_image' );
-         resize = new Croppie(img, {
-            viewport: { width: 280, height: 280 },
-            boundary: { width: 300, height: 300 },
-           // showZoomer: false,
-         //    enableResize: true,
-           enableOrientation: true,
-         //    mouseWheelZoom: 'ctrl'
-         });
-
-         resize.bind({
-            url: image_resize
-         });
-  });
 
   $('#imageuploading').show();
   var file = $(obj)[0].files[0];
   if(file.size > 2000000){
       //close_croppie_modal();
-  //    alert("ไฟล์ของคุณมีขนาดใหญ่ \r\n การตกแต่งภาพอาจจะ Error เนื่องจาก RAM ไม่เพียงพอได้");
+      //alert("ไฟล์ของคุณมีขนาดใหญ่ \r\n การตกแต่งภาพอาจจะ Error เนื่องจาก RAM ไม่เพียงพอได้");
       //return;
   }
  var reader = new FileReader();
   $('#modal_file_crop').modal('show');
 
-
  reader.onload = function(e) {
-         var img = new Image();
-         var canvas = document.createElement( 'canvas' );
-
-         img.onload = function() {
-           var width = img.width;
-           var height = img.height;
-           var MAX_WIDTH = 1000;
-           var MAX_HEIGHT = 1000;
-
-           // Resize maintaining aspect ratio
-           if ( width > height ) {
-               if ( width > MAX_WIDTH ) {
-                   height *= MAX_WIDTH / width;
-                   width = MAX_WIDTH;
-               }
-           } else {
-               if ( height > MAX_HEIGHT ) {
-                   width *= MAX_HEIGHT / height;
-                   height = MAX_HEIGHT;
-               }
-           }
-           canvas.width = width;
-           canvas.height = height;
-//           alert(width +":"+height)
-             var ctx = canvas.getContext( "2d" );
-           // Copy the image to the canvas and resize it.
-             ctx.drawImage( img, 0, 0, width, height );
-            // canvas.toBlob((blob) => {
-
-             $('#viewupload_image').attr('src',canvas.toDataURL())
-
-         } ;
-         img.src = e.target.result;
+       $('#viewupload_image').attr('src', e.target.result);
 
 
+
+
+       var re = $('#viewupload_image').attr('src')
+       var el = document.getElementById('viewupload_image');
+       resize = new Croppie(el, {
+           viewport: { width: 280, height: 280 },
+           boundary: { width: 300, height: 300 },
+          // showZoomer: false,
+       //    enableResize: true,
+          enableOrientation: true,
+       //    mouseWheelZoom: 'ctrl'
+       });
+       resize.bind({
+           url: re,
+       });
+
+  //   $('#image_preview_area').attr('src', e.target.result).show();   // use when saving..
 
 
  };
@@ -151,7 +102,7 @@ function upload_image_crop(){
 
 }
 function clear_upload_area(){
-    if (typeof(resize)=='object') {
+    if (resize) {
         resize.destroy()
     }
    $('#image_preview_area').attr('src', '').hide();

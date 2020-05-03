@@ -1,0 +1,124 @@
+<div class="container-fluid main_data">
+<div class="row box-head-title-foodmall">
+    <div class="col-12 p-0 text-center">
+        <span class="header-foodmall">แบบคัดกรองการแพร่ระบาด <br>เชื้อไวรัส Covid 19 (Self-Screening)</span>
+        <br> ***เพื่อให้เป็นไปตามประกาศของรัฐ***
+    </div>
+
+</div>
+
+<hr>
+<div class=" row" id='main_area'>
+  สวัสดีครับ <!--<img src="##CUSTOMER-pictureUrl##" height="50px"> -->  คุณ ##CUSTOMER-fullname##
+
+  <br>
+  Mobile No : ##CUSTOMER-contact##
+  <br>
+  Age: ##CUSTOMER-age##
+<div class="row card">
+
+   <div class="card-body">
+
+  1.	ท่านมีอาการดังต่อไปนี้ หรือไม่ <br> Do you have any of these Symptoms?
+        <div class="col-12 p-0 text-left">
+            <form>
+            <input name="Symptoms" id="Cough"  type="radio"  value="Cough">
+            <label for="Cough">ไอ [Cough]</label><br>
+            <input name="Symptoms" id="Sore"  type="radio"  value="Sore">
+            <label for="Sore">เจ็บคอ [Sore throats]</label><br>
+            <input name="Symptoms" id="Runny"  type="radio"  value="Runnynose">
+            <label for="Runny">น้ำมูกไหล [Runny nose]</label><br>
+            <input name="Symptoms" id="none"  type="radio"  value="none" checked>
+            <label for="none">ไม่มีอาการเหล่านี้ [None of these Symptoms]</label><br>
+            </form>
+        </div>
+
+
+  </div>
+</div>
+
+
+<div class="row card">
+
+   <div class="card-body">
+
+2.	ท่านมีประวัติเดินทางมาจากประเทศจีน, ญี่ปุ่น, สิงคโปร์, เกาหลีใต้, ฮ่องกง, ไต้หวัน, มาเก๊า, เยอรมัน, ฝรั่งเศส หรือพื้นที่ที่มีการระบาดของโรคไวรัสโควิด-19 ในช่วงเวลา 14 วัน ก่อนเริ่มป่วย ใช่หรือไม่ ?
+
+ <br>Do you have traveled from China, Japan, Singapore, Republic of Korea, Hongkong, Taiwan, Macao, Germany, France or Novel Coronavirus 2019 outbreak areas
+ within the past 14 days before getting sick?
+        <div class="col-12 p-0 text-left">
+            <form>
+            <input name="travel" id="yes"  type="radio"  value="yes">
+            <label for="yes">ใช่ [Yes] </label><br>
+            <input name="travel" id="no"  type="radio"  value="no" checked >
+            <label for="no">ไม่ใช่ [No]</label><br>
+            </form>
+        </div>
+
+
+  </div>
+</div>
+
+
+
+<div class="row card">
+
+   <div class="card-body">
+
+3.	ท่านมีประวัติสัมผัสใกล้ชิดกับผู้ป่วยที่ต้องสงสัยการติดเชื้อโรคไวรัสโคโรนาสายพันธุ์ใหม่ 2019 หรือมีอาชีพที่มีโอกาสสัมผัสนักท่องเที่ยวต่างชาติ หรือไม่ ?
+
+ <br>Do you have contact with suspected or have career opportunities with foreign tourists ?
+        <div class="col-12 p-0 text-left">
+          <form>
+            <input name="contact" id="contactyes"  type="radio"  value="yes">
+            <label for="contactyes">ใช่ [Yes] </label><br>
+            <input name="contact" id="contactno"  type="radio"  value="no" checked>
+            <label for="contactno">ไม่ใช่ [No]</label><br>
+            </form>
+        </div>
+
+
+  </div>
+</div>
+
+  </div>   <!-- // -->
+<div>
+
+
+
+        <div class="col">
+
+           <button class='btn btn-success' onclick="return user_checkin();" id="timeuse"> เข้าใช้บริการ </button>
+
+        </div>
+<BR>
+  กรุณา กรอกแบบฟอร์มนี้ก่อน
+  <br>
+  เข้าใช้บริการ
+  </div>
+</div>
+<script>
+  // extract Branch =
+  var template = $('#main_area').html();
+  $('#timeuse').html("Confirm Check in Date <br> " + moment().format('D MMMM  YYYY, hh:mm '));
+  $('#main_area').html(hash_replace(template,"CUSTOMER",working.customer));
+  function user_checkin(){
+    var data= {LINE_USER: LINE_USER,checkingpoint:'branch'};
+    data.contact = $('input:radio[name="contact"]:checked').val();
+    data.travel =  $('input:radio[name="travel"]:checked').val();
+    data.symptoms =  $('input:radio[name="Symptoms"]:checked').val();
+    data.shopid =   working.shop._id;
+    if(!data.travel){
+      alert("Please Select Travel");
+      return;
+    }
+    data.branch = getParameterByName('branch',url);
+    $.postJSON('/api/liff/covid19/checkin', data, function (res) {
+        if (!res.result) {
+            alert(res.detail);
+        }else {
+          go2View('thankyou')
+        }
+    })
+  }
+</script>

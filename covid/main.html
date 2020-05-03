@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
+  <h1 class="h2" id="shopnameh2">Covid19-Form </h1>
+    <span> Covid19-Form </span>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+    </div>
+  </div>   <!-- // Title  -->
+
+ <h3>Customer Check-in</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Image</th>
+          <th>DisplayName  </th>
+          <th>Full Name</th>
+          <th>Check-in</th>
+          <th>Branch</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody id="table_customer_checkin" >
+        <tr >
+          <td>##CUS-id##</td>
+          <td><img src="##CUS-pictureUrl##" class='img round' height="80px"></td>
+          <td>##CUS-displayName##</td>
+          <td>##CUS-fullname##</td>
+          <td>##CUS-checkintime##</td>
+          <td>##CUS-branch##</td>
+          <td>##CUS-checkindetail##</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+<script>
+  var template_covidform = $('#table_customer_checkin').html();
+  $('#table_customer_checkin').html('');
+  $.postJSON('/api/liff/covid19/getrecord', {LINE_USER: LINE_USER}, function (res) {
+    if(res.result){
+      if(res.detail){
+          res.detail.map( (obj)=>{
+              obj.displayName = obj.customerid.displayName;
+              obj.fullname = obj.customerid.fullname;
+              obj.checkintime = moment(obj.customerid.createdate,'X').format('D MMMM  YYYY, hh:mm ');
+              obj.pictureUrl = obj.customerid.pictureUrl;
+              obj.checkindetail = "Travel from Country: <b>" + obj.travel;
+              obj.checkindetail += "</b><br>Contact Person: <b>" + obj.contact;
+              obj.checkindetail += "</b><br>Symptoms: <b>" + obj.symptoms + "</b>";
+          });
+        $('#table_customer_checkin').html(hash_replace(template_covidform,'CUS',res.detail));
+        console.log(res.detail);
+      }
+  }else{
+      alert(res.detail);
+    }
+  });
+  $('#shopnameh2').html(working.shop.name);
+</script>
