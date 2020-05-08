@@ -1,0 +1,394 @@
+                        
+<div class="row">
+    <div class=" col-md-12 col-12">
+        <h5 class="text-center">รายการออร์เดอร์ทั้งหมด</h5>
+        <div class="row">
+            
+            <div class="text-left col-12 col-md-12  col-lg-12 p-2">
+                <span class="mb-2">ค้นหา Order ID </span><input id="search_text" class="mb-2" type="text">
+                 <span class="mb-2">ค้นหาจากวันที่ </span><input id="search_date_from" class="mb-2" type="date">
+                  <span class="mb-2">ถึง </span><input id="search_date_to" class="mb-2" type="date">
+                  <span class="mb-2">ประเภทการชำระ</span>
+                  <select class="mb-2" id="search_payment" >
+                      <option value="">-------แสดงทั้งหมด-------</option>
+                      <option value="1">เงินสด</option>
+                      <option value="2">QR Payment</option>
+                  </select>
+                  <span class="mb-2">สถานะ</span>
+                  <select class="mb-2" id="search_status" multiple="multiple">
+                      <!--<option value="">---------------------แสดงทั้งหมด---------------------</option>-->
+                        <option value="1">มาใหม่</option>
+                        <option value="4">รายการแก่ไข</option>
+                        <option value="5">รายการใหม่รอลูกค้ายืนยัน</option>
+                        <option value="6">ยกเลิก</option>
+                        <option value="7">ลูกค้ารอร้านยืนยันรายการ</option>
+                        <option value="10">รอการชำระเงินจากลูกค้า</option>
+                        <option value="11">ลูกค้าชำระเงินแล้ว</option>
+                        <option value="12">ลูกค้าจะชำระเงินแบบ COD</option>
+                        <option value="14">ร้านค้าตอบรับ Order แล้ว</option>
+                        <option value="15">ร้านกำลังดำเนินการ</option>
+                        <option value="16">ร้านดำเนินการเสร็จแล้ว</option>
+                        <option value="17">Rider รับสินค้าแล้ว</option>
+                        <option value="23">ยกเลิก เพราะลูกค้าไม่จ่ายเงินผ่าน QR ภายในเวลาที่กำหนด</option>
+                        <option value="24">ร้านค้าไม่กดรับรายการ ภายในเวลาที่กำหนด
+                        <option value="26">ยกเลิก จากร้าน</option>
+                         <option value="27">ยกเลิก จากลูกค้า </option>
+                  </select>
+                  
+                  <button class="mb-2" type="button" onclick="return search_data()">
+                      <i class="fa fa-search fa-1x"> ค้นหา</i>
+                  </button>
+                  <button class="mb-2" type="button">
+                      <i class="fa fa-download fa-1x"> Export Excel</i>
+                  </button>
+            </div>
+          
+        </div>
+        
+    <div class="" style="padding-bottom:30px">
+        <div class="pagination_bar ">
+        </div>
+    </div>
+    </div>
+<div class="text-center col-md-12 col-12">
+    <div class="table-responsive">
+        <table  class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th class="text-center" style="width: 80px;">ID</th>
+                    <th>ชื่อ-นามสกุล (ลูกค้า)</th>
+                    <th>เบอร์ติดต่อ</th>
+                    <th>ประเภทการชำระ</th>
+                    <th>ราคาสินค้า(รวม VAT)</th>
+                    <th>ค่าจัดส่ง</th>
+                    <th>ยอดรวมสุทธิ(รวม VAT)</th>
+                    <th>วันที่ทำรายการ</th>
+                    <th>วันที่แก้ไขล่าสุด</th>
+                    <th>สถานะ</th>
+
+                </tr>
+            </thead>
+
+            <tbody id='order_template'>
+                <tr style=''>
+                    <td class="text-center order_id " >##ORDER-id##</td>
+                    <td class="text-left" ><span>##ORDER-first_name##</span>&nbsp&nbsp&nbsp&nbsp<span>##ORDER-last_name##</span></td>
+                    <td class="text-left">##ORDER-contact_no##</td>
+                    <td class="text-left">##ORDER-paytype##</td>
+                    <td class="text-left">##ORDER-totalcostvat##</td>
+                    <td class="text-left">##ORDER-logistic_cost##</td>
+                    <td class="text-left">##ORDER-grandtotalvat##</td>
+                    
+                    <td class="text-left">##ORDER-createtime##</td>
+                    <td class="text-left">##ORDER-lasttime##</td>
+                    <td class="text-left">##ORDER-statustext##</td>
+
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class=" col-md-6 col-6">
+        <h5>ยอดรวมแยกตามประเภทการชำระ</h5>
+    <div class="table-responsive">
+        <table  class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th class="text-center">ประเภทการชำระ</th>
+                    <th class="text-center">ยอดรวมสุทธิ(รวม VAT)</th>
+
+                </tr>
+            </thead>
+
+            <tbody id='paymenttype_template'>
+                <tr style=''>
+
+                    <td class="text-center" >##PAYMENTTYPE-id##</td>
+                    <td class="text-right">##PAYMENTTYPE-sumgrandtotal##</td>
+                </tr>
+            </tbody>
+            <tbody >
+                <tr style=''>
+                    <td class="text-center order_id ">รวมทั้งสิน</td>
+
+                    <td class="text-right" id='sumary_template'></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+</div>
+<script>
+    console.log(working)
+    console.log("LINE_USER :", LINE_USER)
+    
+    var template_main = $("#order_template").html();
+    var paymenttype_template = $("#paymenttype_template").html();
+
+    $('#search_status').select2()
+    
+//    $.postJSON('/api/data/kinarai/control/order_list',{LINE_USER:LINE_USER},function(data){
+//        console.log(data)
+//    })
+
+     var PAYMENT = [];
+    PAYMENT[1] = 'เงินสด';
+    PAYMENT[2] = 'QR Payment';
+    
+    var STATUSSHOW = [];
+    STATUSSHOW[1] = 'มาใหม่';
+    STATUSSHOW[4] = 'รายการแก่ไข';
+    STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
+    STATUSSHOW[6] = 'ยกเลิก';
+    STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
+    STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
+    STATUSSHOW[11] = 'ลูกค้าชำระเงินแล้ว';
+    STATUSSHOW[12] = 'ลูกค้าจะชำระเงินแบบ COD';
+    STATUSSHOW[14] = 'ร้านค้าตอบรับ Order แล้ว';
+    STATUSSHOW[15] = 'ร้านกำลังดำเนินการ';
+    STATUSSHOW[16] = 'ร้านดำเนินการเสร็จแล้ว';
+    STATUSSHOW[17] = 'Rider รับสินค้าแล้ว';
+    STATUSSHOW[23] = 'ยกเลิก เพราะลูกค้าไม่จ่ายเงินผ่าน QR ภายในเวลาที่กำหนด';
+    STATUSSHOW[24] ='ร้านค้าไม่กดรับรายการ ภายในเวลาที่กำหนด'
+    STATUSSHOW[26] = 'ยกเลิก จากร้าน';
+     STATUSSHOW[27] = 'ยกเลิก จากลูกค้า ';
+
+
+refreshPage()
+
+    
+
+var searchfunction;
+var searchobj={}
+var searchquery = {};
+function refreshPage(){
+    
+    
+$('#preload').modal('show');
+    var search_setting = {
+        posturl: '/api/data/kinarai/control/order_list',
+        paginationDIV: $('.pagination_bar'),
+        pagesize: 10,
+        showfunction: set_data_table,
+        search:{LINE_USER:LINE_USER},
+        limit: 20
+    }
+    searchfunction = ADV_search(search_setting);
+}
+
+    $('#search_date_from').change(function(){
+        console.log($('#search_date_from').val())
+            $('#search_date_to').attr('min',$('#search_date_from').val())
+
+    })
+    $('#search_date_to').change(function(){
+        console.log($('#search_date_to').val())
+            $('#search_date_from').attr('max',$('#search_date_to').val())
+    })
+
+//searchobj={search:{LINE_USER:LINE_USER}}
+    function set_data_table(objdata, totalrecord){
+       console.log("Found data", objdata);
+//        $("#total_item").text(' ' + totalrecord);
+        if(searchobj.search){
+            getPaymentSum(searchobj)
+        }else{
+
+            getPaymentSum({search:{LINE_USER:LINE_USER}})
+        }
+        
+        if (objdata.length == 0) {
+            console.log('null');
+            $('#order_template').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+        }else{
+            objdata.map((obj)=>{
+                 obj.lasttime = moment(obj.lastupdate,'X').format('วันที่ D/M/Y เวลา H:mm:ss ');
+                 obj.createtime = moment(obj.createdate,'X').format('วันที่ D/M/Y เวลา H:mm:ss ');
+                 if(obj.contact){
+                     obj.contact_no= obj.contact
+                 }else{
+                     obj.contact_no ='-'
+                 }
+                 if(obj.firstname){
+                     obj.first_name= obj.firstname
+                 }else{
+                     obj.first_name =''
+                 }
+                 if(obj.lastname){
+                     obj.last_name= obj.lastname
+                 }else{
+                     obj.last_name =''
+                 }
+                 
+                 if(obj.totalcost){
+                     obj.totalcostvat= addCommas(obj.totalcost)
+
+                 }else{
+                     obj.totalcostvat =''
+                 }
+                 if(obj.grandtotal){
+                     obj.grandtotalvat= addCommas(obj.grandtotal)
+                 }else{
+                     obj.grandtotalvat =''
+                 }
+                 if(obj.logisticcost){
+                     obj.logistic_cost= addCommas(obj.logisticcost)
+
+                 }else{
+                     obj.logistic_cost =''
+                 }
+                obj.paytype = PAYMENT[obj.paymenttype];
+                obj.statustext = STATUSSHOW[obj.status];
+             });
+            
+            var temp = hash_replace(template_main, 'ORDER', objdata)
+//            console.log(temp)
+            $('#order_template').html(temp)
+            
+            
+        }
+        setTimeout(function(){ $('#preload').modal('hide'); }, 500);
+        
+    }
+    
+    
+    function getPaymentSum(objdatasearch){
+        console.log(objdatasearch)
+        $.postJSON('/api/data/kinarai/control/order_sumary_payment',objdatasearch,function(datasum){
+            console.log(datasum)
+            
+//             objdata.map((obj)=>{
+//                 obj.contact_no= obj.contact
+//            });
+            var template = hash_replace(paymenttype_template, 'PAYMENTTYPE', datasum)
+//            console.log(temp)
+            $('#paymenttype_template').html(template)
+            var sum=0
+             datasum.map((obj)=>{
+                 if(obj.sumgrandtotal){
+                     sum= sum+obj.sumgrandtotal
+                 }
+                 
+            });
+            $('#sumary_template').html(addCommas(sum))
+//            console.log(temp)
+//            $('#sumary_template').html(sum)
+            
+        });
+    }
+
+    function search_data(){
+        //searchdate
+        searchobj={}
+        searchquery = {};
+        var search_date_from = $('#search_date_from').val();
+        var search_date_to = $('#search_date_to').val();
+        var textsearch = $('#search_text').val()
+        var search_status = $('#search_status').val();
+        var search_payment =$('#search_payment').val();
+        
+        if (search_date_from || search_date_to) {
+            if (search_date_from) {
+                var date_test = new Date(search_date_from);
+                var d = date_test.getDate()
+                var m = date_test.getMonth();
+                var y = date_test.getFullYear();
+                searchquery.datefrom = {
+                    d: d,
+                    m: m,
+                    y: y
+                }
+
+            }
+            if (search_date_to) {
+                var date_test2 = new Date(search_date_to);
+                var d2 = date_test2.getDate()
+                var m2 = date_test2.getMonth();
+                var y2 = date_test2.getFullYear();
+                searchquery.dateto = {
+                    d2: d2,
+                    m2: m2,
+                    y2: y2
+                }
+
+            }
+        }
+        //searchpayment
+        
+        
+        if(textsearch){
+            searchquery.text = textsearch
+        }
+        if(search_payment){
+            searchquery.paymenttype = search_payment
+        }
+        if(Array.isArray(search_status)&&search_status.length>0){
+            searchquery.status = {$in:search_status}
+        }
+        searchquery.LINE_USER =LINE_USER
+        searchobj = {search:searchquery}
+        console.log(searchobj)
+
+        searchfunction(searchobj);
+
+    }
+    
+    
+    
+    
+    function downloadexcel() {
+        $('#preload').modal('show');
+        console.log("Downloaded");
+        $('#download_excel').attr("disabled", true);
+//      searchobj.downloadexcel = true;
+//      console.log('data :post :', searchobj);
+
+//      $(searchobj).extend({
+//         downloadexcel: true
+//      });
+        console.log('Download XLS true')
+//      console.log('data :post :', searchobj);
+        search_date('load')
+
+//      $.postJSON('/api/data/ticket/order_search', searchobj, function (data) {
+//         console.log(data)
+//      });
+        Object.assign(searchquery, {downloadexcel: true});
+//        if (searchquery.page || searchquery.limit) {
+//            delete searchquery.page
+//            delete searchquery.limit
+//        }
+//        $.postJSON('/api/data/ticket/order_export', searchquery, function (data) {
+//            $('#download_excel').removeAttr("disabled");
+//            var a = document.createElement('a');
+//            var url = window.URL.createObjectURL(data);
+//            a.href = url;
+//            a.download = 'report_order_list.xls';
+//            document.body.append(a);
+//            a.click();
+//            a.remove();
+//            window.URL.revokeObjectURL(url);
+//        })
+
+        var nowdate = new Date()
+        var day_ex = nowdate.getDate()
+        var month_ex = nowdate.getMonth() + 1
+        var year_ex = nowdate.getFullYear();
+        $.postJSON('/api/data/ticket/order_export', searchquery, function (blob) {
+            var a = document.createElement('a');
+            a.href = 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(blob);
+            a.download = 'order_list_' + day_ex + '-' + month_ex + '-' + year_ex + '.xls';
+            document.body.append(a);
+            a.click();
+            a.remove();
+            $('#download_excel').removeAttr("disabled");
+            $('#preload').modal('hide');
+        });
+    }
+    
+    
+</script>

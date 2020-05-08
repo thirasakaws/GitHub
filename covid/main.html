@@ -44,8 +44,8 @@
       if(res.detail){
           res.detail.map( (obj)=>{
               obj.displayName = obj.customerid.displayName;
-              obj.fullname = obj.customerid.fullname;
-              obj.checkintime = moment(obj.customerid.createdate,'X').format('D MMMM  YYYY, hh:mm ');
+              obj.fullname = obj.customerid.fullname  + "<BR>" + obj.customerid.contact;
+              obj.checkintime = moment(obj.createdate,'X').format('D MMMM  YYYY, hh:mm ');
               obj.pictureUrl = obj.customerid.pictureUrl;
               obj.checkindetail = "Travel from Country: <b>" + obj.travel;
               obj.checkindetail += "</b><br>Contact Person: <b>" + obj.contact;

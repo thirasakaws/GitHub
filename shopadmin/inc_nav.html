@@ -1,22 +1,47 @@
+<!-- topmenu --> 
+
 <nav id="owner_data" class="navbar navbar-light fixed-top bg-white flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0 bg-white" href="#">
 	 <img src="https://www.kinarai.com/asset/img/logo.png" class="img-fluid logo-size">
   </a>
+	
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 <!--  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
   <ul class="navbar-nav px-3-2 pr-3 text-right " style="width: 412px;">
+	  
+	  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="##OWNER-pictureUrl##" class="img-fluid rounded-circle profile-icons shadow">
+            <span class="font-weight-normal"> ##OWNER-displayName## </span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+			  ออกจากระบบ  <ion-icon size="small" name="log-out-outline"></ion-icon>
+			</a>
+<!--
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+-->
+        </div>
+      </li> 
+	  
+	  
+<!--
     <li class="nav-item d-inline text-nowrap">
         <div class="pr-2 pt-1 align-self-center d-inline"> 
             <ion-icon name="notifications-outline" size="small"></ion-icon>
         </div>
-        <div class="pr-3 d-inline"><!-- // ยินดีต้อนรับ --> 
+        <div class="pr-3 d-inline"> // ยินดีต้อนรับ  
             
             
             <img src="##OWNER-pictureUrl##" class="img-fluid rounded-circle profile-icons shadow">
             <span class="font-weight-normal"> ##OWNER-displayName## </span>
         </div>
 		
-<!--        <a class="nav-link d-inline pr-2 font-color-shop" href="#">เปลี่ยนรหัสผ่าน</a>
-        <span> | </span>-->
+        <a class="nav-link d-inline pr-2 font-color-shop" href="#">เปลี่ยนรหัสผ่าน</a>
+        <span> | </span>
         <div class="d-inline">	
             <a class="nav-link d-inline font-color-shop pl-1" href="#">ออกจากระบบ  
                 <ion-icon size="small" name="log-out-outline"></ion-icon>
@@ -24,6 +49,7 @@
         </div>
         
     </li>
+-->
   </ul>
 </nav> <!-- // topmenu right --> 
 

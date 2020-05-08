@@ -1,12 +1,12 @@
 <link href="/css/glyphicons.css" rel="stylesheet">
-<!--<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="/css/pagination.css" rel="stylesheet" type="text/css"/>
 
-<!--      <script src="/js/bootstrap/bootstrap.min.js"></script>-->
-<script src="/js/popper.min.js"></script> 
+      <!--<script src="/js/bootstrap/bootstrap.min.js"></script>-->
+<script src="/js/popper.min.js"></script>
 
 
-<!--<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>-->
+<script src="/js/bootstrap_4.3.1.min.js" type="text/javascript"></script>
 <script src="/js/pagination.min.js" type="text/javascript"></script>
 <script src="/js/bootstrap-editable.min.js" type="text/javascript"></script>
 <script  src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtmaHPJrAuVbP8tpx2ng09cKyf9z1tR34">
@@ -131,14 +131,14 @@
 
 
     /*  ----- dashboard ------ */
-    
+
 </style>
 <header id='inc_menu_header'>  </header>
 
-<div class="container-fluid"> 
+<div class="container-fluid">
     <div class="row">
        <div id="inc_nav_left"></div>
-       <main id='mainpage_body' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-3 mb-3">
+       <main id='mainpage_body' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-0 mb-3">
 
             Staff Section
             <br>
@@ -147,9 +147,9 @@
                         <span class="sr-only" >Loading...</span>
                     </div>
                 </center>-->
-        </main> <!-- // Content  --> 
-     </div> <!-- // Row  --> 
-</div> <!-- // Container-fluid  --> 
+        </main> <!-- // Content  -->
+     </div> <!-- // Row  -->
+</div> <!-- // Container-fluid  -->
 
 
 
@@ -164,9 +164,11 @@
 </div>
 
 
-<footer style="margin-left: 0px !important;">
-    <div class="container-fluid my-auto">    
-        <div class="d-flex justify-content-around">© Copyright KinArai.com</div>     
+<footer class="mt-3 mb-4">
+    <div class="container-fluid my-auto">
+        <div class="d-flex justify-content-around">
+			<span class="text-secondary">Copyright ©2020 KinArai.com All rights reserved.</span>
+		</div>
     </div>
     <span class="TicketOrgID" style=" color: red;"></span>
 </footer>
@@ -174,13 +176,13 @@
 
 <script src="/js/feather.min.js" type="text/javascript"></script>
 <!--<script src="/js/Chart.min.js" type="text/javascript"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>-->
 <script src="/js/dashboard.js" type="text/javascript"></script>
 
 <script>
     var temp_url_permission,  working={};
     var all_page = ['main','notallow', 'shop_branch_list', 'shop_branch_add', 'shop_branch_edit', 'shop_owner_list', 'shop_owner_edit', 'shop_owner_add', 'shop_type_list', 'shop_image_list','shop_list', 'shop_add', 'shop_edit',
-     'foodmenu_list', 'foodmenu_edit', 'foodmenu_add',];
+     'foodmenu_list', 'foodmenu_edit', 'foodmenu_add','order_seller_latest','order_seller_history','salepackage','salepackage-manage1'];
 
          var firsttime_visit = true;
          function register_all_page() {
@@ -309,11 +311,13 @@
                if (res.result) {
                  $('#inc_menu_header').load('/shopadmin/inc_nav.html');
                  $('#inc_nav_left').load('/shopadmin/inc_nav_left.html');
-                 
+
                  console.log(res);
                  if (typeof(res.detail) =='object' && res.detail._id > 0) {    // มีร้านอยู่แล้ว
+                    ajax_settoken(res.token);
                      working.shop = res.detail;
                      working.shopowner = res.shopowner;
+
                    //  go2View('register2');
                       go2View(firstgourl);
                      return;

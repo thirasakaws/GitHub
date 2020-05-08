@@ -1,0 +1,403 @@
+<div class="d-flex justify-content-between mt-2 mb-5">
+	<div>
+		<h3>เมนู :  <span class="font-color-shop"> ##FoodMenu </span> </h3>
+	</div>
+	<div class="text-right">
+		<button type="button" class="btn btn-sm btn-secondary" onClick="go2View('salepackage')">
+			<ion-icon name="close-outline"></ion-icon>  ยกเลิก 
+		</button>
+		
+		<button type="button" class="btn btn-sm btn-primary"> 
+			<ion-icon name="save-outline"></ion-icon>
+			บันทึก 
+		</button>
+	</div>
+	
+</div> <!--// header -->
+
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+		ทั่วไป
+	  </a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+		จัดการออเดอร์
+	  </a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+		ราคาเมนู
+	  </a>
+	 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-img" role="tab" aria-controls="nav-img" aria-selected="false">
+		รูปภาพ
+	  </a>
+  </div>
+</nav>
+
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active p-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		เมนูอาหาร
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		คำอธิบาย
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		รายละเอียด
+		  </div>
+		  <div class="col-9"> 
+			  <textarea id="" class="form-control form-control-sm"></textarea>
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		ประเภทเมนูอาหาร
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+			  
+			  <small id="emailHelp" class="form-text text-muted"> 
+				  * สามารถพิมพ์แล้วกดวรรคเพื่อเพิ่มประเภทได้ ( ใช้สำหรับการค้นหาอาหารตามประเภท )
+			  </small>
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		ระยะเวลาในการทำ
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		ขนาด
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+		  </div>
+	  </div> <!-- //  -->
+	  
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		น้ำหนัก
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm">
+		  </div>
+	  </div> <!-- //  --> 
+	  
+   </div> <!-- // Tab 1  -->  
+	
+	
+  <div class="tab-pane fade p-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+	  
+	 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		กำหนดเมนู 
+		  </div>
+		  <div class="col-9"> 
+			  <div class="text-left">
+			  	<div class="custom-control custom-switch">
+				  	<input type="checkbox" class="custom-control-input" id="customSwitch1">
+				  	<label class="custom-control-label" for="customSwitch1">
+						<span class="text-secondary"> ( ปิด - เปิด ) </span>
+					</label>
+				</div>
+			  </div>  
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		การยืนยัน Order 
+		  </div>
+		  <div class="col-9"> 
+			  <div class="text-left">
+			  	  <div class="custom-control custom-switch">
+					  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+					  <label class="custom-control-label" for="customSwitch1">
+						  <span class="text-secondary"> ( Manual - Auto ) </span>
+					  </label>
+				 </div> 
+			  </div>  
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		จำกัดต่อวัน
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm" placeholder="จำกัดต่อวัน">
+		  </div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		ตัวเลือกเสริม เลือกได้
+		  </div>
+		  <div class="col-8"> 
+		       <input type="text" id="" class="form-control form-control-sm" >
+		  </div>
+	  		<div class="col"> 
+	  			รายการ
+	  		</div>
+	  </div> <!-- //  --> 
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		รายการ
+		  </div>
+		  <div class="col-9"> 
+		       <input type="text" id="" class="form-control form-control-sm" >
+			   <small id="emailHelp" class="form-text text-muted">
+				   * ตัวเลือกเสริม ( ที่ไม่เกี่ยวกับราคา )
+			  </small>
+		  </div>  		
+	  </div> <!-- //  -->
+   </div> <!-- // Tab 2  -->  
+	
+	
+   <div class="tab-pane fade p-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+	  
+	  <div class="form-group row">
+	   	  <div class="col-3"> 
+		 		กำหนดราคา
+		  </div>
+		  <div class="col-9"> 
+		      <button type="button" class="btn btn-sm btn-primary rounded rounded-pill" onClick="go2View('addFoodPrice')">  
+			  	 <ion-icon name="add-outline"></ion-icon>
+				  เพิ่มราคาเมนู
+			  </button>
+		  </div>
+	  </div> <!-- //  -->
+	   
+	  <div id="addFoodPrice" class="p-4 shadow"> 
+		  <div class="d-flex justify-content-between">
+		  	<div> 
+				<h5> เพิ่มราคาเมนู </h5>  
+			</div>
+			<div class="text-right">
+			    <button type="button" class="btn btn-sm btn-primary rounded rounded-pill">  
+					 <ion-icon name="add-outline"></ion-icon>
+					  เพิ่มรายการราคา
+				  </button>
+			</div>
+		  </div>
+		  <hr>
+		  
+		  
+		  <div class="form-group row">
+			  <div class="col-3"> 
+					คำอธิบาย
+			  </div>
+			  <div class="col-9"> 
+				  <textarea class="form-control"></textarea>
+				  <small id="emailHelp" class="form-text text-muted">
+					  ( เช่น ราคาปกติ / เพิ่มไข่ดาว )  
+				  </small>
+			  </div>
+		  </div> <!-- //  --> 
+		  
+		  <div class="form-group row">
+			  <div class="col-3"> 
+					ราคา
+			  </div>
+			  <div class="col-8"> 
+				
+				 <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="ราคาอาหาร">
+				  
+				  <small id="emailHelp" class="form-text text-muted">
+					  รายขายปกติ  
+				  </small>
+			  </div>
+			  <div class="col">
+			  		บาท
+			  </div>
+
+		  </div> <!-- //  -->
+		  
+		  <div class="form-group row">
+			  <div class="col-3"> 
+					<strong class="font-color-shop"> จัดราคาโปรโมชั่น </strong> 
+			  </div>
+			  <div class="col-9"> 
+				 <div class="custom-control custom-switch">
+				  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+				  <label class="custom-control-label text-secondary" for="customSwitch1">( ปิด - เปิด )</label>
+				</div>
+			  </div>
+		  </div> <!-- //  --> 
+		  
+		  <div class="text-center"> 
+			  <span class="text-danger"> ** กรุณาเพิ่มข้อมูลราคา และรายละเอียดราคาให้ครบถ้วน </span>
+		  </div>
+	  </div>  <!--// addFoodPrice --> 
+	</div>  <!-- // Tab 3  --> 
+	
+	
+	<div class="tab-pane fade p-4" id="nav-img" role="tabpanel" aria-labelledby="nav-img-tab">
+		
+	  <div class="d-flex justify-content-between mb-2"> 	
+		  <div> <h6> รูปภาพหลัก  </h6> </div> 
+		  
+		  <div class="text-right"> 
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFoodImage">
+			   <ion-icon name="add-outline"></ion-icon>  เพิ่มรูปภาพเมนูอาหาร
+			</button>
+		</div>
+		  
+	  </div>
+<!--	  <div class="text-warning d-block "> *** ภาพแรกจะกลายเป็นภาพหลักของเมนูคุณ ขนาดรูปภาพไม่เกิน  10 MB </div>-->
+		
+		
+		
+		
+		
+		<div class="row row-cols-1 row-cols-md-5">
+		  <div class="col mb-4">
+			<div class="card h-100">
+			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
+			  <div class="card-body">
+				
+				<div class="text-center">
+					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"  data-toggle="modal" data-target="#DelFoodImage"> 
+						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพหลัก
+					</button>  
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div> <!--  --> 
+		
+		
+		<div class="mt-3 mb-2 d-flex justify-content-start "> <h6> Additional Images  </h6> </div>
+		<div class="row row-cols-1 row-cols-md-5">
+		  <div class="col mb-4">
+			<div class="card h-100">
+			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
+			  <div class="card-body">
+				
+				<div class="text-center">
+					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"> 
+						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ
+					</button>  
+				</div>
+			  </div>
+			</div>
+		  </div>
+			
+		 <div class="col mb-4">
+			<div class="card h-100">
+			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
+			  <div class="card-body">
+				
+				<div class="text-center">
+					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"> 
+						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ 
+					</button>  
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+		
+		</div>
+		
+		
+	
+	</div>  <!-- // Tab 4  --> 
+</div> <!-- // Tab Content --> 
+
+
+<!-- Modal  เพิ่มรูปภาพเมนูอาหาร -->
+<div class="modal fade" id="addFoodImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">รูปเมนูอาหาร</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <div class="text-center"> 
+		  		<i class="far fa-image" style="font-size: 300px; color: #F8F9FB;"></i>
+		  </div>
+		  <div class="text-center text-secondary mt-1"> 
+			 รูปภาพควรมีขนาดรูปภาพไม่เกิน 10 MB 
+		  </div>
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+			<ion-icon name="close-outline"></ion-icon>  Close
+		</button>
+        <button type="button" class="btn btn-sm btn-primary"><ion-icon name="save-outline">
+			</ion-icon> บันทึกรูปภาพนี้
+		</button>
+      </div>
+    </div>
+  </div>
+</div>  <!-- // Modal addFoodImage --> 
+
+
+<div class="modal fade" id="DelFoodImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ลบรูปเมนูอาหาร</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <div class="text-center"> 
+		  		คุณต้องการลบรูปภาพนี้ ใช่หรือไม่ ?
+		  </div>
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+			<ion-icon name="close-outline"></ion-icon>  Close
+		</button>
+        <button type="button" class="btn btn-sm btn-primary"><ion-icon name="trash-outline">
+			</ion-icon> ลบรูปภาพนี้
+		</button>
+      </div>
+    </div>
+  </div>
+</div>  <!-- // Modal addFoodImage --> 
+
+
+
+
+<script>
+
+function addFoodPrice() { 
+	$('#addFoodPrice').toggle();
+}
+
+</script>
