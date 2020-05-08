@@ -55,7 +55,7 @@
 
 
 
-  <div class="mt-3 mb-5">
+  <div class="mt-3 mb-5 oderdata">
       <h6>รายการสั่งซื้อ <span class="font-color-foodmall">###ORDER-id##</span> </h6>
 
 
@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-3 text-right">
-           ฿  ##MENU-priceshow##
+             ##MENU-priceshow## ฿
         </div>
       </div>
     </div>
@@ -77,21 +77,38 @@
 
 
     <div class="align-items-center">
-      <div class="row">
+      <div class="row totalprice_show">
           <div class="col-6">
               ค่าอาหาร
           </div>
           <div class="col-6 text-right">
-              ฿ ##ORDER-totalcost##
+               ##ORDER-totalcost## ฿
           </div>
       </div>
 
-      <div class="row">
+
+      <div class="row vat_show">
           <div class="col-6">
-              ค่าจัดส่ง <span>##ORDER-totalKM## </span> กม.
+              ราคารวม(ไม่รวม VAT)
           </div>
           <div class="col-6 text-right">
-             ฿ ##ORDER-logisticcost##
+               ##ORDER-total_vatableprice## ฿
+          </div>
+      </div>
+      <div class="row vat_show">
+          <div class="col-6">
+              VAT(7%)
+          </div>
+          <div class="col-6 text-right">
+               ##ORDER-total_vat## ฿
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <small class="show_distanct"><span>##ORDER-totalKM## </span> กม.</small>
+          </div>
+          <div class="col-6 text-right">
+              ##ORDER-logisticcost## ฿
           </div>
       </div>
 
@@ -101,7 +118,7 @@
             <strong>รวมทั้งหมด</strong>
           </div>
           <div class="col-6 text-right ">
-            ฿ ##ORDER-grandtotal##
+             ##ORDER-grandtotal## ฿
           </div>
       </div>
         <hr>
@@ -128,15 +145,45 @@
     function refresh_page_wait(){
       if (working.order) {
         // console.log("ORDER",working.order);
-        var paymenttype = ['','เก็บเงินปลายทาง','QR payment By Quickpay','ลูกค้ารับเองที่ร้าน'];
+        var paymenttype = ['','เก็บเงินปลายทาง','QR payment By Quickpay'];
         working.order.paymenttypeshow = paymenttype[working.order.paymenttype];
         if( working.order.logistic){
           working.order.totalKM = working.order.logistic.distanceShopToCustomerInKM;
         }
-        working.order.totalcost = addCommas(working.order.totalcost );
-        working.order.grandtotal = addCommas(working.order.grandtotal );
-        working.order.logisticcost = addCommas(working.order.logisticcost );
+        working.order.totalcost = working.order.totalcost ? addCommas(working.order.totalcost ) : '0.00';
+        working.order.grandtotal = working.order.grandtotal ? addCommas(working.order.grandtotal ) : '0.00';
+        working.order.logisticcost = working.order.logisticcost ? addCommas(working.order.logisticcost ) : '0.00';
+        if (working.order.total_vatableprice && working.order.total_vat && working.order.pricingtype ) {
+           if (working.order.pricingtype==1) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+           }else if(working.order.pricingtype==2) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+             // $('.vat_show').show();
+           }else if (working.order.pricingtype==3) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+             working.order.grandtotal = working.order.grandtotal ? addCommas(working.order.grandtotal) : '0.00';
+             // $('.vat_show').show();
+
+           }
+
+        }
         $('.main_orderdata').html(hash_replace(teplate_all,"ORDER",working.order));
+        $('.show_distanct').hide();
+        if (working.order.pricingtype) {
+              if (working.order.pricingtype==1) {
+                $('.vat_show').hide();
+                $('.totalprice_show').show();
+              }else {
+                $('.vat_show').show();
+                $('.totalprice_show').hide();
+              }
+        }else {
+          $('.vat_show').hide();
+          $('.totalprice_show').show();
+        }
 
         showmwnuorderlist(working.order.items);
 //        $('.paymenttype').html(paymenttype[Number(working.order.paymenttype)]);

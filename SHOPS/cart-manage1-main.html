@@ -61,11 +61,23 @@
             <div class="form-group row">
                 <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >   วิธีการจ่ายเงิน <span class="text-danger">*</span> </label>
                 <div class="col">
-                    <select id="paymenttype" class="input_data_bn  edit_data ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน">
+                    <select id="paymenttype" class="input_data_bn  ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน" onchange="update_selectdata(this)">
                       <option value="" disabled selected>โปรดระบุ</option>
-                      <option value="1" disabled>เก็บเงินปลายทาง</option>
+                      <option value="1" disabled>เงินสด</option>
                       <option value="2" disabled>QR payment By Quickpay</option>
-                      <option value="3" disabled>ลูกค้ารับเองที่ร้าน</option>
+                  </select>
+                </div>
+            </div> <!--// -->
+        </div>
+
+        <div class="col-12">
+            <div class="form-group row">
+                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" > ประเภทการจัดส่ง <span class="text-danger">*</span> </label>
+                <div class="col">
+                    <select id="deliverytype" class="input_data_bn  ORDER_deliverytype" data-field="deliverytype" placeholder="ประเภทการจัดส่ง" onchange="update_selectdata(this)">
+                      <option value="" disabled selected>โปรดระบุ</option>
+                      <option value="1">ระบบจัดส่ง Delivery</option>
+                      <option value="2" disabled>ลูกค้ามารับเองที่ร้าน</option>
                   </select>
                 </div>
             </div> <!--// -->
@@ -151,7 +163,7 @@
         </div> <!--// ชื่อเมนู -->
 
         <div class="col-3 text-right">
-           ฿ <span class="menu_menuprice">0.00 </span>
+            <span class="menu_menuprice">0.00 </span> ฿
         </div> <!--// ราคา -->
       </div>
 
@@ -160,12 +172,12 @@
 
 
     <div class="align-items-center">
-      <div class="row">
+      <!-- <div class="row">
           <div class="col-6">
               ค่าอาหาร
           </div>
           <div class="col-6 text-right">
-              ฿ <span class="total_price">0 </span>
+               <span class="total_price">0 </span> ฿
           </div>
       </div>
 
@@ -174,7 +186,7 @@
               ค่าจัดส่ง <span class="total_distance font-color-foodmall">0 </span> กม.
           </div>
           <div class="col-6 text-right">
-               ฿ <span class="total_shippingcost">0 </span>
+                <span class="total_shippingcost_before">0 </span> ฿
           </div>
       </div>
       <div class="row" id='discount-shippingcost' style="display:none">
@@ -182,22 +194,70 @@
               ส่วนลดค่าจัดส่ง
           </div>
           <div class="col-6 text-right">
-               ฿ -<span class="total_shippingdiscount">0 </span>
+                -<span class="total_shippingdiscount">0 </span> ฿
           </div>
       </div>
 
-      <hr>
+      <hr> -->
       <div class="row">
           <div class="col-12 text-center " >
               <span class= "text-danger small" id="order_alert"> </span>
           </div>
       </div>
-      <div class="row ">
+      <div class="row " id="total_price_show">
           <div class="col-6">
-              รวมทั้งหมด
+              ค่าอาหาร
+          </div>
+          <div class="col-6 text-right">
+               <span class="total_price">0 </span> ฿
+          </div>
+      </div>
+      <div class="row vat_show">
+          <div class="col-6">
+              ค่าอาหาร(ไม่รวม VAT)
           </div>
           <div class="col-6 text-right ">
-              ฿ <span class="grandtotal">0 </span>
+               <span class="total_vatableprice">0 </span> ฿
+          </div>
+      </div>
+      <div class="row vat_show">
+          <div class="col-6">
+              VAT(7%)
+          </div>
+          <div class="col-6 text-right ">
+               <span class="total_vat">0 </span> ฿
+          </div>
+      </div>
+      <div class="row " id="total_shippingcost_before">
+          <div class="col-6">
+              ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
+          </div>
+          <div class="col-6 text-right">
+                <span class="total_shippingcost_before">0 </span> ฿
+          </div>
+      </div>
+      <div class="row" id="total_shippingcost">
+          <div class="col-6">
+              ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
+          </div>
+          <div class="col-6 text-right">
+                <span class="total_shippingcost">0 </span> ฿
+          </div>
+      </div>
+      <div class="row" id='discount-shippingcost' style="display:none">
+          <div class="col-6">
+              <!-- ส่วนลดค่าจัดส่ง -->
+          </div>
+          <div class="col-6 text-right">
+              <small class="text-secondary">(ส่วนลดค่าจัดส่ง)</small>  -<span class="total_shippingdiscount">0 </span> ฿
+          </div>
+      </div>
+      <div class="row ">
+          <div class="col-6">
+              <strong>ราคาสุทธิ</strong>
+          </div>
+          <div class="col-6 text-right ">
+            <strong>  <span class="grandtotal">0 </span></strong> ฿
           </div>
       </div>
       <hr>
@@ -232,7 +292,7 @@
 
   //for input tag
   $('.edit_data').Fusefield( (obj,cb,data)=>{
-    // console.log("data",data);
+    console.log("data",data);
     if (data.contact) {
           if (data.contact.toString().length!= 10) {
                 alert('กรุณากรอกเบอร์โทรให้ถูกต้อง');
@@ -254,11 +314,24 @@
     return true;
   });
 
+  function update_selectdata(obj){
+        var attr = $(obj).attr('data-field');
+        var value = $(obj).val();
+        // console.log('change',attr,value);
+        var data = {}
+        data[attr] = Number(value);
+        console.log('data',data);
+        update_order(data);
+  }
+
 
     function refresh_managecart1(){
       if (working.order) {
         console.log("ORDER",working.order);
 
+      }
+      if (working.shop) {
+          get_shopdelivery();
       }
             // getUsercustomer();
             getcustomeraddress();
@@ -270,6 +343,26 @@
 
     }
 
+    function get_shopdelivery(){
+      $.postJSON('/api/liff/getshop/delivery', {shop_id: working.shop._id}, function (res) {
+          if(res.result){
+                  working.delivery =res.detail;
+                  if (Array.isArray(working.delivery) && working.delivery.length > 0) {
+                        for(var x=0;x<working.delivery.length;x++){
+                            if (working.delivery[x].get_at_store) {
+                                    if (working.delivery[x].get_at_store == true) {
+                                           $('#deliverytype option[value=2]').prop('disabled',false);
+                                    }
+                            }
+                        }
+                  }
+              }else{
+
+              }
+
+      });
+    }
+
 
 
 
@@ -278,14 +371,8 @@
       if($('#contact').val().toString().length>=10){
         return false;
       }
-      // if(!event.keyCode){
-      //   e.preventDefault();
-      // }
+
     var charCode = (e.which) ? e.which : event.keyCode
-// alert(charCode)
-    // if (!charCode) {
-    //
-    // }
 
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
@@ -295,30 +382,11 @@
   }
 }
 
-    // $('#contact').on('keyup keydown', function(e){
-    //   // alert(e.keyCode);
-    //     if ($(this).val().length >= 10
-    //         // && e.keyCode !== 46
-    //         && e.keyCode !== 8
-    //        ) {
-    //        e.preventDefault();
-    //        // $('.warn_phoneinput').show();
-    //        // $(this).val(10);
-    //     }else {
-    //       // $('.warn_phoneinput').hide();
-    //     }
-    // });
-
     function inputContactHandler(e) {
-      // alert("inputContactHandler: " + e.target.value);
       var last_val = e.target.value.substr(e.target.value.length - 1);
-      // alert(e.target.value.substr(e.target.value.length - 1));
       if (last_val < "0" || last_val > "9" || last_val == '.') {
         e.target.value = e.target.value.slice(0, e.target.value.length - 1);
       }
-      // service_radius = parseFloat(e.target.value);
-      // // document.getElementById('input-radius').value = service_radius.toString();
-      // circle_area.setRadius(service_radius * 1000.0);
     }
 
     function getcustomeraddress(){
@@ -523,18 +591,19 @@ var array_shopid = [];
 
     }
 
-    function update_order(){
-      var data = {
-                  LINE_USER: LINE_USER,
-                  addressid:working.order.addressid,
-                  addressname : working.order.addressname,
-                  addresslocation :  working.order.addresslocation,
-                  addressdetail : working.order.addressdetail,
-                  // firstname : $('.ORDER_firstname').val(),
-                  // lastname : $('.ORDER_lastname').val(),
-                  // contact : $('.ORDER_contact').val()
-                };
-                // console.log("data",data);
+    function update_order(data){
+      // console.log('data update new ',data);
+      if (!data) {
+        var data = {};
+      }
+      data.LINE_USER = LINE_USER;
+      if (working.order.addressid && working.order.addressname) {
+        data.addressid  = working.order.addressid;
+        data.addressname = working.order.addressname;
+        data.addresslocation =  working.order.addresslocation;
+        data.addressdetail = working.order.addressdetail;
+      }
+                // console.log("data update",data);
       $.postJSON('/engine/order/update',data,(res)=>{
           if(res.result){
             // console.log('update',res);
@@ -576,6 +645,8 @@ var array_shopid = [];
       var order=working.order;
       checkorder_status();
 
+      console.log('order data',order);
+
       $('.total_price').html(order.totalcost ? addCommas(order.totalcost) : '0.00') ;
       $('#discount-shippingcost').hide();
       if(order.logistic){
@@ -586,22 +657,86 @@ var array_shopid = [];
             var beforediscount = addCommas(order.logistic.deliveryTotalAmount + order.logistic.Discount);
             $('#discount-shippingcost').show();
             $('.total_shippingdiscount').html(addCommas(order.logistic.Discount));
-            $('.total_shippingcost').html(addCommas(beforediscount));
+            $('.total_shippingcost_before').html(addCommas(beforediscount));
+            $('#total_shippingcost_before').show();
+            $('#total_shippingcost').hide();
           }else{
+              $('#total_shippingcost').show();
             $('#discount-shippingcost').hide();
+            $('#total_shippingcost_before').hide();
           }
       }
+      if (order.deliverytype == 2) {
+        $('.show_distance_KM').hide();
+      }else {
+        $('.show_distance_KM').show();
+      }
       var grandtotal = 0;
-        if(working.order.grandtotal){
-          grandtotal = Number( working.order.grandtotal);
-        }else{
           grandtotal = Number(order.totalcost)
           if(order.logistic && order.logistic.deliveryTotalAmount){
             grandtotal +=order.logistic.deliveryTotalAmount;
           }
+
+
+       // $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
+       if (order.total_vatableprice && order.total_vat && order.pricingtype ) {
+          if (order.pricingtype==1) {
+            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
+            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
+            $('.vat_show').hide();
+            $('#total_price_show').show();
+
+
+          }else if(order.pricingtype==2) {
+            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
+            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
+            $('.vat_show').show();
+            $('#total_price_show').hide();
+          }else if (order.pricingtype==3) {
+            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
+            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
+            grandtotal = grandtotal+order.total_vat;
+            $('.vat_show').show();
+            $('#total_price_show').hide();
+
+          }
+
+       }else{
+             if (working.shop) {
+             // console.log('shop',working.shop);
+               if (working.shop.pricingtype) {
+                  if (working.shop.pricingtype==1) {
+                        $('.total_vat').html('0.00');
+                        var total_vatableprice = order.totalcost;
+                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
+                        $('.vat_show').hide();
+                  }
+                  else if (working.shop.pricingtype==2) {
+                    var vat = Number(order.totalcost)*7/107;
+                        $('.total_vat').html(vat ? addCommas(vat) : '0.00') ;
+                        var total_vatableprice = order.totalcost - vat;
+                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
+                        $('.vat_show').show();
+                  }
+                  else if (working.shop.pricingtype==3) {
+                    var vat = Number(order.totalcost)*7/100;
+                        $('.total_vat').html(vat ? addCommas(vat) : '0.00') ;
+                        var total_vatableprice = order.totalcost;
+                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
+                        grandtotal = grandtotal+ vat;
+                        $('.vat_show').show();
+                  }
+               }else {
+                 $('.vat_show').hide();
+               }
+          }
         }
 
-       $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
+        if(working.order.grandtotal){
+          grandtotal = Number( working.order.grandtotal);
+        }
+
+      $('.grandtotal').html(grandtotal ? addCommas(grandtotal) : '0.00' );
 
     }
     function checkout_payment(){
@@ -630,6 +765,12 @@ var array_shopid = [];
 
       }else{
         alert('กรุณาระบุวิธีการชำระเงิน')
+        return false;
+      }
+      if(Number(working.order.deliverytype) > 0){
+
+      }else{
+        alert('กรุณาระบุประเภทการจัดส่ง')
         return false;
       }
       if(Number(working.order.addressid) >0){

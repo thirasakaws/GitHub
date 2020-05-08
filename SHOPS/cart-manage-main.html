@@ -124,7 +124,7 @@
 <div class="container-fluid fixed-bottom bg-white">
   <div class="row p-1">
 
-        <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="go2View('cart-manage1-main')">
+        <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="confirm_order();">
              <div class="float-left">สรุปรายการสั่งซื้อ</div>
              <div class="float-right"> ฿ <span class='totalcost'></span></div>
          </button>
@@ -188,6 +188,7 @@ $('.edit_data_note').Fusefield( (obj,cb,data)=>{
     function refresh_managecart(){
       $('#ordermenulist').html(template_menulist);
       if (working.order) {
+        getshoporder();
         $('.orderid').html(working.order._id);
         // console.log("ORDER",working.order);
         if (working.order.items && working.order.items.length >0) {
@@ -199,6 +200,17 @@ $('.edit_data_note').Fusefield( (obj,cb,data)=>{
         }
       }
       update_total_cart();
+    }
+
+    function getshoporder(){
+        $.postJSON('/api/liff/getorder/shopowner', {_id: working.order.items[0].shopid}, function (res) {
+            if(res.result){
+                    working.shop =res.detail;
+                }else{
+
+                }
+
+        });
     }
 
     function showmwnulist(obj){
@@ -294,6 +306,35 @@ $('.edit_data_note').Fusefield( (obj,cb,data)=>{
             alert(res.detail);
           }
         });
+      }
+    };
+
+    function confirm_order(){
+      if (working.shop) {
+            if (working.shop.max_price || working.shop.min_price) {
+              if(working.order.totalcost){
+
+              }else {
+                working.order.totalcost = 0;
+                  for(var x=0;x<working.order.items.length;x++){
+                        working.order.totalcost += working.order.items[x].price.price;
+                  }
+              }
+
+            }
+            if (Number(working.shop.min_price)>0) {
+              if(working.order.totalcost< working.shop.min_price){
+                  alert('ยอดสั่งซื้อขั้นต่ำ '+working.shop.min_price+' บาท')
+                  return false;
+              }
+            }
+            if (Number(working.shop.max_price)>0) {
+              if(working.order.totalcost> working.shop.max_price){
+                  alert('ยอดสั่งซื้อเกิน Limit '+working.shop.max_price+' บาท')
+                  return false;
+              }
+            }
+            go2View('cart-manage1-main');
       }
     }
 

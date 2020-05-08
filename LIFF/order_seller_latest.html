@@ -334,6 +334,11 @@
                   ##ORDER-orderautodetail##
             </div>-->
           </div>
+          <div class="show_ondelivery mt-1">
+                <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
+                      ##ORDER-delivery_detail##
+                </div>
+          </div>
 
 
         </div>
@@ -418,6 +423,11 @@
                     </button>
                 </div>
             </div> <!--// btn -->
+            <div class="show_ondelivery mt-1">
+                  <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
+                        ##ORDER-delivery_detail##
+                  </div>
+            </div>
 
 
         </div>
@@ -501,9 +511,15 @@
                     </button>
                 </div>
             </div>
+            <div class="show_ondelivery mt-1">
+                  <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
+                        ##ORDER-delivery_detail##
+                  </div>
+            </div>
 
 
         </div>
+
     </div>  <!-- Tab 3  template3  ตอบรับทำเสร็จแล้ว -->
 
 
@@ -579,6 +595,11 @@
                     </button>
                 </div>
             </div> <!--// btn -->
+            <div class="show_ondelivery mt-1">
+                  <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
+                        ##ORDER-delivery_detail##
+                  </div>
+            </div>
 
 
         </div>
@@ -660,6 +681,11 @@
                     </button>-->
                 </div>
             </div> <!--// btn -->
+            <div class="show_ondelivery mt-1">
+                  <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
+                        ##ORDER-delivery_detail##
+                  </div>
+            </div>
         </div>
     </div> <!-- //Tab 1  Template 5  รอลูกค้าชำระ -->
 
@@ -771,6 +797,22 @@
                       ฿ ##CUS-totalcost##
                     </div>
                   </div> <!--// -->
+                  <div class="row justify-content-center vat_show">
+                      <div class="col-5">
+                        ค่าอาหาร(ไม่รวม VAT)
+                      </div>
+                      <div class="col-5 text-right">
+                        ฿ ##CUS-total_vatableprice##
+                      </div>
+                    </div> <!--// -->
+                    <div class="row justify-content-center vat_show">
+                        <div class="col-5">
+                          VAT
+                        </div>
+                        <div class="col-5 text-right">
+                          ฿ ##CUS-total_vat##
+                        </div>
+                      </div> <!--// -->
 
 
                 <div class="row justify-content-center">
@@ -914,18 +956,18 @@
 
   var STATUSSHOW =[];
   STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
-  STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
-  STATUSSHOW[10] ='รอการชำระเงินจากลูกค้า';
-  STATUSSHOW[11]='ลูกค้าชำระเงินแล้ว';
-  STATUSSHOW[12]='ลูกค้าจะชำระเงินแบบ COD';
-  STATUSSHOW[14]='รายการใหม่รอเริ่มทำ';
-  STATUSSHOW[15]='ร้านกำลังดำเนินการ';
-  STATUSSHOW[16]='ร้านดำเนินการเสร็จแล้ว';
+  STATUSSHOW[7] = 'รอร้านรับรายการ';
+  STATUSSHOW[10] ='รอลูกค้าชำระแบบ QR';
+  STATUSSHOW[11]= 'ลูกค้าชำระเงินแบบ QR แล้ว';
+  STATUSSHOW[12]= 'ลูกค้าชำระเงินปลายทาง';
+  STATUSSHOW[14]= 'รายการรอตอบรับทำออร์เดอร์';
+  STATUSSHOW[15]= 'รายการกำลังทำอาหาร';
+  STATUSSHOW[16]= 'รายการทำอาหารเสร็จพร้อมส่ง';
   STATUSSHOW[17] = 'Rider รับสินค้าแล้ว';
-  STATUSSHOW[23] = 'ลูกค้าไม่ขำระเงินภายในเวลาที่กำหนด';
-  STATUSSHOW[24] = 'ร้านไม่ตอบรับรายการภายในเวลาที่กำหนด';
-  STATUSSHOW[26] = 'ยกเลิก จากร้าน';
-  STATUSSHOW[27] = 'ยกเลิก จากลูกค้า ';
+  STATUSSHOW[23] = 'รายการเกินกำหนดชำระแบบ QR';
+  STATUSSHOW[24] = 'รายการถูกยกเลิก(ร้านรับรายการล่าช้า)';
+  STATUSSHOW[26] = 'รายการถูกยกเลิก(ร้านแจ้งยกเลิก)';
+  STATUSSHOW[27] = 'รายการถูกยกเลิก(ลูกค้าแจ้งยกเลิก)';
 
 
 var orderstatus_page1 = [],orderstatus_page2 = [],orderstatus_page3 = [];
@@ -1045,6 +1087,15 @@ if (Array.isArray(data)) {
                 }
          }else {
            obj.orderautodetail = '<span class="badge badge-pill badge-warning">รายการรับแบบ Manual</span>'
+         }
+         if (obj.deliverytype) {
+            if (obj.deliverytype == 1) {
+                  obj.delivery_style = 'DFDFDF'
+                   obj.delivery_detail = '<strong class="text-dark">รายการจัดส่งแบบ Delivery</strong>'
+            }else if (obj.deliverytype == 2) {
+                   obj.delivery_style = '01550B'
+                   obj.delivery_detail = '<strong class="text-light">ลูกค้ามารับเองที่ร้าน</strong>'
+            }
          }
          obj.time = moment(obj.createdate,'X').format('H:m:s D/M/Y');
          obj.timeupdate = moment(obj.lastupdate,'X').format('H:m:s D/M/Y');
@@ -1296,7 +1347,7 @@ var template_customer = $('#modal_image_customer_preview').html();
 working.ordercustomerlocation = {};
 function previewcustomer(order_id){
   working.ordercustomerlocation = {};
-  var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay','ลูกค้ารับเองที่ร้าน']
+  var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay']
   var obj_cust = {};
     working.orderlast.map((obj)=>{
       // console.log('order-data',obj);
@@ -1324,6 +1375,23 @@ function previewcustomer(order_id){
       }
 
     }
+    if (obj_cust.total_vatableprice && obj_cust.total_vat && obj_cust.pricingtype ) {
+       if (obj_cust.pricingtype==1) {
+         obj_cust.total_vat = obj_cust.total_vat ? addCommas(obj_cust.total_vat) : '0.00';
+         obj_cust.total_vatableprice = obj_cust.total_vatableprice ? addCommas(obj_cust.total_vatableprice) : '0.00';
+       }else if(obj_cust.pricingtype==2) {
+         obj_cust.total_vat = obj_cust.total_vat ? addCommas(obj_cust.total_vat) : '0.00';
+         obj_cust.total_vatableprice = obj_cust.total_vatableprice ? addCommas(obj_cust.total_vatableprice) : '0.00';
+         // $('.vat_show').show();
+       }else if (obj_cust.pricingtype==3) {
+         obj_cust.total_vat = obj_cust.total_vat ? addCommas(obj_cust.total_vat) : '0.00';
+         obj_cust.total_vatableprice = obj_cust.total_vatableprice ? addCommas(obj_cust.total_vatableprice) : '0.00';
+         obj_cust.grandtotal = obj_cust.grandtotal ? addCommas(obj_cust.grandtotal) : '0.00';
+         // $('.vat_show').show();
+
+       }
+
+    }
     if (obj_cust.grandtotal<=0) {
        obj_cust.grandtotalshow = '0.00';
     }else {
@@ -1333,6 +1401,15 @@ function previewcustomer(order_id){
     //
       console.log('cusshow',obj_cust);
         $('#modal_image_customer_preview').html(hash_replace(template_customer,'CUS',obj_cust));
+        if (obj_cust.pricingtype) {
+              if (obj_cust.pricingtype==1) {
+                $('.vat_show').hide();
+              }else {
+                $('.vat_show').show();
+              }
+        }else {
+          $('.vat_show').hide();
+        }
         $('#modal_image_customer_preview').modal('show');
       // address = !address;
 };

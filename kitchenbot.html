@@ -1,706 +1,767 @@
 <!doctype html>
 <html lang="en">
-	<head>
-	<!-- meta-->
-	<meta charset="utf-8">
-	<meta name="author" content="pxdraft" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="keywords" content="Kitchen Bot" />
-	<meta name="description" content="Kitchen Bot" />
-	<!-- title -->
-	<title>Kitchen Bot new version</title>
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-	<!-- plugin CSS -->
+    <head>
+        <!-- meta-->
+        <meta charset="utf-8">
+        <meta name="advws" content="" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="ระบบสั่งอาหาร ระบบเดลิเวอรี่ ระบบสั่งอาหารออนไลน์ สั่งอาหารออนไลน์ ระบบจัดการร้านอาหาร" />
+        <meta name="description" content="ปฏิวัติวงการสั่งอาหารทาง Delivery
+ให้ Kitchen BOT ทำงานแทนคุณ" />
+        <!-- title -->
+        <title>Kitchen BOT</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <!-- plugin CSS -->
 
-	<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap" rel="stylesheet">
-	<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="static/plugin/font-awesome/css/all.min.css" rel="stylesheet">
-	<link href="static/plugin/et-line/style.css" rel="stylesheet">
-	<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet">
-	<link href="static/plugin/ionicons/css/ionicons.min.css" rel="stylesheet">
-	<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
-	<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet">
-	<!-- theme css -->
-	<link href="static/style/master.css" rel="stylesheet">
-	<style type="text/css">
-.fog-container {
-	position: absolute;
-	top: 10%;
-	left: 10%;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 400px;
-}
-.fog-img {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	z-index: 10;
-	width: 500px;
-	height: 300px;
-	top: 0;
-	left: 0;
-}
-.fog-img-first {
-	background: url(static/img/smoke2.png) repeat-y center;
-	animation: marquee 25s linear infinite;
-}
-.fog-img-second {
-	background: url(static/img/smoke2.png) repeat-y center;
-	position: absolute;
-	margin-left: 30%;
-	margin-top: 250px;
-	animation: marquee 40s linear infinite;
-}
- @keyframes marquee {
-0% {
-top: 0;
-}
-100% {
-top: -100%;
-}
-}
-</style>
-	</head>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap" rel="stylesheet">
+        <link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/plugin/font-awesome/css/all.min.css" rel="stylesheet">
+        <link href="static/plugin/et-line/style.css" rel="stylesheet">
+        <link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet">
+        <link href="static/plugin/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+        <link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet">
+        <!-- theme css -->
+        <link href="static/style/master.css" rel="stylesheet">
+        <link href="static/style/main.css" rel="stylesheet">
+        <style type="text/css">
+            .fog-container {
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 400px;
+            }
+            .fog-img {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                z-index: 10;
+                width: 500px;
+                height: 300px;
+                top: 0;
+                left: 0;
+            }
+            .fog-img-first {
+                background: url(static/img/smoke2.png) repeat-y center;
+                animation: marquee 25s linear infinite;
+            }
+            .fog-img-second {
+                background: url(static/img/smoke2.png) repeat-y center;
+                position: absolute;
+                margin-left: 30%;
+                margin-top: 250px;
+                animation: marquee 40s linear infinite;
+            }
+            @keyframes marquee {
+                0% {
+                    top: 0;
+                }
+                100% {
+                    top: -100%;
+                }
+            }
+        </style>
+    </head>
 
-	<body data-spy="scroll" data-target="#navbar-collapse-toggle" data-offset="98">
+    <body data-spy="scroll" data-target="#navbar-collapse-toggle" data-offset="98">
 
-<!-- Header -->
-<header class="header-nav header-white header-transparent">
-      <div class="fixed-header-bar">
-    <!-- Header Nav -->
-    <div class="navbar navbar-main navbar-expand-lg">
-          <div class="container" > <a class="navbar-brand" href="#"> <img class="logo-dark " alt="" title="" src="static/img/site_logo.png" style="height:50px; padding-top:0px;"> <img class="logo-light " alt="" title="" src="static/img/site_logo.png" style="height:70px; padding-top:20px;"> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-        <div class="collapse navbar-collapse navbar-collapse-overlay font-nunito" id="navbar-main-collapse" style="font-size:1.25rem;">
-              <ul class="navbar-nav ml-auto ">
-            <li class="nav-item   px-dropdown"> <a class="nav-link" href="#about">Why us</a> </li>
-            <li class="nav-item   px-dropdown"> <a class="nav-link" href="#whyus">About</a> </li>
-            <li class="nav-item   px-dropdown"> <a class="nav-link" href="#feature">Feature</a> </li>
-            <li class="nav-item   px-dropdown"> <a class="nav-link" href="#customer">Customer</a> </li>
-            <li class="nav-item   px-dropdown"> <a class="nav-link" href="#contact">Contact</a> </li>
-          </ul>
-            </div>
-      </div>
-        </div>
-    <!-- End Header Nav -->
-  </div>
-    </header>
-<!-- Header End -->
-<!-- Main -->
-<main>
-<!-- Home Banner -->
-<section class="effect-section theme-bg p-100px-b" id="top-background" >
-      <div class="fog-container">
-    <div class="fog-img fog-img-first" style="opacity:0.4"></div>
-    <div class="fog-img fog-img-second" style="opacity:0.4"></div>
-  </div>
-      <!--<div class="svg-bottom"> <img src="static/img/effect/divider-2.svg" title="" alt="" class="svg_img gray-color"> </div>-->
-      <div class="container" style="padding-top:100px;">
-    <div id="top-slide" class="row align-items-center">
-          <div class="col-lg-6 m-15px-tb">
-        <h2 class="m-10px-b white-color font-kanit font-w-300">ถึงเวลาปฏิวัติวงการสั่งอาหารทาง <span class="font-nunito">Delivery</span></h2>
-        <h1 class="h1 m-10px-b white-color font-kanit ">ให้ <span class="font-nunito">Kitchen Bot</span> ทำงานแทนคุณ</h1>
-        <p class="font-3 white-color font-kanit">Kitchen Bot เป็นมากกว่าการเป็น<span class="font-nunito"> Delivery Platform</span> ธรรมดา <br>
-              ช่วยให้คุณมีร้านออนไลน์ รวมถึงจัดการเมนูอาหาร ราคา และสต็อคสินค้า ปรับเองได้ง่ายๆ ผ่าน LINE OA</p>
-        <div class="p-20px-t m-btn-wide mb-3"> <a h class="m-btn m-btn-radius m-btn-white m-10px-r" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"> <span class="m-btn-inner-text">ลงทะเบียนเปิดร้าน</span> <span class="m-btn-inner-icon arrow"></span> </a>
-              <!--<a class="m-btn m-btn-radius m-btn-theme2nd" href="#about">
-                                <span class="m-btn-inner-text">เรียนรู้เพิ่มเติม</span>
-                                <span class="m-btn-inner-icon arrow"></span>
-                            </a>-->
-            </div>
-      </div>
-          <div class="col-lg-6 m-15px-tb">
-          	<img class="max-width-120" src="/static/img/mockup-phone-top-02.png" title="" alt="" >
-          </div>
-        </div>
-  </div>
-    </section>
-<!-- End Home Banner -->
-<!-- Section -->
-<section class="section gray-bg">
-      <div class="container">
-    <div class="row justify-content-center md-m-25px-b m-40px-b">
-          <div class="col-lg-8 text-center">
-        <h5 class="theme-color" id="about">Why us</h5>
-        <h3 class="h1 m-15px-b">KITCHEN BOT ช่วยคุณได้จริง</h3>
-        <p class="m-0px font-2">ผู้ช่วยสำหรับร้านอาหารในยุค DELIVERY ที่ช่วยให้การบริหารร้านคุณให้เป็นเรื่องง่ายได้</p>
-      </div>
-        </div>
-    <div class="row">
-          <div class="col-lg-3 m-15px-tb">
-        <div class="card box-shadow p-35px-tb p-35px-lr xl-p-35px-lr hover-top white-bg">
-              <div class="text-center"> <img src="static/img/whyus-01.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
-              <h5 class="m-15px-b">สร้างมาเพื่อร้านค้าออนไลน์อย่างแท้จริง</h5>
-              <p class="m-0px">Kitchen Bot ให้คุณจัดการผ่าน <span class="font-nunito">LINE Official Account (LINE @)</span> ได้ง่ายๆ ไม่ต้องสร้างแอพให้ลูกค้าต้อง download ให้ยุ่งยาก </p>
-            </div>
-      </div>
-          <div class="col-lg-3 m-15px-tb">
-        <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
-              <div class="text-center"> <img src="static/img/whyus-03.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
-              <h5 class="m-15px-b">ใช้ระบบ <span class="font-nunito">A.I. BOT</span> ในการคุยและรับออเดอร์ลูกค้า</h5>
-              <p class="m-0px">มี <span class="font-nunito">ROBOT</span> ช่วยตอบแชท พร้อมส่งเมนูให้ลูกค้าดูอัตโนมัติ (สุดเจ๋ง!) ช่วยเพิ่มประสิทธิภาพในการจัดการออเดอร์ ตอบคำถาม และคำนวณค่าใช้จ่ายให้ทันที</p>
-            </div>
-      </div>
-          <div class="col-lg-3 m-15px-tb">
-        <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
-              <div class="text-center"> <img src="static/img/whyus-02.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
-              <h5 class="m-15px-b">ชำระเงินและเช็คยอดด้วยระบบ QuickPay</h5>
-              <p class="m-0px"> เพิ่มประสิทธิภาพในการชำระเงินค่าอาหารผ่านระบบ <span class="font-nunito">Online Payment</span> อัตโนมัติ ด้วยระบบ <span class="font-nunito">QuickPay</span> โดยใช้ได้ทั้ง <span class="font-nunito"> QR Code</span> และ <span class="font-nunito">Credit Card</span></p>
-            </div>
-      </div>
-          <div class="col-lg-3 m-15px-tb">
-        <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
-              <div class="text-center"> <img src="static/img/whyus-04.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
-              <h5 class="m-15px-b">จัดส่งในขั้นตอนเดียว</h5>
-              <p class="m-0px">สามารถเชื่อมต่อ API กับบริษัทขนส่ง (Delivery Service) เช่น Lalamove หรือ Grab ในขั้นตอนการสั่งซื้อรวมทีเดียว ประหยัดเวลาจัดการ และสามารถให้ลูกค้าตัดสินใจสั่งซื้อได้ง่าย</p>
-            </div>
-      </div>
-        </div>
-  </div>
-    </section>
-<!-- End Section -->
-
-<!-- Section -->
-<section class="section effect-section" id="whyus" style="padding:70px 0;">
-      <div class="effect-01 left"></div>
-      <div class="effect-01 right"></div>
-      <div class="container">
-    <div class="row align-items-center">
-          <div class="col-lg-6 m-15px-tb"> <img src="static/img/showcase.jpg" title="" alt="" class="card-img"> </div>
-          <div class="col-lg-6 m-15px-tb">
-        <div class="p-45px-l lg-p-0px-l">
-              <h3 class="h2 m-15px-b">ถ้าหากคุณกำลังเจอปัญหาเหล่านี้อยู่ <br>
-            ให้ <span class="font-nunito">Kitchen Bot</span> ช่วยดูแลสิคะ</h3>
-              <ul class="list-type-01" style="font-size:1.1rem;">
-            <li>โดนหักค่า GP 30-37 % ของค่าอาหาร จนกำไรไม่เหลือแทบขาดทุน</li>
-            <li>ฝากลูกค้าของคุณไว้กับ <span class="font-nunito">Delivery Platform</span> เปิดโอกาสให้ลูกค้าคุณเห็นคู่แข่ง เทียบราคา ไปซื้อเจ้าอื่น</li>
-            <li>ลูกค้าซื้ออาหารของคุณในหลายแพลตฟอร์ม แต่ไม่ได้มาซื้ออาหารผ่านร้านค้าคุณโดยตรง</li>
-            <li>ออเดอร์ตกหล่น ยากในการตรวจสอบแบบ <span class="font-nunito">Realtime</span> เนื่องจากไม่มีระบบช่วยจัดการออเดอร์</li>
-            <li>ยอดขายหน้าร้านตก เพราะลูกค้าเปลี่ยนพฤติกรรม ไม่ทานอาหารที่ร้าน เปลี่ยนมาสั่งอาหารออนไลน์ หรือ มารับกลับบ้าน</li>
-            <li>ทำหน้าร้านออนไลน์ผ่าน <span class="font-nunito"> Social Commerce </span>ไม่เป็น ไม่ดึงดูดลูกค้า เช่น <span class="font-nunito"> FB Line OA</span></li>
-            <li>ได้รับเงินค่าอาหารล่าช้า 7-15 วัน ทำให้คุณบริหารเงินสด สภาพคล่องไม่ทัน</li>
-          </ul>
-              <div class="row counter p-15px-t">
-            <div class="col-4 col-lg-3  border-right">
-                  <div class="count-data">
-                <h6 class="count h4 theme-color after-k m-5px-b" data-to="10" data-speed="10">10</h6>
-                <span>ลูกค้าเพิ่มขึ้น</span> </div>
-                </div>
-            <div class="col-4 col-lg-3  border-right">
-                  <div class="count-data">
-                <h6 class="count h4 theme-color after-k m-5px-b" data-to="159" data-speed="159">159</h6>
-                <span>ยอดขายเพิ่มขึ้น</span> </div>
-                </div>
-            <div class="col-4 col-lg-3">
-                  <div class="count-data">
-                <h6 class="count h4 theme-color after-p m-5px-b" data-to="99" data-speed="99">99</h6>
-                <span>ลูกค้ากลับมา</span> </div>
-                </div>
-          </div>
-            </div>
-      </div>
-        </div>
-  </div>
-    </section>
-<!-- End Section -->
-<!-- Section -->
-<section class="section gray-bg" id="feature">
-      <div class="container">
-    <div class="row md-m-25px-b m-40px-b justify-content-center">
-          <div class="col-lg-8 text-center">
-        <h5 class="theme-color font-3">Feature &amp; Package</h5>
-        <!--<h3 class="h1 m-15px-b">ด้วยค่า GP เพียง 2% เท่านั้น</h3>-->
-        <p class="m-0px text-left"><span class="font-2 ">ช่วยคุณประหยัดค่าใช้จ่ายได้มาก เมื่อเทียบกับ <span class="font-nunito">Delivery Service</span> ทั่วไป ที่มีค่า GP 25-30% โดยคุณสามารถเลือก <span class="font-nunito">Package</span> ที่เหมาะสมกับการใช้งานของร้านของคุณ
-          เพื่อทดลองใช้งาน หรือสมัครแพ็คเกจรายปีเพื่อรับส่วนลดพิเศษ</span> <br>
-              (** ไม่รวม <span class="font-nunito">Payment Gateway Fee </span> และไม่รวมค่าจัดส่งอาหารผ่านผู้ให้บริการ <span class="font-nunito">Delivery Service</span> )</p>
-      </div>
-        </div>
-    <div class="row">
-          <div class="col-sm-12 col-lg-4 m-15px-tb">
-        <div class="box-shadow hover-top white-bg">
-              <div class="p-40px-t p-20px-lr">
-            <h4 class="h1 w-100 text-center font-nunito">Standard</h4>
-            <!--<p class="m-0px text-center theme-color">900 บาท / เดือน
-</p>-->
-          </div>
-              <div class="p-20px">
-            <ul class="list-type-02" style="margin-bottom: 118px">
-                  <li>Mobile/Tablet View</li>
-                  <li>ดูยอดขายรายวันได้</li>
-                  <li>จัดการเมนูได้</li>
-                  <li>จัดการออเดอร์อัตโนมัติ</li>
-                  <li>เหมาะสำหรับร้านสาขาเดียว</li>
-                </ul>
-            <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="#contact">สั่งซื้อ</a> </div>
-          </div>
-            </div>
-      </div>
-          <div class="col-sm-12 col-lg-4 m-15px-tb">
-        <div class="box-shadow hover-top white-bg">
-              <div class="p-40px-t p-20px-lr">
-            <h4 class="h1 w-100 text-center  font-nunito">Premium</h4>
-            <!--<p class="m-0px text-center theme-color">1,900 บาท / เดือน*</p>-->
-          </div>
-              <div class="p-20px">
-            <ul class="list-type-02" style="margin-bottom: 95px">
-                  <li>Mobile/Tablet View <br>
-                Web Seller Management</li>
-                  <li>ดูยอดขายทุกสาขา</li>
-                  <li>จัดการเมนูได้</li>
-                  <li>จัดการออเดอร์อัตโนมัติ/Center</li>
-                  <li>เหมาะสำหรับร้านหลายสาขา</li>
-                </ul>
-            <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="#contact">สั่งซื้อ</a> </div>
-          </div>
-            </div>
-      </div>
-          <div class="col-sm-12 col-lg-4 m-15px-tb">
-        <div class="box-shadow hover-top white-bg">
-              <div class="p-40px-t p-20px-lr">
-            <h4 class="h1 w-100 text-center  font-nunito">Customize</h4>
-            <!--- <p class="m-0px text-center theme-color">Please Contact*</p>-->
-          </div>
-              <div class="p-20px">
-            <ul class="list-type-02">
-                  <li>Mobile/Tablet View <br>
-                Web Seller Management</li>
-                  <li>ดูยอดขายทุกสาขา</li>
-                  <li>จัดการเมนูได้ทุกสาขา</li>
-                  <li>จัดการออเดอร์แบบ Center / Branch</li>
-                  <li>รองรับ CRM Buit-in</li>
-                  <li>รองรับ Chat แบบ 1:1</li>
-                  <li>รองรับ Chat Bot</li>
-                  <li>เหมาะสำหรับร้านหลายสาขา</li>
-                </ul>
-            <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="#contact">สั่งซื้อ</a> </div>
-          </div>
-            </div>
-      </div>
-        </div>
-  </div>
-    </section>
-<!-- End Section -->
-
-<!-- Section
-        <section class="section effect-section">
-            <div class="container">
-             <div class="row md-m-25px-b m-40px-b justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h5 class="theme-color font-nunito">Our System</h5>
-                        <h3 class="h1 m-15px-b  font-nunito">System Flows</h3>
-                        <p class="m-0px font-2">ระบบจัดการเบ็ดเสร็จในโปรแกรมเดียว</p>
-
-                    </div>
-                       <div class="col-lg-12 ml-auto">
-                       <img class="w-100" src="static/img/system.png" title="" alt="">
-                    </div>
-
-                </div>
-
-            </div>
-        </section>-->
-<!-- End Section -->
-
-<!--รอใส่ข้อมูลให้ครบก่อนแล้วค่อยแสดงส่วนนี้-->
-<!-- Section
-        <section class="section gray-bg" id="customer">
-            <div class="container">
-                <div class="row md-m-25px-b m-40px-b justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h5 class="theme-color">เสียงจากลูกค้า</h5>
-                        <h3 class="h1 m-15px-b">ลูกค้าชั้นนำต่างเลือกใช้บริการของเรา</h3>
-                        <p class="m-0px font-2">ระบบที่น่าเชื่อถือ และทำงานได้อย่างรวดเร็วเท่านั้น ถึงจะทำให้ธุรกิจอยู่รอดในยุคสมัยนี้</p>
-                    </div>
-                </div>
-                <div class="owl-carousel" data-items="3" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
-                    <div class="card p-25px box-shadow m-15px">
-                        <p class="m-0px">ระบบดีมากค่ะ เคยใช้ของ Grab โดยค่าคอมไป 30 % กำไรหายไปเยอะมาก แถมเสียค่าแรกเข้าแพงเอามากๆอีกด้วย การใช้งานก็ไม่ยากเลยค่ะ</p>
-                        <div class="media m-20px-t">
-                            <div class="avatar-60 border-radius-50">
-                                <img src="/ui/images/1.jpg" alt="" title="">
-                            </div>
-                            <div class="media-body p-15px-l align-self-center">
-                                <h6 class="m-0px">คุณเจน</h6>
-                                <span class="font-small">เจ้าของร้านหมูกะทะ</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card p-25px box-shadow m-15px">
-                        <p class="m-0px">ไม่เคยเปิดร้านออนไลน์มาก่อน พอได้มีระบบ ทำให้มีลูกค้าเพิ่มขึ้น แถมประหยัดเวลาในการตอบลูกค้าด้วยค่ะ</p>
-                        <div class="media m-20px-t">
-                            <div class="avatar-60 border-radius-50">
-                                <img src="/ui/images/1.jpg" alt="" title="">
-                            </div>
-                            <div class="media-body p-15px-l align-self-center">
-                                <h6 class="m-0px">คุณนุ่น</h6>
-                                <span class="font-small">เจ้าของร้านเนื้อย่าง</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card p-25px box-shadow m-15px">
-                        <p class="m-0px">ไม่คิดว่าจะช่วยงานที่ร้านได้เยอะขนาดนี้ ลูกค้าก็เพิ่มขึ้นทุกเดือน รู้อย่างนี้ ใช้บริการตั้งนานแล้วค่ะ</p>
-                        <div class="media m-20px-t">
-                            <div class="avatar-60 border-radius-50">
-                                <img src="/ui/images/1.jpg" alt="" title="">
-                            </div>
-                            <div class="media-body p-15px-l align-self-center">
-                                <h6 class="m-0px">คุณโบว์</h6>
-                                <span class="font-small">เจ้าของร้านอาหารตามสั่ง</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card p-25px box-shadow m-15px">
-                        <p class="m-0px">อยากได้ระบบแบบนี้มาตั้งนานแล้ว  ค่าใช้จ่ายถูกกว่าจ่ายที่เดิมเยอะ แถมไม่ต้องจ้างคนดูแลแอพด้วย</p>
-                        <div class="media m-20px-t">
-                            <div class="avatar-60 border-radius-50">
-                                <img src="/ui/images/1.jpg" alt="" title="">
-                            </div>
-                            <div class="media-body p-15px-l align-self-center">
-                                <h6 class="m-0px">คุณเจน</h6>
-                                <span class="font-small">เจ้าของร้านอาหารตามสั่ง</span>
-                            </div>
+        <!-- Header -->
+        <header class="header-nav header-white header-transparent">
+            <div class="fixed-header-bar">
+                <!-- Header Nav -->
+                <div class="navbar navbar-main navbar-expand-lg">
+                    <div class="container" > <a class="navbar-brand" href="#"> <img class="logo-dark " alt="Kitchen BOT" title="Kitchen BOT" src="static/img/site_logo.png" style="height:50px; padding-top:0px;"> <img class="logo-light " alt="Kitchen BOT" title="Kitchen BOT" src="static/img/site_logo.png" style="height:70px; padding-top:20px;"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                        <div class="collapse navbar-collapse navbar-collapse-overlay font-nunito" id="navbar-main-collapse" style="font-size:1.25rem;">
+                            <ul class="navbar-nav ml-auto ">
+                                <li class="nav-item   px-dropdown"> <a class="nav-link" href="#about">Why us</a> </li>
+                                <li class="nav-item   px-dropdown"> <a class="nav-link" href="#whyus">About</a> </li>
+                                <li class="nav-item   px-dropdown"> <a class="nav-link" href="#feature">Feature</a> </li>
+                                <!--<li class="nav-item   px-dropdown"> <a class="nav-link" href="#customer">Customer</a> </li>-->
+                                <li class="nav-item   px-dropdown"> <a class="nav-link" href="#contact">Contact</a> </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+                <!-- End Header Nav -->
             </div>
-        </section>
-         End Section -->
-
-<section class="section">
-      <div class="container">
-    <div class="row md-m-25px-b m-40px-b justify-content-center">
-          <div class="col-lg-8 text-center">
-        <h5 class="theme-color  font-nunito">Seller Step</h5>
-        <h3 class="h1 m-15px-b">เพิ่มยอดขายด้วย <span class=" font-nunito">Kitchen BOT</span> ได้แล้ววันนี้</h3>
-        <p class="m-0px font-2">สร้างร้านค้าออนไลน์เป็นของคุณเองด้วยระบบ <span class=" font-nunito">Kitchen Bot Seller</span></p>
-      </div>
-        </div>
-    <div class="row" id="seller-step-xl">
-          <div class="d-grid grid-template-col-2 grid-template-col-md-5 grid-gap-1 grid-gap-sm-5 my-3">
-        <div class="card blog-grid-1 box-shadow-hover">
-              <div class="blog-img"> <img src="static/img/seller-step01.png" title="" alt=""> </div>
-              <div class="card-body blog-info">
-            <h5 style="font-weight:400;font-size:1.1rem;"> เปิดใช้งานลงทะเบียนผ่าน Kitchen BOT Seller ง่ายๆ </h5>
-            <div class="step-seller">1</div>
-          </div>
-            </div>
-        <div class="card blog-grid-1 box-shadow-hover">
-              <div class="blog-img"> <img src="static/img/seller-step02.png" title="" alt=""> </div>
-              <div class="card-body blog-info">
-            <h5 style="font-weight:400;font-size:1.1rem;"> สร้างข้อมูลร้านค้า สาขา, เวลาเปิด-ปิด </h5>
-            <div class="step-seller">2</div>
-          </div>
-            </div>
-        <div class="card blog-grid-1 box-shadow-hover">
-              <div class="blog-img"> <img src="static/img/seller-step03.png" title="" alt=""> </div>
-              <div class="card-body blog-info">
-            <h5 style="font-weight:400;font-size:1.1rem;"> สร้างเมนูอาหาร โปรโมชั่นและเงื่อนไขอื่นๆ </h5>
-            <div class="step-seller">3</div>
-          </div>
-            </div>
-        <div class="card blog-grid-1 box-shadow-hover">
-              <div class="blog-img"> <img src="static/img/seller-step04.png" title="" alt=""> </div>
-              <div class="card-body blog-info">
-            <h5 style="font-weight:400;font-size:1.1rem;"> สร้างเรทราคา การจัดส่งง่ายๆ </h5>
-            <div class="step-seller">4</div>
-          </div>
-            </div>
-        <div class="card blog-grid-1 box-shadow-hover">
-              <div class="blog-img"> <img src="static/img/seller-step05.png" title="" alt=""> </div>
-              <div class="card-body blog-info">
-            <h5 style="font-weight:400;font-size:1.1rem;"> รอการยืนยันเพื่อเปิดร้านค้า </h5>
-            <div class="step-seller">5</div>
-          </div>
-            </div>
-      </div>
-        </div>
-    <div class="row" id="seller-step-sm">
-          <div class="col-sm-12">
-        <div class="owl-carousel" data-items="3" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
-              <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step01.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 1</h5>
-                  <p class="card-text">เปิดใช้งานลงทะเบียนผ่าน Kitchen BOT Seller ง่ายๆ</p>
+        </header>
+        <!-- Header End -->
+        <!-- Main -->
+        <main>
+            <!-- Home Banner -->
+            <section class="effect-section theme-bg p-100px-b" id="top-background" >
+                <!-- fog
+                 <div class="fog-container">
+                  <div class="fog-img fog-img-first" style="opacity:0.4"></div>
+                  <div class="fog-img fog-img-second" style="opacity:0.4"></div>
                 </div>
-          </div>
-              <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step02.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 2</h5>
-                  <p class="card-text">สร้างข้อมูลร้านค้า สาขา, เวลาเปิด-ปิด</p>
-                </div>
-          </div>
-              <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step03.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 3</h5>
-                  <p class="card-text">สร้างเมนูอาหาร โปรโมชั่นและเงื่อนไขอื่นๆ</p>
-                </div>
-          </div>
-              <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step04.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 4</h5>
-                  <p class="card-text">สร้างเรทราคา การจัดส่งง่ายๆ</p>
-                </div>
-          </div>
-              <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step05.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 5</h5>
-                  <p class="card-text">รอการยืนยันเพื่อเปิดร้านค้า</p>
-                </div>
-          </div>
-            </div>
-      </div>
-        </div>
-    <div>** จำเป็นต้องมี <img src="/static/img/line_oa.png" style="height:35px;" alt="line oa"><span class=" font-nunito">LINE Offial Account อยู่แล้ว</span></div>
-  </div>
-    </section>
-
-<!-- Section -->
-<section class="section gray-bg">
-      <div class="container">
-    <div class="row md-m-25px-b m-40px-b justify-content-center">
-          <div class="col-lg-8 text-center">
-        <h5 class="theme-color">Customer Step</h5>
-        <h3 class="h1 m-15px-b">ลูกค้าสั่งอาหารจากร้านค้าออนไลน์ของคุณเอง</h3>
-        <p class="m-0px font-2">สั่งอาหารง่ายๆ 3 ขั้นตอน เลือกเมนู สั่งซื้อ จ่ายเงิน</p>
-      </div>
-        </div>
-
-    <!--
-                <div class="row" id="customer-step-xl">
-                    <div class="col-sm-6 col-lg-3 m-15px-tb">
-                        <div class="">
-                            <div class="team-img dark-after">
-                                <img src="static/img/customer-step01.png" title="" alt="">
-
-                            </div>
-                            <div class="step-info box-shadow">
-                                <h6 class="dark-color m-5px-b">STEP 1</h6>
-                                <p class="m-0px">เลือกเมนูอาหาร</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3 m-15px-tb">
-                        <div class="">
-                            <div class="team-img dark-after">
-                                <img src="static/img/customer-step02.png" title="" alt="">
-
-                            </div>
-                            <div class="step-info box-shadow">
-                                <h6 class="dark-color m-5px-b">STEP 2</h6>
-                                <p class="m-0px">ดำเนินการสั่งซื้อ</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 m-15px-tb">
-                        <div class="">
-                            <div class="team-img dark-after">
-                                <img src="static/img/customer-step03.png" title="" alt="">
-
-                            </div>
-                            <div class="step-info box-shadow">
-                                <h6 class="dark-color m-5px-b">STEP 3</h6>
-                                <p class="m-0px">ชำระเงิน</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 m-15px-tb">
-                        <div class="">
-                            <div class="team-img dark-after">
-                                <img src="static/img/customer-step04.png" title="" alt="">
-
-                            </div>
-                            <div class="step-info box-shadow">
-                                <h6 class="dark-color m-5px-b">STEP 4</h6>
-                                <p class="m-0px">รับสินค้า</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 -->
-    <div class="row" id="customer-step-sm">
-          <div class="col-sm-12">
-        <div class="owl-carousel" data-items="4" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
-              <div class="card"> <img src="static/img/customer-step01.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 1</h5>
-                  <p class="card-text">เลือกเมนูอาหาร</p>
-                </div>
-          </div>
-              <div class="card "> <img src="static/img/customer-step02.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 2</h5>
-                  <p class="card-text">ดำเนินการสั่งซื้อ</p>
-                </div>
-          </div>
-              <div class="card "> <img src="static/img/customer-step03.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 3</h5>
-                  <p class="card-text">ชำระเงิน</p>
-                </div>
-          </div>
-              <div class="card "> <img src="static/img/customer-step04.png" class="card-img-top" alt="seller step">
-            <div class="card-body">
-                  <h5 class="card-title">STEP 4</h5>
-                  <p class="card-text">รับสินค้า</p>
-                </div>
-          </div>
-            </div>
-      </div>
-        </div>
-  </div>
-    </section>
-<!-- End Section -->
+                <!--<div class="svg-bottom"> <img src="static/img/effect/divider-2.svg" title="" alt="" class="svg_img gray-color"> </div>-->
+                <div class="container" style="padding-top:100px;">
+                    <div id="top-slide" class="row align-items-center">
 
-<!-- Section -->
-<section class="section" id="contact">
-<div class="container">
-<div class="row align-items-center">
-      <div class="col-lg-6 m-15px-tb">
-    <h5 class="theme-color m-10px-b font-4">Kitchen Bot <span class="font-kanit">เท่านั้น</span></h5>
-    <h3 class="h2 m-20px-b font-kanit">ที่รวมฟังก์ชั่นการใช้งานอันยอดเยี่ยม <br>
-          ที่คุณต้องการไว้ที่เดียว</h3>
-    <p class="m-0px font-2 font-kanit">ออกแบบโดยใช้ <span class=" font-nunito">Social Technology </span> ทำให้การซื้อกลับบ้าน (Takeaway) และการสั่งแบบส่งเดลิเวอรี่ (Delivery) มีความสะดวกรวดเร็วมากขึ้น</p>
-    <div class="p-25px-t row">
-          <div class="col-sm-6">
-        <ul class="list-type-01">
-              <li>ลูกค้าสั่งซื้อสินค้าผ่านไลน์ได้เลย</li>
-              <li>Broadcast สินค้าผ่าน LINE OA ได้</li>
-              <li>ระบบชำระเงินอัตโนมัติ</li>
-              <li>เจ้าของร้านทำการตลาดได้เอง</li>
-              <li>ค่าใช้จ่ายที่ต่ำกว่า</li>
-              <li>บริหารงานร้านผ่านมือถือ</li>
-              <li>ระบบเชื่อมต่อ POS ของร้านอาหาร</li>
-            </ul>
-      </div>
-          <div class="col-sm-6">
-        <ul class="list-type-01">
-              <li>มี AI ช่วยประมวลผลและบริการเฉพาะบุคคลได้</li>
-              <li>ไม่จำเป็นต้องโหลด App ให้ยุ่งยาก</li>
-              <li>เชื่อมต่อ API กับ Delivery Service</li>
-              <li>ดูรายงานยอดขายได้ Realtime</li>
-              <li>ระบบบริหารลูกค้าสัมพันธ์ (CRM+Loyalty Program)</li>
-            </ul>
-      </div>
-        </div>
-  </div>
-      <div class="col-lg-5 ml-auto m-15px-tb">
-    <div class="box-shadow-lg card">
-          <div class="card-body">
-        <h5 class="dark-color m-20px-b">ลงทะเบียนเปิดร้านกับเรา</h5>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" title="ลงทะเบียน" target="_blank"><img src="/static/img/mockup-register-v2.png" class="img-fluid" alt="ลงทะเบียน"></a> <br>
-        <br>
-        <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank">ลงทะเบียนเปิดร้าน</a>
-        <div class="p-20px-tb">
-              <!--
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone number">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="3" placeholder="Your Comments"></textarea>
-                                    </div>
-                                    <div>
-                                        <button class="m-btn m-btn-theme m-btn-radius w-100">สมัครเปิดร้าน</button>
-                                    </div>
-                                </form>
+                        <!--แสดงบน desktop xl lg md-->
+                        <div class="col-lg-6 m-15px-tb d-none d-xl-block d-lg-block d-md-block">
+                            <h2 class="m-10px-b white-color font-kanit font-w-300">ถึงเวลาปฏิวัติวงการสั่งอาหารทาง <span class="font-nunito">Delivery</span></h2>
+                            <h1 class="h1 m-10px-b white-color font-kanit ">ให้ <span class="font-nunito">Kitchen BOT</span> ทำงานแทนคุณ</h1>
+                            <p class="font-3 white-color font-kanit">Kitchen BOT เป็นมากกว่าการเป็น<span class="font-nunito"> Delivery Platform</span> ธรรมดา <br>
+                                ช่วยให้คุณมีร้านออนไลน์ รวมถึงจัดการเมนูอาหาร ราคา และสต็อคสินค้า ปรับเองได้ง่ายๆ ผ่าน LINE OA</p>
+                            <div class="p-20px-t m-btn-wide mb-3"> <a h class="m-btn m-btn-radius m-btn-theme m-10px-r" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"> <span class="m-btn-inner-text fontwhite20">ลงทะเบียนเปิดร้าน คลิก! <i class="fas fa-angle-right"></i> </span></a>
+                                <!--<a class="m-btn m-btn-radius m-btn-theme2nd" href="#about">
+                                                      <span class="m-btn-inner-text">เรียนรู้เพิ่มเติม</span>
+                                                      <span class="m-btn-inner-icon arrow"></span>
+                                                  </a>-->
+                            </div>
+                        </div>
+                        <!--End แสดงบน desktop-->
 
-                                -->
-            </div>
-      </div>
-        </div>
-  </div>
-    </div>
-</section>
-<!-- End Section -->
-</main>
-<!-- End Main -->
-<!-- Footer-->
-<footer class="footer" style="background-color:#323f5a">
-      <div class="footer-top">
-    <div class="container">
-          <div class="row">
-        <div class="col-lg-3 col-sm-2 col-md-2 mb-4 font-nunito"> <img src="static/img/footer_logo.png" title="" alt="">
-              <div class="mt-3 w-100 text-center"> <a href="https://lin.ee/mTRzEXu" target="_blank"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/th.png" alt="เพิ่มเพื่อน" height="36" border="0"></a></div>
-            </div>
-        <div class="col-lg-3 col-sm-2   col-md-2 mb-4   font-nunito">
-              <h5 class="white-color footer-title"> Our Group </h5>
-              <ul class="list-unstyled links-white footer-link-1">
-            <li> <a href="https://www.advws.com/" target="_blank">ADVWS</a> </li>
-            <li> <a href="http://www.welovebooking.net" target="_blank">WE LOVE BOOKING</a> </li>
-            <li> <a href="#">WE LOVE CRM</a> </li>
-            <li> <a href="https://www.kinarai.com/" target="_blank">KINARAI</a> </li>
-          </ul>
-            </div>
-        <div class="col-lg-3 col-sm-2  col-md-2 mb-4  ">
-              <h5 class="black-color footer-title font-nunito"> . </h5>
-              <ul class="list-unstyled links-white footer-link-1">
-              <li> <a href="#">คู่มือการใช้งาน</a> </li>
-            <li> <a href="#">ประชาสัมพันธ์</a> </li>
-            <!--<li> <a href="#">คู่มือการใช้งาน</a> </li>
-            <li> <a href="#">ประชาสัมพันธ์</a> </li>
-            <li> <a href="#">บริการเสริม</a> </li>-->
-          </ul>
-            </div>
-        <div class="col-lg-3 col-sm-2 col-md-2   mb-4 ">
-              <h5 class="white-color footer-title">ติดตามเราได้ทาง</h5>
-              <div class=""> <a href="https://www.facebook.com/kitchenbot.th/" target="_blank"><img src="static/img/icon-facebook.png" alt="kinarai" style="width: 40px; height: auto"></a> <a href="https://lin.ee/mTRzEXu" target="_blank"><img src="static/img/icon-line.png" style="width: 40px; height: auto" alt="lineid"></a> </div>
-            </div>
-      </div>
-        </div>
-  </div>
-      <div class="footer-bottom border-style top light">
-    <div class="container">
-          <div class="row">
-        <div class="col-md-6 text-center text-md-left m-5px-tb">
-              <p class="m-0px font-small white-color-light  font-nunito">บริษัท แอดวานซ์ เว็บ เซอร์วิส จำกัด (มหาชน)</p>
+                        <!--แสดงบน mobile sm xs-->
+                        <div class="col-lg-6 m-15px-tb d-block d-sm-none text-center">
+                            <h2 class="m-10px-b white-color font-kanit font-w-300">ถึงเวลาปฏิวัติวงการสั่งอาหาร<br class="d-block d-sm-none"/>ทาง <span class="font-nunito">Delivery</span></h2>
+                            <h1 class="h1 m-10px-b white-color font-kanit ">ให้ <span class="font-nunito">Kitchen BOT</span><br class="d-block d-sm-none"/> ทำงานแทนคุณ</h1>
+                            <p class="font-3 white-color font-kanit">Kitchen BOT เป็นมากกว่าการเป็น<span class="font-nunito"> Delivery Platform</span> ธรรมดา <br>
+                                ช่วยให้คุณมีร้านออนไลน์ รวมถึงจัดการเมนูอาหาร ราคา และสต็อคสินค้า ปรับเองได้ง่ายๆ ผ่าน LINE OA</p>
+                            <div class="p-20px-t m-btn-wide mb-3"> <a h class="m-btn m-btn-radius m-btn-theme m-10px-r" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"> <span class="m-btn-inner-text fontwhite18">ลงทะเบียนเปิดร้าน คลิก! <i class="fas fa-angle-right"></i></span> </a>
+                                <!--<a class="m-btn m-btn-radius m-btn-theme2nd" href="#about">
+                                                      <span class="m-btn-inner-text">เรียนรู้เพิ่มเติม</span>
+                                                      <span class="m-btn-inner-icon arrow"></span>
+                                                  </a>-->
+                            </div>
+                        </div>
+                        <!--End แสดงบน mobile-->
 
-              <!---<ul class="nav justify-content-center justify-content-md-start links-white font-small footer-link-1  font-nunito">
-                            <li><a href="#">Privace &amp; Policy</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Join Us</a></li>
-                             <li><a href="#">Events</a></li>
-                        </ul>-->
+                        <div class="col-lg-6 m-15px-tb"> <img class="max-width-120" src="/static/img/mockup-phone-top-02.png" title="Kitchen BOT" alt="Kitchen BOT" > </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Home Banner -->
+            <!-- Section -->
+            <section class="section gray-bg">
+                <div class="container">
+                    <div class="row justify-content-center md-m-25px-b m-40px-b">
+                        <div class="col-lg-8 text-center">
+                            <h5 class="theme-color" id="about">Why us</h5>
+                            <h3 class="h1 m-15px-b">Kitchen BOT ช่วยคุณได้จริง</h3>
+                            <p class="m-0px font-2">ผู้ช่วยสำหรับผู้ประกอบการร้านอาหาร ในยุค Delivery<br>ที่ช่วยให้การบริหารจัดการร้านอาหารให้เป็นเรื่องง่าย</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 m-15px-tb">
+                            <div class="card box-shadow p-35px-tb p-35px-lr xl-p-35px-lr hover-top white-bg">
+                                <div class="text-center"> <img src="static/img/whyus-01.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
+                                <h5 class="m-15px-b">สร้างมาเพื่อร้านอาหารอย่างแท้จริง</h5>
+                                <p class="m-0px">Kitchen BOT ให้คุณจัดการร้านได้ง่ายๆ ผ่าน <span class="font-nunito">LINE OA (LINE Official Account)</span> โดยไม่จำเป็นต้องโหลด App ให้ยุ่งยาก</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 m-15px-tb">
+                            <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
+                                <div class="text-center"> <img src="static/img/whyus-03.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
+                                <h5 class="m-15px-b">ใช้ระบบ <span class="font-nunito">A.I. BOT</span> ในการคุยและรับออเดอร์ลูกค้า</h5>
+                                <p class="m-0px">มี AI ช่วยประมวลผล เพิ่มประสิทธิภาพในการจัดการออเดอร์ลูกค้า ตอบคำถาม และคำนวณ ผ่านระบบอัตโนมัติ ให้คุณไม่พลาดทุกออเดอร์
+</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 m-15px-tb">
+                            <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
+                                <div class="text-center"> <img src="static/img/whyus-02.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
+                                <h5 class="m-15px-b">ชำระเงินและเช็คยอดด้วยระบบ Online Payment</h5>
+                                <p class="m-0px"> เพิ่มประสิทธิภาพในการชำระเงินค่าอาหารผ่านระบบ <span class="font-nunito">Online Payment</span> อัตโนมัติ ด้วยระบบ <span class="font-nunito">QuickPay</span> โดยใช้ได้ทั้ง <span class="font-nunito"> QR Code</span> และ <span class="font-nunito">Credit Card</span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 m-15px-tb">
+                            <div class="card box-shadow p-35px-tb p-20px-lr xl-p-20px-lr hover-top white-bg">
+                                <div class="text-center"> <img src="static/img/whyus-04.png" title="" class="img-fluid" style="max-height:180px" alt=""> </div>
+                                <h5 class="m-15px-b">จัดส่งในขั้นตอนเดียวผ่าน Delivery</h5>
+                                <p class="m-0px">สามารถเชื่อมต่อ API กับบริษัทขนส่ง (Delivery Service) เพื่อให้ร้านอาหารมีบริการจัดส่ง รวมอยู่ในขั้นตอนการสั่งซื้อ เพื่อประหยัดเวลาจัดการ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
 
+            <!-- Section -->
+            <section class="section effect-section" id="whyus" style="padding:70px 0;">
+                <div class="effect-01 left"></div>
+                <div class="effect-01 right"></div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 m-15px-tb"> <img src="static/img/showcase.jpg" title="" alt="" class="card-img"> </div>
+                        <div class="col-lg-6 m-15px-tb">
+                            <div class="p-45px-l lg-p-0px-l">
+                                <h3 class="h2 m-15px-b">ถ้าหากคุณกำลังเจอปัญหาเหล่านี้อยู่ <br>
+                                    ให้ <span class="font-nunito">Kitchen BOT</span> ช่วยดูแลสิคะ</h3>
+                                <ul class="list-type-01" style="font-size:1.1rem;">
+                                    <li>โดนหักค่า GP 30-37 % ของค่าอาหาร จนกำไรไม่เหลือแทบขาดทุน</li>
+                                    <li>ฝากลูกค้าของคุณไว้กับ <span class="font-nunito">Delivery Platform</span> เปิดโอกาสให้ลูกค้าคุณเห็นคู่แข่ง เทียบราคา ไปซื้อเจ้าอื่น</li>
+                                    <li>ลูกค้าซื้ออาหารของคุณในหลายแพลตฟอร์ม แต่ไม่ได้มาซื้ออาหารผ่านร้านค้าคุณโดยตรง</li>
+                                    <li>ออเดอร์ตกหล่น ยากในการตรวจสอบแบบ <span class="font-nunito">Realtime</span> เนื่องจากไม่มีระบบช่วยจัดการออเดอร์</li>
+                                    <li>ยอดขายหน้าร้านตก เพราะลูกค้าเปลี่ยนพฤติกรรม ไม่ทานอาหารที่ร้าน เปลี่ยนมาสั่งอาหารออนไลน์ หรือ มารับกลับบ้าน</li>
+                                    <li>ทำหน้าร้านออนไลน์ผ่าน <span class="font-nunito"> Social Commerce </span>ไม่เป็น ไม่ดึงดูดลูกค้า เช่น <span class="font-nunito">Facebook หรือ LINE OA เป็นต้น</span></li>
+                                    <li>ได้รับเงินค่าอาหารล่าช้า 7-15 วัน ทำให้คุณบริหารเงินสด สภาพคล่องไม่ทัน</li>
+                                </ul>
+                                <div class="row counter p-15px-t">
+                                    <div class="col-4 col-lg-3  border-right">
+                                        <div class="count-data">
+                                            <h6 class="count h4 theme-color after-k m-5px-b" data-to="10" data-speed="10">10</h6>
+                                            <span>ลูกค้าเพิ่มขึ้น</span> </div>
+                                    </div>
+                                    <div class="col-4 col-lg-3  border-right">
+                                        <div class="count-data">
+                                            <h6 class="count h4 theme-color after-k m-5px-b" data-to="159" data-speed="159">159</h6>
+                                            <span>ยอดขายเพิ่มขึ้น</span> </div>
+                                    </div>
+                                    <div class="col-4 col-lg-3">
+                                        <div class="count-data">
+                                            <h6 class="count h4 theme-color after-p m-5px-b" data-to="99" data-speed="99">99</h6>
+                                            <span>ลูกค้ากลับมา</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+
+            <!-- Section-->
+            <section class="section effect-section">
+                <div class="container">
+                    <div class="row md-m-25px-b m-40px-b justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <!--<h5 class="theme-color font-nunito">Our System</h5>-->
+                            <!--<h3 class="h1 m-15px-b  font-nunito">System Flow</h3>-->
+                            <!--<p class="m-0px font-2">ระบบจัดการเบ็ดเสร็จในโปรแกรมเดียว</p>-->
+                            <p class="m-0px font-2">ทำไมต้องจ่ายแพงกว่า ในเมื่อคุณเลือกได้</p>
+                        </div>
+                        <div class="col-lg-12 ml-auto"> <img class="w-80" src="static/img/pic-table.jpg" title="Kitchen Bot" alt="Kitchen Bot"> </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+
+            <!-- Section -->
+            <section class="section gray-bg" id="feature">
+                <div class="container">
+                    <div class="row md-m-25px-b m-40px-b justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h5 class="theme-color font-3">Feature &amp; Package</h5>
+                            <!--<h3 class="h1 m-15px-b">ด้วยค่า GP เพียง 2% เท่านั้น</h3>-->
+                            <p class="m-0px text-center"><span class="font-2 ">ช่วยคุณประหยัดค่าใช้จ่ายได้มาก เมื่อเทียบกับ <span class="font-nunito">Delivery Service</span> ทั่วไป ที่มีค่า GP 25-30% <br>
+                                    โดยคุณสามารถเลือก <span class="font-nunito">Package</span> ที่เหมาะสมกับการใช้งานของร้านของคุณ<br>
+                                    เพื่อทดลองใช้งาน หรือสมัครแพ็คเกจรายปีเพื่อรับส่วนลดพิเศษ</span> <br><br>
+                                (** ไม่รวม <span class="font-nunito">Payment Gateway Fee </span> และไม่รวมค่าจัดส่งอาหารผ่านผู้ให้บริการ <span class="font-nunito">Delivery Service</span> )
+
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4 m-15px-tb">
+                            <div class="box-shadow hover-top white-bg">
+                                <div class="p-40px-t p-20px-lr">
+                                    <h4 class="h1 w-100 text-center font-nunito">Standard</h4>
+                                    <p class="m-0px text-center theme-color">เหมาะสำหรับสาขาเดียว </p>
+                                </div>
+                                <div class="p-20px">
+                                    <ul class="list-type-02" style="margin-bottom: 200px">
+                                        <li>Mobile / Tablet View</li>
+                                        <li>สร้างได้สูงสุด 20 เมนู</li>
+                                        <li>บริหารจัดการได้ 2 Users</li>
+                                        <li>ดูยอดขายรายวันได้</li>
+                                        <li>จัดการเมนูได้</li>
+                                        <li>จัดการออเดอร์อัตโนมัติ</li>
+                                        <li>ระบบชำระเงินผ่าน COD, QR Code, Credit Card</li>
+                                        <li>ระบบการจัดส่งแบบส่งเองและเชื่อม Delivery API</li>
+                                    </ul>
+                                    <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100 " href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"><span class="fontwhite18">สนใจ คลิก!</span></a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 m-15px-tb">
+                            <div class="box-shadow hover-top white-bg">
+                                <div class="p-40px-t p-20px-lr">
+                                    <h4 class="h1 w-100 text-center  font-nunito">Premium</h4>
+                                    <p class="m-0px text-center theme-color">เหมาะสำหรับ 1-3 สาขา</p>
+                                </div>
+                                <div class="p-20px">
+                                    <ul class="list-type-02" style="margin-bottom: 175px">
+                                        <li>Mobile / Tablet View / Web Seller Management</li>
+                                        <li>สร้างได้สูงสุด 50 เมนู</li>
+                                        <li>บริหารจัดการได้ 3 Users กำหนดสิทธิ์ได้</li>
+                                        <li>ดูยอดขายทุกสาขา</li>
+                                        <li>จัดการเมนูได้</li>
+                                        <li>ระบบจัดการออเดอร์อัตโนมัติ แบบ Center</li>
+                                        <li>ระบบชำระเงินผ่าน COD, QR Code, Credit Card</li>
+                                        <li>ระบบการจัดส่งแบบส่งเองและเชื่อม Delivery API</li>
+                                    </ul>
+                                    <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"><span class="fontwhite18">สนใจ คลิก!</span></a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 m-15px-tb">
+                            <div class="box-shadow hover-top white-bg">
+                                <div class="p-40px-t p-20px-lr">
+                                    <h4 class="h1 w-100 text-center  font-nunito">Customize</h4>
+                                    <p class="m-0px text-center theme-color">เหมาะสำหรับหลายสาขา</p>
+                                </div>
+                                <div class="p-20px">
+                                    <ul class="list-type-02">
+                                        <li>Mobile / Tablet View / Web Seller Management</li>
+                                        <li>สร้างได้สูงสุด 200 เมนู</li>
+                                        <li>บริหารจัดการได้ 5 Users กำหนดสิทธิ์ได้</li>
+                                        <li>ดูยอดขายทุกสาขา</li>
+                                        <li>จัดการเมนูได้ทุกสาขา</li>
+                                        <li>ระบบจัดการออเดอร์อัตโนมัติแบบ Center / Branch Management</li>
+                                        <li>ระบบชำระเงินผ่าน COD, QR Code, Credit Card</li>
+                                        <li>ระบบจัดส่งแบบส่งเอง และ Delivery API</li>
+                                        <li>รองรับระบบบริหารลูกค้าสัมพันธ์ (CRM และ Loyalty Program)</li>
+                                        <li>รองรับ Chat แบบ 1 : 1</li>
+                                        <li>รองรับ AI Chat BOT และ AI ประมวลผลเพื่อบริการเฉพาะบุคคล</li>
+                                        <li>รองรับการเชื่อมต่อ POS ร้านอาหาร</li>
+                                    </ul>
+                                    <div class="p-20px-tb"> <a class="m-btn m-btn-sm m-btn-theme m-btn-radius w-100" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"><span class="fontwhite18">สนใจ คลิก!</span></a> </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+
+            <!--รอใส่ข้อมูลให้ครบก่อนแล้วค่อยแสดงส่วนนี้-->
+            <!-- Section
+                    <section class="section gray-bg" id="customer">
+                        <div class="container">
+                            <div class="row md-m-25px-b m-40px-b justify-content-center">
+                                <div class="col-lg-8 text-center">
+                                    <h5 class="theme-color">เสียงจากลูกค้า</h5>
+                                    <h3 class="h1 m-15px-b">ลูกค้าชั้นนำต่างเลือกใช้บริการของเรา</h3>
+                                    <p class="m-0px font-2">ระบบที่น่าเชื่อถือ และทำงานได้อย่างรวดเร็วเท่านั้น ถึงจะทำให้ธุรกิจอยู่รอดในยุคสมัยนี้</p>
+                                </div>
+                            </div>
+                            <div class="owl-carousel" data-items="3" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
+                                <div class="card p-25px box-shadow m-15px">
+                                    <p class="m-0px">ระบบดีมากค่ะ เคยใช้ของ Grab โดยค่าคอมไป 30 % กำไรหายไปเยอะมาก แถมเสียค่าแรกเข้าแพงเอามากๆอีกด้วย การใช้งานก็ไม่ยากเลยค่ะ</p>
+                                    <div class="media m-20px-t">
+                                        <div class="avatar-60 border-radius-50">
+                                            <img src="/ui/images/1.jpg" alt="" title="">
+                                        </div>
+                                        <div class="media-body p-15px-l align-self-center">
+                                            <h6 class="m-0px">คุณเจน</h6>
+                                            <span class="font-small">เจ้าของร้านหมูกะทะ</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card p-25px box-shadow m-15px">
+                                    <p class="m-0px">ไม่เคยเปิดร้านออนไลน์มาก่อน พอได้มีระบบ ทำให้มีลูกค้าเพิ่มขึ้น แถมประหยัดเวลาในการตอบลูกค้าด้วยค่ะ</p>
+                                    <div class="media m-20px-t">
+                                        <div class="avatar-60 border-radius-50">
+                                            <img src="/ui/images/1.jpg" alt="" title="">
+                                        </div>
+                                        <div class="media-body p-15px-l align-self-center">
+                                            <h6 class="m-0px">คุณนุ่น</h6>
+                                            <span class="font-small">เจ้าของร้านเนื้อย่าง</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card p-25px box-shadow m-15px">
+                                    <p class="m-0px">ไม่คิดว่าจะช่วยงานที่ร้านได้เยอะขนาดนี้ ลูกค้าก็เพิ่มขึ้นทุกเดือน รู้อย่างนี้ ใช้บริการตั้งนานแล้วค่ะ</p>
+                                    <div class="media m-20px-t">
+                                        <div class="avatar-60 border-radius-50">
+                                            <img src="/ui/images/1.jpg" alt="" title="">
+                                        </div>
+                                        <div class="media-body p-15px-l align-self-center">
+                                            <h6 class="m-0px">คุณโบว์</h6>
+                                            <span class="font-small">เจ้าของร้านอาหารตามสั่ง</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card p-25px box-shadow m-15px">
+                                    <p class="m-0px">อยากได้ระบบแบบนี้มาตั้งนานแล้ว  ค่าใช้จ่ายถูกกว่าจ่ายที่เดิมเยอะ แถมไม่ต้องจ้างคนดูแลแอพด้วย</p>
+                                    <div class="media m-20px-t">
+                                        <div class="avatar-60 border-radius-50">
+                                            <img src="/ui/images/1.jpg" alt="" title="">
+                                        </div>
+                                        <div class="media-body p-15px-l align-self-center">
+                                            <h6 class="m-0px">คุณเจน</h6>
+                                            <span class="font-small">เจ้าของร้านอาหารตามสั่ง</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                     End Section -->
+
+            <section class="section">
+                <div class="container">
+                    <div class="row md-m-25px-b m-40px-b justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h5 class="theme-color  font-nunito">Seller Step</h5>
+                            <h3 class="h1 m-15px-b">เพิ่มยอดขายด้วย <span class=" font-nunito">Kitchen BOT</span> ได้แล้ววันนี้</h3>
+                            <p class="m-0px font-2">สร้างร้านค้าออนไลน์บน Social Commerce เป็นของคุณเอง ด้วยระบบ <span class=" font-nunito">Kitchen BOT Seller</span></p>
+                        </div>
+                    </div>
+                    
+                    <!--Desktop-->
+                    <div class="row" id="seller-step-xl">
+                        <div class="d-grid grid-template-col-2 grid-template-col-md-5 grid-gap-1 grid-gap-sm-5 my-3">
+                            <div class="card blog-grid-1 box-shadow-hover">
+                                <div class="blog-img"> <img src="static/img/seller-step01.png" title="" alt="สร้างร้านค้าบน LINE OA"> </div>
+                                <div class="card-body blog-info text-center">
+                                    <h5 style="font-weight:400;font-size:1.1rem;"> เปิดใช้งานลงทะเบียนผ่าน Kitchen BOT Seller ง่ายๆ </h5>
+                                    <div class="step-seller">1</div>
+                                </div>
+                            </div>
+                            <div class="card blog-grid-1 box-shadow-hover">
+                                <div class="blog-img"> <img src="static/img/seller-step02.png" title="" alt="สร้างร้านค้าบน LINE OA"> </div>
+                                <div class="card-body blog-info">
+                                    <h5 style="font-weight:400;font-size:1.1rem;"> สร้างข้อมูลร้านค้า สาขา, เวลาเปิด-ปิด </h5>
+                                    <div class="step-seller">2</div>
+                                </div>
+                            </div>
+                            <div class="card blog-grid-1 box-shadow-hover">
+                                <div class="blog-img"> <img src="static/img/seller-step03.png" title="" alt="สร้างร้านค้าบน LINE OA"> </div>
+                                <div class="card-body blog-info text-center">
+                                    <h5 style="font-weight:400;font-size:1.1rem;"> สร้างเมนูอาหาร โปรโมชั่นและเงื่อนไขอื่นๆ </h5>
+                                    <div class="step-seller">3</div>
+                                </div>
+                            </div>
+                            <div class="card blog-grid-1 box-shadow-hover">
+                                <div class="blog-img"> <img src="static/img/seller-step04.png" title="" alt="สร้างร้านค้าบน LINE OA"> </div>
+                                <div class="card-body blog-info text-center">
+                                    <h5 style="font-weight:400;font-size:1.1rem;"> สร้างเรทราคา การจัดส่งง่ายๆ </h5>
+                                    <div class="step-seller">4</div>
+                                </div>
+                            </div>
+                            <div class="card blog-grid-1 box-shadow-hover">
+                                <div class="blog-img"> <img src="static/img/seller-step05.png" title="" alt=""> </div>
+                                <div class="card-body blog-info text-center">
+                                    <h5 style="font-weight:400;font-size:1.1rem;"> รอการยืนยันเพื่อเปิดร้านค้า </h5>
+                                    <div class="step-seller">5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Desktop-->
+                    
+                    <!--Moblie-->
+                    <div class="row" id="seller-step-sm">
+                        <div class="col-sm-12">
+                            <div class="owl-carousel" data-items="3" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
+                                <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step01.png" class="card-img-top" alt="สร้างร้านค้าบน LINE OA">
+                                    <div class="card-body ">
+                                        <h5 class="card-title">STEP 1</h5>
+                                        <p class="card-text">เปิดใช้งานลงทะเบียนผ่าน Kitchen BOT Seller ง่ายๆ</p>
+                                    </div>
+                                </div>
+                                <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step02.png" class="card-img-top" alt="สร้างร้านค้าบน LINE OA">
+                                    <div class="card-body">
+                                        <h5 class="card-title">STEP 2</h5>
+                                        <p class="card-text">สร้างข้อมูลร้านค้า สาขา, เวลาเปิด-ปิด</p>
+                                    </div>
+                                </div>
+                                <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step03.png" class="card-img-top" alt="สร้างร้านค้าบน LINE OA">
+                                    <div class="card-body">
+                                        <h5 class="card-title">STEP 3</h5>
+                                        <p class="card-text">สร้างเมนูอาหาร โปรโมชั่นและเงื่อนไขอื่นๆ</p>
+                                    </div>
+                                </div>
+                                <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step04.png" class="card-img-top" alt="สร้างร้านค้าบน LINE OA">
+                                    <div class="card-body">
+                                        <h5 class="card-title">STEP 4</h5>
+                                        <p class="card-text">สร้างเรทราคา การจัดส่งง่ายๆ</p>
+                                    </div>
+                                </div>
+                                <div class="card p-25px box-shadow m-15px"> <img src="static/img/seller-step05.png" class="card-img-top" alt="สร้างร้านค้าบน LINE OA">
+                                    <div class="card-body">
+                                        <h5 class="card-title">STEP 5</h5>
+                                        <p class="card-text">รอการยืนยันเพื่อเปิดร้านค้า</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Moblie-->
+                    
+                    <div class="pt-3">** จำเป็นต้องมี <img src="/static/img/line_oa.png" style="height:35px;" alt="line oa"> <span class=" font-nunito">LINE OA (LINE Offial Account)</span></div>
+                    
+                </div>
+            </section>
+
+            <!-- Section -->
+            <section class="section gray-bg">
+                <div class="container">
+                    <div class="row md-m-25px-b m-40px-b justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h5 class="theme-color">Customer Step</h5>
+                            <h3 class="h1 m-15px-b">ลูกค้าสั่งอาหารจากร้านค้าออนไลน์ของคุณเอง</h3>
+                            <p class="m-0px font-2">สั่งอาหารง่ายๆ เพียง 4 ขั้นตอน ผ่าน LINE OA ของร้านค้า</p>
+                        </div>
+                    </div>
+
+                    <!--
+                                <div class="row" id="customer-step-xl">
+                                    <div class="col-sm-6 col-lg-3 m-15px-tb">
+                                        <div class="">
+                                            <div class="team-img dark-after">
+                                                <img src="static/img/customer-step01.png" title="" alt="">
+
+                                            </div>
+                                            <div class="step-info box-shadow">
+                                                <h6 class="dark-color m-5px-b">STEP 1</h6>
+                                                <p class="m-0px">เลือกเมนูอาหาร</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-3 m-15px-tb">
+                                        <div class="">
+                                            <div class="team-img dark-after">
+                                                <img src="static/img/customer-step02.png" title="" alt="">
+
+                                            </div>
+                                            <div class="step-info box-shadow">
+                                                <h6 class="dark-color m-5px-b">STEP 2</h6>
+                                                <p class="m-0px">ดำเนินการสั่งซื้อ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 m-15px-tb">
+                                        <div class="">
+                                            <div class="team-img dark-after">
+                                                <img src="static/img/customer-step03.png" title="" alt="">
+
+                                            </div>
+                                            <div class="step-info box-shadow">
+                                                <h6 class="dark-color m-5px-b">STEP 3</h6>
+                                                <p class="m-0px">ชำระเงิน</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 m-15px-tb">
+                                        <div class="">
+                                            <div class="team-img dark-after">
+                                                <img src="static/img/customer-step04.png" title="" alt="">
+
+                                            </div>
+                                            <div class="step-info box-shadow">
+                                                <h6 class="dark-color m-5px-b">STEP 4</h6>
+                                                <p class="m-0px">รับสินค้า</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                    -->
+                    <div class="row" id="customer-step-sm">
+                        <div class="col-sm-12">
+                            <div class="owl-carousel" data-items="4" data-nav-dots="true" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1" data-space="0" data-autoplay="true">
+                                <div class="card"> <img src="static/img/customer-step01.png" class="card-img-top" alt="seller step">
+                                    <div class="card-body">
+                                       <span class="fontgray30"><i class="fas fa-pizza-slice"></i></span>
+                                        <h5 class="card-title">STEP 1</h5>
+                                        <p class="card-text">เลือกเมนูอาหาร</p>
+                                    </div>
+                                </div>
+                                <div class="card "> <img src="static/img/customer-step02.png" class="card-img-top" alt="seller step">
+                                    <div class="card-body">
+                                       <span class="fontgray30"><i class="fas fa-shopping-cart"></i></span>
+                                        <h5 class="card-title">STEP 2</h5>
+                                        <p class="card-text">ดำเนินการสั่งซื้อ</p>
+                                    </div>
+                                </div>
+                                <div class="card "> <img src="static/img/customer-step03.png" class="card-img-top" alt="seller step">
+                                    <div class="card-body">
+                                       <span class="fontgray30"><i class="fas fa-money-bill"></i></span>
+                                        <h5 class="card-title">STEP 3</h5>
+                                        <p class="card-text">ชำระเงิน</p>
+                                    </div>
+                                </div>
+                                <div class="card "> <img src="static/img/customer-step04.png" class="card-img-top" alt="seller step">
+                                    <div class="card-body">
+                                       <span class="fontgray30"><i class="fas fa-utensils"></i></span>
+                                        <h5 class="card-title">STEP 4</h5>
+                                        <p class="card-text">รับสินค้า</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+
+            <!-- Section -->
+            <section class="section" id="contact">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 m-15px-tb">
+                            <h5 class="theme-color m-10px-b font-4">Kitchen BOT <span class="font-kanit">เท่านั้น</span></h5>
+                            <h3 class="h2 m-20px-b font-kanit">ที่รวมฟังก์ชั่นการใช้งานอันยอดเยี่ยม <br>
+                                ที่คุณต้องการไว้ที่เดียว</h3>
+                            <p class="m-0px font-2 font-kanit">ออกแบบโดยใช้ <span class=" font-nunito">Social Technology </span> ทำให้การซื้อกลับบ้าน (Takeaway) และการสั่งแบบส่งเดลิเวอรี่ (Delivery) มีความสะดวกรวดเร็วมากขึ้น</p>
+                            <div class="p-25px-t row">
+                                <div class="col-sm-6">
+                                    <ul class="list-type-01">
+                                        <li>ลูกค้าสั่งซื้อสินค้าผ่านไลน์ได้เลย</li>
+                                        <li>Broadcast สินค้าผ่าน LINE OA ได้</li>
+                                        <li>ระบบชำระเงินอัตโนมัติ</li>
+                                        <li>เจ้าของร้านทำการตลาดได้เอง</li>
+                                        <li>ค่าใช้จ่ายที่ต่ำกว่า</li>
+                                        <li>บริหารงานร้านผ่านมือถือ</li>
+                                        <li>ระบบเชื่อมต่อ POS ของร้านอาหาร</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-type-01">
+                                        <li>มี AI ช่วยประมวลผลและบริการเฉพาะบุคคลได้</li>
+                                        <li>ไม่จำเป็นต้องโหลด App ให้ยุ่งยาก</li>
+                                        <li>เชื่อมต่อ API กับ Delivery Service</li>
+                                        <li>ดูรายงานยอดขายได้ Realtime</li>
+                                        <li>ระบบบริหารลูกค้าสัมพันธ์ (CRM+Loyalty Program)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 ml-auto m-15px-tb">
+                            <div class="box-shadow-lg card">
+                                <div class="card-body text-center">
+                                    <h5 class="dark-color m-20px-b">เริ่มต้นลงทะเบียนเปิดร้านกับเรา</h5>
+                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" title="ลงทะเบียน" target="_blank"><img src="/static/img/mockup-register-v2.png" class="img-fluid" alt="ลงทะเบียนเปิดร้านกับ Kitchen BOT" title="ลงทะเบียนเปิดร้านกับ Kitchen BOT"></a> <br>
+                                    <br>
+                                    <a class="m-btn m-btn-lg m-btn-theme m-btn-radius w-100" href="https://docs.google.com/forms/d/e/1FAIpQLSfksfVq7CDJJgkDT2Px11lfZbbWzWuJGYuxfJ3PyTr7nnxZrg/viewform" target="_blank"><span class="fontwhite16">ลงทะเบียนเปิดร้าน คลิกเลย! <i class="fas fa-angle-right"></i></span></a>
+                                    <div class="p-20px-tb">
+                                        <!--
+                                                              <form>
+                                                                  <div class="form-group">
+                                                                      <input type="text" class="form-control" placeholder="Email">
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <input type="text" class="form-control" placeholder="Name">
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <input type="text" class="form-control" placeholder="Phone number">
+                                                                  </div>
+                                                                  <div class="form-group">
+                                                                      <textarea class="form-control" rows="3" placeholder="Your Comments"></textarea>
+                                                                  </div>
+                                                                  <div>
+                                                                      <button class="m-btn m-btn-theme m-btn-radius w-100">สมัครเปิดร้าน</button>
+                                                                  </div>
+                                                              </form>
+
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer-->
+        <footer class="footer" style="background-color:#323f5a">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-2 col-md-2 mb-4 font-nunito white-color text-center"> <img src="static/img/footer_logo.png" width="130px" height="auto" title="" alt=""><br><br>
+                            Call Center : 02-105-4164<br>
+                            ทุกวัน : 9.00 - 18.00 น.<br>
+                            marketing@advws.com
+                        </div>
+                        <div class="col-lg-3 col-sm-2 col-md-2 mb-4 font-nunito">
+                            <h5 class="white-color footer-title"> Our Group</h5>
+                            <ul class="list-unstyled links-white footer-link-1">
+                                <li> <a href="http://www.welovebooking.net" target="_blank">WE LOVE BOOKING</a> </li>
+                                <li> <a href="#">WE LOVE CRM</a> </li>
+                                <li> <a href="https://www.kinarai.com/" target="_blank">KINARAI</a> </li>
+                                <li> <a href="#">KITCHEN BOT</a> </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-sm-2  col-md-2 mb-4  ">
+                            <h5 class="black-color footer-title font-nunito"> . </h5>
+                            <ul class="list-unstyled links-white footer-link-1">
+                                <li> <a href="#">AI BOT </a></li>
+                                <li> <a href="#">QUICK PAY </a></li>
+                                <!--<li> <a href="#">คู่มือการใช้งาน</a> </li>
+                                <li> <a href="#">ประชาสัมพันธ์</a> </li>
+                                <li> <a href="#">คู่มือการใช้งาน</a> </li>
+                                <li> <a href="#">ประชาสัมพันธ์</a> </li>
+                                <li> <a href="#">บริการเสริม</a> </li>-->
+                            </ul>
+                            <div class="mt-3 w-100"> <a href="https://lin.ee/mTRzEXu" target="_blank"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/th.png" alt="เพิ่มเพื่อน" height="36" border="0"></a></div>
+
+                        </div>
+                        <div class="col-lg-3 col-sm-2 col-md-2   mb-4 " align="center">
+                            <!--facebook-->
+                            <div id="fb-root"></div>
+                            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v6.0&appId=426917580832756&autoLogAppEvents=1"></script>
+                            <div class="fb-page" data-href="https://www.facebook.com/kitchenbot.th/" data-tabs="timeline" data-width="" data-height="150" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
+                                <blockquote cite="https://www.facebook.com/kitchenbot.th/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/kitchenbot.th/">Kitchen Bot By kinarai.com</a></blockquote>
+                            </div>
+                            <!--end facebook-->
+
+                            <div class=""> </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        <div class="col-md-6 text-center text-md-right m-5px-tb">
-              <p class="m-0px font-small white-color-light  font-nunito">© 2020 Kitchen Bot copyright all right reserved</p>
+            <div class="footer-bottom border-style top light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-left m-5px-tb">
+
+                            <p class="m-0px font-small white-color-light  font-nunito">
+
+                                บริษัท แอดวานซ์ เว็บ เซอร์วิส จำกัด (มหาชน) <br class="d-block d-sm-none"/><a href="https://www.advws.com/" target="_blank">Advace Web Service (ADVWS)</a>
+                            </p>
+
+                            <!---<ul class="nav justify-content-center justify-content-md-start links-white font-small footer-link-1  font-nunito">
+                                              <li><a href="#">Privace &amp; Policy</a></li>
+                                              <li><a href="#">Contact Us</a></li>
+                                              <li><a href="#">Join Us</a></li>
+                                               <li><a href="#">Events</a></li>
+                                          </ul>-->
+
+                        </div>
+                        <div class="col-md-6 text-center text-md-right m-5px-tb">
+                            <p class="m-0px font-small white-color-light  font-nunito">© 2020, Kitchen Bot. All right reserved.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-      </div>
-        </div>
-  </div>
-    </footer>
-<!-- End Footer --> 
-<!-- jquery -->
-<script src="static/js/jquery-3.2.1.min.js"></script>
-<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
-<!-- end jquery -->
-<!-- appear -->
-<script src="static/plugin/appear/jquery.appear.js"></script>
-<!-- end appear -->
-<!--bootstrap-->
-<script src="static/plugin/bootstrap/js/popper.min.js"></script>
-<script src="static/plugin/bootstrap/js/bootstrap.js"></script>
-<!--end bootstrap-->
-<!-- End -->
-<!-- custom js -->
-<script src="static/js/custom.js"></script>
-<!-- end -->
-</body>
-	<!-- end body -->
+        </footer>
+        <!-- End Footer -->
+        <!-- jquery -->
+        <script src="static/js/jquery-3.2.1.min.js"></script>
+        <script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+        <!-- end jquery -->
+        <!-- appear -->
+        <script src="static/plugin/appear/jquery.appear.js"></script>
+        <!-- end appear -->
+        <!--bootstrap-->
+        <script src="static/plugin/bootstrap/js/popper.min.js"></script>
+        <script src="static/plugin/bootstrap/js/bootstrap.js"></script>
+        <!--end bootstrap-->
+        <!-- End -->
+        <!-- custom js -->
+        <script src="static/js/custom.js"></script>
+        <!-- end -->
+    </body>
+    <!-- end body -->
 
 </html>

@@ -341,46 +341,94 @@
 <div class="demo"></div>
 
 
-<div style="max-width:350px;max-height: 350px;border: solid 1px"><img id="dddd" class="my-image" src="/image/Kinarai.jpg" />
+<div style="max-width:350px;max-height: 350px;border: solid 1px"><img id="dddd" class="my-image"/>
 
 </div>
     <div>
-        
-<button class="vanilla-rotate" data-deg="-90">Rotate Left</button>
-<button class="vanilla-rotate" data-deg="90">Rotate Right</button>
-
-        <button class="btn-md btn-primary" onclick="get_image()">Get Image</button>
+  <input type='file' id="imgInp" accept="image/*" />
+  <div id="vanilla-demo"></div>
+          
+  <div class="actions">
+    <button class="vanilla-result">Result</button>
+    <button class="vanilla-rotate" data-deg="-90">Rotate Left</button>
+    <button class="vanilla-rotate" data-deg="90">Rotate Right</button>
+  </div>
+  <div>
+    <img id="show-result" style="width:350px;height: 350px" />
+  </div>
     </div>
 <script>
 
 
 ////CropImage.init()
-var el = document.getElementById('dddd');
-var resize = new Croppie(el, {
-    viewport: { width: 250, height: 250 },
-    boundary: { width: 300, height: 300 },
+
+
+var resize = false
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+        	$('#vanilla-demo').attr('src', e.target.result);
+            var src_r=  $('#vanilla-demo').attr('src')
+            var el = document.getElementById('vanilla-demo');
+            var vanilla = new Croppie(el, {
+              viewport: { width: 300, height: 300 },
+              boundary: { width: 350, height: 350 },
+              showZoomer: false,
+              enableOrientation: true
+            });
+            vanilla.bind({
+              url: src_r,
+              zoom: 0
+            });
+
+            document.querySelector('.vanilla-result').addEventListener('click', function (ev) {
+                vanilla.result({
+                  type: 'blob'
+                }).then(function (blob) {
+                  $('#show-result')[0].src = window.URL.createObjectURL(blob);
+                });
+            });
+
+            $('.vanilla-rotate').on('click', function(ev) {
+              vanilla.rotate(parseInt($(this).data('deg')));
+            });
+            
+            
+            
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+$("#imgInp").change(function(){
+    if(resize==false){
+        
+    }else{
+        resize.destroy()
+    }
     
-//    showZoomer: false,
-//    enableResize: true,
-    enableOrientation: true,
-//    mouseWheelZoom: 'ctrl'
-});
-resize.bind({
-    url: '/image/Kinarai.jpg',
-//    points: []
+    readURL(this);
 });
 
+
+
 //
-$('.vanilla-rotate').on('click', function(ev) {
- resize.rotate(parseInt($(this).data('deg')));
-});
+
 ////on button click
-//function get_image(){
-//    resize.result('base64','viewport').then(function(blob) {
-//        // do something with cropped blob
-//        $('.demo').html(blob)
-//    });
-//}
+function get_image(action){
+
+
+    resize.result('html','viewport').then(function(blob) {
+        // do something with cropped blob
+        $('.demo').html(blob)
+    });
+
+}
+
+
 
 
     var time = ['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00',

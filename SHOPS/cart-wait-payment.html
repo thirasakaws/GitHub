@@ -73,39 +73,55 @@
       <h6>รายการสั่งซื้อ <span class="font-color-foodmall">###ORDER-id##</span> </h6>
 
 
-    <div class="" id="listmenuorder">
-      <div class="row row_tablecontent" style="display:none">
-         <div class="col-2 text-left">
-          <span class="menu_qty">0</span> x
-        </div>
-        <div class="col-7">
-            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span> <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
-        </div>
+      <div class="" id="listmenuorder">
+        <div class="row row_tablecontent" >
+           <div class="col-2 text-left">
+            X<span class="badge badge-light badge-pill menu_qty">##MENU-qty##</span>
+          </div>
+          <div class="col-7">
+              ##MENU-name## ##MENU-pricedes##  ##MENU-fullnote##
+          </div>
 
-        <div class="col-3 text-right">
-           ฿ <span class="menu_menuprice">0.00 </span>
+          <div class="col-3 text-right">
+               ##MENU-priceshow## ฿
+          </div>
         </div>
       </div>
-    </div>
     <hr>
 
 
     <div class="align-items-center">
-      <div class="row">
+      <div class="row totalprice_show">
           <div class="col-6">
               ค่าอาหาร
           </div>
           <div class="col-6 text-right">
-              ฿ <span class="total_price">0.00 </span>
+               ##ORDER-totalcost## ฿
           </div>
       </div>
 
-      <div class="row">
+      <div class="row vat_show">
           <div class="col-6">
-              ค่าจัดส่ง <span>##ORDER-totalKM## </span> กม.
+              ราคารวม(ไม่รวม VAT)
           </div>
           <div class="col-6 text-right">
-             ฿ ##ORDER-totalshipcost##
+               ##ORDER-total_vatableprice## ฿
+          </div>
+      </div>
+      <div class="row vat_show">
+          <div class="col-6">
+              VAT(7%)
+          </div>
+          <div class="col-6 text-right">
+               ##ORDER-total_vat## ฿
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              ค่าจัดส่ง <small class="show_distanct"><span>##ORDER-totalKM## </span> กม.</small>
+          </div>
+          <div class="col-6 text-right">
+              ##ORDER-logisticcost## ฿
           </div>
       </div>
 
@@ -115,7 +131,7 @@
             <strong>รวมทั้งหมด</strong>
           </div>
           <div class="col-6 text-right ">
-             ฿ ##ORDER-grandtotal##
+              ##ORDER-grandtotal## ฿
           </div>
       </div>
 
@@ -140,13 +156,45 @@
     function refresh_page_wait(){
       if (working.order) {
         // console.log("ORDER",working.order);
-        var paymenttype = ['','เก็บเงินปลายทาง','QR payment By Quickpay','ลูกค้ารับเองที่ร้าน'];
+        var paymenttype = ['','เก็บเงินปลายทาง','QR payment By Quickpay'];
         working.order.paymenttypeshow = paymenttype[working.order.paymenttype];
         if( working.order.logistic){
-          working.order.totalshipcost = working.order.logistic.deliveryTotalAmount;
           working.order.totalKM = working.order.logistic.distanceShopToCustomerInKM;
         }
+        working.order.totalcost = working.order.totalcost ? addCommas(working.order.totalcost ) : '0.00';
+        working.order.grandtotal = working.order.grandtotal ? addCommas(working.order.grandtotal ) : '0.00';
+        working.order.logisticcost = working.order.logisticcost ? addCommas(working.order.logisticcost ) : '0.00';
+        if (working.order.total_vatableprice && working.order.total_vat && working.order.pricingtype ) {
+           if (working.order.pricingtype==1) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+           }else if(working.order.pricingtype==2) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+             // $('.vat_show').show();
+           }else if (working.order.pricingtype==3) {
+             working.order.total_vat = working.order.total_vat ? addCommas(working.order.total_vat) : '0.00';
+             working.order.total_vatableprice = working.order.total_vatableprice ? addCommas(working.order.total_vatableprice) : '0.00';
+             // $('.vat_show').show();
+
+           }
+
+        }
         $('.main_orderdata').html(hash_replace(teplate_all,"ORDER",working.order));
+        $('.show_distanct').hide();
+        if (working.order.pricingtype) {
+              if (working.order.pricingtype==1) {
+                $('.vat_show').hide();
+                $('.totalprice_show').show();
+              }else {
+                $('.vat_show').show();
+                $('.totalprice_show').hide();
+              }
+        }else {
+          $('.vat_show').hide();
+        }
+
+        showmwnuorderlist(working.order.items);
 //        $('.paymenttype').html(paymenttype[Number(working.order.paymenttype)]);
       }
             showmwnuorderlist(working.order.items);
@@ -170,45 +218,23 @@
       });
     };
 
-    function showmwnuorderlist(obj){
-      $('#listmenuorder').html(template_ordermenulist);
-      var totalprice =0,shippingcost = 0,grandtotal = 0;
-        for(var x=0;x<obj.length;x++){
-          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
-          totalprice += obj[x].menuprice;
-          obj[x].pricedes = obj[x].price.detail;
-               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
-               if(obj[x].menuprice>0){
-                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
-               }else {
-                 TR.find('.menu_menuprice').html('0.00')
-               }
-               if (obj[x].note) {
-                  TR.find('.menu_notedate').show();
-               }
+    function showmwnuorderlist(menues){
 
-               TR.show();
 
-               /// +=delivery
-        }
-        grandtotal = shippingcost+totalprice;
-        if (totalprice>0) {
-            $('.total_price').html(addCommas(totalprice))
-        }else {
-          $('.total_price').html('0.00')
-        }
 
-        if (shippingcost>0) {
-            $('.total_shippingcost').html(addCommas(shippingcost))
-        }else {
-          $('.total_shippingcost').html('0.00')
-        }
+      menues.map( (obj)=>{
+          obj.priceshow =  obj.price.price;
+          obj.fullnote = "";
+          if(obj.option && obj.option.length > 0 ){
+              obj.fullnote += `[${obj.option.join(',')}]`;
+          }
+          if(obj.note){
+              obj.fullnote += ` (${obj.note})`;
+          }
+          obj.pricedes = obj.price.detail;
+      });
 
-        if (totalprice>0) {
-            $('.grandtotal').html(addCommas(grandtotal))
-        }else {
-          $('.grandtotal').html('0.00')
-        }
+      $('#listmenuorder').html(hash_replace(template_ordermenulist,"MENU",menues));
 
     };
 

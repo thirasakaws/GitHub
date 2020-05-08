@@ -65,8 +65,8 @@ function upload_shopimage(obj){
          var image_resize =  $('#viewupload_image').attr('src');
          var img = document.getElementById( 'viewupload_image' );
          resize = new Croppie(img, {
-            viewport: { width: 280, height: 280 },
-            boundary: { width: 300, height: 300 },
+            viewport: { width: 300, height: 300 },
+            boundary: { width: 350, height: 350 },
            // showZoomer: false,
          //    enableResize: true,
            enableOrientation: true,
@@ -74,7 +74,9 @@ function upload_shopimage(obj){
          });
 
          resize.bind({
-            url: image_resize
+            url: image_resize,
+            orientation:1,
+            zoom:0
          });
   });
 

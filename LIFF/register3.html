@@ -6,7 +6,7 @@
     <div class="row box-head-title-shop text-center" >
 
         <div class="col-3 p-0 text-left">
-            <button class='btn border border-0 text-secondary alink' type="button" id="click_back" onclick="window.history.back()">
+            <button class='btn border border-0 text-secondary alink' type="button" id="click_back" onclick="go2View('register2');">
                 <i class="fas fa-chevron-left"></i> Back
             </button>
         </div>
@@ -36,7 +36,7 @@
     </div> <!-- // สาขา -->
 
     <div class=" row mb-3">
-        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
+        <label class="col-sm-12 text-gray-light2 lable-left-35 " >  เบอร์ติดต่อ </label>
         <div class="col d-flex ">
             <div class="float-left pl-2  w-100 ">
                 <input class="input_data_bn edit_data BRANCH_contact w-90" oninput="inputContactHandler(event);"  placeholder="เบอร์โทร" data-field="contact" id="contact_branch" type="tel"  onkeypress="return isNumberKey(event)">
@@ -48,9 +48,11 @@
 
 
     <div class="row mb-3">
-        <label class="col-sm-4 text-gray-light2 lable-left-35 " >  Location </label>
-        <div class="col d-flex ">
+        <label class="col-sm-12 text-gray-light2 lable-left-35 " >  Location <strong class="text-danger">*</strong> </label>
+        <div class="col-sm-12 d-flex ">
             <div class="float-left pl-2  w-100 text-right">
+              <span class="warn_gps_found" style="display:none;"><i class="fas fa-check-circle text-success"></i></span>
+              <span class="warn_gps_unfound" style="display:none;"><i class="fas fa-times-circle text-danger"></i></span>
                 <button onclick='show_gps()' class='btn btn-sm btn-outline-submit-shop'>
                     <i class="fas fa-map-marker-alt"></i> GPS ระบุพิกัดร้านอาหาร
                 </button>
@@ -60,9 +62,11 @@
         </div>
     </div> <!-- // GPS -->
     <div class="row mb-3">
-        <label class="col-sm-4 text-gray-light2 lable-left-35 " > Config Area Service </label>
-        <div class="col d-flex ">
-            <div class="float-left pl-2  w-100 text-right">
+        <label class="col-sm-12 text-gray-light2 lable-left-35 " > Config Area Service <strong class="text-danger">*</strong> </label>
+        <div class="col-sm-12 d-flex ">
+        <div class="float-left pl-2  w-100 text-right">
+          <span class="warn_radius_found" style="display:none;"><i class="fas fa-check-circle text-success"></i></span>
+          <span class="warn_radius_unfound" style="display:none;"><i class="fas fa-times-circle text-danger"></i></span>
                 <button onclick='show_gps_raduis()' class='btn btn-sm btn-outline-submit-shop'>
                     <i class="fas fa-map-marker-alt"></i> ตั้งค่า พื้นที่ให้บริการ
                 </button>
@@ -361,7 +365,9 @@
          }
          $('.timmmer_').html(optiondata);
 
+         refresh_branch_edit();
 
+function refresh_branch_edit(){
 
     console.log("Manage Branch", working.shopbranch);
 //    setdatabyclass($('.main_data'), 'LINE', LINE_USER);
@@ -395,6 +401,82 @@
             working.branch.opendate.sat = {};
 
     }
+    if (working.branch.location) {
+
+    if (working.branch.location.coordinates.length > 0) {
+          $('.warn_gps_found').show();
+          $('.warn_gps_unfound').hide();
+    }else {
+      $('.warn_gps_found').hide();
+          $('.warn_gps_unfound').show();
+    }
+    if (working.branch.location.service_radius) {
+        $('.warn_radius_unfound').hide();
+        $('.warn_radius_found').show();
+    }else {
+      $('.warn_radius_found').hide();
+      $('.warn_radius_unfound').show();
+
+    }
+  }
+
+    $('#opentime_sun').val(working.branch.opendate.sun.open);
+    $('#opentime_mon').val(working.branch.opendate.mon.open);
+    $('#opentime_tue').val(working.branch.opendate.tue.open);
+    $('#opentime_wed').val(working.branch.opendate.wed.open);
+    $('#opentime_thu').val(working.branch.opendate.thu.open);
+    $('#opentime_fri').val(working.branch.opendate.fri.open);
+    $('#opentime_sat').val(working.branch.opendate.sat.open);
+
+    $('#closetime_sun').val(working.branch.opendate.sun.close);
+    $('#closetime_mon').val(working.branch.opendate.mon.close);
+    $('#closetime_tue').val(working.branch.opendate.tue.close);
+    $('#closetime_wed').val(working.branch.opendate.wed.close);
+    $('#closetime_thu').val(working.branch.opendate.thu.close);
+    $('#closetime_fri').val(working.branch.opendate.fri.close);
+    $('#closetime_sat').val(working.branch.opendate.sat.close);
+
+    if (working.branch.opening == 1) {
+        $('#status_branch').prop('checked', true);
+    } else {
+        $('#status_branch').prop('checked', false);
+    }
+        if (working.branch.opendate.sun.status == 'open') {
+            $('#date_sun').prop('checked', true);
+        } else {
+            $('#date_sun').prop('checked', false);
+        }
+        if (working.branch.opendate.mon.status == 'open') {
+            $('#date_mon').prop('checked', true);
+        } else {
+            $('#date_mon').prop('checked', false);
+        }
+        if (working.branch.opendate.tue.status == 'open') {
+            $('#date_tue').prop('checked', true);
+        } else {
+            $('#date_tue').prop('checked', false);
+        }
+        if (working.branch.opendate.wed.status == 'open') {
+            $('#date_wed').prop('checked', true);
+        } else {
+            $('#date_wed').prop('checked', false);
+        }
+        if (working.branch.opendate.thu.status == 'open') {
+            $('#date_thu').prop('checked', true);
+        } else {
+            $('#date_thu').prop('checked', false);
+        }
+        if (working.branch.opendate.fri.status == 'open') {
+            $('#date_fri').prop('checked', true);
+        } else {
+            $('#date_fri').prop('checked', false);
+        }
+        if (working.branch.opendate.sat.status == 'open') {
+            $('#date_sat').prop('checked', true);
+        } else {
+            $('#date_sat').prop('checked', false);
+        }
+  }
     $.get('/api/data/ticket/province_list', function (data) {
 
         var selectoption = ""
@@ -404,63 +486,6 @@
         }
         $('.BRANCH_province').html(selectoption)
         setdatabyclass($('.main_data'), 'BRANCH', working.branch);
-
-        $('#opentime_sun').val(working.branch.opendate.sun.open);
-        $('#opentime_mon').val(working.branch.opendate.mon.open);
-        $('#opentime_tue').val(working.branch.opendate.tue.open);
-        $('#opentime_wed').val(working.branch.opendate.wed.open);
-        $('#opentime_thu').val(working.branch.opendate.thu.open);
-        $('#opentime_fri').val(working.branch.opendate.fri.open);
-        $('#opentime_sat').val(working.branch.opendate.sat.open);
-
-        $('#closetime_sun').val(working.branch.opendate.sun.close);
-        $('#closetime_mon').val(working.branch.opendate.mon.close);
-        $('#closetime_tue').val(working.branch.opendate.tue.close);
-        $('#closetime_wed').val(working.branch.opendate.wed.close);
-        $('#closetime_thu').val(working.branch.opendate.thu.close);
-        $('#closetime_fri').val(working.branch.opendate.fri.close);
-        $('#closetime_sat').val(working.branch.opendate.sat.close);
-
-        if (working.branch.opening == 1) {
-            $('#status_branch').prop('checked', true);
-        } else {
-            $('#status_branch').prop('checked', false);
-        }
-            if (working.branch.opendate.sun.status == 'open') {
-                $('#date_sun').prop('checked', true);
-            } else {
-                $('#date_sun').prop('checked', false);
-            }
-            if (working.branch.opendate.mon.status == 'open') {
-                $('#date_mon').prop('checked', true);
-            } else {
-                $('#date_mon').prop('checked', false);
-            }
-            if (working.branch.opendate.tue.status == 'open') {
-                $('#date_tue').prop('checked', true);
-            } else {
-                $('#date_tue').prop('checked', false);
-            }
-            if (working.branch.opendate.wed.status == 'open') {
-                $('#date_wed').prop('checked', true);
-            } else {
-                $('#date_wed').prop('checked', false);
-            }
-            if (working.branch.opendate.thu.status == 'open') {
-                $('#date_thu').prop('checked', true);
-            } else {
-                $('#date_thu').prop('checked', false);
-            }
-            if (working.branch.opendate.fri.status == 'open') {
-                $('#date_fri').prop('checked', true);
-            } else {
-                $('#date_fri').prop('checked', false);
-            }
-            if (working.branch.opendate.sat.status == 'open') {
-                $('#date_sat').prop('checked', true);
-            } else {
-                $('#date_sat').prop('checked', false);
-            }
 
     });
 
@@ -531,6 +556,7 @@
             pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],user_type:"seller"};
             call_modal_maps(pos, updategpslocation, showError);
         } else {
+          console.log('navigator',navigator);
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     console.log("GOT POSTIION", position);
@@ -616,6 +642,9 @@
             }
             working.branch.location = data.location;
             $('#writelocationok_radius').show('slow').hide('slow');
+            setTimeout(()=>{
+              refresh_branch_edit();
+            },500)
         });
     }
 
@@ -652,6 +681,9 @@
             }
             working.branch.location = data.location;
             $('#writelocationok').show('slow').hide('slow');
+            setTimeout(()=>{
+              refresh_branch_edit();
+            },500)
         });
     }
 

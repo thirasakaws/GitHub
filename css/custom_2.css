@@ -7,6 +7,14 @@ and open the template in the editor.
     Created on : Apr 30, 2020, 5:06:55 PM
     Author     : 7391
 */
+.breadcrumb { 
+	    background-color : #e9ecef45 !important;
+} 
+
+.btn-primary { 
+	background-color: #fc7d10 !important;
+	border: 1px solid #fc7d10 !important;
+}
 
 ion-icon {
   font-size: 16px;

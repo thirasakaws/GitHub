@@ -52,6 +52,7 @@
     var working={};
     register_all_page();  // Register SubPAGE
     function runApp(){
+
     //  alert("cart")
       $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
         //  alert("add cart")
@@ -80,6 +81,7 @@
       });
 
     }
+
     function resetorder(){
         if(confirm('ยืนยันยกเลิกรายการทั้งหมด?')){
         $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'reset'},(res)=>{

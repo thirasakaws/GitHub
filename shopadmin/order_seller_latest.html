@@ -38,7 +38,8 @@
                   <button class="mb-2" type="button" onclick="return search_data()">
                       <i class="fa fa-search fa-1x"> ค้นหา</i>
                   </button>
-                  <button class="mb-2" type="button">
+                  <button class="mb-2" type="button" id="download_excel" onclick="return search_data('load')">
+                          
                       <i class="fa fa-download fa-1x"> Export Excel</i>
                   </button>
             </div>
@@ -106,12 +107,12 @@
             <tbody id='paymenttype_template'>
                 <tr style=''>
 
-                    <td class="text-center" >##PAYMENTTYPE-id##</td>
-                    <td class="text-right">##PAYMENTTYPE-sumgrandtotal##</td>
+                    <td class="text-center" >##PAYMENTTYPE-paymentname##</td>
+                    <td class="text-right">##PAYMENTTYPE-sum_grandtotal##</td>
                 </tr>
             </tbody>
             <tbody >
-                <tr style=''>
+                <tr id='data_sum_row'>
                     <td class="text-center order_id ">รวมทั้งสิน</td>
 
                     <td class="text-right" id='sumary_template'></td>
@@ -135,10 +136,6 @@
 //        console.log(data)
 //    })
 
-     var PAYMENT = [];
-    PAYMENT[1] = 'เงินสด';
-    PAYMENT[2] = 'QR Payment';
-    
     var STATUSSHOW = [];
     STATUSSHOW[1] = 'มาใหม่';
     STATUSSHOW[4] = 'รายการแก่ไข';
@@ -189,9 +186,12 @@ $('#preload').modal('show');
         console.log($('#search_date_to').val())
             $('#search_date_from').attr('max',$('#search_date_to').val())
     })
-
+var total_record =0;
 //searchobj={search:{LINE_USER:LINE_USER}}
     function set_data_table(objdata, totalrecord){
+        
+        total_record= totalrecord
+        $('#download_excel').attr("disabled", true);
        console.log("Found data", objdata);
 //        $("#total_item").text(' ' + totalrecord);
         if(searchobj.search){
@@ -225,7 +225,14 @@ $('#preload').modal('show');
                  }
                  
                  if(obj.totalcost){
-                     obj.totalcostvat= addCommas(obj.totalcost)
+                     if(obj.pricingtype==3){
+                         console.log('true')
+                        var type3= Number(obj.totalcost)+Number(obj.total_vat)
+                         obj.totalcostvat= addCommas(type3)
+                     }else{
+                         obj.totalcostvat= addCommas(obj.totalcost)
+                     }
+                     
 
                  }else{
                      obj.totalcostvat =''
@@ -241,7 +248,13 @@ $('#preload').modal('show');
                  }else{
                      obj.logistic_cost =''
                  }
-                obj.paytype = PAYMENT[obj.paymenttype];
+                 if(obj.paymenttype==1){
+                     obj.paytype = 'เงินสด';
+                 }else if(obj.paymenttype==2){
+                     obj.paytype ='QR Payment';
+                 }else{
+                     obj.paytype =''
+                 }
                 obj.statustext = STATUSSHOW[obj.status];
              });
             
@@ -251,7 +264,10 @@ $('#preload').modal('show');
             
             
         }
-        setTimeout(function(){ $('#preload').modal('hide'); }, 500);
+        setTimeout(function(){ 
+            $('#preload').modal('hide'); 
+            $('#download_excel').removeAttr('disabled');
+        }, 500);
         
     }
     
@@ -264,24 +280,42 @@ $('#preload').modal('show');
 //             objdata.map((obj)=>{
 //                 obj.contact_no= obj.contact
 //            });
-            var template = hash_replace(paymenttype_template, 'PAYMENTTYPE', datasum)
-//            console.log(temp)
-            $('#paymenttype_template').html(template)
+        if(datasum.length>0){
             var sum=0
              datasum.map((obj)=>{
+                 if(obj._id==1){
+                     obj.paymentname = 'เงินสด'
+                 }else if(obj._id==2){
+                     obj.paymentname = 'QR PAYMENT'
+                 }
                  if(obj.sumgrandtotal){
                      sum= sum+obj.sumgrandtotal
                  }
+                 if(obj.sumgrandtotal){
+                     obj.sum_grandtotal = addCommas(obj.sumgrandtotal)
+                 }
                  
             });
+
+            var template = hash_replace(paymenttype_template, 'PAYMENTTYPE', datasum)
+//            console.log(temp)
+            $('#paymenttype_template').html(template)
+
             $('#sumary_template').html(addCommas(sum))
+            $('#data_sum_row').show()
 //            console.log(temp)
 //            $('#sumary_template').html(sum)
+        }else{
+            $('#paymenttype_template').html('<tr><td colspan="100%" class="text-center">Data Not found</td></tr>');
+
+            $('#data_sum_row').hide()
+        }
+
             
         });
     }
 
-    function search_data(){
+    function search_data(export_data){
         //searchdate
         searchobj={}
         searchquery = {};
@@ -334,51 +368,28 @@ $('#preload').modal('show');
         console.log(searchobj)
 
         searchfunction(searchobj);
+        if(export_data=='load'){
+            downloadexcel(searchobj) 
+        }
 
     }
     
     
     
     
-    function downloadexcel() {
+    function downloadexcel(searchobjdata) {
         $('#preload').modal('show');
         console.log("Downloaded");
         $('#download_excel').attr("disabled", true);
-//      searchobj.downloadexcel = true;
-//      console.log('data :post :', searchobj);
-
-//      $(searchobj).extend({
-//         downloadexcel: true
-//      });
-        console.log('Download XLS true')
-//      console.log('data :post :', searchobj);
-        search_date('load')
-
-//      $.postJSON('/api/data/ticket/order_search', searchobj, function (data) {
-//         console.log(data)
-//      });
-        Object.assign(searchquery, {downloadexcel: true});
-//        if (searchquery.page || searchquery.limit) {
-//            delete searchquery.page
-//            delete searchquery.limit
-//        }
-//        $.postJSON('/api/data/ticket/order_export', searchquery, function (data) {
-//            $('#download_excel').removeAttr("disabled");
-//            var a = document.createElement('a');
-//            var url = window.URL.createObjectURL(data);
-//            a.href = url;
-//            a.download = 'report_order_list.xls';
-//            document.body.append(a);
-//            a.click();
-//            a.remove();
-//            window.URL.revokeObjectURL(url);
-//        })
-
+        searchobjdata.search.download='true'
+        searchobjdata.search.total_limit=total_record
+        console.log(searchobjdata)
         var nowdate = new Date()
         var day_ex = nowdate.getDate()
         var month_ex = nowdate.getMonth() + 1
         var year_ex = nowdate.getFullYear();
-        $.postJSON('/api/data/ticket/order_export', searchquery, function (blob) {
+
+        $.postJSON('/api/data/kinarai/control/order_export', searchobjdata, function (blob) {
             var a = document.createElement('a');
             a.href = 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(blob);
             a.download = 'order_list_' + day_ex + '-' + month_ex + '-' + year_ex + '.xls';

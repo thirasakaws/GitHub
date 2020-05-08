@@ -1,0 +1,95 @@
+<div class="container-fluid">
+<div class="label-orange text-center mb-3" >
+  <span class="header_title"><i class="fas fa-hamburger"></i> เลือกเมนูอาหาร</span>
+</div> 
+    
+<div id='result-add' class="text-center">
+</div><!--// แสดงผลลัพธ์ -->
+    
+<div class="form-group row mt-3 select_price" style="display:none">
+    <div id='menuprice-select' class=" p-0" style="width:100%">
+         <label for="inputEmail3" class="col-12 col-form-label text-orange"> เลือกรายการ </label>
+         <div class="col-auto d-inline">
+             <select class="" id='menu_select'></select>
+         </div>
+         <div class="col-auto d-inline ">
+             <button onclick='update_price()' class=' btn btn-sm btn-orange' id='managebranch'><i class="fas fa-cart-plus"></i> Add</button>
+         </div>
+     </div>
+</div> <!--// เลือกรายการ -->
+    
+<div class="mt-4 text-center">    
+    <button type='button' onclick="liff.closeWindow();" class="btn btn-sm btn-light rounded-pill border border-secondary">
+        <i class="fa fa-fw fa-times"></i>  Close 
+    </button>
+
+    <button type='button' onclick="go2View('cart')" class="btn btn-sm btn-outline-orange rounded-pill">
+        <i class="fas fa-shopping-cart"></i> ดูสินค้าในตะกร้าของคุณ<!--See your Shopping Cart -->
+    </button>
+</div> <!--// btn -->
+
+    
+</div>
+<script>
+    // all_page = [''];
+     var working={};
+    // register_all_page();  // Register SubPAGE
+//  #### Setting ########## For LINE APP
+    var myLiffId = '1653987613-JleMBmV8';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+
+//  #### END  Setting ########## For LINE APP
+    var liffstring = '?liff.state=%2Fmenuid%3D';
+    var detail = window.location.search.replace(liffstring,'');
+    var menuid = detail;
+    function fnc_noprofile(){
+      alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
+      liff.login();
+    }
+    var select_template = $('#shopbranch-select').html();
+        function runApp(){
+        var data2send ={LINE_USER: LINE_USER,
+          menuid:menuid,
+          selectedprice:working.selectedprice
+          }
+      $.postJSON('/engine/order',data2send,(res)=>{
+          if(res.result){
+            if(res.action =='selectprice'){ // Show Select Price
+              $('.select_price').show();
+              working.selectprice = res.detail.prices;
+              set_selection(res.detail.prices);
+              return;
+            }
+
+            $("#result-add").html("OK เพิ่มรายการเมนูอาหารเรียบร้อยแล้ว");
+          }else{
+            $("#result-add").html(res.detail);
+          }
+
+      });
+
+    }
+    function set_selection (allprice){
+        var html ='';
+        for(var x=0; x < allprice.length;x++){
+          html += `<option value="${x}">${allprice[x].detail} ราคา ${allprice[x].price} บาท </option>`;
+        }
+            $('#menu_select').html(html);
+      }
+      function update_price(){
+          var index = $('#menu_select').val();
+        //  alert("INDEX:" + index);
+          $('.select_price').hide('slow');
+          working.selectedprice = working.selectprice[index];
+          runApp();
+      }
+
+    var temp = window.location.href.replace(liffstring+detail,'');
+    if(window.location.href !== temp){
+        window.history.pushState({
+          callpath: 'addcart'
+        }, 'Add item to Shopping Cart', temp);
+    }
+    initializeLiff();
+
+//  $('#body_mainbody').load('/LIFF/preload.html');
+</script>

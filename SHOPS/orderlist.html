@@ -149,23 +149,31 @@
   var template_main= $("#order_template").html();
   var order_template_menu = $('#order_template_menu').html();
 
-  var STATUSSHOW =[];
-  STATUSSHOW[1] = 'มาใหม่';
-  STATUSSHOW[4] = 'รายการแก่ไข';
+  var STATUSSHOW = [];
+  var styletext=[]
+  STATUSSHOW[1] = 'รายการใหม่ยังไม่ยืนยัน';
+  STATUSSHOW[4] = 'ร้านค้าแจ้งแก้ไข';
   STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
-  STATUSSHOW[6] = 'ยกเลิก';
-  STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
-  STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
-  STATUSSHOW[11] = 'ลูกค้าชำระเงินแล้ว';
-  STATUSSHOW[12] = 'ลูกค้าจะชำระเงินแบบปลายทาง';
-  STATUSSHOW[14] = 'ร้านค้ากำลังตรวจสอบรายการ';
-  STATUSSHOW[15] = 'ร้านกำลังดำเนินการ';
-  STATUSSHOW[16] = 'ร้านดำเนินการเสร็จแล้ว';
+  STATUSSHOW[6] = 'ลูกค้ายกเลิก';
+  STATUSSHOW[7] = 'รอร้านรับรายการ';
+  STATUSSHOW[10] ='รอลูกค้าชำระแบบ QR';
+  STATUSSHOW[11]= 'ลูกค้าชำระเงินแบบ QR แล้ว';
+  STATUSSHOW[12]= 'ลูกค้าชำระเงินปลายทาง';
+  STATUSSHOW[14]= 'รายการรอตอบรับทำออร์เดอร์';
+  STATUSSHOW[15]= 'รายการกำลังทำอาหาร';
+  STATUSSHOW[16]= 'รายการทำอาหารเสร็จพร้อมส่ง';
   STATUSSHOW[17] = 'Rider รับสินค้าแล้ว';
-  STATUSSHOW[23] = 'ลูกค้าไม่ขำระเงินภายในเวลาที่กำหนด';
-  STATUSSHOW[24] = 'ร้านไม่ตอบรับรายการภายในเวลาที่กำหนด';
-  STATUSSHOW[26] = 'ยกเลิก จากร้าน';
-  STATUSSHOW[27] = 'ยกเลิก จากลูกค้า ';
+  STATUSSHOW[23] = 'รายการเกินกำหนดชำระแบบ QR';
+  STATUSSHOW[24] = 'รายการถูกยกเลิก(ร้านรับรายการล่าช้า)';
+  STATUSSHOW[26] = 'รายการถูกยกเลิก(ร้านแจ้งยกเลิก)';
+  STATUSSHOW[27] = 'รายการถูกยกเลิก(ลูกค้าแจ้งยกเลิก)';
+
+  styletext[4] = 'text-warning'
+  styletext[5] = 'text-primary'
+  styletext[6] = 'text-danger'
+  styletext[16] = 'text-success'
+  styletext[26] = 'text-secondary'
+  styletext[27] = 'text-warning'
 
 function runApp(){
 
@@ -217,7 +225,7 @@ function runApp(){
 
 var template_modal_order_preview = $('#modal_order_preview').html();
 var ordercustomerlocation = {};
-var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay','ลูกค้ารับเองที่ร้าน']
+var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay']
 
 function previeworder(order_id){
   console.log('id',order_id);

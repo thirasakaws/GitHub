@@ -20,35 +20,45 @@
 
           </div>
 
-        </div> <!-- // modal-body --> 
-        
+        </div> <!-- // modal-body -->
+
         <div class="row">
-            <div class="col-5"><div class="pl-2"> พื้นที่อยู่ภายในรัศมี </div> </div>
-            <div class="col-3"> 
+            <div class="col-5"><div class="pl-2" id="radius_label"> พื้นที่อยู่ภายในรัศมี </div> </div>
+            <div class="col-3">
                 <input class="form-control form-control-md w-100" id="input-radius" type="number" min="0" value="">
-                
+
             </div>
             <div class="col">
                 กิโลเมตร
             </div>
         </div>
-        
+        <div class="row mt-2">
+            <div class="col-5"><div class="pl-2" id="distance_label"> ระยะทางให้บริการ </div> </div>
+            <div class="col-3">
+                <input class="form-control form-control-md w-100" id="input-distance" type="number" min="0" value="">
+
+            </div>
+            <div class="col">
+                กิโลเมตร
+            </div>
+        </div>
+
         <div class="row">
             <small class="col">
-                <div class="form-text text-muted p-1"> พื้นที่อยู่รอบๆ จะได้รับการรวมไว้ด้วยหากศูนย์กลางของพื้นที่อยู่ในรัศมีด้วย  </div> 
+                <div class="form-text text-muted p-1"> พื้นที่อยู่รอบๆ จะได้รับการรวมไว้ด้วยหากศูนย์กลางของพื้นที่อยู่ในรัศมีด้วย  </div>
             </small>
         </div>
-        
-        
-<!--        
+
+
+<!--
         <div id="floating-panel">
           รัศมี
           <input id="input-radius" style="width: 20%" type="number" min="0" value="">
-           <input id="submit" type="button" value="Reverse Geocode"> 
+           <input id="submit" type="button" value="Reverse Geocode">
           กิโลเมตร
         </div>-->
-        
-        
+
+
 
         <div class="modal-footer">
             <!-- <button onclick="btn_modal_map_radius_current()" class="btn btn-sm btn-danger"><i class="fas fa-map-marker-alt"></i> ใช้ที่อยู่ปัจจุบัน</button> -->
@@ -77,8 +87,10 @@
   var alreadyset = false;
   var circle_area;
   var service_radius = 0;
+  var service_distance = 0;
   var latlng_have_save = false;
-  
+  var dot_cnt = 0;
+
   function initMap_radius() {
     console.log("init Map");
     // Initialize Map
@@ -110,15 +122,87 @@
       radius: service_radius
     });
 
-    const input = document.querySelector('input');
+    // const input = document.querySelector('input');
     const input_radius = document.getElementById('input-radius');
-    input.oninput = inputRadiusHandler;
+    input_radius.oninput = inputRadiusHandler;
 
-    function inputRadiusHandler(e) { 
+    function inputRadiusHandler(e) {
       service_radius = parseFloat(e.target.value);
       // document.getElementById('input-radius').value = service_radius.toString();
       circle_area.setRadius(service_radius * 1000.0);
     }
+
+    // const input_distance = document.getElementById('input-distance');
+    // input_distance.oninput = inputDistanceHandler;
+
+    // function inputDistanceHandler(e) {
+    //   service_distance = parseFloat(e.target.value);
+
+    //   console.log(service_distance);
+    //   console.log(typeof(e.target.value));
+    //   console.log(e.target.value.length);
+    //   // document.getElementById('input-radius').value = service_radius.toString();
+    // }
+
+    // input_distance.onkeypress = function(evt) {
+    // evt = evt || window.event;
+    // var charCode = evt.which || evt.keyCode;
+    // var charStr = String.fromCharCode(charCode);
+    // // if (/\d/.test(charStr)) {
+    // //     return false;
+    // // }
+    // console.log(charStr);
+    // console.log(typeof(charStr));
+    // console.log(charStr.length);
+
+    // if ( (charStr >= "0") && (charStr <= "9") ) {
+    //   // do nothing
+    // } else if (charStr == ".") {
+    //   var distance_text = document.getElementById("input_distance").value;
+    //   if (distance_text.charAt(distance_text.length - 2) == ".") {
+    //     document.getElementById("input_distance").value = distance_text.substring(0,distance_text.length-1);
+    //   }
+      
+    // } else {
+    //   var distance_text = document.getElementById("input_distance").value;
+    //   console.log(distance_text);
+    //   document.getElementById("input_distance").value = distance_text.substring(0,distance_text.length-1);
+    // }
+
+    function cancelEvent(event) {// cross-browser code
+      event.cancelBubble = true;
+      event.returnValue = false;
+      if(event.stopPropagation)
+        event.stopPropagation();
+      if(event.preventDefault)
+        event.preventDefault();
+    }
+
+    document.getElementById('input-distance').addEventListener('keydown', function(event) {
+      var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;// cross-browser code
+      console.log("Debug1: " + keyCode);
+      if(keyCode != 8 && (keyCode < 48 || keyCode > 57)){// excludes non-numeric inputs
+        if (keyCode == 190) {
+          dot_cnt++;
+          if (dot_cnt >= 2) {
+            dot_cnt = 1;
+            cancelEvent(event);
+          }
+        } else {
+          cancelEvent(event);
+        }
+      }
+      console.log("Debug1.1:" + document.getElementById('input-distance').value);
+    });
+
+    document.getElementById('input-distance').addEventListener('textInput', function(event) {
+      event = window.event || event;// cross-browser code
+      console.log("Debug2: " + event.data);
+      if(/[^0-9.]/.test(event.data)) {
+        cancelEvent(event);
+      }
+      console.log("Debug2.1:" + document.getElementById('input-distance').value);
+    });
 
     // Event Map Screen Move
     // gmap.addListener('center_changed', showAddress);
@@ -193,8 +277,8 @@
   function call_modal_radius_maps(setting,cbfnc) {
     latlng_default_startup = {lat:13.796135897043685, lng:100.71161980133971};  // ADVWS;
     latlng_saved = {};
-    $('.main_data').hide();
-    $('#modal_google_gps_radius').modal('show');
+    // $('.main_data').hide();
+    // $('#modal_google_gps_radius').modal('show');
     if ( ('lat' in setting) && ('lng' in setting) ) {
       if (setting.lat && setting.lng) {
         latlng_have_save = true;
@@ -204,11 +288,17 @@
         } else {
           latlng_saved = setting;
         }
-        
+
         if ('service_radius' in setting) {
           service_radius = setting.service_radius;
         } else {
           service_radius = 0;
+        }
+
+        if ('service_distance' in setting) {
+          service_distance = setting.service_distance;
+        } else {
+          service_distance = 0;
         }
 
       } else {
@@ -223,7 +313,7 @@
     // $('#modal_google_gps_radius').modal('show');
     setTimeout(()=>{
       initMap_radius();
-      // $('#modal_google_gps_radius').modal('show');
+      $('#modal_google_gps_radius').modal('show');
       if(typeof(setting) == 'function'){
         cbfnc = setting;
         // setting ={lat:13.79607108667891,lng:100.71164142340422};
@@ -265,6 +355,7 @@
           gmap.panTo(themarker.getPosition());
           // showAddress();
           document.getElementById('input-radius').value = (service_radius / 1000.0).toString();
+          document.getElementById('input-distance').value = (service_distance / 1000.0).toString();
         }, 500);
       }
     },500);
@@ -285,6 +376,11 @@
     position.lat = latlng_saved.lng;    // switch bewteen LAT to LNG for MongoDB
     position.lng = latlng_saved.lat;    // switch bewteen LAT to LNG for MongoDB
     position.service_radius = Math.round(parseFloat($('#input-radius').val()) * 1000.0);
+    position.service_distance = Math.round(parseFloat($('#input-distance').val()) * 1000.0);
+    if (position.service_distance < position.service_radius) {
+      alert(document.getElementById("distance_label").innerText + "  ต้องมากกว่า หรือเท่ากับ  " + document.getElementById("radius_label").innerText);
+      return;
+    }
     console.log(position);
 
     if(tempcbfnc_maps){

@@ -13,7 +13,7 @@
       <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt=""
         style="width:29%;" />
     </div>
-    <div class="items-add-to-cart badge badge-pill badge-danger" style="margin-left:-10%;">##CART-totalitem##</div>
+    <div class="items-add-to-cart badge badge-pill badge-danger"  style="margin-left:-10%;"></div>
   </div>
 </div> <!-- topmenu -->
 
@@ -107,7 +107,7 @@
   </div> <!-- //top -->
 
 
-  <div class="row mt-2 text-center" id="btn_qty_ad" style="margin-bottom: 80px;">
+  <div class="row mt-2 text-center" id="btn_qty_add" style="margin-bottom: 80px; display:none;">
     <div class="col-12">
       <button class="btn btn-md btn-outline-submit-foodmall" onclick="rmv_qty();">
         <i class="fas fa-minus"></i>
@@ -129,8 +129,7 @@
   <div class="fixed-bottom m-1 bg-white">
     <div class="row mb-1 ">
       <div class="col-12">
-        <button type='btn' id="btn_add_cart" class="btn btn-lg btn-block btn-submit-foodmall"
-          onclick='add_to_cart(this);'>เพิ่มลงตะกร้า</button>
+        <button type='btn' id="btn_add_cart" class="btn btn-lg btn-block btn-submit-foodmall"  onclick='add_to_cart(this);' style="display:none;">เพิ่มลงตะกร้า</button>
       </div>
     </div>
   </div>
@@ -172,14 +171,14 @@
           // return false;
           //   $('.select_price').show();
           //   working.menuid = menuid;
-          //   if (res.detail.prices.length > 1) {
-          //     working.selectprice = res.detail.prices;
-          //     set_selection(res.detail.prices);
+            if (res.detail.prices.length > 1) {
+            $('#btn_add_cart').show();
+            $('#btn_qty_add').show();
 
-          //   }
-          //   if (res.detail.option && res.detail.option.length > 0) {
-          //     set_select_option(res.detail);
-          //   }
+            }
+            // if (res.detail.option && res.detail.option.length > 0) {
+            //   set_select_option(res.detail);
+            // }
 
 
           //   return;
@@ -189,7 +188,7 @@
             update_shoppingcart();
             $('#btn_add_cart').hide();
             $('#mainview').hide();
-            $('#btn_qty_ad').hide();
+            $('#btn_qty_add').hide();
             $("#result-add").html("<strong>เพิ่มสินค้าไปยังรถเข็นเรียบร้อย</strong>").addClass('text-success pt-3 pb-3');
             return false;
           }
@@ -321,11 +320,11 @@
       if (re) {
         $('#btn_add_cart').hide();
         $('#mainview').hide();
-        $('#btn_qty_ad').hide();
+        $('#btn_qty_add').hide();
         $("#result-add").html("<strong>เพิ่มสินค้าไปยังรถเข็นเรียบร้อย</strong>").addClass('text-success pt-3 pb-3');
-        setTimeout(() => {
-          liff.closeWindow();
-        }, 2000)
+        // setTimeout(() => {
+        //   liff.closeWindow();
+        // }, 2000)
       } else {
         $("#result-add").html(res.detail).addClass('text-danger pt-3 pb-3');
       }
@@ -345,7 +344,9 @@
       width: '+=20px'
     }, 200).animate({
       width: '-=20px'
-    }, 200);;
+    }, 200);
+
+    $('.items-add-to-cart').html(working.order.totalitem).show();
   }
 
 

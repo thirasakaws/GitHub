@@ -1,0 +1,156 @@
+/*kitchen bot style here*/
+
+
+
+/*font */
+.fontmain{ font-family: 'Kanit'; }
+.fonttitle { font-size:1.571em; font-family: 'Kanit'; }
+.fontnav{ font-size:1.143em; font-family: 'Kanit'; }
+
+.fontgray {color: #7d7c7c}
+.fontgray10 { font-size:0.714em; color: #7d7c7c}
+.fontgray12 { font-size:0.857em; color: #7d7c7c}
+.fontgray14 { font-size:1.000em; color: #7d7c7c}
+.fontgray16 { font-size:1.143em; color: #7d7c7c}
+.fontgray18 { font-size:1.286em; color: #7d7c7c}
+.fontgray20 { font-size:1.429em; color: #7d7c7c}
+.fontgray22 { font-size:1.571em; color: #7d7c7c}
+.fontgray30 { font-size:2.143em; color: #7d7c7c}
+.fontgray35 { font-size:2.500em; color: #7d7c7c}
+.fontgray60 { font-size:4.286em; color: #7d7c7c}
+.fontgray90 { font-size:6.429em; color: #7d7c7c}
+
+.fontgreen {color: #04b04e}
+.fontgreen10 { font-size:0.714em; color: #04b04e}
+.fontgreen12 { font-size:0.857em; color: #04b04e}
+.fontgreen14 { font-size:1.000em; color: #04b04e}
+.fontgreen16 { font-size:1.143em; color: #04b04e}
+.fontgreen18 { font-size:1.286em; color: #04b04e}
+.fontgreen20 { font-size:1.429em; color: #04b04e}
+.fontgreen22 { font-size:1.571em; color: #04b04e}
+.fontgreen30 { font-size:2.143em; color: #04b04e}
+.fontgreen35 { font-size:2.500em; color: #04b04e}
+.fontgreen60 { font-size:4.286em; color: #04b04e}
+.fontgreen90 { font-size:6.429em; color: #04b04e}
+
+.fontblack {color: #000000}
+.fontblack10 { font-size:0.714em; color: #333333}
+.fontblack12 { font-size:0.857em; color: #333333}
+.fontblack14 { font-size:1.000em; color: #333333}
+.fontblack16 { font-size:1.143em; color: #333333}
+.fontblack18 { font-size:1.286em; color: #333333}
+.fontblack20 { font-size:1.429em; color: #333333}
+.fontblack22 { font-size:1.571em; color: #333333}
+.fontblack30 { font-size:2.143em; color: #333333}
+.fontblack35 { font-size:2.500em; color: #333333}
+.fontblack60 { font-size:4.286em; color: #333333}
+.fontblack90 { font-size:6.429em; color: #333333}
+
+.fontred{color: #f64662}
+.fontred10 { font-size:0.714em; color: #f64662}
+.fontred12 { font-size:0.857em; color: #f64662}
+.fontred14 { font-size:1.000em; color: #f64662}
+.fontred16 { font-size:1.143em; color: #f64662}
+.fontred18 { font-size:1.286em; color: #f64662}
+.fontred20 { font-size:1.429em; color: #f64662}
+.fontred22 { font-size:1.571em; color: #f64662}
+.fontred30 { font-size:2.143em; color: #f64662}
+.fontred35 { font-size:2.500em; color: #f64662}
+.fontred60 { font-size:4.286em; color: #f64662}
+.fontred90 { font-size:6.429em; color: #f64662}
+
+.fontblue {color: #467fbf}
+.fontblue10 { font-size:0.714em; color: #467fbf}
+.fontblue12 { font-size:0.857em; color: #467fbf}
+.fontblue14 { font-size:1.000em; color: #467fbf}
+.fontblue16 { font-size:1.143em; color: #467fbf}
+.fontblue18 { font-size:1.286em; color: #467fbf}
+.fontblue20 { font-size:1.429em; color: #467fbf}
+.fontblue22 { font-size:1.571em; color: #467fbf}
+.fontblue30 { font-size:2.143em; color: #467fbf}
+.fontblue35 { font-size:2.500em; color: #467fbf}
+.fontblue60 { font-size:4.286em; color: #467fbf}
+.fontblue90 { font-size:6.429em; color: #467fbf}
+
+.fontnavy {color: #29324c}
+.fontnavy10 { font-size:0.714em; color: #29324c}
+.fontnavy12 { font-size:0.857em; color: #29324c}
+.fontnavy14 { font-size:1.000em; color: #29324c}
+.fontnavy16 { font-size:1.143em; color: #29324c}
+.fontnavy18 { font-size:1.286em; color: #29324c}
+.fontnavy20 { font-size:1.429em; color: #29324c}
+.fontnavy22 { font-size:1.571em; color: #29324c}
+.fontnavy30 { font-size:2.143em; color: #29324c}
+.fontnavy35 { font-size:2.500em; color: #29324c}
+.fontnavy60 { font-size:4.286em; color: #29324c}
+.fontnavy90 { font-size:6.429em; color: #29324c}
+
+.fontwhite {color: #ffffff}
+.fontwhite10 { font-size:0.714em; color: #ffffff}
+.fontwhite12 { font-size:0.857em; color: #ffffff}
+.fontwhite14 { font-size:1.000em; color: #ffffff}
+.fontwhite16 { font-size:1.143em; color: #ffffff}
+.fontwhite18 { font-size:1.286em; color: #ffffff}
+.fontwhite20 { font-size:1.429em; color: #ffffff}
+.fontwhite22 { font-size:1.571em; color: #ffffff}
+.fontwhite30 { font-size:2.143em; color: #ffffff}
+.fontwhite35 { font-size:2.500em; color: #ffffff}
+.fontwhite60 { font-size:4.286em; color: #ffffff}
+.fontwhite90 { font-size:6.429em; color: #ffffff}
+
+.fontyellow {color: #FABE28}
+.fontyellow10 { font-size:0.714em; color: #FABE28}
+.fontyellow12 { font-size:0.857em; color: #FABE28}
+.fontyellow14 { font-size:1.000em; color: #FABE28}
+.fontyellow16 { font-size:1.143em; color: #FABE28}
+.fontyellow18 { font-size:1.286em; color: #FABE28}
+.fontyellow20 { font-size:1.429em; color: #FABE28}
+.fontyellow22 { font-size:1.571em; color: #FABE28}
+.fontyellow30 { font-size:2.143em; color: #FABE28}
+.fontyellow35 { font-size:2.500em; color: #FABE28}
+.fontyellow60 { font-size:4.286em; color: #FABE28}
+.fontyellow90 { font-size:6.429em; color: #FABE28}
+
+.fontorange {color: #fc7d10}
+.fontorange10 { font-size:0.714em; color: #fc7d10}
+.fontorange12 { font-size:0.857em; color: #fc7d10}
+.fontorange14 { font-size:1.000em; color: #fc7d10}
+.fontorange16 { font-size:1.143em; color: #fc7d10}
+.fontorange18 { font-size:1.286em; color: #fc7d10}
+.fontorange20 { font-size:1.429em; color: #fc7d10}
+.fontorange22 { font-size:1.571em; color: #fc7d10}
+.fontorange30 { font-size:2.143em; color: #fc7d10}
+.fontorange35 { font-size:2.500em; color: #fc7d10}
+.fontorange60 { font-size:4.286em; color: #fc7d10}
+.fontorange90 { font-size:6.429em; color: #fc7d10}
+
+
+
+
+.input-group-icon2 {
+	position: relative
+}
+.input-group-icon2 .icon {
+	position: absolute;
+	left: 20px;
+	top: 0;
+	line-height: 40px;
+	z-index: 3
+}
+.input-group-icon2 .icon i {
+	color: #797979
+}
+.input-group-icon2 .single-input {
+	padding-left: 45px
+}
+.single-textarea {
+	display: block;
+	width: 100%;
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #000000;
+	padding: 0 20px;
+	height: 100px;
+	resize: none
+}

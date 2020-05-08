@@ -167,7 +167,7 @@
                                                                                     <span class='SHOP_bank_account editable_shop'>  </span>
                                                                                 </div>-->
                             <div class="float-left pl-2  w-100 ">
-                                <input class="input_data_bn edit_data SHOP_bank_account w-90" placeholder="xxxx-xxxx-xxxx-xxxx" data-field="bank_account">
+                                <input class="input_data_bn edit_data SHOP_bank_account w-90" type="tel" oninput="inputContactHandler(event);" id="bank_account" placeholder="xxxx-xxxx-xxxx-xxxx" data-field="bank_account" onkeypress="return isNumberKeyBank(event)">
                             </div>
                         </div>
 
@@ -175,28 +175,88 @@
 
 
 
-                    <div class="row">
+                    <div class="row border-bottom">
                         <label class="col-sm-4 text-gray-light2 lable-left-35 " ><b>  ช่องทางการชำระ </b></label>
                         <div class="col d-flex">
 
                             <div class="float-left pl-2  w-100 ">
                               <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-1" value="1">
-                                <label class="custom-control-label" for="paytype-1">เก็บเงินปลายทาง</label> <!-- // Cash On Delivery -->
+                                <label class="custom-control-label" for="paytype-1">เงินสด</label> <!-- // Cash On Delivery -->
                               </div>
                               <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-2" value="2">
                                 <label class="custom-control-label" for="paytype-2">QR payment By Quickpay</label>
                               </div>
-                              <div class="custom-control custom-checkbox">
+                              <!-- <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-3" value="3">
                                 <label class="custom-control-label" for="paytype-3">ลูกค้ารับเองที่ร้าน</label>
-                              </div>
+                              </div> -->
 
                             </div>
                         </div>
                     </div> <!--// ช่องทางการชำระ  -->
-                </div> <!--// end -->
+
+                    <div class="border-bottom">
+                      <div class="row">
+                        <label class=text-gray-light2 lable-left-35 " ><b>ยอดการรับออร์เดอร์</b></label>
+                      </div>
+                      <div class="row p-2">
+                          <div class="row float-left">
+                            <div class="col-6 text-left text-gray-light ">
+                              <div class="row">
+                                 <div class="col-4">
+                                  <small>ราคาขั้นต่ำ</small>
+                                 </div>
+                                 <div class="col-8">
+                                     <input class="input_data_bn edit_data SHOP_min_price w-100" type="number" data-field="min_price">
+                                 </div>
+                              </div>
+                            </div>
+                            <div class="col-6 text-left text-gray-light">
+                              <div class="row">
+                                 <div class="col-4">
+                                   <small>ราคาสูงสุด</small>
+                                 </div>
+                                 <div class="col-8">
+                                       <input class="input_data_bn edit_data SHOP_max_price w-100" type="number" data-field="max_price">
+                                 </div>
+                              </div>
+
+                            </div>
+                          </div>
+                      </div>
+
+                    </div>  <!-- limit amount -->
+
+
+                    <div class="row">
+                      <div class="row">
+                        <label class="col text-gray-light2 lable-left-35 " ><b>  การคิดราคาอาหาร </b></label>
+                      </div>
+                        <div class="col-12">
+                          <!-- Group of default radios - option 1 -->
+                            <div class="custom-control custom-radio">
+                              <input type="radio" class="custom-control-input" id="pricing-1" name="groupOfDefaultRadios" value="1" onchange="updatepricingtype(this)">
+                              <label class="custom-control-label" for="pricing-1">ไม่คำนวณ VAT</label>
+                            </div>
+
+                            <!-- Group of default radios - option 2 -->
+                            <div class="custom-control custom-radio">
+                              <input type="radio" class="custom-control-input" id="pricing-2" name="groupOfDefaultRadios" value="2" onchange="updatepricingtype(this)">
+                              <label class="custom-control-label" for="pricing-2">VAT(7%)รวมในราคาอาหารแล้ว</label>
+                            </div>
+
+                            <!-- Group of default radios - option 3 -->
+                            <div class="custom-control custom-radio">
+                              <input type="radio" class="custom-control-input" id="pricing-3" name="groupOfDefaultRadios" value="3" onchange="updatepricingtype(this)">
+                              <label class="custom-control-label" for="pricing-3">VAT(7%)ยังไม่รวมในราคาอาหาร</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div> <!--// การคิดราคาอาหาร  -->
 
 
       </div>
@@ -456,6 +516,31 @@
             working.shop.opening = 1;
         if (!working.shop.paymenttype)
             working.shop.paymenttype = [];
+        if (!working.shop.pricingtype){
+              data = {
+                _id : working.shop._id,
+                pricingtype : 1,
+              }
+               update_shop(data);
+               setTimeout(()=>{
+                 set_pricing();
+               },500)
+        }
+
+    }
+
+    function update_shop(data){
+      data.LINE_USER = LINE_USER;
+      $.postJSON('/api/liff/edit/shop', data, function (res) {
+          if (!res.result) {
+              alert(res.detail);
+              cb(false);
+          }else{
+           if (working.shop._id == res.detail._id) {
+                working.shop = res.detail;
+           }
+            cb(true); }
+      })
     }
 
 
@@ -472,6 +557,22 @@
   }else{
     alert('not have event')
   }
+}
+
+function isNumberKeyBank(e) {
+        if(e){
+            if($('#bank_account').val().toString().length>=10){
+              return false;
+            }
+            var charCode = (e.which) ? e.which : event.keyCode
+
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+          return false;
+      return true;
+      }else{
+      alert('not have event')
+      }
+
 }
 
 
@@ -508,7 +609,24 @@
         })
     };
 
+    function updatepricingtype(obj){
+      if ($(obj).is(':checked')) {
+        var dataid = $(obj).attr('value');
+        var data = {};
+        data.LINE_USER = LINE_USER;
+        data._id = working.shop._id;
+        data.pricingtype = dataid;
+        $.postJSON('/api/liff/edit/shop', data, function (res) {
+            if (!res.result) {
+                alert(res.detail);
+                cb(false);
+            }else cb(true);
+        })
+      }
+    };
+
     $.get('/api/data/ticket/province_list',function(data){
+      if(data && Array.isArray(data) && data.length > 0){
 
         var selectoption =""
         selectoption += '<option value="">----เลือก-----</option>'
@@ -516,8 +634,9 @@
                 selectoption +='<option value="'+data[x]._id+'">'+data[x].name+'</option>'
             }
             $('.SHOP_province').html(selectoption)
-            setdatabyclass($('.main_data'), 'LINE', LINE_USER);
-            setdatabyclass($('.main_data'), 'SHOP', working.shop);
+          }
+          setdatabyclass($('.main_data'), 'LINE', LINE_USER);
+          setdatabyclass($('.main_data'), 'SHOP', working.shop);
     })
     // console.log("Error1");
 
@@ -531,7 +650,11 @@
         }
     }
 
-    setpaymentttype(working.shop.paymenttype);
+    if (working.shop.paymenttype && Array.isArray(working.shop.paymenttype)) {
+          setpaymentttype(working.shop.paymenttype);
+    }
+
+
 
     function setpaymentttype(obj) {
         if (obj.length > 0) {
@@ -540,18 +663,35 @@
             }
         }
     }
+
+set_pricing();
+function set_pricing(){
+  if (working.shop.pricingtype) {
+        $('#pricing-' + working.shop.pricingtype + '').prop('checked', true);
+  }
+}
     //for input tag
     $('.edit_data').Fusefield( (obj,cb)=>{
       var field = obj.attr('data-field');
       var data = {};
       data.LINE_USER = LINE_USER;
       data._id = working.shop._id;
+      if (!working.shop.pricingtype) {
+        data.pricingtype = 1;
+      }
       data[field] = obj.val();
       $.postJSON('/api/liff/edit/shop', data, function (res) {
           if (!res.result) {
               alert(res.detail);
               cb(false);
-          }else cb(true);
+          }else {
+            if (working.shop._id == res.detail._id) {
+              working.shop = res.detail;
+            }
+            cb(true);
+          }
+
+
       })
     },(obj)=>{
       return true;

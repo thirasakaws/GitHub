@@ -8,16 +8,22 @@
     </div>
 
     <div class="main_data">
-        
-        
+
+
         <div class="row mb-4">
             <div class="col-12">
-                
+
               <div class="shadow-sm rounded p-3">
                 <div class="font-color-shop header-sub-title line-bottom-color-shop "> การจัดส่ง </div>
                     <div class="form-group row mt-2">
+                        <div class="col-12 text-gray-light pb-3">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="form-control-sm custom-control-input paymenttype" onchange="updatepaymenttype();" id="paytype-1" >
+                          <label class="custom-control-label" for="paytype-1">รับที่ร้านด้วยตัวเอง</label> <!-- // Cash On Delivery -->
+                        </div>
+                        </div>
                         <div class="col-12  text-gray-light">
-                            Delivery Type 
+                            Delivery Type
                             <select class=" editable_shop form-control-sm SHOP_delivery" data-field='delivery' >
                                 <option disabled value='1'>LINE MAN </option>
                                 <option disabled value='2'>Kinarai Delivery Service</option>
@@ -25,8 +31,8 @@
                                 <option disabled value='4'>จัดส่งเอง เฉพาะพื้นที่ให้บริการ</option>
                             </select>
                         </div>
-                    </div> 
-                
+                    </div>
+
                 <!--/
                  <div class="font-color-shop header-sub-title line-bottom-color-shop"> ตารางกับหนดค่าจัดส่ง ต่อรอบการจัดส่ง </div>
                   / -->
@@ -40,9 +46,9 @@
             </div> <!--//  -->
             </div> <!--//  -->
         </div> <!--//  -->
-        
-        
-        
+
+
+
 
         <div class="font-color-shop header-sub-title line-bottom-color-shop shadow-sm  p-2 pl-3">
             กำหนดระยะทางการจัดส่งและค่าบริการ
@@ -55,25 +61,25 @@
                         <b><span class="border-bottom-gray">กำหนดเงื่อนไขระยะทาง </span> <span class="text-danger">##DELI-distt1_order##</span></b>
                         <span class="float-right pr-2"><i class="fa fa-trash-alt text-danger fa-1x float-right" onclick="delete_delivery(this)"></i></span>
                     </label>
-                    
+
 
                     <div class="col d-flex">
                         <div class="float-left w-100 ">
                             <div class="form-group row">
                                 <div class="col-12 text-gray-light">
                                     ระยะไม่เกิน <span ><input class="input_data_bn editable_delivery_t1 w-50 text-center"  type='number' placeholder="ระยะทางไม่เกิน (Km)" data-field="distance" value="##DELI-distance##"></span> กิโลเมตร
-                                    
+
                                 </div>
 <!--                                <div class="col-4">
-                                    
+
                                 </div>
                                 <div class="col text-right text-gray-light">
-                                    
+
                                 </div>-->
 
                             </div> <!--//  -->
-                            
-                            
+
+
 
                             <div class="form-group row">
 <!--                                <label class="col-5 text-gray-light"></label>-->
@@ -81,7 +87,7 @@
                                     ค่าบริการเริ่มต้น <span><input class="input_data_bn editable_delivery_t1 w-25 text-center" type='number' placeholder="เช่น 10" data-field="fee"  value="##DELI-fee##"></span> บาท
                                 </div>
 <!--                                <div class="col text-right text-gray-light">
-                                    
+
                                 </div>-->
                             </div> <!--//  -->
 <!--
@@ -101,17 +107,17 @@
                             </div> <!--//  -->
 <!--                            <div class="none_mar"></div>-->
                             <div class="text-danger mb-2 btn btn-sm  btn-light pl-1 pr-1" onclick="show_condition_t1(this)" val_ch="0"><i class="fas fa-cog"></i> ตั้งค่าขั้นสูง</div>
-                            
+
                             <div class="p-2 rounded bg-gray-light-2"  style="display: none;">
                                 <div class="mt-2 text-danger border-bottom-gray">เงื่อนไขพิเศษสำหรับการให้ส่วนลด <span class="float-right"><i class="fas fa-percent text-danger"></i> </span></div>
-                                
+
                                 <div class="form-group row mt-2">
                                     <div class="col-12 text-gray-light">
                                         ค่าบริการต่อชิ้น <span><input class="text-center input_data_bn w-50 editable_delivery_t1" type='number' placeholder="เช่น 10" data-field="per_item"  value="##DELI-per_item##"></span> บาท
                                     </div>
 
-                                </div> <!-- // --> 
-                                
+                                </div> <!-- // -->
+
                                 <div class="form-group row mt-2">
 
                                     <div class="col-12 text-gray-light">
@@ -123,21 +129,21 @@
                                         </select>
                                         <input class="text-center input_data_bn editable_delivery_t1 w-25" type='number'   data-field="condition_amount"  value="##DELI-condition_amount##" >
                                          </span> บาท
-                                    </div> 
-                                </div> <!-- // --> 
-                                
+                                    </div>
+                                </div> <!-- // -->
+
                                 <div class="form-group row mt-2">
 
                                     <div class="col-12 ">
                                         จำนวนส่วนลด <span><input class="text-center input_data_bn editable_delivery_t1 w-50" type='number'   data-field="condition_discount"  value="##DELI-condition_discount##" ></span> บาท
-                                       
+
                                     </div>
 
                                 </div> <!-- // -->
-                                
-                                
-                                
-                                
+
+
+
+
 <!--                                <div class="col-12">
                                     <span class="text-gray-light">เงื่อนไข </span>
                                     <select class=" editable_delivery_t1 condition_type" data-field="condition_type">
@@ -175,7 +181,7 @@
         <label class="col-12 text-gray-light lable-left-35" >
             <b><span class="border-bottom-gray">ระยะเหมาจ่าย </span></b>
         </label>
-        
+
         <div class="col d-flex  mb-3  row_tableconten " data-id="##DELI-id##">
             <div class="float-left w-100 ">
                 <div class="form-group row">
@@ -208,14 +214,14 @@
                         ค่าบริการต่อ  1 Km <span><input class="input_data_bn editable_delivery_t2 w-25 text-center" type='number' placeholder="เช่น 0.5" data-field="per_itemkm"  value="##DELI-per_itemkm##" data-id="##DELI-id##"></span> บาท
                     </div>
                 </div> <!--//  -->
-                
+
 <!--                <div class="none_mar"></div>-->
-                <div class="text-warning btn btn-sm btn-light" onclick="show_condition_t1(this)" val_ch="0"> 
+                <div class="text-warning btn btn-sm btn-light" onclick="show_condition_t1(this)" val_ch="0">
                     <i class="fas fa-cog"></i> ตั้งค่าขั้นสูง
                 </div>
-                
+
                 <div class="p-2 rounded bg-gray-light-2 mt-2" style="display: none;" >
-                    
+
                     <div class="mt-2 text-warning border-bottom-gray">เงื่อนไขพิเศษสำหรับการให้ส่วนลด <span class="float-right"> <i class="fas fa-percent text-warning"></i>   </span></div>
                     <div class="form-group row mt-2">
 
@@ -224,8 +230,8 @@
                         </div>
 
                     </div> <!-- // -->   <!--//  -->
-                    
-                    
+
+
                      <div class="form-group row mt-2">
                         <div class="col-12  text-gray-light">
                              เงื่อนไข <span>
@@ -237,9 +243,9 @@
                                     <input class="text-center input_data_bn editable_delivery_t2 w-25" type='number'   data-field="condition_amount"  value="##DELI-condition_amount##"  data-id="##DELI-id##">
                                      </span> บาท
                         </div>
-                        
-                    </div> <!-- // --> 
-                    
+
+                    </div> <!-- // -->
+
                     <div class="form-group row mt-2">
 
                         <div class="col-12 text-gray-light">
@@ -248,8 +254,8 @@
                         </div>
 
                     </div> <!-- // -->
-          
-              
+
+
                 </div> <!--//  -->
 
 
@@ -313,6 +319,7 @@
     function get_delivery() {
 //        console.log('get data type 1')
         $.postJSON('/api/liff/check/shopdalivery', {LINE_USER: LINE_USER}, function (res2) {
+            console.log(res2)
             //alert(JSON.stringify(res2.detail));
             if (res2.result) {
                 //$('#delivery_type1').html(JSON.stringify(res2.detail));                return;
@@ -325,16 +332,39 @@
                         if (res2.detail[x].type == 1) {
                             number_list = number_list+1
                             res2.detail[x].distt1_order = number_list
+                            if(!res2.detail[x].distance){
+                                res2.detail[x].distance =0
+                            }
+                            if(!res2.detail[x].fee){
+                                res2.detail[x].fee =0
+                            }
+                            if(!res2.detail[x].per_itemkm){
+                                res2.detail[x].per_itemkm =0
+                            }
                             if(!res2.detail[x].condition_type){
                                 res2.detail[x].condition_type =0
                             }
-                            
+                            if(!res2.detail[x].condition_amount){
+                                res2.detail[x].condition_amount =0
+                            }
+                            if(!res2.detail[x].condition_discount){
+                                res2.detail[x].condition_discount =0
+                            }
+
                             type1.push(res2.detail[x]);
                         } else if (res2.detail[x].type == 2) {
                             if(!res2.detail[x].condition_type){
                                 res2.detail[x].condition_type =0
                             }
                             type2 = res2.detail[x];
+                        }else if(res2.detail[x].type == 3){
+                            if(res2.detail[x].get_at_store == true){
+
+                                $('#paytype-1').attr('checked',true)
+                                $('#paytype-1').attr('tempid',res2.detail[x]._id)
+                            }
+
+
                         }
                     }
 
@@ -389,14 +419,14 @@
     function set_obj_fusefiled(jqueryobj, type) {
         jqueryobj.Fusefield((obj, cb, data) => {
             data.type = type;
-            
+
             console.log(data)
             if(obj.find_id()==false&&obj.attr('data-id')!==false){
                 data._id= obj.attr('data-id')
             }else{
                 data._id = obj.find_id();
             }
-            
+
             //alert("SETID " + data._id);
             $.postJSON('/api/liff/edit/deliverytable', data, function (res) {
                 console.log(res)
@@ -454,6 +484,38 @@
         });
     }
 
+    function updatepaymenttype(){
+//        console.log($('#paytype-1').is( "checked" ))
+var tempid = $('#paytype-1').attr('tempid');
+        if(!tempid){
+            console.log('false')
+            addnewdelivery(3)
+        }else{
+                    var datapost1 = {}
+                    datapost1.LINE_USER=LINE_USER;
+                    datapost1._id= tempid;
+                    if($('#paytype-1').prop( "checked" )==true){
+                        datapost1.get_at_store = true
+                    }else{
+                        datapost1.get_at_store = false
+                    }
+                    console.log(datapost1)
+                    $.postJSON('/api/liff/edit/deliverytable', datapost1, function (res) {
+                        console.log(res)
+                        if (!res.result) {
+                            alert(res.detail);
+                            cb(false);
+                        } else {
+                            cb(true);
+                        }
+                    });
+        }
+
+
+
+    };
+
+
     function delete_delivery(obj) {
 
         var tempid = $(obj).find_id();
@@ -472,13 +534,20 @@
             });
 
         }
-        
+
     }
 
     function addnewdelivery(type) {
 //
-
-        $.postJSON('/api/liff/edit/deliverytable', {LINE_USER: LINE_USER, type: type}, function (res) { // Create New Data
+        var datapost = {}
+       datapost.LINE_USER= LINE_USER
+       datapost.type=type
+       if(type==3){
+           datapost.get_at_store =true
+           // for click first time
+       }
+       console.log(datapost)
+        $.postJSON('/api/liff/edit/deliverytable',datapost , function (res) { // Create New Data
             if (res.result) {
                 var obj = res.detail;
 
@@ -486,12 +555,15 @@
                     var html = hash_replace(template_delivery_type2, 'DELI', obj)
                     $('#delivery_type2').html(html);
                     set_obj_fusefiled($('.editable_delivery_t2'), 2);
-                } else {
+                } else if(type==1) {
                     number_list = number_list+1
                     obj.distt1_order = number_list
                     var html = hash_replace(template_delivery_type1, 'DELI', obj)
                     $('#delivery_type1').append(html);
                     set_obj_fusefiled($('.editable_delivery_t1'), 1);
+                }else if(type==3){
+                    $('#paytype-1').attr('tempid',obj._id)
+//                     set_obj_fusefiled($('.editable_delivery_t1'), 1);
                 }
 
             }

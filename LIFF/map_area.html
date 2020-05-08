@@ -9,7 +9,7 @@
         var pos;
         if (working.branch.location && Array.isArray(working.branch.location.coordinates)) {
             // Already input Location
-            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],service_radius:working.branch.location.service_radius}
+            pos = {lat: working.branch.location.coordinates[0], lng: working.branch.location.coordinates[1],service_radius:working.branch.location.service_radius , service_distance : working.branch.location.service_distance}
             // call_modal_radius_maps(pos, updategpslocation_radius, showError);
             setTimeout(()=>{
                 call_modal_radius_maps(pos, updategpslocation_radius, showError);
@@ -42,7 +42,7 @@
             _id: working.branch._id
         };
         if (loc !== "close") {
-            data.location = {type: "Point", coordinates: [loc.lat, loc.lng], service_radius: loc.service_radius};
+            data.location = {type: "Point", coordinates: [loc.lat, loc.lng], service_radius: loc.service_radius, service_distance : loc.service_distance};
 
             $.postJSON('/api/liff/edit/shopbranch', data, function (res) {
                 if (!res.result) {
@@ -57,7 +57,7 @@
         setTimeout(() => {
             go2View('register3');
         }, 500);
-        
+
     }
 
     function showError(error) {
