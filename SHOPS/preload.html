@@ -217,7 +217,7 @@
 ///######### Change Color #########
 //////////
 var temp_url_permission
-var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','cart-main','menulist','menuview','menuview4add','menu','menusearch','shopview','register','test','balance','thankyou'];
+var all_page = ['main','profile','faq_customer','customeregister','search','order','orderlist','payment','must-openshop','addcart','cart','cart-main','menulist','menuview','menuview4add','menu','menusearch','shopview','register','test','balance','paybyqr','thankyou'];
 var firsttime_visit =true;
 var working={};
 var temp =  window.location.pathname.split('/');
@@ -296,6 +296,7 @@ function initializeApp(liffpagename) {
           LINE_USER.displayName= profile.displayName;
           LINE_USER.statusMessage= profile.statusMessage;
           LINE_USER.getDecodedIDToken= liff.getDecodedIDToken().email;
+
           check_shop();
           runApp();
           alreadyinit = runApp;
@@ -317,6 +318,7 @@ function initializeApp(liffpagename) {
 }
 
 function check_shop(){
+
   $.postJSON('/api/liff/checkshopid',{LINE_USER: LINE_USER,liffid:myLiffId},(res)=>{
 
       if(res.detail){

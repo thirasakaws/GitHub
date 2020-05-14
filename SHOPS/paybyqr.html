@@ -1,15 +1,3 @@
-
-<!--
-<div id="testarea">
-  Balance:
-  </div>
--->
-
-<!--
-<div id="testarea">
-  Balance:
-  </div>
--->
 <link href="../../css/e_cash_card_style.css" rel="stylesheet" type="text/css">
 
 <div class="flex nav-topmenu ">
@@ -25,8 +13,8 @@
   </div> <!-- Logo & Header -->
 
 
-   <div class="d-flex justify-content-center mt-3 mb-2"> 
-      <h4 class="font-bluegreen-light"> เติมเงิน - ถอนเงิน </h4> 
+  <div class="d-flex justify-content-center mt-3 mb-2 "> 
+      <h4 class="font-brown-light"> Wallet ID </h4> 
   </div>  
 <!--Header -->
 
@@ -50,9 +38,9 @@
 -->
 
 
-  <div class="d-flex justify-content-center mt-1 mb-1">
+  <div class="d-flex justify-content-center mt-1 mb-1 ">
       <div class="mx-auto p-3">
-         <div class="img-qrcode2 rounded shadow">
+         <div class="img-qrcode rounded shadow">
           <img src="https://www.qrcode-monkey.com/img/default-preview-qr.svg" class="img-qrcode-white img-fluid rounded ">
          </div> 
       </div>
@@ -64,38 +52,32 @@
   </div> 
   <div class="d-flex justify-content-center mt-1">
         <span class="text-secondary"> เบอร์มือถือ &nbsp;</span> <strong>090-262-9146  </strong> 
-</div>
+  </div>
 
 
-
-<div class="d-flex justify-content-between mt-3 pl-4 pr-4 ">
+<div class="d-flex justify-content-between mt-2 pl-4 pr-4 ">
 	  <div>
         <span class="text-secondary"> จำนวนเงินที่มีในบัตร &nbsp;</span> 
 	  </div>
 	  <div>
-	  	<strong class="font-bluegreen-light font-20">500  </strong> บาท
+	  	<strong class="font-brown-light font-20">500  </strong> บาท
 	  </div>
   </div> <!-- //  -->  
 
 
+ <div class="d-flex justify-content-between mt-1 pl-4 pr-4 ">
+	  <div>
+        <span class="text-secondary"> วันที่เติมล่าสุด &nbsp;</span>  13/4/63 12:30
+	  </div>
+	  <div>
+	  	 <span class="text-secondary"> วันที่หมดอายุ &nbsp;</span>  <span class="text-danger"> 15/4/63 12:30 </span>
+	  </div>
+  </div> <!-- //  -->  
 
 
-	  
-
- <div class="d-flex justify-content-between mt-1 pl-4 pr-4" style="margin-bottom: 60px;">
-    <div>
-      <span class="text-secondary"> วันที่เติมล่าสุด &nbsp;</span>  13/4/63 12:30
-    </div>
-    <div>
-       <span class="text-secondary"> วันที่หมดอายุ &nbsp;</span>  <span class="text-danger"> 15/4/63 12:30 </span>
-    </div>
-</div> <!-- //  -->  
-
-
-
-<div class="fixed-bottom bg-white rounded line-gray-top pt-2">
+<div class="fixed-bottom bg-white rounded line-gray-top pt-2 ">
   <div class="d-flex justify-content-center mb-2">
-        <small class="text-secondary"> สำหรับจุดให้บริการ เติมเงิน - ถอนเงิน</small>  
+        <small class="text-secondary"> สำหรับจุดให้บริการขายสินค้า / อาหาร</small>  
   </div>
 </div>	<!-- // footer --> 
 
@@ -103,21 +85,18 @@
 
 <script>
   var working={};
-  function runApp() {
-    var data2send ={
-      LINE_USER: LINE_USER,
-      wallettype:1,
-      LiffId:myLiffId
-      }
+    function runApp() {
+      var data2send ={
+        LINE_USER: LINE_USER,
+        wallettype:1,
+        LiffId:myLiffId
+        }
 
-      $.postJSON('https://wallet.kinarai.com/api/liff/tokenuser/premiumshop',{LINE_USER: LINE_USER,liffid:myLiffId},(res)=>{
-          if(res.detail){
-          }
+      $.postJSON('/wallet/token/wallet',data2send,(res)=>{
+          $('#testarea').html(JSON.stringify(res));
       });
-    $.postJSON('https://wallet.kinarai.com/wallet/checkbalance',data2send,(res)=>{
-        $('#testarea').html(JSON.stringify(res));
-    });
-  }
-  initializeLiff('wallet-balance');
+    }
+    initializeLiff('wallet');
+
 
 </script>

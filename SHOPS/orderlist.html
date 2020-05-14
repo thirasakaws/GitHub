@@ -1,84 +1,84 @@
-
 <div class="container-fluid">
-    <div class="row box-head-title-foodmall nav-color-shop shadow mb-3 bg-light">
-         <div class="col-3 p-0 pl-1 text-left">
-<!--             <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
+  <div class="row box-head-title-foodmall nav-color-shop shadow mb-3 bg-light">
+    <div class="col-3 p-0 pl-1 text-left">
+      <!--             <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage');">
                  <i class="fas fa-chevron-left"></i>
              </button>-->
-         </div>
-         <div class="col-6 p-0 text-center">
-             <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการออเดอร์ของฉัน</div>
-         </div>
-         <div class="col-3 text-right">
- <!--            <div class="d-block mr-4" onclick="go2View('cart')">
+    </div>
+    <div class="col-6 p-0 text-center">
+      <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการออเดอร์ของฉัน</div>
+    </div>
+    <div class="col-3 text-right">
+      <!--            <div class="d-block mr-4" onclick="go2View('cart')">
                  <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
              </div>
              <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
-         </div>
-     </div> <!--// top menu -->
+    </div>
+  </div>
+  <!--// top menu -->
 
 
 
   <div id="order_history" class="mt-5">
-      Please Wait..
+    Please Wait..
   </div>
 
 
 
   <div id="order_template" style="display:none;">
 
-      <div class="card row_tablecontent mb-3" >
-          <div class="row p-1">
-              <div class="col-6">
-                  หมายเลขออเดอร์ # <span class="font-color-foodmall">##ORDER-id##</span>
-                <div>
-                    <small>เวลา <span class="badge badge-pill badge-warning"> ##ORDER-time## </span></small>
-                </div>
+    <div class="card row_tablecontent mb-3">
+      <div class="row p-1">
+        <div class="col-6">
+          หมายเลขออเดอร์ # <span class="font-color-foodmall">##ORDER-id##</span>
+          <div>
+            <small>เวลา <span class="badge badge-pill badge-warning"> ##ORDER-time## </span></small>
+          </div>
 
-             </div>
-             <div class="col-6 text-right">
-                 <small>สถานะ <span class="text-info">##ORDER-statusshow##</span></small>
-                 <div>
-                    <!--<small>ร้าน <span class="badge badge-pill badge-info"> ##ORDER-shopname## สาขา ##ORDER-shopbranch## </span></small>-->
-                </div>
-             </div>
-          </div> <!-- // -->
+        </div>
+        <div class="col-6 text-right">
+          <small>สถานะ <span class="text-info">##ORDER-statusshow##</span></small>
+          <div>
+            <!--<small>ร้าน <span class="badge badge-pill badge-info"> ##ORDER-shopname## สาขา ##ORDER-shopbranch## </span></small>-->
+          </div>
+        </div>
+      </div> <!-- // -->
 
-          <div class="row p-1">
-              <div class="col-6 pt-0 pb-0">
-                  <div><small>รายการอาหาร</small></div>
-                  <div><small>ค่าอาหาร</small></div>
-              </div>
-              <div class="col-6 pt-0 pb-0 text-right">
-                  <div>
-                    <small><span> ##ORDER-totalitems## </span> รายการ</small>
-                  </div>
-                  <div>
-                     <small><span>##ORDER-grandtotal##</span> บาท</small>
-                  </div>
+      <div class="row p-1">
+        <div class="col-6 pt-0 pb-0">
+          <div><small>รายการอาหาร</small></div>
+          <div><small>ค่าอาหาร</small></div>
+        </div>
+        <div class="col-6 pt-0 pb-0 text-right">
+          <div>
+            <small><span> ##ORDER-totalitems## </span> รายการ</small>
+          </div>
+          <div>
+            <small><span>##ORDER-grandtotal##</span> บาท</small>
+          </div>
 
-              </div>
-          </div> <!-- // -->
+        </div>
+      </div> <!-- // -->
 
 
-          <div class="row p-1 mb-1">
-              <div class="col-6">
-                  <small class="btn btn-sm btn-outline-submit-foodmall rounded-pill p-0 pl-1 pr-1" onclick="previeworder(##ORDER-id##)">
-                     <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span>
-                  </small>
-              </div>
+      <div class="row p-1 mb-1">
+        <div class="col-6">
+          <small class="btn btn-sm btn-outline-submit-foodmall rounded-pill p-0 pl-1 pr-1" onclick="previeworder(##ORDER-id##)">
+            <span class=""><i class="far fa-eye"></i> ดูข้อมูล </span>
+          </small>
+        </div>
 
-              <div class="col-6 text-right">
-<!--                  <small class="btn btn-sm btn-submit-foodmall rounded-pill p-0 pl-1 pr-1">
+        <div class="col-6 text-right">
+          <!--                  <small class="btn btn-sm btn-submit-foodmall rounded-pill p-0 pl-1 pr-1">
                       สั่งซ้ำอีกครั้ง
                   </small>-->
-              </div>
-          </div> <!-- // -->
+        </div>
+      </div> <!-- // -->
 
 
-       </div> <!-- // card -->
+    </div> <!-- // card -->
 
-    </div> <!-- // order_template -->
+  </div> <!-- // order_template -->
 
 
 
@@ -86,13 +86,13 @@
   <div id="order_template_menu" style="display:none;">
     <div class=" p-1 mt-1">
       <small class="row border-bottom">
-          <div class="col-8">
-              ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span>  <br>
-              <small>##MENU-pricedetail##</small> <span class="font-color-shop">##MENU-note##</span>
-          </div>
-          <div class="col-4 text-right">
-              <span class="font-color-shop">฿ ##MENU-priceshow##</span>
-          </div>
+        <div class="col-8">
+          ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span> <br>
+          <small>##MENU-pricedetail##</small> <span class="font-color-shop">##MENU-note##</span>
+        </div>
+        <div class="col-4 text-right">
+          <span class="font-color-shop">฿ ##MENU-priceshow##</span>
+        </div>
       </small>
 
     </div>
@@ -101,41 +101,43 @@
 
 
 
-<div class="modal fade" id="modal_order_preview"  tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="modal_order_preview" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 
-        <div class="modal-body" >
-          <div class="">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h5 class="modal-title font-color-foodmall">รายการสั่งอาหาร</h5>
+      <div class="modal-body">
+        <div class="">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title font-color-foodmall">รายการสั่งอาหาร</h5>
+        </div>
+        <div class="">
+          ##VIEW-menudetail##
+        </div>
+        <div class="row mt-3">
+          <div class="col-6 pt-0 pb-0">
+
+            <div> <small>จำนวนรายการ </small></div>
+            <div> <small>ระยะทาง </small></div>
+            <div> <small>ค่าจัดส่ง</small></div>
+            <div> <small>ราคารวมทั้งหมด</small></div>
+            <div> <small>ประเภทการชำระ </small></div>
           </div>
-          <div class="">
-              ##VIEW-menudetail##
+          <div class="col-6 pt-0 pb-0 text-right">
+
+            <div> <small>##VIEW-totalitems## รายการ </small></div>
+            <div> <small class="font-color-foodmall">##VIEW-totaldistance## กม. </small></div>
+            <div> <small>##VIEW-deliveryTotalAmount## บาท </small></div>
+            <div> <small>##VIEW-grandtotal## บาท </small></div>
+            <div> <small>##VIEW-paymenttypedetail## </small></div>
           </div>
-            <div class="row mt-3">
-                <div class="col-6 pt-0 pb-0">
-
-                    <div> <small>จำนวนรายการ </small></div>
-                    <div> <small>ระยะทาง </small></div>
-                    <div> <small>ค่าจัดส่ง</small></div>
-                    <div> <small>ราคารวมทั้งหมด</small></div>
-                    <div> <small>ประเภทการชำระ </small></div>
-                </div>
-                <div class="col-6 pt-0 pb-0 text-right">
-
-                    <div> <small>##VIEW-totalitems## รายการ </small></div>
-                    <div> <small class="font-color-foodmall">##VIEW-totaldistance## กม. </small></div>
-                    <div> <small>##VIEW-deliveryTotalAmount## บาท </small></div>
-                    <div> <small>##VIEW-grandtotal## บาท </small></div>
-                    <div> <small>##VIEW-paymenttypedetail## </small></div>
-                </div>
-            </div> <!--// row -->
+        </div>
+        <!--// row -->
 
 
-        </div> <!--// modal-body -->
+      </div>
+      <!--// modal-body -->
 
     </div>
   </div>
@@ -143,25 +145,25 @@
 
 
 <script>
-    all_page = ["order_seller_latest1"];
-    var working = {};
-    register_all_page();  // Register SubPAGE
-  var template_main= $("#order_template").html();
+  all_page = ["order_seller_latest1"];
+  var working = {};
+  register_all_page(); // Register SubPAGE
+  var template_main = $("#order_template").html();
   var order_template_menu = $('#order_template_menu').html();
 
   var STATUSSHOW = [];
-  var styletext=[]
+  var styletext = []
   STATUSSHOW[1] = 'รายการใหม่ยังไม่ยืนยัน';
   STATUSSHOW[4] = 'ร้านค้าแจ้งแก้ไข';
   STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
   STATUSSHOW[6] = 'ลูกค้ายกเลิก';
   STATUSSHOW[7] = 'รอร้านรับรายการ';
-  STATUSSHOW[10] ='รอลูกค้าชำระแบบ QR';
-  STATUSSHOW[11]= 'ลูกค้าชำระเงินแบบ QR แล้ว';
-  STATUSSHOW[12]= 'ลูกค้าชำระเงินปลายทาง';
-  STATUSSHOW[14]= 'รายการรอตอบรับทำออร์เดอร์';
-  STATUSSHOW[15]= 'รายการกำลังทำอาหาร';
-  STATUSSHOW[16]= 'รายการทำอาหารเสร็จพร้อมส่ง';
+  STATUSSHOW[10] = 'รอลูกค้าชำระแบบ QR';
+  STATUSSHOW[11] = 'ลูกค้าชำระเงินแบบ QR แล้ว';
+  STATUSSHOW[12] = 'ลูกค้าชำระเงินปลายทาง';
+  STATUSSHOW[14] = 'รายการรอตอบรับทำออร์เดอร์';
+  STATUSSHOW[15] = 'รายการกำลังทำอาหาร';
+  STATUSSHOW[16] = 'รายการทำอาหารเสร็จพร้อมส่ง';
   STATUSSHOW[17] = 'Rider รับสินค้าแล้ว';
   STATUSSHOW[23] = 'รายการเกินกำหนดชำระแบบ QR';
   STATUSSHOW[24] = 'รายการถูกยกเลิก(ร้านรับรายการล่าช้า)';
@@ -175,87 +177,89 @@
   styletext[26] = 'text-secondary'
   styletext[27] = 'text-warning'
 
-function runApp(){
+  function runApp() {
 
-  $.postJSON('/engine/history/customerorder',{LINE_USER: LINE_USER},(res)=>{
-      if(res.result){
+    $.postJSON('/engine/history/customerorder', {
+      LINE_USER: LINE_USER
+    }, (res) => {
+      if (res.result) {
         var history = res.detail;
         working.history = history;
-        if(history.length ==0){
-            $("#order_history").html("ไม่พบรายการสั่งซื้อ");
+        if (history.length == 0) {
+          $("#order_history").html("ไม่พบรายการสั่งซื้อ");
           return;
         }
         if (history) {
-           history.map((obj)=>{   // PREPARE ORDER DATA
-              // console.log('history',obj);
-              if(obj.logistic && obj.logistic.distanceShopToCustomerInKM){
-                obj.totaldistance = obj.logistic.distanceShopToCustomerInKM;
-                obj.deliveryTotalAmount = obj.logistic.deliveryTotalAmount;
-              }else{
-                obj.totaldistance =0;
-              }
-             if(!obj.note) obj.note='';
-                  obj.statusshow = STATUSSHOW[obj.status];
-                  obj.items.map((item)=>{   // setting Some Default
-                      item.priceshow = item.price.price;
-                      item.pricedetail = item.price.detail;
-                  });
-                obj.time = moment(obj.createdate,'X').format('H:m:s D/M/Y');
-                obj.totalitems = obj.items.length;
-                 obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
-           });
+          history.map((obj) => { // PREPARE ORDER DATA
+            // console.log('history',obj);
+            if (obj.logistic && obj.logistic.distanceShopToCustomerInKM) {
+              obj.totaldistance = obj.logistic.distanceShopToCustomerInKM;
+              obj.deliveryTotalAmount = obj.logistic.deliveryTotalAmount;
+            } else {
+              obj.totaldistance = 0;
+            }
+            if (!obj.note) obj.note = '';
+            obj.statusshow = STATUSSHOW[obj.status];
+            obj.items.map((item) => { // setting Some Default
+              item.priceshow = item.price.price;
+              item.pricedetail = item.price.detail;
+            });
+            obj.time = moment(obj.createdate, 'X').format('H:m:s D/M/Y');
+            obj.totalitems = obj.items.length;
+            obj.menudetail = hash_replace(order_template_menu, 'MENU', obj.items);
+          });
 
-           var html1  = hash_replace(template_main,'ORDER',history)
-           $("#order_history").html(html1);
-          }else {
-            return 'ไม่พบเมนู'
-          }
-          // go2View('order_seller_latest1');
+          var html1 = hash_replace(template_main, 'ORDER', history)
+          $("#order_history").html(html1);
+        } else {
+          return 'ไม่พบเมนู'
+        }
+        // go2View('order_seller_latest1');
         // $('#shopingcart').html(JSON.stringify(res.detail));
-      }else{
+      } else {
         //$('#warn-order').show();
         alert(res.detail)
         // alert(res.detail);
       }
-  });
-      // $('#shopi0ngcart').html(JSON.stringify(res.detail));
-};
+    });
+    // $('#shopi0ngcart').html(JSON.stringify(res.detail));
+  };
 
 
 
-var template_modal_order_preview = $('#modal_order_preview').html();
-var ordercustomerlocation = {};
-var paymenttype_array = ['','เก็บเงินปลายทาง','QR payment By Quickpay']
+  var template_modal_order_preview = $('#modal_order_preview').html();
+  var ordercustomerlocation = {};
+  var paymenttype_array = ['', 'เงินสด', 'ระบบจัดส่ง Delivery']
 
-function previeworder(order_id){
-  console.log('id',order_id);
-  var obj_cust;
-    working.history.map((obj)=>{  // PREPARE Items Data
+  function previeworder(order_id) {
+    console.log('id', order_id);
+    var obj_cust;
+    working.history.map((obj) => { // PREPARE Items Data
       // console.log('view',obj);
-          obj.paymenttypedetail = paymenttype_array[obj.paymenttype];
-          if(obj.logistic && obj.logistic.distanceShopToCustomerInKM){
-            obj.totaldistance = obj.logistic.distanceShopToCustomerInKM;
-          }else{
-            obj.totaldistance =0;
-          }
-          obj.items.map((item)=>{   // setting Some Default
-              item.priceshow = item.price.price;
-              item.pricedetail = item.price.detail;
-          });
-          obj.time = moment(obj.createdate,'X').format('H:m:s D/M/Y');
-          obj.totalitems = obj.items.length;
-          obj.menudetail  = hash_replace(order_template_menu,'MENU',obj.items);
-      if(obj._id == order_id) obj_cust = obj;
+      obj.paymenttypedetail = paymenttype_array[obj.paymenttype];
+      if (obj.logistic && obj.logistic.distanceShopToCustomerInKM) {
+        obj.totaldistance = obj.logistic.distanceShopToCustomerInKM;
+      } else {
+        obj.totaldistance = 0;
+      }
+      obj.items.map((item) => { // setting Some Default
+        item.priceshow = item.price.price;
+        item.pricedetail = item.price.detail;
+      });
+      obj.time = moment(obj.createdate, 'X').format('H:m:s D/M/Y');
+      obj.totalitems = obj.items.length;
+      obj.menudetail = hash_replace(order_template_menu, 'MENU', obj.items);
+      if (obj._id == order_id) obj_cust = obj;
     });
 
-    if(obj_cust){
-      console.log('view',obj_cust);
-        $('#modal_order_preview').html(hash_replace(template_modal_order_preview,'VIEW',obj_cust));
-        $('#modal_order_preview').modal('show');
-      }
-};
+    if (obj_cust) {
+      console.log('view', obj_cust);
+      $('#modal_order_preview').html(hash_replace(template_modal_order_preview, 'VIEW', obj_cust));
+      $('#modal_order_preview').modal('show');
+    }
+  };
 
-initializeLiff('orderlist');
+  initializeLiff('orderlist');
 
-//  $('#body_mainbody').load('/LIFF/preload.html');
+  //  $('#body_mainbody').load('/LIFF/preload.html');
 </script>

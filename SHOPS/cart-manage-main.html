@@ -1,344 +1,371 @@
 <div id="top_shopping_cart" class="row-fluid navbar w-100 shadow nav-color-shop box-head-title-foodmall topmenu-navbar">
 
-        <div class="col-1 pl-0 text-left">
-            <button class='btn border border-0 text-secondary' onclick="go2View('menulist-main')">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-        </div>
-        <div class="col text-center">
-            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการอาหารในตะกร้า #<span class="orderid"></span></div>
-        </div>
-        <div class="col-1 text-right">
-<!--            <div class="d-block mr-4" onclick="go2View('cart')">
+  <div class="col-1 pl-0 text-left">
+    <button class='btn border border-0 text-secondary' onclick="go2View('menulist')">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+  <div class="col text-center">
+    <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> รายการอาหารในตะกร้า #<span class="orderid"></span></div>
+  </div>
+  <div class="col-1 text-right">
+    <!--            <div class="d-block mr-4" onclick="go2View('cart')">
                 <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
             </div>
             <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
-        </div>
+  </div>
 </div> <!-- topmenu -->
 
 
 
 <div class="container-fluid ">
 
-    <div class="row text-center" id="warn_order_fail" style="display:none;">
-      <div class="mx-auto  text-center mb-3 mt-5">
-          <img src="/image/icon-menu.png" class="img-fluid w-40" alt=""/>
+  <div class="row text-center" id="warn_order_fail" style="display:none;">
+    <div class="mx-auto  text-center mb-3 mt-5">
+      <img src="/image/icon-menu.png" class="img-fluid w-50" alt="" />
+    </div>
+
+    <div class="mx-auto text-center w-100">
+      <div class="h5 font-size-120 ">เริ่มต้นสั่งอาหารกันเลย !</div>
+
+      <div class="font-color-foodmall-gray-light2 font-size-110 font-weight-300">เพิ่มรายการสินค้าลงตะกร้า<br>และกดสั่งซื้อ</div>
+    </div>
+    <hr>
+  </div> <!-- // row ตะกร้าว่าง -->
+
+
+  <div class="row mt-2">
+    <div class="col">
+      <div class="text-right">
+        <span class="btn btn-sm border border-0 btn-outline-danger" id="menu_toporder" onclick="resetorder();">
+          <i class="fas fa-trash-alt text-danger"></i> ยกเลิกรายการ
+        </span>
       </div>
-
-      <div class="mx-auto text-center w-100">
-          <div class="h5 font-size-120 ">เริ่มต้นสั่งอาหารกันเลย !</div>
-
-           <div class="font-color-foodmall-gray-light2 font-size-110 font-weight-300">เพิ่มรายการสินค้าลงตะกร้า<br>และกดสั่งซื้อ</div>
-      </div>
-        <hr>
-    </div>  <!-- // row ตะกร้าว่าง -->
-
-
-    <div class="row mt-2">
-        <div class="col">
-            <div class="text-right">
-                <span class="btn btn-sm border border-0 btn-outline-danger" id="menu_toporder"  onclick="resetorder();">
-                    <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกรายการ
-                </span>
-            </div>
-        </div>
-    </div>  <!-- // ยกเลิกรายการทั้งหมด  -->
+    </div>
+  </div> <!-- // ยกเลิกรายการทั้งหมด  -->
 
 </div>
 
 
 <div class="container-fluid ">
-    <div class="" id="ordermenulist" style="margin-bottom: 15% !important;">
+  <div class="" id="ordermenulist" style="margin-bottom: 15% !important;">
     <div class="row  border-bottom row_tablecontent" style="display:none;">
 
-            <div class="col-8">
-                <div class="menu_name"> ชื่ออาหาร</div>
-            </div>  <!--// menu name -->
+      <div class="col-8">
+        <div class="menu_name"> ชื่ออาหาร</div>
+      </div>
+      <!--// menu name -->
 
-            <div class="col-4 text-right ">
-                <div class="font-size-110">
-                    ฿ <span class="menu_menuprice">0.00</span>
-                </div>
-            </div> <!--// price -->
+      <div class="col-4 text-right ">
+        <div class="font-size-110">
+          ฿ <span class="menu_menuprice">0.00</span>
+        </div>
+      </div>
+      <!--// price -->
 
-            <div class="col-3 pb-1">
-                <img  class="menu_pic w-100 rounded" alt="">
-            </div> <!--// img -->
+      <div class="col-3 pb-1">
+        <img class="menu_pic w-100 rounded" alt="">
+      </div>
+      <!--// img -->
 
-            <div class="col-5 pt-2">
-                <small class="text-secondary menu_pricedes font-weight-300 d-block"></small>
-                <!-- <small class="text-secondary menu_note font-weight-300 d-block"></small> -->
-                <div class='menuoptionshow text-secondary font-weight-300 d-block'></div>
-                <small class="text-danger "  onclick="updatecartitem(this,'delete');">
-                    <i class="far fa-trash-alt"></i> ลบ
-                </small>
-            </div> <!--// menu detail   -->
+      <div class="col-5 pt-2">
+        <small class="text-secondary menu_pricedes font-weight-300 d-block"></small>
+        <!-- <small class="text-secondary menu_note font-weight-300 d-block"></small> -->
+        <div class='menuoptionshow text-secondary font-weight-300 d-block'></div>
+        <small class="text-danger " onclick="updatecartitem(this,'delete');">
+          <i class="far fa-trash-alt"></i> ลบ
+        </small>
+      </div>
+      <!--// menu detail   -->
 
-            <div class="col-4">
+      <div class="col-4">
 
-                <div class="row mt-2">
-                  <div class="col-4 pl-0">
-                      <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'remove');">
-                          <i class="fas fa-minus"></i>
-                      </button>
-                  </div> <!--// -->
+        <div class="row mt-2">
+          <div class="col-4 pl-0">
+            <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'remove');">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+          <!--// -->
 
-                  <div class="col-4 pl-0">
-                      <div class="menu_qty text-center ml-1 font-size-120">
-                          0
-                      </div>
-                  </div>  <!--// -->
+          <div class="col-4 pl-0">
+            <div class="menu_qty text-center ml-1 font-size-120">
+              0
+            </div>
+          </div>
+          <!--// -->
 
-                  <div class="col-4 text-left pl-0">
-                      <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'add');">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                  </div> <!--// -->
-              </div> <!--// row -->
+          <div class="col-4 text-left pl-0">
+            <button class="btn btn-sm btn-outline-submit-foodmall" onclick="updatecartitem(this,'add');">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <!--// -->
+        </div>
+        <!--// row -->
 
-            </div> <!--// price   -->
+      </div>
+      <!--// price   -->
 
 
 
-            <div class="col-12 pt-3 bg-light rounded-left rounded-right">
+      <div class="col-12 pt-3 bg-light rounded-left rounded-right">
 
-                <div class="form-group row">
-                   <div class="col-12 ">
-                    <textarea type="text" class="bg-white form-control form-control-sm input_data_bn  edit_data_note menu_note_detail w-100 menu_note"  placeholder="โน๊ต เช่น ไม่เผ็ด 1 จาน, ไม่คะน้า 1 จาน , ไม่กระเทียม 1 จาน" data-field="note"></textarea>
-                    <!--<small id="" class="form-text text-muted">เช่น ไม่เผ็ด 1 จาน, ไม่คะน้า 1 จาน , ไม่กระเทียม 1 จาน</small>-->
-                   </div>
-                   <!-- <div class="col-2 pl-0">
+        <div class="form-group row">
+          <div class="col-12 ">
+            <textarea type="text" class="bg-white form-control form-control-sm input_data_bn  edit_data_note menu_note_detail w-100 menu_note" placeholder="โน๊ต เช่น ไม่เผ็ด 1 จาน, ไม่คะน้า 1 จาน , ไม่กระเทียม 1 จาน" data-field="note"></textarea>
+            <!--<small id="" class="form-text text-muted">เช่น ไม่เผ็ด 1 จาน, ไม่คะน้า 1 จาน , ไม่กระเทียม 1 จาน</small>-->
+          </div>
+          <!-- <div class="col-2 pl-0">
                     <button type="button" name="button" class="btn btn-submit-foodmall btn-sm" onclick="save_menunote(this);">บันทึก</button>
                   </div> -->
-                </div>
-            </div>  <!--// comment -->
+        </div>
+      </div>
+      <!--// comment -->
 
-    </div> <!--// row -->
-  </div> <!--// ordermenulist  -->
+    </div>
+    <!--// row -->
+  </div>
+  <!--// ordermenulist  -->
 
 
 
-<!-- onclick="checkout();" -->
+  <!-- onclick="checkout();" -->
 
-<!-- ยอดรวม และ ปุ่ม -->
-<div class="container-fluid fixed-bottom bg-white">
-  <div class="row p-1">
+  <!-- ยอดรวม และ ปุ่ม -->
+  <div class="container-fluid fixed-bottom bg-white">
+    <div class="row p-1">
 
-        <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="confirm_order();">
-             <div class="float-left">สรุปรายการสั่งซื้อ</div>
-             <div class="float-right"> ฿ <span class='totalcost'></span></div>
-         </button>
+      <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="confirm_order();">
+        <div class="float-left">สรุปรายการสั่งซื้อ</div>
+        <div class="float-right"> ฿ <span class='totalcost'></span></div>
+      </button>
 
-  </div> <!-- // ยอดรวม และ ปุ่ม -->
-</div> <!-- // container-fluid  -->
+    </div> <!-- // ยอดรวม และ ปุ่ม -->
+  </div> <!-- // container-fluid  -->
 
 
 </div>
 <script>
-var template_menulist = $('#ordermenulist').html();
+  var template_menulist = $('#ordermenulist').html();
 
-refresh_managecart();
+  refresh_managecart();
 
-//for input tag
-$('.edit_data_note').Fusefield( (obj,cb,data)=>{
-    console.log('data',data);
-  if (data.note || data.note=="") {
-    // console.log('found',data);
-    var temp = obj.parents('.row_tablecontent');
-    var menu_menuprice = temp.find('.menu_menuprice').html();
+  //for input tag
+  $('.edit_data_note').Fusefield((obj, cb, data) => {
+    console.log('data', data);
+    if (data.note || data.note == "") {
+      // console.log('found',data);
+      var temp = obj.parents('.row_tablecontent');
+      var menu_menuprice = temp.find('.menu_menuprice').html();
 
-    var menuid = obj.parents('.row_tablecontent').attr('data-id');
-    for (var x = 0; x < working.order.items.length; x++) {
-        if (working.order.items[x].menuid == menuid && working.order.items[x].price.price ==  menu_menuprice) {
-            working.order.items[x].note = data.note;
+      var menuid = obj.parents('.row_tablecontent').attr('data-id');
+      for (var x = 0; x < working.order.items.length; x++) {
+        if (working.order.items[x].menuid == menuid && working.order.items[x].price.price == menu_menuprice) {
+          working.order.items[x].note = data.note;
         }
-    }
-    console.log('MENU ORDER ',   working.order.items)
-    var data = {LINE_USER: LINE_USER, _id:   working.order._id, items: working.order.items};
-    // console.log(data);
-    $.postJSON('/engine/order/update', data, (res) => {
+      }
+      console.log('MENU ORDER ', working.order.items)
+      var data = {
+        LINE_USER: LINE_USER,
+        _id: working.order._id,
+        items: working.order.items
+      };
+      // console.log(data);
+      $.postJSON('/engine/order/update', data, (res) => {
         if (!res.result) {
-            return alert(res.detail);
-            cb(false);
+          return alert(res.detail);
+          cb(false);
         } else {
           res.detail ? working.order = res.detail : false;
           cb(true);
         }
 
+      });
+
+    }
+    // console.log("data field",data);
+    // $.postJSON('/engine/order/update', data, function (res) {
+    //     if (!res.result) {
+    //         alert(res.detail);
+    //         cb(false);
+    //     }else {
+    //         res.detail ? working.order = res.detail : false;
+    //       cb(true);
+    //     }
+    // })
+  }, (obj) => {
+    return true;
+  });
+
+
+
+
+  function refresh_managecart() {
+    $('#ordermenulist').html(template_menulist);
+    if (working.order) {
+      $('.orderid').html(working.order._id);
+      console.log("ORDER", working.order);
+      if (working.order.items && working.order.items.length > 0) {
+        getshoporder();
+        showmwnulist(working.order.items);
+      } else {
+        // alert('zero')
+        $('#menu_toporder').hide();
+        $('#warn_order_fail').show();
+        $('#goconfirmorder').hide();
+      }
+    }
+    update_total_cart();
+  }
+
+  function getshoporder() {
+    $.postJSON('/api/liff/getorder/shopowner', {
+      _id: working.order.items[0].shopid
+    }, function(res) {
+      if (res.result) {
+        working.shop = res.detail;
+      } else {
+
+      }
+
     });
+  }
+
+  function showmwnulist(obj) {
+    $('#ordermenulist').html(template_menulist);
+    for (var x = 0; x < obj.length; x++) {
+      obj[x].menuprice = obj[x].price.price;
+      obj[x].pricedes = obj[x].price.detail;
+      if (obj[x].images) {
+        obj[x].pic = obj[x].images[0];
+      }
+      var TR = tablerow($("#ordermenulist"), 'menu', obj[x], template_menulist, false);
+      TR.find('.menu_pic').attr('src', '/api/liff/menu/image/' + obj[x].images[0] + '')
+      if (obj[x].menuprice > 0) {
+        TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+      } else {
+        TR.find('.menu_menuprice').html('0.00')
+      }
+
+      if (obj[x].note) {
+        TR.find('.show_menunote').show();
+      }
+      TR.attr('data-id', obj[x].menuid);
+      TR.attr('data-indexid', x);
+      if (Array.isArray(obj[x].option)) {
+        var html_option = '';
+        obj[x].option.map((ech) => {
+          html_option += `<span  class='badge badge-success'>${ech}</span> `;
+        });
+
+        TR.find('.menuoptionshow').html(html_option)
+      }
+
+      TR.show();
+
+    }
+  }
+
+  function update_total_cart() {
+    $('.totalcost').html(addCommas(working.order.totalcost))
+    if (working.order.totalcost) {
+      if (working.order.totalcost <= 0) {
+        $('#menu_toporder').hide();
+        $('#warn_order_fail').show();
+        $('#goconfirmorder').hide();
+      }
+    }
+
+
 
   }
-  // console.log("data field",data);
-  // $.postJSON('/engine/order/update', data, function (res) {
-  //     if (!res.result) {
-  //         alert(res.detail);
-  //         cb(false);
-  //     }else {
-  //         res.detail ? working.order = res.detail : false;
-  //       cb(true);
-  //     }
-  // })
-    },(obj)=>{
-  return true;
-});
 
+  function fnc_noprofile() {
+    alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
+    liff.login();
+  }
 
-
-
-    function refresh_managecart(){
-      $('#ordermenulist').html(template_menulist);
-      if (working.order) {
-        getshoporder();
-        $('.orderid').html(working.order._id);
-        // console.log("ORDER",working.order);
-        if (working.order.items && working.order.items.length >0) {
-              showmwnulist(working.order.items);
-        }else {
-          $('#menu_toporder').hide();
-          $('#warn_order_fail').show();
-          $('#goconfirmorder').hide();
-        }
+  function updatecartitem(obj, type, comments) {
+    var temp = $(obj).parents('.row_tablecontent');
+    var menuid = $(obj).find_id();
+    var menuindex = temp.attr('data-indexid');
+    console.log(type + '#' + menuid);
+    if (menuid > 0) {
+      if (working.order.items[menuindex].menuid != menuid) {
+        alert("internal-Error , Notouf menu");
+        return;
       }
-      update_total_cart();
-    }
+      var objmenu = working.order.items[menuindex];
+      var datapost = {
+        LINE_USER: LINE_USER,
+        action: type,
+        menuid: menuid
+      };
+      if (type == 'add' || type == 'remove') { // Find oldprice
+        datapost.selectedprice = objmenu.price;
+        datapost.selectedoption = objmenu.option;
+      }
 
-    function getshoporder(){
-        $.postJSON('/api/liff/getorder/shopowner', {_id: working.order.items[0].shopid}, function (res) {
-            if(res.result){
-                    working.shop =res.detail;
-                }else{
-
+      if (type == 'comment') {
+        datapost.comment = temp.find('.menu_comments').val();
+      }
+      console.log('SEND', datapost);
+      $.postJSON('/engine/order', datapost, (res) => {
+        if (res.result) {
+          if (working.order = res.detail) {
+            if (working.order.items.length <= 0) {
+              refresh_managecart();
+            } else {
+              var oldval = temp.find('.menu_qty').html();
+              if (type == 'remove') {
+                if (Number(oldval) <= 1) {
+                  showmwnulist(working.order.items);
+                } else {
+                  temp.find('.menu_qty').html(Number(oldval) - 1);
                 }
-
-        });
-    }
-
-    function showmwnulist(obj){
-      $('#ordermenulist').html(template_menulist);
-        for(var x=0;x < obj.length;x++){
-          obj[x].menuprice = obj[x].price.price;
-          obj[x].pricedes = obj[x].price.detail;
-          if(obj[x].images){
-              obj[x].pic = obj[x].images[0];
-          }
-               var TR = tablerow($("#ordermenulist"), 'menu', obj[x], template_menulist, false);
-               TR.find('.menu_pic').attr('src','/api/liff/menu/image/'+obj[x].images[0]+'')
-               if(obj[x].menuprice>0){
-                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
-               }else {
-                 TR.find('.menu_menuprice').html('0.00')
-               }
-
-               if (obj[x].note) {
-                 TR.find('.show_menunote').show();
-               }
-               TR.attr('data-id',obj[x].menuid);
-               TR.attr('data-indexid',x);
-               if(Array.isArray(obj[x].option)){
-                  var html_option='';
-                  obj[x].option.map((ech)=>{
-                      html_option+=`<span  class='badge badge-success'>${ech}</span> `;
-                  });
-
-                  TR.find('.menuoptionshow').html(html_option)
-               }
-
-               TR.show();
-
-        }
-    }
-    function update_total_cart(){
-
-      $('.totalcost').html(addCommas(working.order.totalcost))
-    }
-    function fnc_noprofile(){
-      alert("กรุณาให้ข้อมูลกับทางาเรา เพื่อการสั่งซื้อ");
-      liff.login();
-    }
-
-    function updatecartitem(obj,type,comments){
-      var temp = $(obj).parents('.row_tablecontent');
-      var menuid = $(obj).find_id();
-      var menuindex = temp.attr('data-indexid');
-      console.log(type+'#'+menuid);
-      if(menuid > 0 ){
-          if(working.order.items[menuindex].menuid != menuid ){
-            alert("internal-Error , Notouf menu");
-            return;
-          }
-          var objmenu = working.order.items[menuindex];
-        var datapost = {LINE_USER: LINE_USER,action:type,menuid:menuid};
-        if(type=='add' || type=='remove'){    // Find oldprice
-          datapost.selectedprice = objmenu.price;
-          datapost.selectedoption = objmenu.option;
-        }
-
-        if(type=='comment'){
-          datapost.comment = temp.find('.menu_comments').val();
-        }
-        console.log('SEND' ,datapost);
-        $.postJSON('/engine/order',datapost,(res)=>{
-          if(res.result){
-                if (working.order = res.detail) {
-                  if(working.order.items.length <=0){
-                    refresh_managecart();
-                  }else {
-                    var oldval = temp.find('.menu_qty').html();
-                    if(type=='remove'){
-                      if(Number(oldval) <= 1 ){
-                          showmwnulist(working.order.items);
-                      }else{
-                         temp.find('.menu_qty').html(Number(oldval) -1);
-                      }
-                    }else if(type=='add'){
-                      temp.find('.menu_qty').html(Number(oldval) +1);
-                    }else{
-                        showmwnulist(working.order.items);
-                    }
-                  }
-
-
-              }else {
-                return 'ไม่พบเมนู'
+              } else if (type == 'add') {
+                temp.find('.menu_qty').html(Number(oldval) + 1);
+              } else {
+                showmwnulist(working.order.items);
               }
-              update_total_cart();
-          }else{
-            alert(res.detail);
+            }
+
+
+          } else {
+            return 'ไม่พบเมนู'
           }
-        });
+          update_total_cart();
+        } else {
+          alert(res.detail);
+        }
+      });
+    }
+  };
+
+  function confirm_order() {
+    if (working.shop) {
+      if (working.order.totalcost) {
+
+      } else {
+        working.order.totalcost = 0;
+        for (var x = 0; x < working.order.items.length; x++) {
+          working.order.totalcost += working.order.items[x].price.price;
+        }
       }
-    };
-
-    function confirm_order(){
-      if (working.shop) {
-            if (working.shop.max_price || working.shop.min_price) {
-              if(working.order.totalcost){
-
-              }else {
-                working.order.totalcost = 0;
-                  for(var x=0;x<working.order.items.length;x++){
-                        working.order.totalcost += working.order.items[x].price.price;
-                  }
-              }
-
-            }
-            if (Number(working.shop.min_price)>0) {
-              if(working.order.totalcost< working.shop.min_price){
-                  alert('ยอดสั่งซื้อขั้นต่ำ '+working.shop.min_price+' บาท')
-                  return false;
-              }
-            }
-            if (Number(working.shop.max_price)>0) {
-              if(working.order.totalcost> working.shop.max_price){
-                  alert('ยอดสั่งซื้อเกิน Limit '+working.shop.max_price+' บาท')
-                  return false;
-              }
-            }
-            go2View('cart-manage1-main');
+      if (working.shop.min_price && Number(working.shop.min_price) > 0) {
+        if (working.order.totalcost < working.shop.min_price) {
+          alert('ยอดสั่งซื้อขั้นต่ำ ' + working.shop.min_price + ' บาท')
+          return false;
+        }
       }
+      if (working.shop.max_price && Number(working.shop.max_price) > 0) {
+        if (working.order.totalcost > working.shop.max_price) {
+          alert('ยอดสั่งซื้อเกิน Limit ' + working.shop.max_price + ' บาท')
+          return false;
+        }
+      }
+      go2View('cart-manage1-main');
     }
-
-
-
-
+  }
 </script>

@@ -2,32 +2,35 @@
 <link href="https://getbootstrap.com/docs/4.4/examples/carousel/carousel.css" rel="stylesheet">-->
 
 <div id='top_shopping_cart' class="row-fluid navbar fixed-top nav-color-shop box-head-title-foodmall shadow">
-    <div class="col-2 pl-0 text-left">
-        <button class='btn border border-0 text-secondary' onclick="runApp();">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+  <div class="col-2 pl-0 text-left">
+    <button class='btn border border-0 text-secondary' onclick="runApp();">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+
+  <div class="col-6  text-center">
+    <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
+    <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
+      <form onsubmit="return search_menusubmit();">
+        <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา">
+      </form>
     </div>
+  </div>
+  <!--// center -->
 
-    <div class="col-6  text-center">
-        <div class="header-foodmall font-color-foodmall-gray-medium mt-1 " id="nav_normal"> สั่งอาหาร</div>
-        <div class="header-foodmall font-color-foodmall-gray-medium mt-1" id="nav_search" style="display:none">
-          <form onsubmit="return search_menusubmit();">
-              <input type='text' id='inp_search' class='form-control form-control-sm' placeholder="ค้นหา" >
-          </form>
-        </div>
-    </div> <!--// center -->
-
-    <div class="col-3  text-right ">
-      <div class="d-inline " onclick="openSearch()"  >
-          <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:30%;">
-      </div>
-        <div class="d-inline pr-3" onclick="go2View('cart')" style="width:50%;">
-            <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;"/>
-        </div>
-        <div  class="items-add-to-cart badge badge-pill badge-danger " onclick="go2View('cart')">##CART-totalitem##</div>
-    </div> <!--// center -->
-</div> <!--// menu -->
- <!-- // container fluid -->
+  <div class="col-3  text-right ">
+    <div class="d-inline " onclick="openSearch()">
+      <img src="/image/icons8-search.svg" class="icon-size-search img-fluid" style="width:30%;">
+    </div>
+    <div class="d-inline pr-3" onclick="go2View('cart')" style="width:50%;">
+      <img src="/image/icons8-shopping-cart-80.png" id='icon_shoppingcart' class=" icon-size-cart" alt="" style="width:29%;" />
+    </div>
+    <div class="items-add-to-cart badge badge-pill badge-danger " onclick="go2View('cart')">##CART-totalitem##</div>
+  </div>
+  <!--// center -->
+</div>
+<!--// menu -->
+<!-- // container fluid -->
 
 
 
@@ -41,7 +44,7 @@
 
   <div class="carousel-inner">
     <div class="carousel-item  active">
-        <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-image1##" class="d-block w-100 img-fluid" alt="...">
+      <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-image1##" class="d-block w-100 img-fluid" alt="...">
     </div>
     <div class="carousel-item">
       <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-image2##" class="d-block w-100 img-fluid" alt="...">
@@ -58,7 +61,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>  <!-- // carousel -->
+</div> <!-- // carousel -->
 
 
 
@@ -68,8 +71,8 @@
 
 
 
-<div class="container-fluid text-center mx-auto w-100" id='main_shop_image'  style="position: absolute; z-index: 16;  top: 38%;">
-      <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-mainimage##" class="img-fluid rounded-circle shadow" alt="" onclick="runApp();" style="width:25%; border: 5px #ffffff solid; background-color: #fff;"/>
+<div class="container-fluid text-center mx-auto w-100" id='main_shop_image' style="position: absolute; z-index: 16;  margin-top:-15%">
+  <img src="https://www.kinarai.com/cdn/image/shop/##SHOP-mainimage##" class="img-fluid rounded-circle shadow" alt="" onclick="runApp();" style="width:25%; border: 5px #ffffff solid; background-color: #fff;" />
 </div> <!-- // logo website -->
 
 <!-- // Slide banner การตลาดกำหนดขนาดมา-->
@@ -80,234 +83,255 @@
 
 
 <!-- Category -->
-<div class="container-fluid " >
-    <div class="row mb-2 margin-top-15">
-        <div class="col-12">
-            <div class="row row-cols-4" id="SHOP_promotag">
-            </div> <!-- // row-cols-4 คือ จำนวนคอลัม -->
-        </div> <!-- // col left -->
+<div class="container-fluid ">
+  <div class="row mb-2 margin-top-15">
+    <div class="col-12">
+      <div class="row row-cols-4" id="SHOP_promotag">
+      </div> <!-- // row-cols-4 คือ จำนวนคอลัม -->
+    </div> <!-- // col left -->
 
-        <div class="col-2" style="display: none; ">
-        </div>  <!-- // col right  ปุ่ม search ให้ลิ้งค์ไปที่ menu_search.html -->
-    </div>
+    <div class="col-2" style="display: none; ">
+    </div> <!-- // col right  ปุ่ม search ให้ลิ้งค์ไปที่ menu_search.html -->
+  </div>
 </div> <!-- // Category -->
 
 
-<div class="container-fluid " >
-    <div class="row" id='mainview'>
-      Loading..
-    </div>
+<div class="container-fluid ">
+  <div class="row" id='mainview'>
+    Loading..
+  </div>
 </div>
 
 <!-- /// card-deck   -->
 <div class="row" id='template_mainview' style="display:none; ">
-    <div class="col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview' >
-        <div class="border border-0 shadow-sm rounded-lg border-bottom-color-primary" >
+  <div class="col-lg-3 col-sm-3 col-md-3 col-6 mb-3" id='main_menu_preview'>
+    <div class="border border-0 shadow-sm rounded-lg border-bottom-color-primary">
 
-          <img src="https://www.kinarai.com/##menu-mainimage##" class="card-img-top" alt="..." onclick='view_menu_id(##menu-id##);'>
-
-
-
-          <div class="card-body pt-2 pb-1">
-              <h6 class="card-title text-center mt-2" style="height:40px;">##menu-name## </h6>
-
-<!--                <p class="card-text font-color-foodmall-gray-light2">รายละเอียด</p>-->
-<!--                <p class="card-text">##menu-description##</p>-->
-
-            <div class="row p-0">
-                <div class="col-8 pl-1">
-                    <div class="font-color-foodmall-gray-medium mt-3 font-weight-bold" >
-                ##menu-promotionprice##   ฿ ##menu-mainprice##
-                    </div>
-                </div>
-
-                <div class="col-4 text-right">
-                     <div class="d-block">
-                         <i class="fas fa-plus-circle fa-2x font-color-foodmall" ##menu-disable## onclick="addtocart(##menu-id##)"></i>
-                     </div>
-                     <!--<img src="/image/icons8-plus-green.svg" onclick="addtocart(##menu-id##)" style="width:153%">-->
-                </div>
-            </div>  <!-- // -->
-
-          </div>  <!-- // cardbody -->
+      <img src="https://www.kinarai.com/##menu-mainimage##" class="card-img-top" alt="..." onclick='view_menu_id(##menu-id##);'>
 
 
-<!--                <div> Review of Customer </div>
+
+      <div class="card-body pt-2 pb-1">
+        <h6 class="card-title text-center mt-2" style="height:40px;">##menu-name## </h6>
+
+        <!--                <p class="card-text font-color-foodmall-gray-light2">รายละเอียด</p>-->
+        <!--                <p class="card-text">##menu-description##</p>-->
+
+        <div class="row p-0">
+          <div class="col-8 pl-1">
+            <div class="font-color-foodmall-gray-medium mt-3 font-weight-bold">
+              ##menu-promotionprice## ฿ ##menu-mainprice##
+            </div>
+          </div>
+
+          <div class="col-4 text-right">
+            <div class="d-block">
+              <i class="fas fa-plus-circle fa-2x font-color-foodmall" ##menu-disable## onclick="addtocart(##menu-id##)"></i>
+            </div>
+            <!--<img src="/image/icons8-plus-green.svg" onclick="addtocart(##menu-id##)" style="width:153%">-->
+          </div>
+        </div> <!-- // -->
+
+      </div> <!-- // cardbody -->
+
+
+      <!--                <div> Review of Customer </div>
             ...
             <br>-->
-        </div>   <!-- // card -->
+    </div> <!-- // card -->
 
-    </div> <!-- // card deck -->
+  </div> <!-- // card deck -->
 </div> <!-- // row -->
 
 
 
 
 <script>
-
-  var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F','');
-  var working={};
+  var detail = window.location.search.replace('?liff.state=%2FLINE%2Fmenuview%3F', '');
+  var working = {};
   var template = $('#template_mainview').html();
   var template_cart = $('#top_shopping_cart').html();
   $('#top_shopping_cart').html('').show();
   //$('#main_menu_preview').html('').show();
 
-  function addtocart(menuid,cb){
+  function addtocart(menuid, cb) {
 
-    var data2send ={
+    var data2send = {
       LINE_USER: LINE_USER,
-      menuid:menuid,
-      selectedprice:working.selectedprice,
-      main:main_web_site,
-      selectedoption:working.selectedoption,
-      action:'add'
-      }
-    $.postJSON('/engine/order',data2send,(res)=>{
+      menuid: menuid,
+      selectedprice: working.selectedprice,
+      main: main_web_site,
+      selectedoption: working.selectedoption,
+      action: 'add'
+    }
+    $.postJSON('/engine/order', data2send, (res) => {
       //  alert("Add to Shopping Cart");
-        if(res.result){
-          if(res.action =='selectprice'){ // Show Select Price
-            $('.select_price').show();
-              working.menuid = menuid;
-            go2View('menuview4add');
-            return;
-          }else{
-            working.order = res.detail;
-            update_shoppingcart();
-          }
-          working.selectedprice = undefined;
-          working.selectedoption =undefined;
-          if(cb) cb(true);
-        }else{
-            alert(res.detail);
+      if (res.result) {
+        if (res.action == 'selectprice') { // Show Select Price
+          $('.select_price').show();
+          working.menuid = menuid;
+          go2View('menuview4add');
+          return;
+        } else {
+          working.order = res.detail;
+          update_shoppingcart();
         }
+        working.selectedprice = undefined;
+        working.selectedoption = undefined;
+        if (cb) cb(true);
+      } else {
+        alert(res.detail);
+      }
 
     });
   }
 
   function runApp() {
-      $.postJSON('/engine/shop/getdetail',{LINE_USER: LINE_USER},(res)=>{
-        if(res.result){
-          working.shop = res.detail;
+    $.postJSON('/engine/shop/getdetail', {
+      LINE_USER: LINE_USER
+    }, (res) => {
+      if (res.result) {
+        working.shop = res.detail;
 
-          if(working.shop && working.shop.images){
+        if (working.shop && working.shop.images) {
 
           //alert("Found item" +  res.detail.items.length)
-            var temphtml = $('#carouselcard').html();
-            var data={mainimage:working.shop.images[0]};
-            data.image1 = working.shop.images[1] ? working.shop.images[1] : working.shop.images[0];
-            data.image2 = working.shop.images[2] ? working.shop.images[2] : data.image1 ;
-            data.image3 = working.shop.images[3] ? working.shop.images[3] : data.image2 ;
-            var a = hash_replace(temphtml,'SHOP',data);
-            $('#carouselcard').html(a);
-          }
-          var templogo = $('#main_shop_image').html();
-          $('#main_shop_image').html(hash_replace(templogo,'SHOP',data));
-          // promotag
-          if(Array.isArray(working.shop.promotag)){
-            var html = '';
+          var temphtml = $('#carouselcard').html();
+          var data = {
+            mainimage: working.shop.images[0]
+          };
+          data.image1 = working.shop.images[1] ? working.shop.images[1] : working.shop.images[0];
+          data.image2 = working.shop.images[2] ? working.shop.images[2] : data.image1;
+          data.image3 = working.shop.images[3] ? working.shop.images[3] : data.image2;
+          var a = hash_replace(temphtml, 'SHOP', data);
+          $('#carouselcard').html(a);
+        }
+        var templogo = $('#main_shop_image').html();
+        $('#main_shop_image').html(hash_replace(templogo, 'SHOP', data));
+        // promotag
+        if (Array.isArray(working.shop.promotag)) {
+          var html = '';
 
-            for(var x=0; x < working.shop.promotag.length;x++) {
-              if(x > 7) break;
-              html +=`<div class="col pt-1 pb-1"><button class="btn-block bg-white border border-success-foodmall text-center rounded p-1 mb-1" onclick="list_menu('${working.shop.promotag[x]}');">
+          for (var x = 0; x < working.shop.promotag.length; x++) {
+            if (x > 7) break;
+            html += `<div class="col pt-1 pb-1"><button class="btn-block btn-sm bg-white border border-success-foodmall text-center rounded p-1 mb-1" onclick="list_menu('${working.shop.promotag[x]}');">
                   <span class="font-color-foodmall">${working.shop.promotag[x]}</span>
               </button></div>`;
-            }
-
-            $('#SHOP_promotag').html(html);
           }
 
+          $('#SHOP_promotag').html(html);
         }
-      });
-      $.postJSON('/engine/order',{LINE_USER: LINE_USER,action:'getdetail'},(res)=>{
-          if(res.result){
-            working.order = res.detail;
 
-            // $('#shopingcart').html(JSON.stringify(res.detail));
-          }else{
+      }
+    });
+    $.postJSON('/engine/order', {
+      LINE_USER: LINE_USER,
+      action: 'getdetail'
+    }, (res) => {
+      if (res.result) {
+        working.order = res.detail;
 
-          }
+        // $('#shopingcart').html(JSON.stringify(res.detail));
+      } else {
 
-          update_shoppingcart();
-          //return false;
-          list_menu();
-      });
+      }
+
+      update_shoppingcart();
+      //return false;
+      list_menu();
+    });
 
 
   }
-  function list_menu (tags,query){
-    var postdata = {LINE_USER: LINE_USER}
-      postdata.tags = tags? tags: undefined;
-      postdata.keywords = query? query: undefined;
-      $('#mainview').html('search...');
-    $.postJSON('/engine/get/menulist',postdata,(res)=>{
-          if(res && res.detail){
 
-          var menu = res.detail;
-          var allhtml ='';
-          res.detail.map( (each)=>{
-              each.mainimage = each.images && each.images[0] ?  `cdn/image/menu/${each.images[0]}` : "image/Kinarai.jpg"; //default image
-              each.mainprice = each.price ?  each.price[0].price : '-';
-              // Find Promotion price
-              for(var x=0;x < each.price.length; x++){
-                  if(each.price[x].status==1 && each.price[x].normal_price > 0){  // Found Promotion
-                    each.promotionprice =  `<small class="text-secondary"><strike>฿ ${each.price[x].normal_price }</strike></small><br>`;
-                    break;
-                  }
+  function list_menu(tags, query) {
+    var postdata = {
+      LINE_USER: LINE_USER
+    }
+    postdata.tags = tags ? tags : undefined;
+    postdata.keywords = query ? query : undefined;
+    $('#mainview').html('search...');
+    $.postJSON('/engine/get/menulist', postdata, (res) => {
+      if (res && res.detail) {
+        // console.log('menulist', res.detail);
+
+        var menu = res.detail;
+        var allhtml = '';
+        res.detail.map((each) => {
+          each.mainimage = each.images && each.images[0] ? `cdn/image/menu/${each.images[0]}` : "image/Kinarai.jpg"; //default image
+          each.mainprice = each.price ? each.price[0].price : '-';
+          // Find Promotion price
+          for (var x = 0; x < each.price.length; x++) {
+            if (each.price[x].status == 1 && each.price[x].normal_price) { // Found Promotion
+              if (each.price[x].normal_price > 0 && each.price[x].normal_price > each.price[x].price) {
+                each.promotionprice = `<small class="text-secondary"><strike>฿ ${each.price[x].normal_price }</strike></small><br>`;
+                each.mainprice = each.price[x].price;
+                break;
+              } else {
+                each.promotionprice = '';
               }
-              each.disable = each.status !=1? "disabled='disabled'":'';
+            } else {
+              each.promotionprice = ''
+            }
+          }
+          each.disable = each.status != 1 ? "disabled='disabled'" : '';
 
-          });
-          allhtml=hash_replace(template,'menu',res.detail);
-          // alert(allhtml);
-          // return;
-          $('#mainview').html(allhtml);
-        } else{
-          alert(res.detail);
-        }
+        });
+        allhtml = hash_replace(template, 'menu', res.detail);
+        // alert(allhtml);
+        // return;
+        $('#mainview').html(allhtml);
+      } else {
+        alert(res.detail);
+      }
     });
   }
 
-  function view_menu_id(menuid){
+  function view_menu_id(menuid) {
     working.menuid = menuid;
     go2View('menuview4add');
   }
 
-  function update_shoppingcart(){
-      if(working.order && working.order.items){
-          working.order.totalitem =0;
-          working.order.items.map((obj)=>{
-              working.order.totalitem +=obj.qty;
-          })
-      }
+  function update_shoppingcart() {
+    if (working.order && working.order.items) {
+      working.order.totalitem = 0;
+      working.order.items.map((obj) => {
+        working.order.totalitem += obj.qty;
+      })
+    }
 
-      var a=hash_replace(template_cart,'CART', working.order || {totalitem:0});
-      $("#top_shopping_cart").html(a)
-      // if (Number(working.order.totalitem) <=0) {
-      //       $(".total_item").html('');
-      // }else {
-      //   $(".total_item").html(working.order.totalitem);
-      // }
-      $('#icon_shoppingcart').animate({
-        width: '+=20px'
+    var a = hash_replace(template_cart, 'CART', working.order || {
+      totalitem: 0
+    });
+    $("#top_shopping_cart").html(a)
+    // if (Number(working.order.totalitem) <=0) {
+    //       $(".total_item").html('');
+    // }else {
+    //   $(".total_item").html(working.order.totalitem);
+    // }
+    $('#icon_shoppingcart').animate({
+      width: '+=20px'
     }, 200).animate({
       width: '-=20px'
-  }, 200);;
+    }, 200);;
   }
   initializeLiff('menulist');
-  function search_menusubmit(){
+
+  function search_menusubmit() {
     openSearch();
     return false;
   }
-  var toggle =false;
-  function openSearch(){
-    if(toggle){
-      toggle =false;
-      list_menu ('',$('#inp_search').val());
+  var toggle = false;
+
+  function openSearch() {
+    if (toggle) {
+      toggle = false;
+      list_menu('', $('#inp_search').val());
       $('#inp_search').val('');
       $('#nav_search').hide();
       $('#nav_normal').show('slow');
-    }else{
-      toggle =true;
+    } else {
+      toggle = true;
       $('#nav_normal').hide();
       $('#nav_search').show('slow');
     }

@@ -17,22 +17,11 @@
                   <span class="mb-2">สถานะ</span>
                   <select class="mb-2" id="search_status" multiple="multiple">
                       <!--<option value="">---------------------แสดงทั้งหมด---------------------</option>-->
-                        <option value="1">มาใหม่</option>
-                        <option value="4">รายการแก่ไข</option>
-                        <option value="5">รายการใหม่รอลูกค้ายืนยัน</option>
-                        <option value="6">ยกเลิก</option>
-                        <option value="7">ลูกค้ารอร้านยืนยันรายการ</option>
-                        <option value="10">รอการชำระเงินจากลูกค้า</option>
-                        <option value="11">ลูกค้าชำระเงินแล้ว</option>
-                        <option value="12">ลูกค้าจะชำระเงินแบบ COD</option>
-                        <option value="14">ร้านค้าตอบรับ Order แล้ว</option>
-                        <option value="15">ร้านกำลังดำเนินการ</option>
-                        <option value="16">ร้านดำเนินการเสร็จแล้ว</option>
-                        <option value="17">Rider รับสินค้าแล้ว</option>
-                        <option value="23">ยกเลิก เพราะลูกค้าไม่จ่ายเงินผ่าน QR ภายในเวลาที่กำหนด</option>
-                        <option value="24">ร้านค้าไม่กดรับรายการ ภายในเวลาที่กำหนด
-                        <option value="26">ยกเลิก จากร้าน</option>
-                         <option value="27">ยกเลิก จากลูกค้า </option>
+                        <option value="1">มาใหม่(รอชำระเงิน)</option>
+                        <option value="2">ลูกค้าชำระเงินเรียบร้อย</option>
+                        <option value="3">ร้านค้าดำเนินการสำเร็จ</option>
+                        <option value="4">รายการยกเลิก</option>
+
                   </select>
                   
                   <button class="mb-2" type="button" onclick="return search_data()">
@@ -137,22 +126,16 @@
 //    })
 
     var STATUSSHOW = [];
-    STATUSSHOW[1] = 'มาใหม่';
-    STATUSSHOW[4] = 'รายการแก่ไข';
-    STATUSSHOW[5] = 'รายการใหม่รอลูกค้ายืนยัน';
-    STATUSSHOW[6] = 'ยกเลิก';
-    STATUSSHOW[7] = 'ลูกค้ารอร้านยืนยันรายการ';
-    STATUSSHOW[10] = 'รอการชำระเงินจากลูกค้า';
-    STATUSSHOW[11] = 'ลูกค้าชำระเงินแล้ว';
-    STATUSSHOW[12] = 'ลูกค้าจะชำระเงินแบบ COD';
-    STATUSSHOW[14] = 'ร้านค้าตอบรับ Order แล้ว';
-    STATUSSHOW[15] = 'ร้านกำลังดำเนินการ';
-    STATUSSHOW[16] = 'ร้านดำเนินการเสร็จแล้ว';
-    STATUSSHOW[17] = 'Rider รับสินค้าแล้ว';
-    STATUSSHOW[23] = 'ยกเลิก เพราะลูกค้าไม่จ่ายเงินผ่าน QR ภายในเวลาที่กำหนด';
-    STATUSSHOW[24] ='ร้านค้าไม่กดรับรายการ ภายในเวลาที่กำหนด'
-    STATUSSHOW[26] = 'ยกเลิก จากร้าน';
-     STATUSSHOW[27] = 'ยกเลิก จากลูกค้า ';
+    STATUSSHOW[7] = 'มาใหม่(รอชำระเงิน)';
+    STATUSSHOW[10] = 'มาใหม่(รอชำระเงิน)';
+    STATUSSHOW[11] = 'ลูกค้าชำระเงินเรียบร้อย';
+    STATUSSHOW[12] = 'ลูกค้าชำระเงินเรียบร้อย';
+    STATUSSHOW[14] = 'ลูกค้าชำระเงินเรียบร้อย';
+    STATUSSHOW[15] = 'ลูกค้าชำระเงินเรียบร้อย';
+    STATUSSHOW[16] = 'ร้านค้าดำเนินการสำเร็จ';
+    STATUSSHOW[24] ='รายการยกเลิก'
+    STATUSSHOW[26] = 'รายการยกเลิก';
+
 
 
 refreshPage()
@@ -171,7 +154,10 @@ $('#preload').modal('show');
         paginationDIV: $('.pagination_bar'),
         pagesize: 10,
         showfunction: set_data_table,
-        search:{LINE_USER:LINE_USER},
+        search:{
+                LINE_USER:LINE_USER,
+                status:{$in:[7,10,11,12,14,15,16,24,26]}
+            },
         limit: 20
     }
     searchfunction = ADV_search(search_setting);
@@ -235,18 +221,18 @@ var total_record =0;
                      
 
                  }else{
-                     obj.totalcostvat =''
+                     obj.totalcostvat ='0.00'
                  }
                  if(obj.grandtotal){
                      obj.grandtotalvat= addCommas(obj.grandtotal)
                  }else{
-                     obj.grandtotalvat =''
+                     obj.grandtotalvat ='0.00'
                  }
                  if(obj.logisticcost){
                      obj.logistic_cost= addCommas(obj.logisticcost)
 
                  }else{
-                     obj.logistic_cost =''
+                     obj.logistic_cost ='0.00'
                  }
                  if(obj.paymenttype==1){
                      obj.paytype = 'เงินสด';
@@ -351,6 +337,8 @@ var total_record =0;
 
             }
         }
+        
+
         //searchpayment
         
         
@@ -360,9 +348,32 @@ var total_record =0;
         if(search_payment){
             searchquery.paymenttype = search_payment
         }
+//        if(Array.isArray(tempstatus)&&tempstatus.length>0){
+        var tempstatus =[]
         if(Array.isArray(search_status)&&search_status.length>0){
-            searchquery.status = {$in:search_status}
+            console.log(search_status)
+            if(search_status.indexOf("1")>-1||search_status.indexOf(1)>-1){
+    //            searchquery.status:{$in:[7,10]}
+                tempstatus.push(7,10)
+            }else if(search_status.indexOf("2")>-1||search_status.indexOf(2)>-1){
+    //            searchquery.status:{$in:[11,12,14,15]}
+                tempstatus.push(11,12,14,15)
+            }else if(search_status.indexOf("3")>-1||search_status.indexOf(3)>-1){
+    //            searchquery.status:{$in:[16]}
+                tempstatus.push(16)
+            }else if(search_status.indexOf("4")>-1||search_status.indexOf(4)>-1){
+    //            searchquery.status:{$in:[24,26]}
+                tempstatus.push(24,26)
+            }
+            searchquery.status = {$in:tempstatus}
+        }else{
+           tempstatus=[7,10,11,12,14,15,16,24,26]
+            searchquery.status = {$in:tempstatus}
         }
+            console.log('tempstatus ', tempstatus)
+            
+           
+        
         searchquery.LINE_USER =LINE_USER
         searchobj = {search:searchquery}
         console.log(searchobj)

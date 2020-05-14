@@ -141,6 +141,7 @@ function getmenulist(searchstr){
   var data = {LINE_USER:LINE_USER,searchstr:searchstr};
   $('#main-menu').html('');
   $.postJSON ('/api/liff/list/menu',data,(res)=>{
+    console.log('data',res)
       if(res.result){
 
         if(res.detail[0]){

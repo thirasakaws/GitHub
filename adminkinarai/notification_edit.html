@@ -74,7 +74,7 @@
     function setdata(obj) {
         if (obj) {
             //load shopid select option
-            //setdata to select option function query new branch by 
+            //setdata to select option function query new branch by
 
             var objjquery = $('#setdata_notification');
             setdatabyclass(objjquery, 'notify', obj);
@@ -121,8 +121,13 @@
         console.log(postdata)
         $.postJSON('/api/data/kinarai/notification_update', postdata, function (re) {
             console.log(re)
-            alert('บันทึกข้อมูลเรียบร้อย')
-            go2View("/notification_list")
+            if(re.texterror){
+              alert(re.texterror)
+              return false
+            }else{
+              alert('เพิ่มข้อมูลเรียบร้อย')
+              go2View("/notification_list")
+            }
         })
         return false
     }

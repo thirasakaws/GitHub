@@ -3,63 +3,63 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#" onClick="go2View('main')">Dashboard</a></li>
+    <li class="breadcrumb-item">จัดการเมน</li>
     <li class="breadcrumb-item active" aria-current="page">เมนูอาหาร</li>
   </ol>
 </nav>
 
 
-<div class="d-flex justify-content-center mt-5 mb-5">
-	<form>
-		<div class="d-inline-block">
-			<input type="text" class="form-control" placeholder="ค้นหาเมนูอาหาร">
-		</div>
+<div class=" justify-content-center mt-4 mb-4">
+    <div class="row">
+  		<div class="form-inline col-12 col-sm-5 col-md-6 col-lg-6">
 
-		<div class="d-inline-block">
-			<button type="button" class="btn btn-submit-shop rounded-pill">
-				<ion-icon name="search-outline"></ion-icon> ค้นหา 
-			</button>  
-			
-		</div>
+          <input id="inp_searchmenu" type="text" class="w-50 form-control rounded-pill" placeholder="ค้นหาเมนูอาหาร" >
 
-		<div class="d-inline-block">
-			<button id="addfoodmenu" type="button" class="btn btn-outline-submit-shop rounded-pill">
-				<ion-icon name="add-outline"></ion-icon> เพิ่มเมนูอาหาร  
-			</button> 
-			
-		</div>
-	 </form>
+          <button type="button" onclick="return seachmenu_submit()" class="ml-3 btn btn-submit-shop rounded-pill">
+            <!-- <ion-icon name="search-outline"></ion-icon> ค้นหา -->
+            <i class="fa fa-search"></i> ค้นหา
+          </button>
+      </div>
+  		<div class="form-inline col-12 col-sm-7 col-md-6 col-lg-6">
+          <input id="add_name_menu" type="text" class="w-50 form-control rounded-pill" placeholder="ชื่อเมนูอาหาร">
+    			<button id="addfoodmenu" onclick="return addnew_menu()" type="button"  class="ml-3 btn btn-outline-submit-shop rounded-pill">
+    				<!-- <ion-icon name="add-outline"></ion-icon> เพิ่มเมนูอาหาร -->
+            <i class="fa fa-plus"></i> เพิ่มเมนูอาหาร
+    			</button>
+  		</div>
+    </div>
 </div>	<!--// Search food menu -->
 
-
-
+<hr>
+<!--
    <div id="addfoodmenu_show" class="d-flex flex-column mt-3 mb-5">
 		<div class="text-center mb-3">
-				<h4> ระบุรายชื่อเมนูของคุณ </h4> 	
+				<h4> ระบุรายชื่อเมนูของคุณ </h4>
 		</div>
 
-	
+
 	<div class="col-12 d-block tex-center">
 		<div class="form-row">
-			<div class="col-5 text-right offset-lg-3"> 
-				<div style=""> 
-					 <input type="text" id="" class="form-control w-100" placeholder="ชื่อเมนูอาหาร"> 
+			<div class="col-5 text-right offset-lg-3">
+				<div style="">
+					 <input type="text" id="" class="form-control w-100 rounded-pill" placeholder="ชื่อเมนูอาหาร">
 				</div>
-				
-			</div> 
+
+			</div>
 			<div class="col">
 				<button type="button" class="btn btn-outline-submit-shop rounded-pill">
-					<ion-icon name="add-outline"></ion-icon> เพิ่มเมนูอาหาร 
+					<ion-icon name="add-outline"></ion-icon> เพิ่มเมนูอาหาร
 				</button>
 
-			</div> 
-		</div> 
+			</div>
+		</div>
 	</div>
-</div>  <!--// เพิ่ม ระบุรายชื่อเมนู ของคุณ   -->  
-		
+</div>  -->
+ <!--// เพิ่ม ระบุรายชื่อเมนู ของคุณ   -->
 
 
-<style> 
+
+<style>
 @media screen and (min-width: 601px) {  /* pc */
   .text-title 	{
     font-size: 18px;
@@ -75,281 +75,210 @@
 </style>
 
 
-<!-- food menu --> 		
-	  
- <div class="row row-cols-1 row-cols-md-5">
-	 
-  <div class="col mb-4">
+<!-- food menu -->
+
+ <div class="row row-cols-1 row-cols-md-5" id="col-card">
+
+  <div class="col mb-4" >
     <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/b55dbefc2500aa7791fd4057b96e06e6" class="card-img-top" alt="...">
+      <img src="##MENU-img_food##" style="width: 100%;object-fit: cover;height: 280px;display: block;" class="card-img-top" alt="...">
       <div class="card-body pt-2 pl-2 pr-2 pb-0">
-		 
+
 		  <div class="d-flex flex-column">
-		  	 <div>  
-				<span class="card-title text-title">โอ้กะจู๋ไส้กรอกเยอรมัน</span> 
+		  	 <div>
+				<span class="card-title text-title">##MENU-name##</span>
 			 </div>
-			 <div class="text-left">  
-			 	<span class="text-gray-light2">##menu_id##  </span>
+			 <div class="text-left">
+			 	<span class="text-gray-light2">##MENU-id##</span>
 			 </div>
-		  </div> <!--// ชื่อเมนู -->  
-        
-		  
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div class="text-success"> <ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		  </p> <!--// --> 
-		
+		  </div> <!--// ชื่อเมนู -->
+
+
+        <div class="card-text pt-2">
+          <div class="d-flex justify-content-between">
+            <div> จำนวนคงเหลือ </div>
+            <div>##MENU-amount_text##</div>
+          </div>
+  		    <div class="d-flex justify-content-between">
+    				<div> จำกัดต่อวัน </div>
+    				<div class="text-danger font-weight-bold">##MENU-limit_date_text##</div>
+  		    </div>
+  		    <div class="d-flex justify-content-between">
+    				<div> สถานะ </div>
+    				<div class="text-success">##MENU-status_text##</div>
+    		  </div>
+		   </div> <!--// -->
       </div>
-	  
+
        <div class="card-footer p-1">
 		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop " onClick="go2View('salepackage-manage1')"> 
-				   จัดการเมนูอาหาร 
+			 <button class="btn btn-sm rounded-pill btn-submit-shop " onclick="managethismenu(##MENU-id##);">
+				   จัดการเมนูอาหาร
 			 </button>
-	  </div>  <!-- // card-footer  -->
-		   
-<!--
-		  <div class="d-flex justify-content-between">
-			  
-			  
-			  <div> <button class="btn btn-sm rounded btn-submit-shop p-0 pl-1 pr-1"> <ion-icon name="construct"></ion-icon> จัดการขั้นสูง</button></div>
-			  <div> <button class="btn btn-sm rounded btn-submit-shop p-0 pl-1 pr-1"> <ion-icon name="create-outline"></ion-icon> จัดการเมนู</button></div>
-
-		   </div>  เมนู 2 ปุ่ม ติดซ้าย และ ขวา
--->
+	  </div>
 		</div>
     </div>
-  </div> <!--// end col food --> 
-		
-		
-
- <div class="col mb-4">
-    <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/63c2c0832f32d5e7294996591cd659db" class="card-img-top" alt="...">
-      <div class="card-body pt-2 pl-2 pr-2 pb-0">
-        <div class="d-flex justify-content-between">
-		  	 <div>  
-				<h5 class="card-title">โอ้กะจู๋ไส้กรอกเยอรมัน</h5> 
-			 </div>
-			 <div class="text-right">  
-			 	<span class="text-gray-light2">##menu_id##  </span>
-			 </div>
-		  </div> <!--// ชื่อเมนู -->  
-		  
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div><ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		  </p>  <!--//--> 
-		
-      </div>
-	  
-       <div class="card-footer p-1">
-		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop " onClick="go2View('salepackage-manage1')"> 
-				   จัดการเมนูอาหาร 
-			 </button>
-	  </div>  <!-- // card-footer  -->
-
-		</div>
-    </div>
-  </div> <!--// end col food -->
-	  
-	  
-
- <div class="col mb-4">
-    <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/63c2c0832f32d5e7294996591cd659db" class="card-img-top" alt="...">
-      <div class="card-body pt-2 pl-2 pr-2 pb-0">
-		  
-        <div class="d-flex justify-content-between">
-		  	 <div>  
-				<h5 class="card-title">โอ้กะจู๋ไส้กรอกเยอรมัน</h5> 
-			 </div>
-			 <div class="text-right">  
-			 	<span class="text-gray-light2">##menu_id##  </span>
-			 </div>
-		  </div> <!--// ชื่อเมนู -->  
-		  
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div><ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		   
-		  
-		  </p>
-      </div>
-	  
-       <div class="card-footer p-1">
-		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop " onClick="go2View('salepackage-manage1')"> 
-				   จัดการเมนูอาหาร 
-			 </button>
-	  </div>  <!-- // card-footer  -->
-
-		</div>
-    </div>
-  </div> <!--// end col food -->
+  </div>
+</div>
 
 
-
-<div class="col mb-4">
-    <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/63c2c0832f32d5e7294996591cd659db" class="card-img-top" alt="...">
-      <div class="card-body pt-2 pl-2 pr-2 pb-0">
-        <h5 class="card-title">โอ้กะจู๋ไส้กรอกเยอรมัน</h5>
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div><ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		   
-		  
-		  </p>
-      </div>
-	  
-       <div class="card-footer p-1">
-		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop "> 
-				   จัดการเมนูอาหาร 
-			 </button>
-	  </div>  <!-- // card-footer  -->
-
-		</div>
-    </div>
-  </div> <!--// end col food -->
-
-
-	
-  <div class="col mb-4">
-    <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/63c2c0832f32d5e7294996591cd659db" class="card-img-top" alt="...">
-      <div class="card-body pt-2 pl-2 pr-2 pb-0">
-        <h5 class="card-title">โอ้กะจู๋ไส้กรอกเยอรมัน</h5>
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div><ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		   
-		  
-		  </p>
-      </div>
-	  
-       <div class="card-footer p-1">
-		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop "> 
-				   จัดการเมนูอาหาร 
-			 </button>
-	  </div>  <!-- // card-footer  -->
-
-		</div>
-    </div>
-  </div> <!--// end col food -->	
-	
-	
-  <div class="col mb-4">
-    <div class="card shadow-sm">
-      <img src="https://www.kinarai.com/cdn/image/menu/63c2c0832f32d5e7294996591cd659db" class="card-img-top" alt="...">
-      <div class="card-body pt-2 pl-2 pr-2 pb-0">
-        <h5 class="card-title">โอ้กะจู๋ไส้กรอกเยอรมัน</h5>
-        <p class="card-text">
-			<div class="d-flex justify-content-between">
-				<div> จำนวนคงเหลือ </div>
-				<div> 0 </div> 
-		    </div> 
-		    
-		    <div class="d-flex justify-content-between">
-				<div> จำกัดต่อวัน </div>
-				<div class="text-danger font-weight-bold"> 0 </div> 
-		    </div> 
-		  
-		    <div class="d-flex justify-content-between">
-				<div> สถานะ </div>
-				<div><ion-icon name="checkmark-circle-outline"></ion-icon> เปิดขาย </div> 
-		    </div>
-		   
-		  
-		  </p>
-      </div>
-	  
-       <div class="card-footer p-1">
-		   <div class="d-flex justify-content-center">
-			 <button class="btn btn-sm rounded-pill btn-submit-shop "> 
-				   จัดการเมนูอาหาร 
-			 </button>
-	  </div>  <!-- // card-footer  -->
-
-		</div>
-    </div>
-  </div> <!--// end col food -->
-	  
-	  
- 
-	
-	
-</div>  <!--// end row foodmenu -->   
-
- 
 
 <script>
-	
+var template_menu = $('#col-card').html();
 $("#addfoodmenu").click(function(){
   $("#addfoodmenu_show").show();
 });
-	
+getmenulist();
+function seachmenu_submit(){
+
+  getmenulist($('#inp_searchmenu').val());
+  return false;
+}
+
+function addnew_menu(){
+    var data ={}
+    data.LINE_USER=LINE_USER ;
+    data.status = 4;
+    data.name = $('#add_name_menu').val()
+    $.postJSON('/api/liff/add/menu',data,(res)=>{
+        if(!res.result){
+          return alert(res.detail);
+        }
+
+        getmenulist()
+    });
+}
+
+
+
+function getmenulist(searchstr){
+  var data = {LINE_USER:LINE_USER,searchstr:searchstr};
+  $('#col-card').html('');
+  $.postJSON ('/api/liff/list/menu',data,(res)=>{
+    console.log('data',res)
+      if(res.result){
+
+        if(res.detail[0]){
+            $('.shopmenu_shopname').html(res.detail[0].shopname)
+        }
+
+          new_table_row(res.detail);
+          $('#inp_searchmenu').val('')
+      }
+  });
+}
+function new_table_row(objdata){
+   $('#col-card').html(template_menu);
+      if (objdata.length == 0) {
+          console.log('null');
+          $('#col-card').html('<div><center><h4><i class="fas fa-exclamation-circle"></i> ไม่พบข้อมูลที่ค้นหา</h4></center></div>');
+      }else{
+          objdata.map((obj)=>{
+          //      obj.lasttime = moment(obj.lastupdate,'X').format('วันที่ D/M/Y เวลา H:mm:ss ');
+          //      obj.createtime = moment(obj.createdate,'X').format('วันที่ D/M/Y เวลา H:mm:ss ');
+               if(!obj.status){
+                    obj.status_text= '<i class="text-success far fa-check-circle"></i> เปิดขาย';
+               }else{
+                 if(obj.status==5){
+
+                     obj.status_text= '<i class="text-success far fa-check-circle"></i><span class="text-success"> เปิดขาย</span>'
+                 }else if(obj.status==4){
+                     obj.status_text ='<i class="text-danger far fa-times-circle"></i><span class="text-danger"> ปิด</span>'
+                 }
+               }
+               if(obj.amount){
+                  obj.amount_text= obj.amount
+               }else{
+                  obj.amount_text= ''
+               }
+               if(obj.limit_date){
+                  obj.limit_date_text= obj.limit_date
+               }else{
+                  obj.limit_date_text= ''
+               }
+               if(Array.isArray(obj.images) && obj.images.length>0){
+                   obj.img_food = '/api/liff/menu/image/'+obj.images[0]
+               }else{
+                   obj.img_food ="/image/icon-menu.png"
+               }
+          //      if(obj.firstname){
+          //          obj.first_name= obj.firstname
+          //      }else{
+          //          obj.first_name =''
+          //      }
+          //      if(obj.lastname){
+          //          obj.last_name= obj.lastname
+          //      }else{
+          //          obj.last_name =''
+          //      }
+          //
+          //      if(obj.totalcost){
+          //          if(obj.pricingtype==3){
+          //              console.log('true')
+          //             var type3= Number(obj.totalcost)+Number(obj.total_vat)
+          //              obj.totalcostvat= addCommas(type3)
+          //          }else{
+          //              obj.totalcostvat= addCommas(obj.totalcost)
+          //          }
+          //
+          //
+          //      }else{
+          //          obj.totalcostvat ='0.00'
+          //      }
+          //      if(obj.grandtotal){
+          //          obj.grandtotalvat= addCommas(obj.grandtotal)
+          //      }else{
+          //          obj.grandtotalvat ='0.00'
+          //      }
+          //      if(obj.logisticcost){
+          //          obj.logistic_cost= addCommas(obj.logisticcost)
+          //
+          //      }else{
+          //          obj.logistic_cost ='0.00'
+          //      }
+          //      if(obj.paymenttype==1){
+          //          obj.paytype = 'เงินสด';
+          //      }else if(obj.paymenttype==2){
+          //          obj.paytype ='QR Payment';
+          //      }else{
+          //          obj.paytype =''
+          //      }
+          //     obj.statustext = STATUSSHOW[obj.status];
+
+
+           });
+           console.log(objdata)
+           var temp = hash_replace(template_menu, 'MENU', objdata)
+       //            console.log(temp)
+           $('#col-card').html(temp)
+          }
+
+
+      // var TR = tablerow($("#col-card"), 'shopmenu', obj[x], template_menu, false) ;
+      // var status;
+      //   if (obj[x].status==5) {
+      //       status = '<i class="far fa-check-circle"></i> เปิดขาย';
+      //       TR.find('.shopmenu_status').css('color','green');
+      //   }else if (obj[x].status==4) {
+      //     status = '<i class="far fa-times-circle"></i> ปิด';
+      //     TR.find('.shopmenu_status').css('color','red');
+      //   }
+      //
+      //   if(!obj[x].price || obj[x].price.length <= 0){
+      //     TR.find('.warn_menu').html('** กรุณาเพิ่มราคาเมนูของคุณ');
+      //   }
+      //
+      //
+      //   TR.find('.shopmenu_id').html(obj[x]._id);
+      //
+      //
+      //   TR.find('.shopmenu_status').html(status);
+      //   TR.show();
+
+}
+
+function managethismenu(menu_id){
+  //alert('Menue'+working.menunow );
+  go2View('salepackage-manage1?menu_id='+menu_id);
+}
 </script>

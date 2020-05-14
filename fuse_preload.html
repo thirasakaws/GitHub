@@ -1,0 +1,41 @@
+<div id="mainpage_body">
+
+  PRELOADED
+
+</div>
+
+
+<script>
+
+    var all_page = ['hello','firstpage'];
+    function page_register(){
+      for (var x = 0; x < all_page.length; x++) {
+          var prefix = '/fuse/'
+          if (all_page[x].indexOf('/') !== -1) {
+              prefix = '/'
+          }
+          onPageshow(prefix + all_page[x], {obj: '#mainpage_body', url: '/' + all_page[x] + '.html'}, function () {
+              // obj is main_div  url ,real-url
+
+              //screen_page_byname(detailofview);
+          });
+
+      }
+    }
+    page_register();
+    if (!starturl)
+        starturl = 'hello'
+    if (starturl == '/') {
+        starturl = 'hello'
+    }
+    if (starturl[0] == '/') {
+        starturl = starturl.replace('/', '');
+    }
+var GLOBALTOKEN = 'aa5645454495494a';
+    function getTOKEN(){
+          ajax_settoken(GLOBALTOKEN);
+    }
+    getTOKEN();
+     go2View(starturl);
+
+</script>

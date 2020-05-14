@@ -69,32 +69,34 @@
                     </div>
 
             </div>
-
-
-            
-<div class=" mb-2" id="date-list">
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันอาทิตย์</h3>
+            <div class="form-row p-2">
+                    <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-left pr-3 pb-3">
+                        <h3>วันที่เปิดให้บริการ</h3>
+                    </div>
+                    <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+<!--                        <input type="text"  name="search" class=" shop_branch_contact form-control input-sm autoFilter" placeholder="เบอร์ติดต่อ"  >-->
+                        
+                <div class=" w-2" id="date-list">
+                        <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันอาทิตย์</u></h4>
                             </div>
-                            <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_sun" class="form-control timmmer_" name="" onchange="manage_opendate('sun','open',this);">
-
-                                       </select>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_sun" class="form-control timmmer_" name="" onchange="manage_opendate('sun','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
                                 <label class="switch" >
                                     <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
 
@@ -102,190 +104,197 @@
                                 </label>
                             </div>
                         </div>
-
-
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันจันทร์</h3>
-                              </div>
-                              <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_mon" class="form-control timmmer_" name="" onchange="manage_opendate('mon','open',this);">
-
-                                       </select>
-                                   </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_mon" class="form-control timmmer_" name="" onchange="manage_opendate('mon','close',this);">
-
-                                       </select>
-                                   </div>
-
-                                </div>
-                              </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_mon" class="toggle-date" onchange="manage_opendate('mon','action',this);">
-                                    <span class="slider round"></span>
-                                </label>
+                        <hr>
+                      <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันจันทร์</u></h4>
                             </div>
-                        </div>
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันอังคาร</h3>
-                            </div>
-                            <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_tue" class="form-control timmmer_" name="" onchange="manage_opendate('tue','open',this);">
-
-                                       </select>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_tue" class="form-control timmmer_" name="" onchange="manage_opendate('tue','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_tue" class="toggle-date" onchange="manage_opendate('tue','action',this);">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันพุธ</h3>
-                              </div>
-                              <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_wed" class="form-control timmmer_" name="" onchange="manage_opendate('wed','open',this);">
-
-                                       </select>
+                        <hr>
+                      <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันอังคาร</u></h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_wed" class="form-control timmmer_" name="" onchange="manage_opendate('wed','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_wed" class="toggle-date" onchange="manage_opendate('wed','action',this);">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันพฤหัสบดี</h3>
-                              </div>
-                              <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_thu" class="form-control timmmer_" name="" onchange="manage_opendate('thu','open',this);">
-
-                                       </select>
+                        <hr>
+                      <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันพุธ</u></h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_thu" class="form-control timmmer_" name="" onchange="manage_opendate('thu','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_thu" class="toggle-date" onchange="manage_opendate('thu','action',this);">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันศุกร์</h3>
-                              </div>
-                              <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_fri" class="form-control timmmer_" name="" onchange="manage_opendate('fri','open',this);">
-
-                                       </select>
+                        <hr>
+                      <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันพฤหัสบดี</u></h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_fri" class="form-control timmmer_" name="" onchange="manage_opendate('fri','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_fri" class="toggle-date" onchange="manage_opendate('fri','action',this);">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
-                        <div class="row   pt-2 m-0  text-right">
-                            <div class="col-3 text-left text-gray-light ">
-                              <h3>วันเสาร์</h3>
-                              </div>
-                              <div class="col-6">
-                                <div class="row text-center mb-2">
-                                   <div class="col-6">
-                                     เวลาเปิด
-                                       <select id="opentime_sat" class="form-control timmmer_" name="" onchange="manage_opendate('sat','open',this);">
-
-                                       </select>
+                        <hr>
+                                              <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันศุกร์</u></h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
                                    </div>
-                                   <div class="col-6">
-                                     เวลาปิด
-                                       <select id="closetime_sat" class="form-control timmmer_" name="" onchange="manage_opendate('sat','close',this);">
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
 
                                        </select>
                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="date_sat" class="toggle-date" onchange="manage_opendate('sat','action',this);">
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
+                        <hr>
+                      <div class="row ">
+                            <div class="col-12 col-md-4 col-sm-4 col-lg-4  ">
+                                <h4><u>วันเสาร์</u></h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                                <div class="row  mb-2 form-inline">
+                                   <div class="col-md-6 col-sm-6 col-lg-6 form-group">
+                                        <label for="timmmer_o">เวลาเปิด</label>
+                                       <select id="timmmer_o" class=" w-40 timmmer_ form-control mx-sm-2" name="timmmer_o"></select>
+                                   </div>
+                                   <div class="col-md-6 col-sm-6 col-lg-6">
+                                     <span>เวลาปิด</span>
+                                       <select id="timmmer_c" class="  w-40 timmmer_ form-control mx-sm-2" name="timmmer_c">
+
+                                       </select>
+                                   </div>
+
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-sm-2 col-lg-2 text-right pr-4">
+                                <label class="switch" >
+                                    <input type="checkbox" id="date_sun" class="toggle-date" onchange="manage_opendate('sun','action',this);" style="width:50px;">
+
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
+                        
+                        
+                    </div>
+
+            </div>
+
+            
+
             <div class="row">
-                        <h3 class="col-sm-6 col-lg-6 text-gray-light " style="width:auto;"> สถานะ การเปิดใช้งาน<span class="text-gray-light2">(ปิด-เปิด)</span> </h3>
-        <div class="col text-right d-flex d-inline ">
-            <div class="ml-auto">
-                <label class="switch">
-                    <input type="checkbox" id="status_branch" onchange="change_status_branch(this)">
-                    <span class="slider round"></span>
-                </label>
+                        <h3 class="col-sm-10 col-lg-10 col-12 text-gray-light " style="width:auto;"> สถานะ การเปิดใช้งาน<span class="text-gray-light2">(ปิด-เปิด)</span> </h3>
+                        <div class="col-sm-2 col-lg-2 col-2 text-right pr-4">
+                            <div class="pr-2">
+                                <label class="switch">
+                                    <input type="checkbox" id="status_branch" onchange="change_status_branch(this)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
             </div>
         </div>
-            </div>
-        </div>
-            <div class="row p-4">
+<!--            <div class="row p-4">
         <h3 class="col-sm-4 col-12 col-lg-4  " >Location</h3>
         <div class="col-sm-8 col-12 col-lg-8">
             <div class="float-left pl-2  w-100 text-right">
@@ -296,7 +305,7 @@
 
             </div>
         </div>
-    </div> <!-- // GPS -->
+    </div>  // GPS 
     <div class="row p-4">
         <h3 class="col-sm-4 col-12 col-lg-4 " > Config Area Service </h3>
         <div class="col-sm-8 col-12 col-lg-8">
@@ -308,11 +317,11 @@
 
             </div>
         </div>
-    </div> <!-- // GPS raduis-->
+    </div>  // GPS raduis-->
     </div>
 
 </div>
-                <div id='gmap_gps'>
+<!--                <div id='gmap_gps'>
                 </div>
 <div class="modal fade" id="showmodal" tabindex="-1" role="dialog" aria-labelledby="modalshopstatus" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -334,8 +343,8 @@
             </div>
         </div>
     </div>
-</div>
-<link rel="stylesheet" href="/css/croppie.css" />
+</div>-->
+<!--<link rel="stylesheet" href="/css/croppie.css" />
 <script src="/js/croppie.js"></script>
 
 <div class="demo"></div>
@@ -350,83 +359,95 @@
           
   <div class="actions">
     <button class="vanilla-result">Result</button>
-    <button class="vanilla-rotate" data-deg="-90">Rotate Left</button>
-    <button class="vanilla-rotate" data-deg="90">Rotate Right</button>
+    <button class="vanilla-rotate" data-deg="90">Rotate Left</button>
+    <button class="vanilla-rotate" data-deg="-90">Rotate Right</button>
+    
   </div>
   <div>
     <img id="show-result" style="width:350px;height: 350px" />
   </div>
-    </div>
+    </div>-->
 <script>
 
 
 ////CropImage.init()
 
 
-var resize = false
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-        	$('#vanilla-demo').attr('src', e.target.result);
-            var src_r=  $('#vanilla-demo').attr('src')
-            var el = document.getElementById('vanilla-demo');
-            var vanilla = new Croppie(el, {
-              viewport: { width: 300, height: 300 },
-              boundary: { width: 350, height: 350 },
-              showZoomer: false,
-              enableOrientation: true
-            });
-            vanilla.bind({
-              url: src_r,
-              zoom: 0
-            });
-
-            document.querySelector('.vanilla-result').addEventListener('click', function (ev) {
-                vanilla.result({
-                  type: 'blob'
-                }).then(function (blob) {
-                  $('#show-result')[0].src = window.URL.createObjectURL(blob);
-                });
-            });
-
-            $('.vanilla-rotate').on('click', function(ev) {
-              vanilla.rotate(parseInt($(this).data('deg')));
-            });
-            
-            
-            
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-
-$("#imgInp").change(function(){
-    if(resize==false){
-        
-    }else{
-        resize.destroy()
-    }
-    
-    readURL(this);
-});
+//var resize = false
+//function readURL(input) {
+//    if (input.files && input.files[0]) {
+//        var reader = new FileReader();
+//
+//        reader.onload = function (e) {
+//        	$('#vanilla-demo').attr('src', e.target.result);
+//            var src_r=  $('#vanilla-demo').attr('src')
+//            var el = document.getElementById('vanilla-demo');
+//            vanilla = new Croppie(el, {
+//              viewport: { width: 300, height: 300 },
+//              boundary: { width: 350, height: 350 },
+//              showZoomer: false,
+//              enableOrientation: true
+//            });
+//            vanilla.bind({
+//              url: src_r,
+//              zoom: 0
+//            });
+//            $('.vanilla-rotate').on('click', function(ev) {
+//                console.log(vanilla.get())
+//                var rawget = vanilla.get()
+//                vanilla.rotate(parseInt($(this).data('deg')));
+//                
+//                vanilla.bind({
+//                  url: src_r,
+//                  zoom: rawget.zoom,
+//                  points:rawget.points,
+//                  orientation:rawget.orientation
+//                });
+//            });
+//
+//            document.querySelector('.vanilla-result').addEventListener('click', function (ev) {
+//                vanilla.result({
+//                  type: 'base64',
+//                }).then(function (blob) {
+//                        $('#show-result').attr('src',blob)
+////                  $('#show-result')[0].src = window.URL.createObjectURL(blob);
+//                });
+//            });
+//
+//
+//            
+//            
+//            
+//        }
+//        reader.readAsDataURL(input.files[0]);
+//    }
+//}
+//
+//
+//$("#imgInp").change(function(){
+//    if(resize==false){
+//        
+//    }else{
+//        resize.destroy()
+//    }
+//    
+//    readURL(this);
+//});
 
 
 
 //
 
 ////on button click
-function get_image(action){
-
-
-    resize.result('html','viewport').then(function(blob) {
-        // do something with cropped blob
-        $('.demo').html(blob)
-    });
-
-}
+//function get_image(action){
+//
+//
+//    resize.result('html','viewport').then(function(blob) {
+//        // do something with cropped blob
+//        $('.demo').html(blob)
+//    });
+//
+//}
 
 
 
@@ -468,85 +489,85 @@ function get_image(action){
            })
     });
 
-
-$('#gmap_gps').load('/adminkinarai/modal_gps_full.html');
-    // $('#gmap_gps_raduis').load('/LIFF/modal_map_radius.html');
-    function show_gps() {
-        var pos;
-        if (tempbranch.location && Array.isArray(tempbranch.location.coordinates)) {
-            // Already input Location
-            pos = {lat: tempbranch.location.coordinates[0], lng: tempbranch.location.coordinates[1],user_type:"seller"};
-            call_modal_maps(pos, updategpslocation, showError);
-        } else {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log("GOT POSTIION", position);
-                    // if(!position.coords.latitude && !position.coords.longitude){
-                    pos = {}
-                    // }else {
-                    //   pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-                    // }
-
-                    // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-                    call_modal_maps(pos, updategpslocation, showError);
-                });
-                return;
-            }
-        }
-//$('#showmodal').modal('show')
-
-
-    }
-    
-    
-    function show_gps_raduis() {
-        go2View('map_area');
-        // var pos;
-        // if (tempbranch.location && Array.isArray(tempbranch.location.coordinates)) {
-        //     // Already input Location
-        //     pos = {lat: tempbranch.location.coordinates[0], lng: tempbranch.location.coordinates[1],service_radius:tempbranch.location.service_radius}
-        //     call_modal_radius_maps(pos, updategpslocation_radius, showError);
-        // } else {
-        //     if (navigator.geolocation) {
-        //         navigator.geolocation.getCurrentPosition(function (position) {
-        //             console.log("GOT POSTIION", position);
-        //             // if(!position.coords.latitude && !position.coords.longitude){
-        //             pos = {}
-        //             // }else {
-        //             //   pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-        //             // }
-
-        //             // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-        //             call_modal_radius_maps(pos, updategpslocation_radius, showError);
-        //         });
-        //         return;
-        //     }
-        // }
-
-
-
-    }
-    
-
-    function updategpslocation(loc) {
-        var data = {
-            shopid: tempbranch.shopid,
-            _id: tempbranch._id
-        };
-        data.location = {type: "Point", coordinates: [loc.lat, loc.lng]};
-
-        $.postJSON('/api/data/kinarai/shop_branch_edit', data, function (res) {
-            if (!res.result) {
-                alert(res.detail);
-                return;
-            }
-            tempbranch.location = data.location;
-            $('#writelocationok').show('slow').hide('slow');
-        });
-    }
-    
-        function showError(error) {
-        console.log("ERROR", error)
-    }
+//
+//$('#gmap_gps').load('/adminkinarai/modal_gps_full.html');
+//    // $('#gmap_gps_raduis').load('/LIFF/modal_map_radius.html');
+//    function show_gps() {
+//        var pos;
+//        if (tempbranch.location && Array.isArray(tempbranch.location.coordinates)) {
+//            // Already input Location
+//            pos = {lat: tempbranch.location.coordinates[0], lng: tempbranch.location.coordinates[1],user_type:"seller"};
+//            call_modal_maps(pos, updategpslocation, showError);
+//        } else {
+//            if (navigator.geolocation) {
+//                navigator.geolocation.getCurrentPosition(function (position) {
+//                    console.log("GOT POSTIION", position);
+//                    // if(!position.coords.latitude && !position.coords.longitude){
+//                    pos = {}
+//                    // }else {
+//                    //   pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+//                    // }
+//
+//                    // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+//                    call_modal_maps(pos, updategpslocation, showError);
+//                });
+//                return;
+//            }
+//        }
+////$('#showmodal').modal('show')
+//
+//
+//    }
+//    
+//    
+//    function show_gps_raduis() {
+//        go2View('map_area');
+//        // var pos;
+//        // if (tempbranch.location && Array.isArray(tempbranch.location.coordinates)) {
+//        //     // Already input Location
+//        //     pos = {lat: tempbranch.location.coordinates[0], lng: tempbranch.location.coordinates[1],service_radius:tempbranch.location.service_radius}
+//        //     call_modal_radius_maps(pos, updategpslocation_radius, showError);
+//        // } else {
+//        //     if (navigator.geolocation) {
+//        //         navigator.geolocation.getCurrentPosition(function (position) {
+//        //             console.log("GOT POSTIION", position);
+//        //             // if(!position.coords.latitude && !position.coords.longitude){
+//        //             pos = {}
+//        //             // }else {
+//        //             //   pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+//        //             // }
+//
+//        //             // pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+//        //             call_modal_radius_maps(pos, updategpslocation_radius, showError);
+//        //         });
+//        //         return;
+//        //     }
+//        // }
+//
+//
+//
+//    }
+//    
+//
+//    function updategpslocation(loc) {
+//        var data = {
+//            shopid: tempbranch.shopid,
+//            _id: tempbranch._id
+//        };
+//        data.location = {type: "Point", coordinates: [loc.lat, loc.lng]};
+//
+//        $.postJSON('/api/data/kinarai/shop_branch_edit', data, function (res) {
+//            if (!res.result) {
+//                alert(res.detail);
+//                return;
+//            }
+//            tempbranch.location = data.location;
+//            $('#writelocationok').show('slow').hide('slow');
+//        });
+//    }
+//    
+//        function showError(error) {
+//        console.log("ERROR", error)
+//    }
   
 </script>

@@ -1,0 +1,17 @@
+FIRTS
+<button onclick="go2View('hello');"> Click HELLO</button>
+
+<button onclick="go2View('hello2');"> Click HELLO2</button>
+<script>
+  var all_page = ['hello2'];
+  page_register();
+
+function refreshpage(){
+  alert("FIRST CALL"+GLOBALTOKEN);
+  $.post('/testapi/test',{a:1,b:2},function(){
+
+
+  });
+}
+
+  </script>

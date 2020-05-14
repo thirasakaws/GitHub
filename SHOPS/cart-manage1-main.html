@@ -1,23 +1,23 @@
 <div id='gmap_ordergps'>
 </div>
 <div class="container-fluid main_data">
-    <div id="top_shopping_cart" class="row-fluid navbar w-100 shadow nav-color-shop box-head-title-foodmall topmenu-navbar">
+  <div id="top_shopping_cart" class="row-fluid navbar w-100 shadow nav-color-shop box-head-title-foodmall topmenu-navbar">
 
-        <div class="col-1 pl-0 text-left">
-            <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage-main');">
-                 <i class="fas fa-chevron-left"></i>
-             </button>
-        </div>
-        <div class="col text-center">
-            <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ </div>
-        </div>
-        <div class="col-1 text-right">
-<!--            <div class="d-block mr-4" onclick="go2View('cart')">
+    <div class="col-1 pl-0 text-left">
+      <button class='btn border border-0 text-secondary' onclick="go2View('cart-manage-main');">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+    <div class="col text-center">
+      <div class="header-foodmall font-color-foodmall-gray-medium mt-1"> สรุปรายการสั่งซื้อ </div>
+    </div>
+    <div class="col-1 text-right">
+      <!--            <div class="d-block mr-4" onclick="go2View('cart')">
                 <img src="/image/icons8-shopping-cart-80.png" class="float-right" alt="" style="width: 52%; max-width:45px;"/>
             </div>
             <div class="items-add-to-cart badge badge-pill badge-danger">##CART-totalitem##</div>-->
-        </div>
-    </div> <!-- topmenu -->
+    </div>
+  </div> <!-- topmenu -->
 
 
 
@@ -25,121 +25,142 @@
   <div class="text-secondary d-flex justify-content-between ">
     <h6 class="font-color-foodmall-gray-medium">ข้อมูลการจัดส่ง</h6>
 
-    <span class="btn btn-sm btn-outline-danger" onclick="resetorder();"> <i class="fas fa-trash-alt text-danger" ></i> ยกเลิกรายการ</span>
+    <span class="btn btn-sm btn-outline-danger" onclick="resetorder();"> <i class="fas fa-trash-alt text-danger"></i> ยกเลิกรายการ</span>
   </div>
 
 
   <div class="">
     <!--<small>ส่งไปยัง</small>-->
     <div class="row mt-3">
-        <div class="col-6">
-            <div class="form-group">
-                <label class="font-color-foodmall-gray-light2 lable-left-35 " > ชื่อ <span class="text-danger">*</span></label>
-                <input class="input_data_bn edit_data CUSTOMER_firstname ORDER_firstname w-90 " placeholder="" data-field="firstname">
-            </div> <!--// -->
+      <div class="col-6">
+        <div class="form-group">
+          <label class="font-color-foodmall-gray-light2 lable-left-35 "> ชื่อ <span class="text-danger">*</span></label>
+          <input class="input_data_bn edit_data CUSTOMER_firstname ORDER_firstname w-90 " placeholder="" id="firstname" data-field="firstname">
+        </div>
+        <!--// -->
 
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label class="font-color-foodmall-gray-light2 lable-left-35 "> นามสกุล <span class="text-danger">*</span></label>
+          <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="" id="lastname" data-field="lastname">
         </div>
-        <div class="col-6">
-           <div class="form-group">
-                <label class="font-color-foodmall-gray-light2 lable-left-35 " > นามสกุล  <span class="text-danger">*</span></label>
-                <input class="input_data_bn edit_data CUSTOMER_lastname ORDER_lastname w-90 " placeholder="" data-field="lastname">
-            </div> <!--// -->
-        </div>
+        <!--// -->
+      </div>
     </div>
     <div class="row ">
-        <div class="col-12">
-            <div class="form-group row">
-                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >  เบอร์ติดต่อ <span class="text-danger">*</span> </label>
-                <div class="col">
-                    <input class="input_data_bn edit_data ORDER_contact w-90 " oninput="inputContactHandler(event);"  id="contact" type="tel" maxlength="10" data-field="contact"  onkeypress="return isNumberKey(event)"> <br>
-                    <small class="warn_phoneinput text-danger" style="display:none;">**รูปแบบไม่ถูกต้อง</small>
-                </div>
-            </div> <!--// -->
+      <div class="col-12">
+        <div class="form-group row">
+          <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2"> เบอร์ติดต่อ <span class="text-danger">*</span> </label>
+          <div class="col-6">
+            <input class="input_data_bn edit_data ORDER_contact w-90 " oninput="inputContactHandler(event);" id="contact" type="tel" maxlength="10" data-field="contact" onkeypress="return isNumberKey(event)"> <br>
+            <small class="warn_phoneinput text-danger" style="display:none;">**รูปแบบไม่ถูกต้อง</small>
+          </div>
         </div>
+        <!--// -->
+      </div>
 
-        <div class="col-12">
-            <div class="form-group row">
-                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" >   วิธีการจ่ายเงิน <span class="text-danger">*</span> </label>
-                <div class="col">
-                    <select id="paymenttype" class="input_data_bn  ORDER_paymenttype" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน" onchange="update_selectdata(this)">
-                      <option value="" disabled selected>โปรดระบุ</option>
-                      <option value="1" disabled>เงินสด</option>
-                      <option value="2" disabled>QR payment By Quickpay</option>
-                  </select>
-                </div>
-            </div> <!--// -->
+      <div class="col-12">
+        <div class="form-group row">
+          <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2"> วิธีการจ่ายเงิน <span class="text-danger">*</span> </label>
+          <div class="col">
+            <select id="paymenttype" class="input_data_bn  ORDER_paymenttype w-90" data-field="paymenttype" placeholder="วิธีการจ่ายเงิน" onchange="update_selectdata(this)">
+              <option value="" disabled selected>โปรดระบุ</option>
+              <option value="1" disabled>เงินสด</option>
+              <option value="2" disabled>QR payment By Quickpay</option>
+            </select>
+          </div>
         </div>
+        <!--// -->
+      </div>
 
-        <div class="col-12">
-            <div class="form-group row">
-                <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2" > ประเภทการจัดส่ง <span class="text-danger">*</span> </label>
-                <div class="col">
-                    <select id="deliverytype" class="input_data_bn  ORDER_deliverytype" data-field="deliverytype" placeholder="ประเภทการจัดส่ง" onchange="update_selectdata(this)">
-                      <option value="" disabled selected>โปรดระบุ</option>
-                      <option value="1">ระบบจัดส่ง Delivery</option>
-                      <option value="2" disabled>ลูกค้ามารับเองที่ร้าน</option>
-                  </select>
-                </div>
-            </div> <!--// -->
+      <div class="col-12">
+        <div class="form-group row">
+          <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2"> ประเภทการจัดส่ง <span class="text-danger">*</span> </label>
+          <div class="col">
+            <select id="deliverytype" class="input_data_bn  ORDER_deliverytype w-90" data-field="deliverytype" placeholder="ประเภทการจัดส่ง" onchange="update_selectdata(this)">
+              <option value="" disabled selected>โปรดระบุ</option>
+              <option value="2">ระบบจัดส่ง Delivery</option>
+              <option value="3" disabled>ลูกค้ามารับเองที่ร้าน</option>
+              <option value="4" disabled>ลูกค้ามานั่งทานที่ร้าน</option>
+            </select>
+          </div>
         </div>
+        <!--// -->
+      </div>
 
-    </div> <!--// row -->
+      <div class="col-12">
+        <div class="form-group row">
+          <label class="col-sm-4 lable-left-35 font-color-foodmall-gray-light2">สาขา</label>
+          <div class="col">
+            <select id="shopbranch" class="input_data_bn  ORDER_shopbranch w-90" data-field="shopbranch" placeholder="เลือกสาขา" onchange="update_selectdata(this)" disabled>
+            </select>
+          </div>
+        </div>
+        <!--// -->
+      </div>
+
+
+    </div>
+    <!--// row -->
   </div>
 
 
-<!--  <hr>-->
+  <!--  <hr>-->
 
-  <div class="form-group mt-3 border-bottom border-light mt-3">
+  <div class="form-group mt-3 border-bottom border-light mt-3 address_location_area">
     <div class="row">
       <div class="col-6">
-          <label class="font-color-foodmall-gray-light2 " style="width:auto;"> ที่อยู่ปลายทาง</label>
+        <label class="font-color-foodmall-gray-light2 " style="width:auto;"> ที่อยู่ปลายทาง</label>
       </div>
       <div class="col-6 text-right">
-          <div class="ml-auto">
-           <button type="button" name="button" class="btn btn-sm btn-outline-submit-foodmall rounded-pill" onclick='find_location_order();'>
-               <i class="fas fa-plus"></i> เพิ่มที่อยู่
-           </button>
-          </div>
-       </div>
-    </div> <!--// -->
+        <div class="ml-auto">
+          <button type="button" name="button" class="btn btn-sm btn-outline-submit-foodmall rounded-pill" onclick='find_location_order();'>
+            <i class="fas fa-plus"></i> เพิ่มที่อยู่
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--// -->
 
 
-     <div class="row mt-2">
-       <div class="col-12" onclick='showlist_address();'>
-          <input disabled class="form-control border-0 bg-light" id="addres_area" placeholder="คลิกที่นี่เพื่อดูรายการที่อยู่">
-          <div class="row">
-            <div class="col-12 text-center">
-              <div class="btn btn-block">
-                  <strong class="text-secondary"> <span>เลือกที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
-              </div>
+    <div class="row mt-2">
+      <div class="col-12" onclick='showlist_address();'>
+        <input disabled class="form-control border-0 bg-light" id="addres_area" placeholder="คลิกที่นี่เพื่อดูรายการที่อยู่" onclick='showlist_address();' />
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="btn btn-block">
+              <strong class="text-secondary"> <span>เลือกที่อยู่</span> <i class="fas fa-angle-down"></i></strong>
             </div>
           </div>
-       </div>
-     </div>
-     <div class="text-left card" id="showlist_address" style="display:none;">
-       <div class="card-body">
-         <div class="" id="address_list">
-           <div class="custom-control custom-radio row_tablecontent p-2" style="display:none;" >
-             <div class="row">
-               <div class="col-10">
-                 <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
-                 <label class="custom-control-label radio_for" for="">
-                   <span class="add_name"></span> <span class="add_detail"></span> <br>
-                    <small> <span class="add_address"></span></small>
+        </div>
+      </div>
+    </div>
+    <div class="text-left card" id="showlist_address" style="display:none;">
+      <div class="card-body">
+        <div class="" id="address_list">
+          <div class="custom-control custom-radio row_tablecontent p-2" style="display:none;">
+            <div class="row">
+              <div class="col-10">
+                <input type="radio" class="custom-control-input radio_id " id="" name="groupOfDefaultRadios" onchange="updateorder_add(this);">
+                <label class="custom-control-label radio_for" for="">
+                  <span class="add_name"></span> <span class="add_detail"></span> <br>
+                  <small> <span class="add_address"></span></small>
 
-                 </label>
-               </div>
-               <div class="col-2">
-                    <span class="text-danger btn btn-light" onclick="changethis_add(this,'disabled');"><i class="fas fa-trash-alt"></i></span>
-               </div>
+                </label>
+              </div>
+              <div class="col-2">
+                <span class="text-danger btn btn-light" onclick="changethis_add(this,'disabled');"><i class="fas fa-trash-alt"></i></span>
+              </div>
 
-             </div>
-           </div>
-         </div>
-       </div>
-     </div> <!--// -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// -->
 
- </div>
+  </div>
 
 
 
@@ -147,24 +168,27 @@
   <div class="mt-2 mb-2 bg-space-gray"></div>
 
   <div class="mt-1 mb-5">
-      <h6 class="font-color-foodmall">สรุปคำสั่งซื้อ</h6>
+    <h6 class="font-color-foodmall">สรุปคำสั่งซื้อ</h6>
     <div class="" id="listmenuorder">
       <div class="row row_tablecontent" style="display:none">
         <div class="col-2 text-left">
-            <span class="menu_qty">0</span>
-            <span class="font-color-foodmall-gray-light2">x</span>
-        </div>  <!--// จำนวน -->
+          <span class="menu_qty">0</span>
+          <span class="font-color-foodmall-gray-light2">x</span>
+        </div>
+        <!--// จำนวน -->
 
         <div class="col-7">
-            <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span>
+          <span class="menu_name">ชื่อเมนู</span> <span class="menu_pricedes"></span>
 
-            <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
-            <small class="menuoptionshow" ></small>
-        </div> <!--// ชื่อเมนู -->
+          <small class="menu_notedate" style="display:none;">(<span class="menu_note"></span>)</small>
+          <small class="menuoptionshow"></small>
+        </div>
+        <!--// ชื่อเมนู -->
 
         <div class="col-3 text-right">
-            <span class="menu_menuprice">0.00 </span> ฿
-        </div> <!--// ราคา -->
+          <span class="menu_menuprice">0.00 </span> ฿
+        </div>
+        <!--// ราคา -->
       </div>
 
     </div>
@@ -200,65 +224,65 @@
 
       <hr> -->
       <div class="row">
-          <div class="col-12 text-center " >
-              <span class= "text-danger small" id="order_alert"> </span>
-          </div>
+        <div class="col-12 text-center ">
+          <span class="text-danger small" id="order_alert"> </span>
+        </div>
       </div>
       <div class="row " id="total_price_show">
-          <div class="col-6">
-              ค่าอาหาร
-          </div>
-          <div class="col-6 text-right">
-               <span class="total_price">0 </span> ฿
-          </div>
+        <div class="col-6">
+          ค่าอาหาร
+        </div>
+        <div class="col-6 text-right">
+          <span class="total_price">0 </span> ฿
+        </div>
       </div>
       <div class="row vat_show">
-          <div class="col-6">
-              ค่าอาหาร(ไม่รวม VAT)
-          </div>
-          <div class="col-6 text-right ">
-               <span class="total_vatableprice">0 </span> ฿
-          </div>
+        <div class="col-6">
+          ค่าอาหาร(ไม่รวม VAT)
+        </div>
+        <div class="col-6 text-right ">
+          <span class="total_vatableprice">0 </span> ฿
+        </div>
       </div>
       <div class="row vat_show">
-          <div class="col-6">
-              VAT(7%)
-          </div>
-          <div class="col-6 text-right ">
-               <span class="total_vat">0 </span> ฿
-          </div>
+        <div class="col-6">
+          VAT(7%)
+        </div>
+        <div class="col-6 text-right ">
+          <span class="total_vat">0 </span> ฿
+        </div>
       </div>
-      <div class="row " id="total_shippingcost_before">
-          <div class="col-6">
-              ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
-          </div>
-          <div class="col-6 text-right">
-                <span class="total_shippingcost_before">0 </span> ฿
-          </div>
+      <div class="row " id="total_shippingcost_before" style="display:none;">
+        <div class="col-6">
+          ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
+        </div>
+        <div class="col-6 text-right">
+          <span class="total_shippingcost_before">0 </span> ฿
+        </div>
       </div>
       <div class="row" id="total_shippingcost">
-          <div class="col-6">
-              ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
-          </div>
-          <div class="col-6 text-right">
-                <span class="total_shippingcost">0 </span> ฿
-          </div>
+        <div class="col-6">
+          ค่าจัดส่ง <small class="show_distance_KM"><span class="total_distance font-color-foodmall">0 </span> กม.</small>
+        </div>
+        <div class="col-6 text-right">
+          <span class="total_shippingcost">0 </span> ฿
+        </div>
       </div>
       <div class="row" id='discount-shippingcost' style="display:none">
-          <div class="col-6">
-              <!-- ส่วนลดค่าจัดส่ง -->
-          </div>
-          <div class="col-6 text-right">
-              <small class="text-secondary">(ส่วนลดค่าจัดส่ง)</small>  -<span class="total_shippingdiscount">0 </span> ฿
-          </div>
+        <div class="col-6">
+          <!-- ส่วนลดค่าจัดส่ง -->
+        </div>
+        <div class="col-6 text-right">
+          <small class="text-secondary">(ส่วนลดค่าจัดส่ง)</small> -<span class="total_shippingdiscount">0 </span> ฿
+        </div>
       </div>
       <div class="row ">
-          <div class="col-6">
-              <strong>ราคาสุทธิ</strong>
-          </div>
-          <div class="col-6 text-right ">
-            <strong>  <span class="grandtotal">0 </span></strong> ฿
-          </div>
+        <div class="col-6">
+          <strong>ราคาสุทธิ</strong>
+        </div>
+        <div class="col-6 text-right ">
+          <strong> <span class="grandtotal">0 </span></strong> ฿
+        </div>
       </div>
       <hr>
     </div>
@@ -267,19 +291,19 @@
 
 
   <div class="container-fluid fixed-bottom bg-white">
-        <div class="row p-1">
+    <div class="row p-1">
 
-              <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="checkout_payment();" >
-                  ยืนยันรายการ และชำระเงิน
-<!--                   <div class="float-left">ยืนยันรายการ และชำระเงิน</div>
+      <button type="button" id="goconfirmorder" name="button" class="btn btn-lg btn-submit-foodmall btn-block" onclick="checkout_payment();">
+        ยืนยันรายการ และชำระเงิน
+        <!--                   <div class="float-left">ยืนยันรายการ และชำระเงิน</div>
                    <div class="float-right"> ฿ <span class='grandtotal'></span></div>-->
-               </button>
+      </button>
 
-        </div> <!-- // ยอดรวม และ ปุ่ม -->
-      </div> <!-- // container-fluid  -->
+    </div> <!-- // ยอดรวม และ ปุ่ม -->
+  </div> <!-- // container-fluid  -->
 
 
-<!--  <div class="fixed-bottom m-1 bg-white">
+  <!--  <div class="fixed-bottom m-1 bg-white">
     <button type="button" name="button" class="btn btn-lg btn-block btn-submit-foodmall" onclick="checkout_payment();"> ยืนยันรายการ และชำระเงิน </button>
 
   </div>-->
@@ -291,522 +315,756 @@
   refresh_managecart1();
 
   //for input tag
-  $('.edit_data').Fusefield( (obj,cb,data)=>{
-    console.log("data",data);
+  $('.edit_data').Fusefield((obj, cb, data) => {
+    console.log("data", data);
     if (data.contact) {
-          if (data.contact.toString().length!= 10) {
-                alert('กรุณากรอกเบอร์โทรให้ถูกต้อง');
-                $('#contact').focus();
-                cb(false);
-               return false;
-          }
+      if (data.contact.toString().length != 10) {
+        alert('กรุณากรอกเบอร์โทรให้ถูกต้อง');
+        $('#contact').focus();
+        cb(false);
+        return false;
+      }
     }
-    $.postJSON('/engine/order/update', data, function (res) {
-        if (!res.result) {
-            alert(res.detail);
-            cb(false);
-        }else {
-            res.detail ? working.order = res.detail : false;
-          cb(true);
+    $.postJSON('/engine/order/update', data, function(res) {
+      if (!res.result) {
+        alert(res.detail);
+        cb(false);
+      } else {
+        res.detail ? working.order = res.detail : false;
+
+        if (working.order.logistic) {
+          if (working.order.logistic.shopBranchId) {
+            working.order.shopbranch = working.order.logistic.shopBranchId;
+          }
         }
+        show_order_warning();
+        cb(true);
+      }
     })
-  },(obj)=>{
+  }, (obj) => {
     return true;
   });
 
-  function update_selectdata(obj){
-        var attr = $(obj).attr('data-field');
-        var value = $(obj).val();
-        // console.log('change',attr,value);
-        var data = {}
-        data[attr] = Number(value);
-        console.log('data',data);
-        update_order(data);
+  function update_selectdata(obj) {
+    var attr = $(obj).attr('data-field');
+    var value = $(obj).val();
+    // console.log('change',attr,value);
+    var data = {}
+    data[attr] = Number(value);
+    console.log('data 2 update select', data);
+    if (data.deliverytype) {
+      if (data.deliverytype != 1) {
+        $('#shopbranch').prop("disabled", false);
+      } else {
+        $('#shopbranch').prop("disabled", true);
+      }
+    }
+    update_order(data);
+  }
+
+  function show_order_warning() {
+    if (working.order.deliverytype) {
+      if (working.order.deliverytype == 3 || working.order.deliverytype == 4) {
+        $('#shopbranch').prop("disabled", false);
+        $('.address_location_area').hide();
+      } else {
+        $('#shopbranch').prop("disabled", true);
+        $('.address_location_area').show();
+      }
+    }
+    if (!working.order.firstname) {
+      // alert('no firstname')
+      $("#firstname").css('border', '1px solid red');
+    } else {
+      $("#firstname").css('border', '1px solid #FFFFFF');
+    }
+    if (!working.order.lastname) {
+      // alert('no lastname')
+      $("#lastname").css('border', '1px solid red');
+    } else {
+      $("#lastname").css('border', '1px solid #FFFFFF');
+    }
+    if (!working.order.contact) {
+      // alert('no contact')
+      $("#contact").css('border', '1px solid red');
+    } else {
+      $("#contact").css('border', '1px solid #FFFFFF');
+    }
+
+    if (!working.order.paymenttype) {
+      // alert('no paymenttype')
+      $("#paymenttype").css('border', '1px solid red');
+    } else {
+      $("#paymenttype").css('border', '1px solid #FFFFFF');
+    }
+    if (!working.order.deliverytype) {
+      // alert('no deliverytype')
+      $("#deliverytype").css('border', '1px solid red');
+    } else {
+      $("#deliverytype").css('border', '1px solid #FFFFFF');
+    }
+    if (!working.order.shopbranch) {
+      // alert('no shopbranch')
+      $("#shopbranch").css('border', '1px solid red');
+    } else {
+      $("#shopbranch").css('border', '1px solid #FFFFFF');
+    }
   }
 
 
-    function refresh_managecart1(){
-      if (working.order) {
-        console.log("ORDER",working.order);
-
-      }
-      if (working.shop) {
-          get_shopdelivery();
-      }
-            // getUsercustomer();
-            getcustomeraddress();
-            setTimeout(()=>{
-              showmwnuorderlist(working.order.items);
-              setdatabyclass($('.main_data'), 'ORDER', working.order);
-
-            },500);
+  function refresh_managecart1() {
+    if (working.order) {
+      console.log("ORDER", working.order);
 
     }
-
-    function get_shopdelivery(){
-      $.postJSON('/api/liff/getshop/delivery', {shop_id: working.shop._id}, function (res) {
-          if(res.result){
-                  working.delivery =res.detail;
-                  if (Array.isArray(working.delivery) && working.delivery.length > 0) {
-                        for(var x=0;x<working.delivery.length;x++){
-                            if (working.delivery[x].get_at_store) {
-                                    if (working.delivery[x].get_at_store == true) {
-                                           $('#deliverytype option[value=2]').prop('disabled',false);
-                                    }
-                            }
-                        }
-                  }
-              }else{
-
-              }
-
-      });
+    if (working.shop) {
+      // console.log('shop', working.shop);
+      getshopbranch(working.shop._id);
+      get_shopdelivery();
     }
+    // getUsercustomer();
+    getcustomeraddress();
+    setTimeout(() => {
+      showmwnuorderlist(working.order.items);
 
+      if (working.order.logistic) {
+        if (working.order.logistic.shopBranchId) {
+          working.order.shopbranch = working.order.logistic.shopBranchId;
 
-
-
-    function isNumberKey(e){
-      if(e){
-      if($('#contact').val().toString().length>=10){
-        return false;
+        }
       }
+      show_order_warning();
+      setdatabyclass($('.main_data'), 'ORDER', working.order);
+    }, 500);
 
-    var charCode = (e.which) ? e.which : event.keyCode
-
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-    return true;
-  }else{
-    alert('not have event')
   }
-}
 
-    function inputContactHandler(e) {
-      var last_val = e.target.value.substr(e.target.value.length - 1);
-      if (last_val < "0" || last_val > "9" || last_val == '.') {
-        e.target.value = e.target.value.slice(0, e.target.value.length - 1);
-      }
-    }
-
-    function getcustomeraddress(){
-       $('#address_list').html(showlistadd_temp);
-      $.postJSON('/api/liff/get/address', {LINE_USER: LINE_USER}, function (res) {
-        if(res.result){
-          obj = res.detail;
-          if(obj.length >0){
-              working.address = res.detail;
-              var found;
-              for(var x=0;x<obj.length;x++){
-                     var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
-                     if (working.order.addressid) {
-                       if(obj[x]._id == working.order.addressid){
-                         found = true;
-                         working.order.addresslocation = obj[x].location;
-                          TR.find('.radio_id').prop('checked', true);
-                          $('#addres_area').val(obj[x].name);
-                          if (obj[x].detail) {
-                                  $('#addres_area').val(obj[x].name+' '+obj[x].detail);
-                          }
-                          $('#addres_area').attr('data-id', working.order.addressid)
-                       }
-                     }
-                     TR.find('.radio_id').attr('id','add'+obj[x]._id);
-                     TR.find('.radio_for').attr('for','add'+obj[x]._id);
-                     TR.show();
-                }
-                if(!found){
-                  working.order.addressid = working.address[0]._id;
-                  working.order.addressname = working.address[0].address;
-                    if (working.address[0].detail) {
-                      working.order.addressdetail = working.address[0].detail;
-                    }
-                  working.order.addresslocation = working.address[0].location;
-
-                  update_order();
-                }
-              }else {
-                $('#addres_area').val('');
-                $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู่");
+  function get_shopdelivery() {
+    $.postJSON('/api/liff/getshop/delivery', {
+      shop_id: working.shop._id
+    }, function(res) {
+      if (res.result) {
+        working.delivery = res.detail;
+        if (Array.isArray(working.delivery) && working.delivery.length > 0) {
+          for (var x = 0; x < working.delivery.length; x++) {
+            if (working.delivery[x].type == 3 && working.delivery[x].get_at_store) {
+              if (working.delivery[x].get_at_store == true) {
+                $('#deliverytype option[value=3]').prop('disabled', false);
               }
-
-        }else{
-          $('#addres_area').attr('placeholder',"คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
+            } else if (working.delivery[x].type == 4 && working.delivery[x].eat_at_store) {
+              if (working.delivery[x].eat_at_store == true) {
+                $('#deliverytype option[value=4]').prop('disabled', false);
+              }
+            }
+          }
         }
-      });
-    };
+      } else {
 
-var array_shopid = [];
+      }
 
-    function showmwnuorderlist(obj){
-      array_shopid = [];
-      $('#listmenuorder').html(template_ordermenulist);
+    });
+  }
 
-        for(var x=0;x<obj.length;x++){
-          array_shopid.push(obj[x].shopid);
-          obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
-        //  totalprice += obj[x].menuprice;
-          obj[x].pricedes = obj[x].price.detail;
-               var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
-               if(obj[x].menuprice>0){
-                  TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
-               }else {
-                 TR.find('.menu_menuprice').html('0.00')
-               }
-               if (obj[x].note) {
-                  TR.find('.menu_notedate').show();
-               }
-               if(Array.isArray(obj[x].option)){
-                  var html_option='';
-                  obj[x].option.map((ech)=>{
-                      html_option+=`<span  class='badge badge-success'>${ech}</span> `;
-                  });
 
-                  TR.find('.menuoptionshow').html(html_option)
-               }
 
-               TR.show();
 
-               /// +=delivery
-        }
-          if(array_shopid.length > 0){
-            getorder_shop(array_shopid);
+  function isNumberKey(e) {
+    if (e) {
+      if ($('#contact').val().toString().length >= 10) {
+        return false;
+      }
+
+      var charCode = (e.which) ? e.which : event.keyCode
+
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+      return true;
+    } else {
+      alert('not have event')
+    }
+  }
+
+  function inputContactHandler(e) {
+    var last_val = e.target.value.substr(e.target.value.length - 1);
+    if (last_val < "0" || last_val > "9" || last_val == '.') {
+      e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+    }
+  }
+
+  function getcustomeraddress() {
+    $('#address_list').html(showlistadd_temp);
+    $.postJSON('/api/liff/get/address', {
+      LINE_USER: LINE_USER
+    }, function(res) {
+      if (res.result) {
+        data = res.detail;
+        if (data.length > 0) {
+          working.address = res.detail;
+          if (data.length > 1) {
+            var obj = data.sort((a, b) => b._id - a._id);
+
+            if (obj[0]._id < obj[1]._id) {
+              obj = data.sort((a, b) => b._id - a._id);
+            }
+          } else {
+            var obj = data;
+          }
+          var found;
+          for (var x = 0; x < obj.length; x++) {
+            var TR = tablerow($("#address_list"), 'add', obj[x], showlistadd_temp, false);
+            if (working.order.addressid) {
+              if (obj[x]._id == working.order.addressid) {
+                found = true;
+                working.order.addresslocation = obj[x].location;
+                TR.find('.radio_id').prop('checked', true);
+                $('#addres_area').val(obj[x].name);
+                if (obj[x].detail) {
+                  $('#addres_area').val(obj[x].name + ' ' + obj[x].detail);
+                }
+                $('#addres_area').attr('data-id', working.order.addressid)
+              }
+            }
+            TR.find('.radio_id').attr('id', 'add' + obj[x]._id);
+            TR.find('.radio_for').attr('for', 'add' + obj[x]._id);
+            TR.show();
           }
 
-        update_ship_cost();
+          if (working.new_address) {
+            found = false;
+          }
+          if (!found) {
+            working.order.addressid = working.address[0]._id;
+            working.order.addressname = working.address[0].address;
+            if (working.address[0].detail) {
+              working.order.addressdetail = working.address[0].detail;
+            }
+            working.order.addresslocation = working.address[0].location;
+            if (working.order.deliverytype != 3 && working.order.deliverytype != 4) {
+              update_order();
+            }
 
-    }
 
-    function getorder_shop(array){
-
-      $.postJSON('/api/liff/check/order/shop', {_id : array}, function (res) {
-        // console.log("LOCATE",res);
-        if(res.result){
-          // var optiondata = '';
-          // optiondata += '<option value="" disabled selected>โปรดระบุ</option>';
-             working.ordershop = res.detail;
-             // var paymentoption = ['','Cash On Delivery','QR payment By Quickpay'];
-            paymenttype = [];
-             var arr = working.ordershop;
-             if(arr.length>0){
-                   for(var x=0;x<arr.length;x++){
-                        for(var y=0;y<arr[x].paymenttype.length;y++){
-                            if(paymenttype.indexOf(arr[x].paymenttype[y]) == -1){
-                                  // paymenttype.push(arr[x].paymenttype[y]);
-                                  // console.log('****'+$('#paymenttype option[value='+arr[x].paymenttype[y]+']').val());
-                                 $('#paymenttype option[value='+arr[x].paymenttype[y]+']').prop('disabled',false);
-                                    // optiondata += '<option value="' +arr[x].paymenttype[y] + '">' + paymentoption[arr[x].paymenttype[y]] + '</option>';
-                            }
-                        }
-                   }
-                 }
-                 // $('#paymenttype').html(optiondata);
-        }else{
-          // alert(res.detail);
-        }
-      });
-    };
-
-    $('#gmap_ordergps').load('/SHOPS/modal_gps_full.html');
-      function find_location_order() {
-        // alert('show')
-        var pos;
-        if (working.order.location && Array.isArray(working.order.location.coordinates)) {
-            // Already input Location
-            pos = {lat: working.order.location.coordinates[0], lng: working.order.location.coordinates[1],user_type:"customer"};
-            // console.log('pos',pos);
+          }
         } else {
-                      pos = {}
+          $('#addres_area').val('');
+          $('#addres_area').attr('placeholder', "คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู่");
         }
-        call_modal_maps(pos, function (data) {
-            console.log('DataBack:', data);
-            // addcusaddress(data)
-            working.new_address = {}
-            working.new_address.address = data.address;
-            working.new_address.location = { type: "Point", coordinates: [data.lat, data.lng] };
 
-            if (working.new_address.address) {
-              setTimeout(()=>{
-                  go2View('manage_address-main');
-              },500)
+      } else {
+        $('#addres_area').attr('placeholder', "คุณยังไม่มีข้อมูลที่อยู่ กรุณาเพิ่มที่อยู");
+      }
+    });
+  };
 
-            }
+  var array_shopid = [];
 
+  function showmwnuorderlist(obj) {
+    // getshopbranch(working.shop._id)
+    array_shopid = [];
+    $('#listmenuorder').html(template_ordermenulist);
+
+    for (var x = 0; x < obj.length; x++) {
+      array_shopid.push(obj[x].shopid);
+      obj[x].menuprice = Number(obj[x].price.price) * Number(obj[x].qty);
+      //  totalprice += obj[x].menuprice;
+      obj[x].pricedes = obj[x].price.detail;
+      var TR = tablerow($("#listmenuorder"), 'menu', obj[x], template_ordermenulist, false);
+      if (obj[x].menuprice > 0) {
+        TR.find('.menu_menuprice').html(addCommas(obj[x].menuprice));
+      } else {
+        TR.find('.menu_menuprice').html('0.00')
+      }
+      if (obj[x].note) {
+        TR.find('.menu_notedate').show();
+      }
+      if (Array.isArray(obj[x].option)) {
+        var html_option = '';
+        obj[x].option.map((ech) => {
+          html_option += `<span  class='badge badge-success'>${ech}</span> `;
         });
-      };
-      function addcusaddress(loc){
-        var data = {
-          LINE_USER : LINE_USER,
-          address : loc.address
-          };
-        data.location = { type: "Point", coordinates: [loc.lat, loc.lng] };
-        // console.log('ORDER GPS',data);
 
-        $.postJSON('/api/liff/update/address', data, function (res) {
-          // console.log("LOCATE",res);
-          if(res.result){
-              // $('#writelocation_cus').show('slow').hide('slow');
-              getcustomeraddress();
-          }else{
-            alert(res.detail);
+        TR.find('.menuoptionshow').html(html_option)
+      }
+
+      TR.show();
+
+      /// +=delivery
+    }
+    if (array_shopid.length > 0) {
+      getorder_shop(array_shopid);
+    }
+
+    update_ship_cost();
+
+  }
+
+  function getorder_shop(array) {
+
+    $.postJSON('/api/liff/check/order/shop', {
+      _id: array
+    }, function(res) {
+      // console.log("LOCATE",res);
+      if (res.result) {
+        // var optiondata = '';
+        // optiondata += '<option value="" disabled selected>โปรดระบุ</option>';
+        working.ordershop = res.detail;
+        // var paymentoption = ['','Cash On Delivery','QR payment By Quickpay'];
+        // paymenttype = [];
+        var arr = working.ordershop[0];
+        if (arr.paymenttype.length > 0) {
+          //   for (var x = 0; x < arr.length; x++) {
+          for (var x = 0; x < arr.paymenttype.length; x++) {
+            // if (paymenttype.indexOf(arr.paymenttype[x]) == -1) {
+            // paymenttype.push(arr[x].paymenttype[y]);
+            // console.log('****'+$('#paymenttype option[value='+arr[x].paymenttype[y]+']').val());
+            $('#paymenttype option[value=' + arr.paymenttype[x] + ']').prop('disabled', false);
+            // optiondata += '<option value="' +arr[x].paymenttype[y] + '">' + paymentoption[arr[x].paymenttype[y]] + '</option>';
+            // }
           }
-        });
+          //   }
+        }
+        // $('#paymenttype').html(optiondata);
+      } else {
+        // alert(res.detail);
+      }
+    });
+  };
+
+  function getshopbranch(dataid) {
+    // console.log('shopid', working.shop);
+    // return false;
+    $.postJSON('/api/liff/getorder/shopbranch', {
+      shopid: dataid
+    }, function(res) {
+      if (res.result) {
+        var bfound = 0;
+        var optiondata = '';
+        optiondata += '<option value="" disabled selected>โปรดเลือก</option>';
+        working.shopbranch = res.detail;
+        // console.log('branch_found', working.shopbranch);
+        var bh = working.shopbranch;
+        var now = new Date();
+        var nt = moment(now).format('HH:mm');
+        var t = nt.split(':');
+        var now_time = t[0] + '' + t[1];
+        var d = moment(now).format('ddd');
+        var now_day = d.toLowerCase();
+        // alert(now_day)
+
+        for (var x = 0; x < bh.length; x++) {
+          if (bh[x].opening == 1) {
+            if (bh[x].opendate) {
+              if (bh[x].opendate[now_day].status) {
+                var bt_status = bh[x].opendate[now_day].status;
+                if (bh[x].opendate[now_day].open && bh[x].opendate[now_day].close) {
+                  var bt_open = bh[x].opendate[now_day].open.split(':');
+                  var bt_close = bh[x].opendate[now_day].close.split(':');
+
+                  var branch_open = bt_open[0] + '' + bt_open[1];
+
+                  var branch_close = bt_close[0] + '' + bt_close[1];
+                  if (Number(branch_close) <= 0) {
+                    branch_close = 2400
+                  }
+                  // alert('open ' + Number(branch_open) + "close" + Number(branch_close) + " now " + Number(now_time))
+                  if (Number(now_time) >= Number(branch_open) && Number(now_time) <= Number(branch_close)) {
+                    // alert(bt_status)
+                    if (bt_status == 'open') {
+                      bfound++;
+                      optiondata += '<option value="' + bh[x]._id + '">' + bh[x].name + '</option>';
+                    } else {
+                      // optiondata += '<option value="' + bh[x]._id + '" disabled>' + bh[x].name + '</option>';
+                    }
+                  } else {
+                    // optiondata += '<option value="' + bh[x]._id + '" disabled>' + bh[x].name + '</option>';
+                  }
+                } else {
+                  if (bt_status == 'open') {
+                    bfound++;
+                    optiondata += '<option value="' + bh[x]._id + '">' + bh[x].name + '</option>';
+                  } else {
+                    // optiondata += '<option value="' + bh[x]._id + '" disabled>' + bh[x].name + '</option>';
+                  }
+                }
+              }
+
+            } else {
+              bfound++;
+              optiondata += '<option value="' + bh[x]._id + '">' + bh[x].name + '</option>';
+            }
+          } else {
+            // optiondata += '<option value="' + bh[x]._id + '" disabled>' + bh[x].name + '</option>';
+          }
+
+        }
+
+        if (bfound <= 0) {
+          alert('ไม่พบสาขาเปิดให้บริการขณะนี้')
+        }
+
+        $('#shopbranch').html(optiondata);
+
+      } else {
+
+      }
+    });
+  }
+
+  $('#gmap_ordergps').load('/SHOPS/modal_gps_full.html');
+
+  function find_location_order() {
+    // alert('show')
+    var pos;
+    if (working.order.location && Array.isArray(working.order.location.coordinates)) {
+      // Already input Location
+      pos = {
+        lat: working.order.location.coordinates[0],
+        lng: working.order.location.coordinates[1],
+        user_type: "customer"
+      };
+      // console.log('pos',pos);
+    } else {
+      pos = {}
+    }
+    call_modal_maps(pos, function(data) {
+      console.log('DataBack:', data);
+      // addcusaddress(data)
+      working.new_address = {}
+      working.new_address.address = data.address;
+      working.new_address.location = {
+        type: "Point",
+        coordinates: [data.lat, data.lng]
       };
 
-    function updateorder_add(obj) {
-      if ($(obj).is(':checked')) {
-        var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
-        working.order.addressid = dataid;
-        for(var x=0;x<working.address.length;x++){
-          if (working.address[x]._id==dataid) {
-              working.order.addressname = working.address[x].address;
-              working.order.addressdetail = working.address[x].detail;
-              working.order.addresslocation = working.address[x].location;
-              working.order.addressid = working.address[x]._id;
+      if (working.new_address.address) {
+        setTimeout(() => {
+          go2View('manage_address-main');
+        }, 500)
+
+      }
+
+    });
+  };
+
+  function addcusaddress(loc) {
+    var data = {
+      LINE_USER: LINE_USER,
+      address: loc.address
+    };
+    data.location = {
+      type: "Point",
+      coordinates: [loc.lat, loc.lng]
+    };
+    // console.log('ORDER GPS',data);
+
+    $.postJSON('/api/liff/update/address', data, function(res) {
+      // console.log("LOCATE",res);
+      if (res.result) {
+        // $('#writelocation_cus').show('slow').hide('slow');
+        getcustomeraddress();
+      } else {
+        alert(res.detail);
+      }
+    });
+  };
+
+  function updateorder_add(obj) {
+    if ($(obj).is(':checked')) {
+      var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
+      working.order.addressid = dataid;
+      for (var x = 0; x < working.address.length; x++) {
+        if (working.address[x]._id == dataid) {
+          working.order.addressname = working.address[x].address;
+          working.order.addressdetail = working.address[x].detail;
+          working.order.addresslocation = working.address[x].location;
+          working.order.addressid = working.address[x]._id;
+        }
+      }
+      update_order();
+    }
+    // console.log('order -- ',working.order);
+
+  }
+
+  function changethis_add(obj, action) {
+    var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
+    if (confirm('ยืนยันที่จะลบที่อยู่นี้ ?')) {
+      var data = {
+        LINE_USER: LINE_USER,
+        _id: dataid,
+        active: false
+      };
+
+      $.postJSON('/api/liff/update/address', data, function(res) {
+        // console.log("LOCATE",res);
+        if (res.result) {
+          getcustomeraddress();
+        } else {
+          alert(res.detail);
+        }
+      });
+    }
+
+  }
+
+  function update_order(data) {
+    console.log('data update new ', data);
+    if (!data) {
+      var data = {};
+    }
+    data.LINE_USER = LINE_USER;
+    if (working.order.addressid && working.order.addressname) {
+      data.addressid = working.order.addressid;
+      data.addressname = working.order.addressname;
+      data.addresslocation = working.order.addresslocation;
+      data.addressdetail = working.order.addressdetail;
+    }
+    if (data.shopbranch) {
+      if (!data.deliverytype) {
+        data.deliverytype = Number($('#deliverytype').val());
+      }
+    }
+    if (data.deliverytype) {
+      if (data.deliverytype == 3 || data.deliverytype == 4) {
+        data.addressid = '';
+        data.addressname = '';
+        data.addresslocation = '';
+        data.addressdetail = '';
+        if (!data.shopbranch) {
+          if (working.order.shopbranch) {
+            data.shopbranch = working.order.shopbranch;
+          } else {
+            alert('กรุณาเลือกสาขา');
+            return false;
           }
         }
-        update_order();
-        }
-        // console.log('order -- ',working.order);
 
+      } else {
+        delete data.shopbranch;
+      }
     }
-    function changethis_add(obj,action){
-        var dataid = $(obj).parents('.row_tablecontent').attr('data-id');
-        if(confirm('ยืนยันที่จะลบที่อยู่นี้ ?')){
-          var data = {
-            LINE_USER : LINE_USER,
-            _id : dataid,
-            active : false
-            };
+    if (working.new_address) {
+      delete working.new_address;
+    }
 
-          $.postJSON('/api/liff/update/address', data, function (res) {
-            // console.log("LOCATE",res);
-            if(res.result){
-                getcustomeraddress();
-            }else{
-              alert(res.detail);
+    console.log("data update", data);
+    $.postJSON('/engine/order/update', data, (res) => {
+      if (res.result) {
+        console.log('update', res);
+        if (res.detail) working.order = res.detail;
+        $('.warn-save').show('slow').hide('slow');
+        getcustomeraddress();
+        $('#showlist_address').hide();
+        checkorder_status();
+        update_ship_cost();
+        setTimeout(() => {
+          if (working.order.logistic) {
+            if (working.order.logistic.shopBranchId) {
+              working.order.shopbranch = working.order.logistic.shopBranchId;
             }
-          });
-        }
+          }
+          show_order_warning();
 
-    }
+          setdatabyclass($('.main_data'), 'ORDER', working.order);
+        }, 100)
+        showlist_address_temp = false;
+      } else {
 
-    function update_order(data){
-      // console.log('data update new ',data);
-      if (!data) {
-        var data = {};
       }
-      data.LINE_USER = LINE_USER;
-      if (working.order.addressid && working.order.addressname) {
-        data.addressid  = working.order.addressid;
-        data.addressname = working.order.addressname;
-        data.addresslocation =  working.order.addresslocation;
-        data.addressdetail = working.order.addressdetail;
+    });
+  }
+
+  function checkorder_status() {
+    var order = working.order;
+    if (!order.branch_found) {
+      if (order.systemcomment) {
+        $('#order_alert').html(order.systemcomment).show('slow');
+      } else {
+        $('#order_alert').html('*** ที่อยู่จัดส่งไม่ถูกต้อง').show('slow');
       }
-                // console.log("data update",data);
-      $.postJSON('/engine/order/update',data,(res)=>{
-          if(res.result){
-            // console.log('update',res);
-              if(res.detail) working.order = res.detail;
-              $('.warn-save').show('slow').hide('slow');
-              getcustomeraddress();
-              $('#showlist_address').hide();
-              checkorder_status();
-              update_ship_cost();
-              showlist_address_temp=false;
-            }else{
-
-            }
-         });
-    }
-    function checkorder_status(){
-      var order=working.order;
-      if(!order.branch_found){
-        if(order.systemcomment){
-            $('#order_alert').html(order.systemcomment).show('slow');
-        }else{
-            $('#order_alert').html('*** ที่อยู่จัดส่งไม่ถูกต้อง').show('slow');
-        }
-        $('#goconfirmorder').prop('disabled',true);
-        $('.grandtotal').html('-');
-        $('.total_distance').html('-');
-        $('.total_shippingcost').html('-');
-        $('#discount-shippingcost').hide();
-        return false;
-      }else{
-
-        $('#order_alert').html('').hide();
-        $('#goconfirmorder').prop('disabled',false);
-        return true;
-      }
-    }
-    function update_ship_cost(){
-
-      var order=working.order;
-      checkorder_status();
-
-      console.log('order data',order);
-
-      $('.total_price').html(order.totalcost ? addCommas(order.totalcost) : '0.00') ;
+      $('#goconfirmorder').prop('disabled', true);
+      $('.grandtotal').html('-');
+      $('.total_distance').html('-');
+      $('.total_shippingcost').html('-');
       $('#discount-shippingcost').hide();
-      if(order.logistic){
-          $('.total_distance').html( order.logistic.distanceShopToCustomerInKM ?  addCommas(order.logistic.distanceShopToCustomerInKM) : '0.00');
-          $('.total_shippingcost').html(order.logistic.deliveryTotalAmount ? addCommas(order.logistic.deliveryTotalAmount) : '0.00');
+      return false;
+    } else {
 
-          if(Number(order.logistic.Discount) > 0){
-            var beforediscount = addCommas(order.logistic.deliveryTotalAmount + order.logistic.Discount);
-            $('#discount-shippingcost').show();
-            $('.total_shippingdiscount').html(addCommas(order.logistic.Discount));
-            $('.total_shippingcost_before').html(addCommas(beforediscount));
-            $('#total_shippingcost_before').show();
-            $('#total_shippingcost').hide();
-          }else{
-              $('#total_shippingcost').show();
-            $('#discount-shippingcost').hide();
-            $('#total_shippingcost_before').hide();
-          }
-      }
-      if (order.deliverytype == 2) {
-        $('.show_distance_KM').hide();
-      }else {
-        $('.show_distance_KM').show();
-      }
-      var grandtotal = 0;
-          grandtotal = Number(order.totalcost)
-          if(order.logistic && order.logistic.deliveryTotalAmount){
-            grandtotal +=order.logistic.deliveryTotalAmount;
-          }
-
-
-       // $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
-       if (order.total_vatableprice && order.total_vat && order.pricingtype ) {
-          if (order.pricingtype==1) {
-            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
-            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
-            $('.vat_show').hide();
-            $('#total_price_show').show();
-
-
-          }else if(order.pricingtype==2) {
-            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
-            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
-            $('.vat_show').show();
-            $('#total_price_show').hide();
-          }else if (order.pricingtype==3) {
-            $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00') ;
-            $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00') ;
-            grandtotal = grandtotal+order.total_vat;
-            $('.vat_show').show();
-            $('#total_price_show').hide();
-
-          }
-
-       }else{
-             if (working.shop) {
-             // console.log('shop',working.shop);
-               if (working.shop.pricingtype) {
-                  if (working.shop.pricingtype==1) {
-                        $('.total_vat').html('0.00');
-                        var total_vatableprice = order.totalcost;
-                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
-                        $('.vat_show').hide();
-                  }
-                  else if (working.shop.pricingtype==2) {
-                    var vat = Number(order.totalcost)*7/107;
-                        $('.total_vat').html(vat ? addCommas(vat) : '0.00') ;
-                        var total_vatableprice = order.totalcost - vat;
-                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
-                        $('.vat_show').show();
-                  }
-                  else if (working.shop.pricingtype==3) {
-                    var vat = Number(order.totalcost)*7/100;
-                        $('.total_vat').html(vat ? addCommas(vat) : '0.00') ;
-                        var total_vatableprice = order.totalcost;
-                        $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00') ;
-                        grandtotal = grandtotal+ vat;
-                        $('.vat_show').show();
-                  }
-               }else {
-                 $('.vat_show').hide();
-               }
-          }
-        }
-
-        if(working.order.grandtotal){
-          grandtotal = Number( working.order.grandtotal);
-        }
-
-      $('.grandtotal').html(grandtotal ? addCommas(grandtotal) : '0.00' );
-
+      $('#order_alert').html('').hide();
+      $('#goconfirmorder').prop('disabled', false);
+      return true;
     }
-    function checkout_payment(){
-      console.log('order',working.order.firstname);
+  }
 
-      if(working.order.firstname || working.order.firstname !==''){
-        if(working.order.lastname || working.order.lastname !==''){
+  function update_ship_cost() {
+
+    var order = working.order;
+    checkorder_status();
+
+    console.log('order data', order);
+
+    $('.total_price').html(order.totalcost ? addCommas(order.totalcost) : '0.00');
+    $('#discount-shippingcost').hide();
+    if (order.logistic) {
+      $('.total_distance').html(order.logistic.distanceShopToCustomerInKM ? addCommas(order.logistic.distanceShopToCustomerInKM) : '0.00');
+      $('.total_shippingcost').html(order.logistic.deliveryTotalAmount ? addCommas(order.logistic.deliveryTotalAmount) : '0.00');
+
+      if (Number(order.logistic.Discount) > 0) {
+        var beforediscount = addCommas(order.logistic.deliveryTotalAmount + order.logistic.Discount);
+        $('#discount-shippingcost').show();
+        $('.total_shippingdiscount').html(addCommas(order.logistic.Discount));
+        $('.total_shippingcost_before').html(addCommas(beforediscount));
+        $('#total_shippingcost_before').show();
+        $('#total_shippingcost').hide();
+      } else {
+        $('#total_shippingcost').show();
+        $('#discount-shippingcost').hide();
+        $('#total_shippingcost_before').hide();
+      }
+    }
+    if (order.deliverytype == 3 || order.deliverytype == 4) {
+      $('.show_distance_KM').hide();
+    } else {
+      $('.show_distance_KM').show();
+    }
+    var grandtotal = 0;
+    grandtotal = Number(order.totalcost)
+    if (order.logistic && order.logistic.deliveryTotalAmount) {
+      grandtotal += order.logistic.deliveryTotalAmount;
+    }
 
 
-        }else{
-          alert('กรุณาระบุนามสกุลผู้รับ')
-          return false;
+    // $('.grandtotal').html(addCommas(grandtotal) );//addCommas(working.order.grandtotal));
+    if (order.total_vatableprice && order.total_vat && order.pricingtype) {
+      if (order.pricingtype == 1) {
+        $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00');
+        $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00');
+        $('.vat_show').hide();
+        $('#total_price_show').show();
+
+
+      } else if (order.pricingtype == 2) {
+        $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00');
+        $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00');
+        $('.vat_show').show();
+        $('#total_price_show').hide();
+      } else if (order.pricingtype == 3) {
+        $('.total_vat').html(order.total_vat ? addCommas(order.total_vat) : '0.00');
+        $('.total_vatableprice').html(order.total_vatableprice ? addCommas(order.total_vatableprice) : '0.00');
+        grandtotal = grandtotal + order.total_vat;
+        $('.vat_show').show();
+        $('#total_price_show').hide();
+
+      }
+
+    } else {
+      if (working.shop) {
+        // console.log('shop',working.shop);
+        if (working.shop.pricingtype) {
+          if (working.shop.pricingtype == 1) {
+            $('.total_vat').html('0.00');
+            var total_vatableprice = order.totalcost;
+            $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00');
+            $('.vat_show').hide();
+          } else if (working.shop.pricingtype == 2) {
+            var vat = Number(order.totalcost) * 7 / 107;
+            $('.total_vat').html(vat ? addCommas(vat) : '0.00');
+            var total_vatableprice = order.totalcost - vat;
+            $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00');
+            $('.vat_show').show();
+          } else if (working.shop.pricingtype == 3) {
+            var vat = Number(order.totalcost) * 7 / 100;
+            $('.total_vat').html(vat ? addCommas(vat) : '0.00');
+            var total_vatableprice = order.totalcost;
+            $('.total_vatableprice').html(total_vatableprice ? addCommas(total_vatableprice) : '0.00');
+            grandtotal = grandtotal + vat;
+            $('.vat_show').show();
+          }
+        } else {
+          $('.vat_show').hide();
         }
+      }
+    }
 
-      }else{
-        alert('กรุณาระบุชื่อผู้รับ')
+    if (working.order.grandtotal) {
+      grandtotal = Number(working.order.grandtotal)
+    }
+    grandtotal = grandtotal.toFixed(0);
+
+    $('.grandtotal').html(grandtotal ? addCommas(grandtotal) : '0.00');
+
+  }
+
+  function checkout_payment() {
+    console.log('order', working.order.firstname);
+
+    if (working.order.firstname || working.order.firstname !== '') {
+      if (working.order.lastname || working.order.lastname !== '') {
+
+
+      } else {
+        alert('กรุณาระบุนามสกุลผู้รับ')
         return false;
       }
 
-      if(!working.order.contact || working.order.contact.toString().length != 10){
-        alert('กรุณาระบุเบอร์ติดต่อ');
-        $('#contact').focus();
-        return false;
-      }
-      if(Number(working.order.paymenttype) > 0){
+    } else {
+      alert('กรุณาระบุชื่อผู้รับ')
+      return false;
+    }
 
-      }else{
-        alert('กรุณาระบุวิธีการชำระเงิน')
-        return false;
-      }
-      if(Number(working.order.deliverytype) > 0){
+    if (!working.order.contact || working.order.contact.toString().length != 10) {
+      alert('กรุณาระบุเบอร์ติดต่อ');
+      $('#contact').focus();
+      return false;
+    }
+    if (Number(working.order.paymenttype) > 0) {
 
-      }else{
-        alert('กรุณาระบุประเภทการจัดส่ง')
-        return false;
-      }
-      if(Number(working.order.addressid) >0){
+    } else {
+      alert('กรุณาระบุวิธีการชำระเงิน')
+      return false;
+    }
+    if (Number(working.order.deliverytype) > 0) {
+
+    } else {
+      alert('กรุณาระบุประเภทการจัดส่ง')
+      return false;
+    }
+    if (Number(working.order.addressid) > 0) {
 
 
-      }else{
+    } else {
+      if (working.order.deliverytype == 3 && working.order.deliverytype == 4) {} else {
         alert('กรุณาระบุที่อยู่ปลายทาง')
         return false;
       }
-      if(!working.order.branch_found) return false;
-      if(working.order && working.order.items && working.order.items.length >0 && working.order._id){
-          liff.sendMessages([{
-                   'type': 'text',
-                   'text': "OrderConfirm: #"+working.order._id
-               }]).then(function() {
-                   liff.closeWindow();
-               }).catch(function(error) {
-                  console.log("Send Error");
-                   window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
-               });
-
-      }else{
-          alert("รายการสั่งซื้อของคุณยังไม่พร้อมสำหรับชำระเงิน");
-      }
-    };
-
-    var showlist_address_temp=false;
-    function showlist_address(){
-      $('.showadd_address').hide();
-
-      if(showlist_address_temp){
-        $('#showlist_address').hide();
-      }else{
-          $('#showlist_address').show();
-      }
-      showlist_address_temp = !showlist_address_temp;
     }
+    if (!working.order.branch_found) return false;
+    if (working.order && working.order.items && working.order.items.length > 0 && working.order._id) {
+      liff.sendMessages([{
+        'type': 'text',
+        'text': "OrderConfirm: #" + working.order._id
+      }]).then(function() {
+        liff.closeWindow();
+      }).catch(function(error) {
+        console.log("Send Error");
+        window.alert('Error: คุณไม่ได้อนุญาติให้ App เราส่งข้อความ\r\n กรุณาอนุญาติเพื่อให้ทำรายการได้');
+      });
 
+    } else {
+      alert("รายการสั่งซื้อของคุณยังไม่พร้อมสำหรับชำระเงิน");
+    }
+  };
+
+  var showlist_address_temp = false;
+
+  function showlist_address() {
+    $('.showadd_address').hide();
+
+    if (showlist_address_temp) {
+      $('#showlist_address').hide();
+    } else {
+      $('#showlist_address').show();
+    }
+    showlist_address_temp = !showlist_address_temp;
+  }
 </script>

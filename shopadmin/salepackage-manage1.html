@@ -1,403 +1,836 @@
 <div class="d-flex justify-content-between mt-2 mb-5">
 	<div>
-		<h3>เมนู :  <span class="font-color-shop"> ##FoodMenu </span> </h3>
+		<h3>เมนู : <span class="font-color-shop menuname"> MENU_MANE</span> </h3>
 	</div>
 	<div class="text-right">
 		<button type="button" class="btn btn-sm btn-secondary" onClick="go2View('salepackage')">
-			<ion-icon name="close-outline"></ion-icon>  ยกเลิก 
+			<i class="fas fa-arrow-left"></i> กลับไปยังหน้ารายการเมนู
 		</button>
-		
-		<button type="button" class="btn btn-sm btn-primary"> 
-			<ion-icon name="save-outline"></ion-icon>
-			บันทึก 
+
+		<button type="button" class="btn btn-sm btn-primary">
+			<i class="fa fa-save"></i>
+			บันทึก
 		</button>
 	</div>
-	
-</div> <!--// header -->
+
+</div>
+<!--// header -->
 
 
 <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
-		ทั่วไป
-	  </a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
-		จัดการออเดอร์
-	  </a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
-		ราคาเมนู
-	  </a>
-	 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-img" role="tab" aria-controls="nav-img" aria-selected="false">
-		รูปภาพ
-	  </a>
-  </div>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+		<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+			ทั่วไป
+		</a>
+		<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+			จัดการออเดอร์
+		</a>
+		<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+			ราคาเมนู
+		</a>
+		<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-img" role="tab" aria-controls="nav-img" aria-selected="false">
+			รูปภาพ
+		</a>
+	</div>
 </nav>
 
 
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active p-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		เมนูอาหาร
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		คำอธิบาย
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		รายละเอียด
-		  </div>
-		  <div class="col-9"> 
-			  <textarea id="" class="form-control form-control-sm"></textarea>
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		ประเภทเมนูอาหาร
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-			  
-			  <small id="emailHelp" class="form-text text-muted"> 
-				  * สามารถพิมพ์แล้วกดวรรคเพื่อเพิ่มประเภทได้ ( ใช้สำหรับการค้นหาอาหารตามประเภท )
-			  </small>
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		ระยะเวลาในการทำ
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		ขนาด
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-		  </div>
-	  </div> <!-- //  -->
-	  
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		น้ำหนัก
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm">
-		  </div>
-	  </div> <!-- //  --> 
-	  
-   </div> <!-- // Tab 1  -->  
-	
-	
-  <div class="tab-pane fade p-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-	  
-	 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		กำหนดเมนู 
-		  </div>
-		  <div class="col-9"> 
-			  <div class="text-left">
-			  	<div class="custom-control custom-switch">
-				  	<input type="checkbox" class="custom-control-input" id="customSwitch1">
-				  	<label class="custom-control-label" for="customSwitch1">
-						<span class="text-secondary"> ( ปิด - เปิด ) </span>
-					</label>
-				</div>
-			  </div>  
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		การยืนยัน Order 
-		  </div>
-		  <div class="col-9"> 
-			  <div class="text-left">
-			  	  <div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-					  <label class="custom-control-label" for="customSwitch1">
-						  <span class="text-secondary"> ( Manual - Auto ) </span>
-					  </label>
-				 </div> 
-			  </div>  
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		จำกัดต่อวัน
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm" placeholder="จำกัดต่อวัน">
-		  </div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		ตัวเลือกเสริม เลือกได้
-		  </div>
-		  <div class="col-8"> 
-		       <input type="text" id="" class="form-control form-control-sm" >
-		  </div>
-	  		<div class="col"> 
-	  			รายการ
-	  		</div>
-	  </div> <!-- //  --> 
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		รายการ
-		  </div>
-		  <div class="col-9"> 
-		       <input type="text" id="" class="form-control form-control-sm" >
-			   <small id="emailHelp" class="form-text text-muted">
-				   * ตัวเลือกเสริม ( ที่ไม่เกี่ยวกับราคา )
-			  </small>
-		  </div>  		
-	  </div> <!-- //  -->
-   </div> <!-- // Tab 2  -->  
-	
-	
-   <div class="tab-pane fade p-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-	  
-	  <div class="form-group row">
-	   	  <div class="col-3"> 
-		 		กำหนดราคา
-		  </div>
-		  <div class="col-9"> 
-		      <button type="button" class="btn btn-sm btn-primary rounded rounded-pill" onClick="go2View('addFoodPrice')">  
-			  	 <ion-icon name="add-outline"></ion-icon>
-				  เพิ่มราคาเมนู
-			  </button>
-		  </div>
-	  </div> <!-- //  -->
-	   
-	  <div id="addFoodPrice" class="p-4 shadow"> 
-		  <div class="d-flex justify-content-between">
-		  	<div> 
-				<h5> เพิ่มราคาเมนู </h5>  
-			</div>
-			<div class="text-right">
-			    <button type="button" class="btn btn-sm btn-primary rounded rounded-pill">  
-					 <ion-icon name="add-outline"></ion-icon>
-					  เพิ่มรายการราคา
-				  </button>
-			</div>
-		  </div>
-		  <hr>
-		  
-		  
-		  <div class="form-group row">
-			  <div class="col-3"> 
-					คำอธิบาย
-			  </div>
-			  <div class="col-9"> 
-				  <textarea class="form-control"></textarea>
-				  <small id="emailHelp" class="form-text text-muted">
-					  ( เช่น ราคาปกติ / เพิ่มไข่ดาว )  
-				  </small>
-			  </div>
-		  </div> <!-- //  --> 
-		  
-		  <div class="form-group row">
-			  <div class="col-3"> 
-					ราคา
-			  </div>
-			  <div class="col-8"> 
-				
-				 <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="ราคาอาหาร">
-				  
-				  <small id="emailHelp" class="form-text text-muted">
-					  รายขายปกติ  
-				  </small>
-			  </div>
-			  <div class="col">
-			  		บาท
-			  </div>
+<div class="tab-content setdatamenu" id="nav-tabContent">
+	<div class="tab-pane fade show active p-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-		  </div> <!-- //  -->
-		  
-		  <div class="form-group row">
-			  <div class="col-3"> 
-					<strong class="font-color-shop"> จัดราคาโปรโมชั่น </strong> 
-			  </div>
-			  <div class="col-9"> 
-				 <div class="custom-control custom-switch">
-				  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-				  <label class="custom-control-label text-secondary" for="customSwitch1">( ปิด - เปิด )</label>
+		<div class="form-group row">
+			<div class="col-3">
+				เมนูอาหาร
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="changeinput form-control MENU_name form-control-sm">
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				คำอธิบาย
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="form-control MENU_description form-control-sm">
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				รายละเอียด
+			</div>
+			<div class="col-9">
+				<textarea id="" class="form-control MENU_detail form-control-sm"></textarea>
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				ประเภทเมนูอาหาร
+			</div>
+			<div class="col-9">
+				<!-- <input type="text" id="" class="form-control form-control-sm">ก -->
+				<select class="MENU_type form-control form-control-sm " multiple="multiple" placeholder="ตัวเลือกเสริม">
+				</select>
+				<small id="emailHelp" class="form-text text-muted">
+					* สามารถพิมพ์แล้วกดวรรคเพื่อเพิ่มประเภทได้ ( ใช้สำหรับการค้นหาอาหารตามประเภท )
+				</small>
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				ระยะเวลาในการทำ
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="form-control MENU_timespent form-control-sm">
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				ขนาด
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="form-control MENU_size form-control-sm">
+			</div>
+		</div> <!-- //  -->
+
+
+		<div class="form-group row">
+			<div class="col-3">
+				น้ำหนัก
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="form-control MENU_weight form-control-sm">
+			</div>
+		</div> <!-- //  -->
+
+	</div> <!-- // Tab 1  -->
+
+
+	<div class="tab-pane fade p-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+
+
+		<div class="form-group row">
+			<div class="col-3">
+				กำหนดเมนู
+			</div>
+			<div class="col-9">
+				<div class="text-left">
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="menu_status">
+						<label class="custom-control-label" for="menu_status">
+							<span class="text-secondary"> ( ปิด - เปิด ) </span>
+						</label>
+					</div>
 				</div>
-			  </div>
-		  </div> <!-- //  --> 
-		  
-		  <div class="text-center"> 
-			  <span class="text-danger"> ** กรุณาเพิ่มข้อมูลราคา และรายละเอียดราคาให้ครบถ้วน </span>
-		  </div>
-	  </div>  <!--// addFoodPrice --> 
-	</div>  <!-- // Tab 3  --> 
-	
-	
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				การยืนยัน Order
+			</div>
+			<div class="col-9">
+				<div class="text-left">
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="confirm_order">
+						<label class="custom-control-label" for="confirm_order">
+							<span class="text-secondary"> ( Manual - Auto ) </span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div> <!-- //  -->
+
+
+		<div class="form-group row">
+			<div class="col-3">
+				จำกัดต่อวัน
+			</div>
+			<div class="col-9">
+				<input type="text" id="" class="MENU_limit_date form-control form-control-sm" placeholder="จำกัดต่อวัน">
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				ตัวเลือกเสริม เลือกได้
+			</div>
+			<div class="col-8">
+				<input type="text" id="" multiple="multiple" class="MENU_optionlimit form-control form-control-sm" />
+
+			</div>
+			<div class="col">
+				รายการ
+			</div>
+		</div> <!-- //  -->
+
+		<div class="form-group row">
+			<div class="col-3">
+				รายการ
+			</div>
+			<div class="col-9">
+				<select id="selectmenu_option" multiple="multiple" class="MENU_option form-control form-control-sm">
+				</select>
+				<small id="emailHelp" class="form-text text-muted">
+					* ตัวเลือกเสริม ( ที่ไม่เกี่ยวกับราคา )
+				</small>
+			</div>
+		</div> <!-- //  -->
+	</div> <!-- // Tab 2  -->
+
+
+	<div class="tab-pane fade p-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+		<div class="form-group row">
+			<div class="col-3">
+				<h4>กำหนดราคา</h4>
+			</div>
+			<div class="col-9">
+				<button type="button" class="btn btn-sm btn-primary rounded rounded-pill" onclick="return modalpriceadd()">
+					<!-- <ion-icon name="add-outline"></ion-icon> -->
+					<i class="fa fa-plus"></i>
+					สร้างราคาเมนูใหม่
+				</button>
+			</div>
+		</div> <!-- //  -->
+
+		<div id="addFoodPrice">
+			<div class="p-4 shadow mb-5">
+				<div class="d-flex justify-content-between">
+					<div>
+						<h5> เพิ่มราคาเมนู <span class="text-danger">##menuprice-number_id##</span></h5>
+					</div>
+					<div class="text-right">
+						<!-- <button type="button" class="btn btn-sm btn-primary rounded rounded-pill">
+							<i class="fa fa-plus"></i>
+							เพิ่ม
+						</button> -->
+						<button type="button" class="btn btn-sm btn-danger rounded rounded-pill" onclick="delete_price(##menuprice-number_id##)">
+							<i class="fa fa-trash"></i>
+						</button>
+					</div>
+				</div>
+				<hr>
+
+
+				<div class="form-group row">
+					<div class="col-3">
+						คำอธิบาย
+					</div>
+					<div class="col-9">
+						<textarea class="form-control">##menuprice-detail##</textarea>
+						<small id="emailHelp" class="form-text text-muted">
+							( เช่น ราคาปกติ / เพิ่มไข่ดาว )
+						</small>
+					</div>
+				</div> <!-- //  -->
+
+				<div class="form-group row">
+					<div class="col-3">
+						ราคา
+					</div>
+					<div class="col-8">
+
+						<input type="text" value="##menuprice-price##" class="form-control form-control-sm" placeholder="ราคาอาหาร">
+
+						<small id="emailHelp" class="form-text text-muted">
+							รายขายปกติ
+						</small>
+					</div>
+					<div class="col">
+						บาท
+					</div>
+
+				</div> <!-- //  -->
+
+				<div class="form-group row">
+					<div class="col-3">
+						<strong class="font-color-shop"> จัดราคาโปรโมชั่น</strong>
+					</div>
+					<div class="col-9">
+						<div class="custom-control custom-switch">
+							<input type="checkbox" ##menuprice-promotioncheck## class="custom-control-input" id="customSwitch1">
+							<label class="custom-control-label text-secondary" for="customSwitch1">( ปิด - เปิด )</label>
+						</div>
+					</div>
+				</div> <!-- //  -->
+
+				<div class="text-center">
+					<span class="text-danger"> ** กรุณาเพิ่มข้อมูลราคา และรายละเอียดราคาให้ครบถ้วน </span>
+				</div>
+			</div>
+		</div>
+		<!--// addFoodPrice -->
+	</div> <!-- // Tab 3  -->
+
+
 	<div class="tab-pane fade p-4" id="nav-img" role="tabpanel" aria-labelledby="nav-img-tab">
-		
-	  <div class="d-flex justify-content-between mb-2"> 	
-		  <div> <h6> รูปภาพหลัก  </h6> </div> 
-		  
-		  <div class="text-right"> 
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFoodImage">
-			   <ion-icon name="add-outline"></ion-icon>  เพิ่มรูปภาพเมนูอาหาร
-			</button>
+
+		<div class="d-flex justify-content-between mb-2">
+			<div>
+				<h6> รูปภาพหลัก </h6>
+			</div>
+
+			<div class="text-right">
+				<button type="button" class="btn btn-primary" onclick="addimagemodal()">
+					<ion-icon name="add-outline"></ion-icon> เพิ่มรูปภาพเมนูอาหาร
+				</button>
+			</div>
+
 		</div>
-		  
-	  </div>
-<!--	  <div class="text-warning d-block "> *** ภาพแรกจะกลายเป็นภาพหลักของเมนูคุณ ขนาดรูปภาพไม่เกิน  10 MB </div>-->
-		
-		
-		
-		
-		
+		<!--	  <div class="text-warning d-block "> *** ภาพแรกจะกลายเป็นภาพหลักของเมนูคุณ ขนาดรูปภาพไม่เกิน  10 MB </div>-->
+
+
+
+
+
 		<div class="row row-cols-1 row-cols-md-5">
-		  <div class="col mb-4">
-			<div class="card h-100">
-			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
-			  <div class="card-body">
-				
-				<div class="text-center">
-					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"  data-toggle="modal" data-target="#DelFoodImage"> 
-						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพหลัก
-					</button>  
+			<div class="col mb-4">
+				<div class="card h-100">
+					<img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" id="show-result" class="card-img-top" alt="...">
+					<div class="card-body">
+
+						<div class="text-center">
+							<button type="button" class="btn btn-sm btn-primary rounded rounded-pill" data-toggle="modal" data-target="#DelFoodImage">
+								<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพหลัก
+							</button>
+						</div>
+					</div>
 				</div>
-			  </div>
 			</div>
-		  </div>
-		</div> <!--  --> 
-		
-		
-		<div class="mt-3 mb-2 d-flex justify-content-start "> <h6> Additional Images  </h6> </div>
-		<div class="row row-cols-1 row-cols-md-5">
-		  <div class="col mb-4">
-			<div class="card h-100">
-			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
-			  <div class="card-body">
-				
-				<div class="text-center">
-					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"> 
-						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ
-					</button>  
-				</div>
-			  </div>
-			</div>
-		  </div>
-			
-		 <div class="col mb-4">
-			<div class="card h-100">
-			  <img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
-			  <div class="card-body">
-				
-				<div class="text-center">
-					<button type="button" class="btn btn-sm btn-primary rounded rounded-pill"> 
-						<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ 
-					</button>  
-				</div>
-			  </div>
-			</div>
-		  </div>
-		  
-		
+		</div> <!--  -->
+
+
+		<div class="mt-3 mb-2 d-flex justify-content-start ">
+			<h6> Additional Images </h6>
 		</div>
-		
-		
-	
-	</div>  <!-- // Tab 4  --> 
-</div> <!-- // Tab Content --> 
+		<div class="row row-cols-1 row-cols-md-5">
+			<div class="col mb-4">
+				<div class="card h-100">
+					<img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
+					<div class="card-body">
+
+						<div class="text-center">
+							<button type="button" class="btn btn-sm btn-primary rounded rounded-pill">
+								<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col mb-4">
+				<div class="card h-100">
+					<img src="https://www.kinarai.com/cdn/image/menu/323ba33b5a212182508ff45fecef6d1a" class="card-img-top" alt="...">
+					<div class="card-body">
+
+						<div class="text-center">
+							<button type="button" class="btn btn-sm btn-primary rounded rounded-pill">
+								<ion-icon name="trash-outline"></ion-icon> ลบรูปภาพ
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div> <!-- // Tab 4  -->
+</div> <!-- // Tab Content -->
 
 
 <!-- Modal  เพิ่มรูปภาพเมนูอาหาร -->
 <div class="modal fade" id="addFoodImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">รูปเมนูอาหาร</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-		  <div class="text-center"> 
-		  		<i class="far fa-image" style="font-size: 300px; color: #F8F9FB;"></i>
-		  </div>
-		  <div class="text-center text-secondary mt-1"> 
-			 รูปภาพควรมีขนาดรูปภาพไม่เกิน 10 MB 
-		  </div>
-	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
-			<ion-icon name="close-outline"></ion-icon>  Close
-		</button>
-        <button type="button" class="btn btn-sm btn-primary"><ion-icon name="save-outline">
-			</ion-icon> บันทึกรูปภาพนี้
-		</button>
-      </div>
-    </div>
-  </div>
-</div>  <!-- // Modal addFoodImage --> 
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">รูปเมนูอาหาร</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body ">
+				<div class="text-center uploadCrop">
+					<img id="vanilla-demo" style="width:100%" src="/image/icon-menu.png" class="far fa-image">
+					<!-- <div id="showimage"></div> -->
+					<!-- <i class="far fa-image" id="temp_load" style="font-size: 300px; color: #F8F9FB;"></i> -->
+				</div>
+				<div class="text-center">
+					<button class="vanilla-rotate" data-deg="90" value="left">Rotate Left</button>
+					<button class="vanilla-rotate" data-deg="-90" value="right">Rotate Right</button>
+				</div>
+				<div class="text-center text-secondary mt-1">
+					รูปภาพควรมีขนาดรูปภาพไม่เกิน 10 MB
+				</div>
+				<a class="btn file-btn" style="position: relative">
+					<span>Upload</span>
+					<input type="file" id="imgInp" value="Choose a file" accept="image/*">
+				</a>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+					<ion-icon name="close-outline"></ion-icon> Close
+				</button>
+				<button type="button" class="btn btn-sm btn-primary vanilla-result">
+					<ion-icon name="save-outline">
+					</ion-icon> บันทึกรูปภาพนี้
+				</button>
+			</div>
+		</div>
+	</div>
+</div> <!-- // Modal addFoodImage -->
 
 
 <div class="modal fade" id="DelFoodImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ลบรูปเมนูอาหาร</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-		  <div class="text-center"> 
-		  		คุณต้องการลบรูปภาพนี้ ใช่หรือไม่ ?
-		  </div>
-	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
-			<ion-icon name="close-outline"></ion-icon>  Close
-		</button>
-        <button type="button" class="btn btn-sm btn-primary"><ion-icon name="trash-outline">
-			</ion-icon> ลบรูปภาพนี้
-		</button>
-      </div>
-    </div>
-  </div>
-</div>  <!-- // Modal addFoodImage --> 
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">ลบรูปเมนูอาหาร</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="text-center">
+					คุณต้องการลบรูปภาพนี้ ใช่หรือไม่ ?
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+					<ion-icon name="close-outline"></ion-icon> Close
+				</button>
+				<button type="button" class="btn btn-sm btn-primary">
+					<ion-icon name="trash-outline">
+					</ion-icon> ลบรูปภาพนี้
+				</button>
+			</div>
+		</div>
+	</div>
+</div> <!-- // Modal addFoodImage -->
+
+<div class="modal fade" id="modal_add_newprice" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">เพิ่มราคาเมนู</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group mt-1">
+					<div class='show_managemenuprice mt-2 w-100' id="form_addnewprice">
+						<div class="row mt-1">
+							<div class="col-4">
+								<span class="head_newprice_detail">คำอธิบาย</span>
+
+							</div>
+							<div class="col">
+								<textarea type="text" id="newprice_detail" class="form-control"></textarea>
+								<small class="text-secondary text-gray-light2 warn_newprice_detail">(เช่น ราคาปกติ/เพิ่มใข่ดาว)</small>
+							</div>
+						</div>
+						<div class="row mt-1">
+							<div class="col-4">
+								<span class="head_newprice">ราคา</span>
+							</div>
+							<div class="col">
+								<div class="input-group">
+									<input type="number" id="newprice_price" class="form-control">
+									<div class="input-group-prepend">
+										<div class="input-group-text">บาท</div>
+									</div>
+								</div>
+								<small class="text-secondary text-gray-light2 warn_newprice">ราคาขายปกติ</small>
+							</div>
+						</div>
+						<div class="form-group border-bottom border-light bg-secondary row">
+							<div class="col-12">
+								<div class="row">
+									<label class="col-sm-4 text-gray-light font-color-shop mt-2" style="width:auto;">จัดราคาโปรโมชั่น <span class="text-gray-light2">(ปิด - เปิด)</span> </label>
+									<div class="col text-right d-flex d-inline ">
+										<div class="ml-auto mt-2">
+											<!-- <label class="switch">
+												<input type="checkbox" id="newprice_status" >
+												<span class="slider round" for="newprice_status"></span>
+											</label> -->
+											<div class="custom-control custom-switch">
+												<input type="checkbox" class="custom-control-input" id="newprice_status">
+												<label class="custom-control-label text-secondary" for="newprice_status">( ปิด - เปิด )</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<small class="text-warning mt-1 warn_status" style="display:none;"></small>
+									</div>
+								</div>
+								<div class="form-group mt-3" id="show_promotion" style="display:none;">
+									<div class="row mt-1">
+										<div class="col-4">
+											ราคาโปรโมชั่น
+										</div>
+										<div class="col">
+											<div class="input-group">
+												<input type="number" id="promotion_price" disabled class="form-control">
+												<div class="input-group-prepend">
+													<div class="input-group-text">บาท</div>
+												</div>
+											</div>
+											<small class="text-secondary text-light">(ราคาที่จัดโปรโมชั่น)</small>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div> <!-- // กำหนดเมนู (เปิด-ปิด) -->
+						<small class="text-danger">**กรุณาเพิ่มข้อมูลราคา และรายละเอียดราคาให้ครบถ้วน</small>
+						<button class="btn  btn-sm btn-primary mt-3" onclick="add_price()">+ เพิ่มรายการ</button>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="select2_data">
+
+	<script>
+		// function addFoodPrice() {
+		// 	$('#addFoodPrice').toggle();
+		// }
+
+		// var vanilla = false
+		var vanilla = ""
+		var tmpimage = $('.uploadCrop').html()
+		var valuerotae
+		var src_r
+
+		function readURL(input) {
+			// $('#temp_load').hide()
+			// $('#vanilla-demo').show()
+			$('.uploadCrop').html(tmpimage)
+			if (input.files && input.files[0]) {
+				valuerotae = 1
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					// $('.uploadCrop').html(tmpimage)
+
+					$('#vanilla-demo').attr('src', e.target.result);
+					src_r = $('#vanilla-demo').attr('src')
+					var el = document.getElementById('vanilla-demo');
+
+
+					vanilla = new Croppie(el, {
+						viewport: {
+							width: 300,
+							height: 300
+						},
+						boundary: {
+							width: 350,
+							height: 350
+						},
+						enableOrientation: true,
+
+					});
+					vanilla.bind({
+						url: src_r,
+						zoom: 0
+					});
+
+
+					document.querySelector('.vanilla-result').addEventListener('click', function(ev) {
+
+						vanilla.result({
+							type: 'canvas',
+							size: 'viewport'
+						}).then(function(blob) {
+							$('#show-result').attr('src', blob)
+							// console.log(blob)
+							//                  $('#show-result')[0].src = window.URL.createObjectURL(blob);
+						});
+						$('#addFoodImage').modal('hide')
+
+					});
 
 
 
 
-<script>
 
-function addFoodPrice() { 
-	$('#addFoodPrice').toggle();
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$('.vanilla-rotate').on('click', function(ev) {
+			// vanilla.rotate(parseInt($(this).data('deg')));
+			$('#vanilla-demo').croppie('destroy');
+			var objget = vanilla.get()
+
+			// vanilla.destroy()
+			console.log(objget)
+			console.log($(this).val())
+			var changerotate
+			if ($(this).val() == 'right') {
+				//rotate left
+				console.log('right')
+				if (valuerotae == 1) {
+					changerotate = 6
+				}
+				if (valuerotae == 6) {
+					changerotate = 3
+				}
+				if (valuerotae == 3) {
+					changerotate = 8
+				}
+				if (valuerotae == 8) {
+					changerotate = 1
+				}
+
+
+			} else if ($(this).val() == 'left') {
+				//rotate right
+				console.log('left')
+				if (valuerotae == 1) {
+					changerotate = 8
+				}
+				if (valuerotae == 8) {
+					changerotate = 3
+				}
+				if (valuerotae == 3) {
+					changerotate = 6
+				}
+				if (valuerotae == 6) {
+					changerotate = 1
+				}
+
+			}
+			console.log('rotate :', changerotate)
+			valuerotae = changerotate
+			vanilla.bind({
+				url: src_r,
+				orientation: changerotate,
+				zoom: objget.zoom
+			});
+			return false
+		});
+		$("#imgInp").change(function() {
+			// 			if (vanilla == false) {
+			// 				$('.uploadCrop').html(tmpimage)
+			// 			} else {
+			// 				vanilla.destroy()
+			// 				vanilla =false
+			// 			}
+			// $('.uploadCrop').html(tmpimage)
+
+			readURL(this);
+		});
+
+function addimagemodal(){
+	 $('#addFoodImage').modal('show')
 }
 
-</script>
+
+		$('.select2_data').loadcached('/select2_memu_type.html', function() {});
+		var menu_id = getParameterByName('menu_id');
+		var addFoodPrice = $('#addFoodPrice').html()
+
+		console.log()
+		if (menu_id) {
+			sale_package_manage()
+		}
+
+		$('.MENU_type').on('change.select2', function(e) {
+			var data = {
+				LINE_USER: LINE_USER,
+				_id: menu_id,
+				type: $('.MENU_type').val()
+			};
+			// console.log(data);
+			$.postJSON('/api/liff/edit/menu', data, (res) => {
+				if (!res.result) {
+					return alert(res.detail);
+				}
+			});
+		});
+
+
+		function create_menutype(type, id_name) {
+			console.log('type', type);
+			var seldata = `<option disabled>เมนูเครื่องเคียง เช่น มันบด เฟรนช์ฟราย </option>`;
+			if (Array.isArray(type)) {
+				for (var x = 0; x < type.length; x++) {
+					seldata += '<option value="' + type[x] + '" selected >' + type[x] + '</option>';
+				}
+			}
+
+			$('.' + id_name).off('change.select2');
+			$('.' + id_name).html(seldata);
+			$('.' + id_name).select2({
+				tags: true,
+				tokenSeparators: [',', ' '],
+				allowClear: true,
+				createTag: function(params) {
+					if (params.term === '') {
+						return null;
+					}
+					//if (allownewtag) {
+					return {
+						id: params.term,
+						text: params.term
+					};
+					//}
+					//return null;
+
+				}
+			});
+		}
+
+		function modalpriceadd() {
+
+			$('#modal_add_newprice').modal('show');
+		}
+		var setdata = {}
+
+		var $selectdata;
+
+		function create_option(objJquery, dataobj) {
+			var S2obj = objJquery.select2();
+			var seldata = ''; // ตั้งชื่อตัวแปรใหม่ ไปใช้กับ <select
+			if (Array.isArray(dataobj)) {
+				for (var x = 0; x < dataobj.length; x++) {
+					seldata += '<option value="' + dataobj[x] + '" >' + dataobj[x] + '</option>';
+				}
+				objJquery.html(seldata)
+			}
+
+			return S2obj
+		}
+
+		function sale_package_manage() {
+			$.postJSON('/api/liff/get/menu', {
+				LINE_USER: LINE_USER,
+				_id: menu_id
+			}, (res) => {
+				console.log("result from get menu",res)
+				if (!res.result) {
+					alert(res.detail);
+					return;
+				}
+				create_menutype(res.detail.type, 'MENU_type')
+				$selectdata = create_option($('#selectmenu_option'), res.detail.option)
+				if (res.detail.confirm_order == "auto") {
+					$('#confirm_order').prop('checked', true);
+				} else if (res.detail.confirm_order == "manual") {
+					$('#confirm_order').prop('checked', false)
+				}
+				if (res.detail.status == 5) {
+					$('#menu_status').prop('checked', true);
+				} else {
+					$('#menu_status').prop('checked', false)
+				}
+				if (res.detail.status < 4) {
+					$('#menu_status').prop('disabled', true)
+				}
+				$('.menuname').html(res.detail.name)
+				if (res.detail.price) {
+					setdata.price = res.detail.price
+					showtable(res.detail.price)
+				}
+				setdatabyclass($('.setdatamenu'), 'MENU', res.detail);
+
+
+			});
+		}
+
+
+		$('.changeinput').change(function() {
+			console.log($(this).val())
+			var datafield = $(this).attr('data-field')
+			setdata[datafield] = $(this).val()
+			console.log(setdata)
+		});
+		var tempobjprice = {}
+
+		function showtable(object) {
+			var objdata = object
+			var number_id = 1
+			objdata.map((obj) => {
+				obj.number_id = number_id++
+				obj.promotioncheck = obj.status == 1 ? "checked" : ""
+
+			});
+			tempobjprice = objdata
+			console.log(tempobjprice)
+			var temp = hash_replace(addFoodPrice, 'menuprice', objdata)
+			$('#addFoodPrice').html(temp)
+		}
+
+		function delete_price(price_id) {
+			if (confirm("คุณต้องการลบข้อมูลราคานี้ใช่หรือไม่") == true) {
+				console.log(price_id)
+				for (var x = 0; x < tempobjprice.length; x++) {
+					if (tempobjprice[x].number_id == price_id) {
+						tempobjprice.splice(x, 1)
+					}
+
+				}
+				console.log(tempobjprice)
+				showtable(tempobjprice)
+			} else {
+				return false
+			}
+
+
+		}
+
+		function add_price() {
+			var detp = $('#newprice_detail').val()
+			var pricep = $('#newprice_price').val()
+			var statusp = 0
+			if ($('#newprice_status').is(':checked') == true) {
+				statusp = 1
+			} else {
+				statusp = 0
+			}
+
+			var objprice = {}
+			objprice.status = statusp
+			objprice.price = pricep
+			objprice.detail = detp
+			tempobjprice.push(objprice)
+			console.log(tempobjprice)
+			showtable(tempobjprice)
+			$('#modal_add_newprice').modal('hide');
+		}
+
+
+		function save_data() {
+			console.log(setdata)
+			//postdata
+			$.postJSON('/', function(data) {
+				if (data.res) {
+					alert(data.res)
+				} else {
+
+				}
+
+			})
+
+
+			setdata = {}
+
+		}
+	</script>

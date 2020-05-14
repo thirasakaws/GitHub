@@ -1,0 +1,258 @@
+<div class="">
+
+  <img width="120px" height="120px" class='rounded' id='image_preview_area' style='display:none'>
+
+  <div class="spinner-border text-primary" id='imageuploading' style="width:2rem;height: 2rem; font-size: 50px;display:none" role="status">
+  </div>
+  <label class="btn btn-sm btn-orange btn-upload ml-auto" for="image_uploader_btn" title="Upload image file">
+    <input type="file" class="sr-only" id="image_uploader_btn" name="file" accept="*" onchange="upload_shopimage(this);">
+    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+      <span class="btn btn-submit-shop btn-sm"><i class="fas fa-plus"></i> เพิ่มรูป (10Mb Max)</span>
+    </span>
+  </label>
+</div>
+<div class="modal fade " id="modal_file_crop" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+    <div class="modal-content" style=" height: auto; min-height: 100%; border-radius: 0;">
+      <div class="modal-body" style="width:100%; height:75vh">
+
+        <div class="w-100 p-2 text-center">
+          <img id="viewupload_image" class="my-image w-50" src="/image/Kinarai.jpg" />
+
+        </div>
+        <div class="text-center row">
+          <div class="col-4 text-right">
+            <button class="vanilla-rotate btn btn-info btn-sm" onclick="rotate_left();">Rotate Left</button>
+          </div>
+          <div class="col-4 text-left">
+            <button class="vanilla-rotate btn btn-info btn-sm" onclick="rotate_right();">Rotate Right</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button onclick="upload_image_crop();" class="btn btn-sm btn-success"><i class="fa fa-fw fa-save"></i>OK </button>
+        <button onclick="close_croppie_modal();" class="btn btn-sm btn-light border border-secondary"><i class="fa fa-fw fa-times"></i> Close </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var upload_url = '';
+  var resize = false;
+  var postdata = undefined;
+
+
+
+
+
+  function upload_shopimage(obj) {
+    if (typeof(resize) == 'object' && resize) {
+      try {
+        resize.destroy()
+      } catch (e) {
+
+      }
+
+      resize = false;
+    }
+    $('#viewupload_image').off("load");
+    $('#viewupload_image').on("load", function() {
+
+
+      var image_resize = $('#viewupload_image').attr('src');
+      var img = document.getElementById('viewupload_image');
+      resize = new Croppie(img, {
+        viewport: {
+          width: 300,
+          height: 100
+        },
+        boundary: {
+          width: 350,
+          height: 150
+        },
+        // showZoomer: false,
+        //    enableResize: true,
+        enableOrientation: true,
+        //    mouseWheelZoom: 'ctrl'
+      });
+
+      resize.bind({
+        url: image_resize,
+        orientation: 1,
+        zoom: 0
+      });
+    });
+
+    $('#imageuploading').show();
+    var file = $(obj)[0].files[0];
+    if (file.size > 2000000) {
+      //close_croppie_modal();
+      //    alert("ไฟล์ของคุณมีขนาดใหญ่ \r\n การตกแต่งภาพอาจจะ Error เนื่องจาก RAM ไม่เพียงพอได้");
+      //return;
+    }
+    var reader = new FileReader();
+    $('#modal_file_crop').modal('show');
+
+
+    reader.onload = function(e) {
+      var img = new Image();
+      var canvas = document.createElement('canvas');
+
+      img.onload = function() {
+        var width = img.width;
+        var height = img.height;
+        var MAX_WIDTH = 2000;
+        var MAX_HEIGHT = 2000;
+
+        // Resize maintaining aspect ratio
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        //           alert(width +":"+height)
+        var ctx = canvas.getContext("2d");
+        // Copy the image to the canvas and resize it.
+        ctx.drawImage(img, 0, 0, width, height);
+        // canvas.toBlob((blob) => {
+
+        $('#viewupload_image').attr('src', canvas.toDataURL())
+
+      };
+      img.src = e.target.result;
+
+
+
+
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function rotate_left() {
+    resize.rotate(90);
+  }
+
+  function rotate_right() {
+    resize.rotate(-90);
+  }
+
+  function close_croppie_modal() {
+    $('#modal_file_crop').modal('hide');
+    clear_upload_area();
+  }
+
+  function upload_image_crop() {
+    $('#modal_file_crop').modal('hide');
+    if (!resize) return;
+    resize.result('blob', 'viewport', 'png').then(function(blob) {
+      doUploadImage(blob)
+    });
+
+  }
+
+  function clear_upload_area() {
+    if (typeof(resize) == 'object') {
+      resize.destroy()
+    }
+    $('#image_preview_area').attr('src', '').hide();
+    $('#imageuploading').hide();
+  }
+
+  function OnProgress(e) {
+    //Progress bar
+    //    console.log(e);
+    var pt = Math.ceil(e.loaded * 100 / (e.total));
+    //console.log(total);
+    //  console.log(pt);
+    $('#pt').html(pt + '%'); //update status text
+  }
+
+  function doUploadImage(tempimagefile4upload) {
+    if (tempimagefile4upload) {
+
+      //console.log(tempimagefile4upload);
+      var formData = new FormData();
+      formData.append('file', tempimagefile4upload, 'imageupload.png');
+
+
+      if (postdata) {
+        var allhead = Object.keys(postdata);
+        for (var x = 0; x < allhead.length; x++) {
+          var val = postdata[allhead[x]];
+          if (typeof(val) == 'object') {
+            try {
+              val = JSON.stringify(val);
+              console.log("STRINGIFY")
+            } catch (e) {
+
+            }
+          }
+          formData.append(allhead[x], val);
+        }
+      }
+
+
+      //
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+          tempimagefile4upload = null;
+          clear_upload_area();
+          try {
+            var resp = JSON.parse(request.response);
+          } catch (e) {
+            var resp = {
+              status: 'error',
+              data: 'Unknown error occurred: [' + request.responseText + ']'
+            };
+            alert(request.responseText);
+            return;
+          }
+
+          aftercropfileSuccess(resp);
+        }
+      };
+
+      request.upload.addEventListener('progress', OnProgress, false);
+      request.open('POST', upload_url);
+      request.send(formData);
+      //  console.log("Sending File");
+
+    }
+  }
+
+
+  var tempcbfnc_image_upload;
+
+  function call_modal_image_upload(setting, cbfnc) {
+    //alert("Changeing..")
+    upload_url = setting.url;
+    if (setting.postdata) {
+      postdata = setting.postdata;
+    }
+    console.log("SETTING ", upload_url);
+    console.log(postdata);
+    if (typeof(cbfnc) == 'function') tempcbfnc_image_upload = cbfnc;
+
+  }
+
+  function aftercropfileSuccess(imagedata) {
+    console.log("aftercropfileSuccess Called")
+    if (tempcbfnc_image_upload) {
+      tempcbfnc_image_upload(imagedata);
+    } else {
+      console.error("NO CBFNC FOR IMAGE UPLOAD");
+    }
+  };
+</script>

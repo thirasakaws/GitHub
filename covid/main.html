@@ -1,6 +1,6 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
-  <h1 class="h2" id="shopnameh2">Covid19-Form </h1>
-    <span> Covid19-Form </span>
+<div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
+  <h1 class="h2 mr-4" id="shopnameh2">Covid19-Form </h1>
+<!--    <span> Covid19-Form </span>-->
     <div class="btn-toolbar mb-2 mb-md-0">
 
     </div>
@@ -8,22 +8,25 @@
 
  <h3>Customer Check-in</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-sm">
+
+    <table class="table table-bordered table-sm">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Image</th>
-          <th>DisplayName  </th>
-          <th>Full Name</th>
-          <th>Check-in</th>
-          <th>Branch</th>
-          <th>Detail</th>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">DisplayName  </th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Check-in</th>
+          <th scope="col">Branch</th>
+          <th scope="col">Detail</th>
         </tr>
       </thead>
-      <tbody id="table_customer_checkin" >
+      <tbody id="table_customer_checkin">
         <tr >
           <td>##CUS-id##</td>
-          <td><img src="##CUS-pictureUrl##" class='img round' height="80px"></td>
+          <td> 
+			  <img src="##CUS-pictureUrl##" class="rounded-circle" height="60px">
+		  </td>
           <td>##CUS-displayName##</td>
           <td>##CUS-fullname##</td>
           <td>##CUS-checkintime##</td>
@@ -32,7 +35,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div>  <!-- //  table-responsive  -->  
 
 
 

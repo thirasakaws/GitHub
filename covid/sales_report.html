@@ -1,0 +1,99 @@
+<link href="stylesheet.css" rel="stylesheet" type="text/css">
+
+
+<div class="form-row mt-2 mb-5 bg-white shadow-sm m-2 p-2">
+     <div class="col-md-1 mb-3">
+        <label>จุดขาย</label>
+        <select class="custom-select" id="type" required="">
+            <option>จุดให้บริการ # 1</option>
+            <option>จุดให้บริการ # 2</option>
+          </select> 
+     </div>
+
+
+     <div class="col-md-2 mb-3">
+         <label>วันที่เริ่ม</label>
+        <input type="date" id="date_start" class="form-control" > 
+     </div>
+
+     <div class="col-md-2 mb-3">
+         <label>วันที่สิ้นสุด</label>
+        <input type="date" id="date_end" class="form-control" > 
+     </div>
+     <div class="col-md-2 mb-3 pt-2">
+         <button type="button" class="btn btn-md btn-primary mt-4 ">
+             <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+</svg> ค้นหา 
+             </button>
+         </div>
+</div> 
+<!--// form-row --> 
+<!-- Search --> 
+	  
+	  
+	  
+	  
+	  
+<div class="table-responsive table-responsive-sm"> 
+<!--
+	<small class="form-text text-muted">
+              แสดงข้อมูลจากรายการล่าสุด
+         </small>
+-->
+    <table class="table table-bordered table-sm w-100">
+	    <thead>
+	      <tr class="text-center">
+	        
+	        <th>วันที่ทำรายการ</th>
+			<th>เวลา</th>
+			<th class="text-center">จุดขาย</th>
+	        <th class="text-left pl-3">ลูกค้าผู้ทำรายการ</th>
+	        <th>ยอดขาย (บาท) </th>
+          </tr>
+		</thead>
+		
+		<tbody class="font-medium"> 
+	      <tr >
+	        <td class="text-center" style="width: 150px">04/05/63 </td>
+			<td class="text-center" style="width: 150px">11:30 น. </td>
+			<td> จุดให้บริการ # 1 </td>
+			  <td>
+				  
+				  <div class="d-inline-block ml-2 mr-3"> 
+				  	<img src="https://profile.line-scdn.net/0hrHjEU6whLWdXPAAv1udSMGt5IwogEisvL1xgAHZpelEqXm5ibF5iUnU5dlAvWG0wa1NhBSE4IFYq" class="rounded-circle img-profile-small shadow-sm">
+				  </div>  
+				  
+				   <div class="d-inline-block">
+				     ชื่อ - สกุล (ลูกค้า) / เบอร์มือถือ 
+				  </div>
+			  
+			 </td>	
+	        <td class="text-right" style="width: 200px"> 
+				<span class="font-weight-bold totol-price mr-3"> 300.- </span>
+			</td> <!-- ยอดขาย -->
+          </tr>
+			
+			 <tr >
+				<td class="text-center" style="width: 150px">05/05/63 </td>
+				<td class="text-center" style="width: 150px">11:30 น. </td>
+				<td>จุดให้บริการ # 2 </td>
+				<td>
+					<div class="d-inline-block ml-2  mr-3"> 
+						<img src="https://profile.line-scdn.net/0hrHjEU6whLWdXPAAv1udSMGt5IwogEisvL1xgAHZpelEqXm5ibF5iUnU5dlAvWG0wa1NhBSE4IFYq" class="rounded-circle img-profile-small shadow-sm">
+					  </div>  
+
+					   <div class="d-inline-block">
+						 ชื่อ - สกุล (ลูกค้า) / เบอร์มือถือ 
+					  </div>
+		        </td>
+				<td class="text-right" style="width: 200px"> 
+					<span class="font-weight-bold totol-price mr-3"> 200.- </span>
+				</td> <!-- ยอดขาย -->
+			  </tr>		
+			
+
+      </tbody>
+  </table>
+</div>  <!--// table responsive --> 

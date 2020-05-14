@@ -1,0 +1,136 @@
+<link href="stylesheet.css" rel="stylesheet" type="text/css">
+
+
+
+
+<div class="form-row mt-2 mb-5 bg-white shadow-sm m-2 p-2">
+         <div class="col-md-2 mb-3">
+            <label>ชื่อ - สกุล </label>
+            <input type="text" id="fullname" class="form-control" placeholder="กรอกชื่อ หรือ สกุล"> 
+         </div>
+
+         <div class="col-md-2 mb-3">
+             <label>เบอร์มือถือ  (Wallet ID)</label>
+            <input type="text" id="mobileno" class="form-control" placeholder="กรอกเบอร์มือถือ"> 
+         </div>
+
+         <div class="col-md-2 mb-3">
+             <label>ประเภท</label>
+             <select class="custom-select" id="type" required="">
+				<option>ทั้งหมด</option>
+                <option>เติมเงิน</option>
+                <option>ถอนเงิน</option>
+				<option>ยอดใช้จ่าย</option>
+              </select>
+         </div>
+
+         <div class="col-md-2 mb-3">
+             <label>วันที่เริ่ม</label>
+            <input type="date" id="date_start" class="form-control" > 
+         </div>
+
+         <div class="col-md-2 mb-3">
+             <label>วันที่สิ้นสุด</label>
+            <input type="date" id="date_end" class="form-control" > 
+         </div>
+         <div class="col-md-2 mb-3 pt-2">
+             <button type="button" class="btn btn-md btn-primary mt-4 ">
+                 <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+</svg> ค้นหา 
+             </button>
+         </div>
+          
+     </div> <!--// search --> 
+
+	
+
+<!-- Search --> 
+	  
+	  
+	  
+<div class="table-responsive table-responsive-sm"> 
+<!--
+	<small class="form-text text-muted">
+              แสดงข้อมูลจากรายการล่าสุด
+         </small>
+-->
+    <table class="table table-bordered table-sm w-100">
+	    <thead>
+	      <tr class="text-center">
+	        <th>ID</th>
+	        <th>วันที่</th>
+	        <th>User</th>
+			<th>เบอร์มือถือ  <span class="text-secondary"> (Wallet ID) </span></th>
+	        <th>ชื่อ - สกุล</th>
+	        <th>รายการ</th>
+			<th>เติมเงิน <span class="text-secondary">(บาท)</span> </th>
+			  <th>ถอนเงิน <span class="text-secondary"> (บาท)</span> </th>
+			<th>ยอดใช้จ่าย <span class="text-secondary"> (บาท)</span></th>
+	        <th>ยอดคงเหลือ <span class="text-secondary"> (บาท)</span></th>
+	        <th>ช่องทาง</th>
+          </tr>
+		</thead>
+		
+		<tbody class="font-medium"> 
+	      <tr >
+	        <td class="text-center">#11</td>
+	        <td class="text-center">04/05/63<br>
+            12:00 น.</td>
+	        <td class="text-center">
+			  <img src="https://profile.line-scdn.net/0hrHjEU6whLWdXPAAv1udSMGt5IwogEisvL1xgAHZpelEqXm5ibF5iUnU5dlAvWG0wa1NhBSE4IFYq" class="rounded-circle img-profile shadow-sm" >
+			</td>
+			  <td>เบอร์มือถือ</td>
+	        <td>ชื่อ - สกุล
+			</td>
+	        <td>เติมเงิน</td>
+	        <td class="text-right">300.-</td> <!-- เติมเงิน -->
+	        <td class="text-right"></td> <!-- ถอนเงิน -->
+			<td class="text-right"></td> <!-- ยอดใช้จ่าย -->
+	        <td class="text-right">300.-</td> <!-- คงเหลือ -->
+	        <td>Key in</td>
+	        
+          </tr>
+	      <tr>
+	        <td class="text-center">#12</td>
+	        <td class="text-center">04/05/63
+				<br>
+			14:00 น.
+			  </td>
+	        <td class="text-center">
+			  <img src="https://profile.line-scdn.net/0hrHjEU6whLWdXPAAv1udSMGt5IwogEisvL1xgAHZpelEqXm5ibF5iUnU5dlAvWG0wa1NhBSE4IFYq" class="rounded-circle img-profile shadow-sm">
+			</td>
+			 <td>เบอร์มือถือ</td>
+	        <td >ชื่อ - สกุล</td>
+	        <td>จุดให้บริการ # 1</td>
+	        
+	        <td class="text-right"></td>    <!-- เติมเงิน -->
+			<td class="text-right"></td>	<!-- ถอนเงิน -->
+			<td class="text-right">100.-</td>  <!-- ใช้เงิน -->
+	        <td class="text-right">200.-</td>  <!-- คงเหลือ -->
+	        <td>Scan QR</td>
+	        
+          </tr>
+			
+		  <tr>
+	        <td class="text-center">#13</td>
+	        <td class="text-center">04/05/63
+				<br>
+			    14:00 น.
+			  </td>
+	        <td class="text-center">
+			  <img src="https://profile.line-scdn.net/0hrHjEU6whLWdXPAAv1udSMGt5IwogEisvL1xgAHZpelEqXm5ibF5iUnU5dlAvWG0wa1NhBSE4IFYq" class="rounded-circle img-profile shadow-sm">
+			</td>
+			<td>เบอร์มือถือ</td>
+	        <td >ชื่อ - สกุล</td>
+	        <td>ถอนเงิน</td>
+	        <td class="text-right"></td>    <!-- เติมเงิน -->
+			<td class="text-right">200.-</td>	<!-- ถอนเงิน -->
+			<td class="text-right"></td>  <!-- ใช้เงิน -->
+	        <td class="text-right">0.-</td>  <!-- คงเหลือ -->
+	        <td>Scan QR</td>
+          </tr>	
+      </tbody>
+  </table>
+</div>  <!--// table responsive -->

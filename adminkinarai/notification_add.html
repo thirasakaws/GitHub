@@ -118,8 +118,14 @@
         console.log(postdata)
         $.postJSON('/api/data/kinarai/notification_insert', postdata, function (re) {
             console.log(re)
-            alert('เพิ่มข้อมูลเรียบร้อย')
-            go2View("/notification_list")
+            if(re.texterror){
+              alert(re.texterror)
+              return false
+            }else{
+              alert('เพิ่มข้อมูลเรียบร้อย')
+              go2View("/notification_list")
+            }
+
         })
         return false
     }

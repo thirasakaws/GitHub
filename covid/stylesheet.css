@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(13px + 6 * ((100vw - 320px) / 680));
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 16px;
+  }
+
+  .font-medium { font-size: 95%; }
+  .totol-price { font-size: 1vw; }	
+}
+
+.img-profile {  height: 46px; border: 2px solid #ffffff; }
+.border-bottom-grey { 
+    border-bottom-color: #cbcbcb57; border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 3px; 
+}
+.border-bottom-double { 
+    border-bottom-color: #cbcbcb57; border-bottom-style: double; padding-bottom: 3px; 
+}
