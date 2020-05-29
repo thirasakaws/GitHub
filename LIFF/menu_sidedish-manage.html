@@ -1,11 +1,6 @@
 <div class='container-fluid main_data'>
-  <div class="text-left">
-    <button type="button" name="button" class="btn btn-sm btn-outline-submit-shop addnewmenu rounded-pill" onclick="go2View('menu_sidedish-manage')">
-      <i class="fas fa-plus"></i> จัดการ SideDish
-    </button>
-  </div>
   <div class="box-head-title-shop text-center">
-    <span class="header-shop"> จัดการเมนูของร้านค้า</span>
+    <span class="header-shop"> จัดการเมนู SideDish</span>
   </div>
 
 
@@ -85,7 +80,6 @@
                   <div><span class="label-inline-block-52 text-gray-light">คงเหลือ </span>: <span class="shopmenu_amount pl-1"></span></div>
                   <div><span class="label-inline-block-52 text-gray-light">จำกัดต่อวัน </span>: <span class="shopmenu_limit_date pl-1 font-color-shop font-weight-bold"></span></div>
                   <div><span class="label-inline-block-52 text-gray-light">สถานะ </span>: <span class="shopmenu_status pl-1"></span></div>
-                  <div><span class="btn btn-sm btn-outline-danger rounded-pill mt-2" onclick="disabled_activemenu(this)">ลบเมนู</span></div>
                 </small>
               </div>
               <div class="col-4 text-right">
@@ -121,7 +115,7 @@
   ADVWS.make_edittext($('.makenewmenu'), function(data, obj) {
     data.LINE_USER = LINE_USER;
     data.status = 4;
-    $.postJSON('/api/liff/add/menu', data, (res) => {
+    $.postJSON('/api/liff/add/menusidedish', data, (res) => {
       if (!res.result) {
         return alert(res.detail);
       }
@@ -162,7 +156,7 @@
       searchstr: searchstr
     };
     $('#main-menu').html('');
-    $.postJSON('/api/liff/list/menu', data, (res) => {
+    $.postJSON('/api/liff/list/menu_sidedish', data, (res) => {
       console.log('data', res)
       if (res.result) {
 
@@ -227,38 +221,16 @@
     show_addnewmenu_show = !show_addnewmenu_show;
   }
 
-
-  function disabled_activemenu(obj) {
-    if (confirm('ยืนยันการลบเมนู?')) {
-      var dataid = $(obj).find_id();
-      var data = {
-        LINE_USER: LINE_USER,
-        _id: dataid,
-        active: false
-      };
-
-      $.postJSON('/api/liff/edit/menu', data, (res) => {
-        if (!res.result) {
-          return alert(res.detail);
-        } else {
-          getmenulist();
-        }
-
-      });
-    }
-  }
-
-
   function managethismenu(obj) {
-    working.menunow = $(obj).find_id();
+    working.sidedish_now = $(obj).find_id();
     //alert('Menue'+working.menunow );
-    go2View('salepackage-manage');
+    go2View('menu_sidedish-manage2');
   }
 
   function manageactivethismenu(obj) {
-    working.menunow = $(obj).find_id();
+    working.sidedish_now = $(obj).find_id();
     //alert('Menue'+working.menunow );
-    go2View('salepackage-manage1');
+    go2View('menu_sidedish-manage1');
   }
   // >>>>>>> a98d1b1c22f7305bb12eefa6e376f660b396f483
 </script>

@@ -1,30 +1,32 @@
 <div class="container-fluid">
-Please wait...
+  Please wait...
 </div>
 <script>
-    all_page = ['salepackage1','salepackage-manage1','salepackage-manage'];  // Sub File
-    var working={};
-    register_all_page();  // Register SubPAGE
-//  #### Setting ########## For LINE APP
-    var myLiffId = '1653987624-4R527y0R';   // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
+  all_page = ['salepackage1', 'salepackage-manage1', 'salepackage-manage', 'sidedish', 'sidedish-manage1', 'sidedish-manage', 'menu_sidedish-manage', 'menu_sidedish-manage1', 'menu_sidedish-manage2']; // Sub File
+  var working = {};
+  register_all_page(); // Register SubPAGE
+  //  #### Setting ########## For LINE APP
+  var myLiffId = '1653987624-4R527y0R'; // <---- ต้องให้ตรงตามที่ตั้งค่าไว้กับทาง LINE ไม่งั้นมันจะ Redirect ไปไฟล์อื่น
 
-//  #### END  Setting ########## For LINE APP
+  //  #### END  Setting ########## For LINE APP
 
-    function runApp() {
-        console.log("RUN APP");
-        $.postJSON('/api/liff/check/shopowner', {LINE_USER: LINE_USER}, function (res) {
-            console.log("REsult back:");
-            console.log(res);
-            if (res.result) {
-                working.shop = res.detail
-                go2View('salepackage1');
-            } else {
-                go2View('must-openshop');
-            }
-        });
+  function runApp() {
+    console.log("RUN APP");
+    $.postJSON('/api/liff/check/shopowner', {
+      LINE_USER: LINE_USER
+    }, function(res) {
+      console.log("REsult back:");
+      console.log(res);
+      if (res.result) {
+        working.shop = res.detail
+        go2View('salepackage1');
+      } else {
+        go2View('must-openshop');
+      }
+    });
 
-    }
-    initializeLiff();
+  }
+  initializeLiff();
 
-//  $('#body_mainbody').load('/LIFF/preload.html');
+  //  $('#body_mainbody').load('/LIFF/preload.html');
 </script>

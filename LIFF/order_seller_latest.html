@@ -223,9 +223,16 @@
     <span class="header-shop"> รายการออเดอร์ <i class="fas fa-sync-alt"></i></span>
   </div>
 
+  <div class="row p-2">
+    <div class="col-12 text-center">
+      <select id="shopbranch" class="form-control" style="min-width:50%;" data-field="shopbranch" placeholder="เลือกสาขา" onchange="search_selectbranch(this);">
+      </select>
+    </div>
+  </div>
 
 
-  <ul class="nav nav-pills nav-fill nav-tabs mb-3" id="nav-tab" role="tablist">
+
+  <ul class="nav nav-pills nav-fill nav-tabs mb-1" id="nav-tab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="nav-new-tab" data-toggle="pill" href="#nav-new" role="tab" aria-controls="pills-home" aria-selected="true">
         <span style="font-size:4vw;"> รายการมาใหม่ </span>
@@ -250,6 +257,22 @@
       </div>
     </div>
     <div class="tab-pane fade" id="nav-wait" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <div class="mb-2" onclick="show_orderdelivery();">
+        <div class="text-center" style="background-color:#FF6100">
+          <span class="btn btn-sm btn-block text-light"><i class="fas fa-chevron-down"></i> ดูรายการ Delivery <i class="fas fa-truck"></i></span>
+        </div>
+      </div>
+      <div class="row text-center mb-2 delivery_show" id="deliverylistshow" style="display:none;">
+        <div class="col-4">
+          <span class="badge badge-pill btn btn-sm text-light" style="background-color:#FF6100" onclick="filterbydelivery(1)">รอตอบรับ</span>
+        </div>
+        <div class="col-4">
+          <span class="badge badge-pill btn btn-sm text-light" style="background-color:#FF6100" onclick="filterbydelivery(16)"> ตอบรับเรียบร้อย</span>
+        </div>
+        <div class="col-4">
+          <span class="badge badge-pill btn btn-sm text-light" style="background-color:#FF6100" onclick="filterbydelivery(6)"> ไม่ตอบรับ</span>
+        </div>
+      </div>
       <div id="order_waiting_payment" class="w-100">
         Please Wait..
       </div>
@@ -260,46 +283,6 @@
       </div>
     </div>
   </div>
-
-
-
-  <!-- <div class="container-" style="display: none;">
-             <div class="row">
-               <div class="col-xs-12 ">
-                 <nav>
-                   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                     <div class="nav-item nav-link active" id="nav-new-tab" data-toggle="tab" href="#nav-new" role="tab" aria-controls="nav-home" aria-selhref="#nav-new"ected="true">รายการมาใหม่</div>
-                     <div class="nav-item nav-link" id="nav-wait-tab" data-toggle="tab" href="#nav-wait" role="tab" aria-controls="nav-profile" aria-selected="false">รายการรอทำ</div>
-                     <div class="nav-item nav-link" id="nav-finish-tab" data-toggle="tab" href="#nav-finish" role="tab" aria-controls="nav-contact" aria-selected="false">รอทำเสร็จ</div>
-                   </div>
-                 </nav>
-                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                   <div class="tab-pane fade show active" id="nav-new" role="tabpanel" aria-labelledby="nav-home-tab">
-                     <div id="order_last" class="w-100">
-                         Please Wait..
-                     </div>
-                   </div>
-                   <div class="tab-pane fade" id="nav-wait" role="tabpanel" aria-labelledby="nav-profile-tab">
-                     <div id="order_waiting_payment" class="w-100">
-                         Please Wait..
-                     </div>
-                   </div>
-                   <div class="tab-pane fade" id="nav-finish" role="tabpanel" aria-labelledby="nav-contact-tab">
-                     <div id="order_waiting_finish" class="w-100">
-                         Please Wait..
-                     </div>
-                   </div>
-                 </div>
-
-               </div>
-             </div>
-       </div> -->
-
-
-  <!-- <div id="order_last">
-      Please Wait..
-</div> -->
-
 
 
 
@@ -408,6 +391,11 @@
           ##ORDER-delivery_detail##
         </div>
       </div>
+      <div class="show_deliverystatus mt-1">
+        <div class="w-100 text-center" style="background-color:###ORDER-delivery_status_style##">
+          ##ORDER-delivery_status_show##
+        </div>
+      </div>
 
 
     </div>
@@ -500,6 +488,11 @@
       <div class="show_ondelivery mt-1">
         <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
           ##ORDER-delivery_detail##
+        </div>
+      </div>
+      <div class="show_deliverystatus mt-1">
+        <div class="w-100 text-center" style="background-color:###ORDER-delivery_status_style##">
+          ##ORDER-delivery_status_show##
         </div>
       </div>
 
@@ -596,6 +589,11 @@
           ##ORDER-delivery_detail##
         </div>
       </div>
+      <div class="show_deliverystatus mt-1">
+        <div class="w-100 text-center" style="background-color:###ORDER-delivery_status_style##">
+          ##ORDER-delivery_status_show##
+        </div>
+      </div>
 
 
     </div>
@@ -683,6 +681,11 @@
       <div class="show_ondelivery mt-1">
         <div class="w-100 text-center" style="background-color:###ORDER-delivery_style##">
           ##ORDER-delivery_detail##
+        </div>
+      </div>
+      <div class="show_deliverystatus mt-1">
+        <div class="w-100 text-center" style="background-color:###ORDER-delivery_status_style##">
+          ##ORDER-delivery_status_show##
         </div>
       </div>
 
@@ -776,6 +779,11 @@
           ##ORDER-delivery_detail##
         </div>
       </div>
+      <div class="show_deliverystatus mt-1">
+        <div class="w-100 text-center" style="background-color:###ORDER-delivery_status_style##">
+          ##ORDER-delivery_status_show##
+        </div>
+      </div>
     </div>
   </div> <!-- //Tab 1  Template 5  รอลูกค้าชำระ -->
 
@@ -787,7 +795,7 @@
     <div class="border rounded p-2 mt-1">
       <div class="row">
         <div class="col-9">
-          ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span> <br>
+          ##MENU-qty## x <span class="font-color-shop">##MENU-name##</span> <span class="text-secondary">(##MENU-pricedetail##)</span>
         </div>
         <div class="col-3 text-right">
           <span class="font-color-shop">฿ ##MENU-priceshow##</span>
@@ -796,7 +804,7 @@
           <span class="font-color-shop">##MENU-optionmenu## </span>
         </div>
         <div class="col-12">
-          <small><span class="text-gray-light"> Note :</span> <span class="font-color-shop">##MENU-note##</span></small>
+          <small><span class="text-gray-light note_show"> Note :</span> <span class="font-color-shop">##MENU-note##</span></small>
         </div>
       </div> <!-- รายละเอียดสินค้า -->
 
@@ -1078,7 +1086,43 @@
     orderstatus_page2 = [],
     orderstatus_page3 = [];
 
-  setInterval(neworderCall, 1000 * 5);
+  setInterval(neworderCall, 5000);
+  setInterval(MENU_DELIVERY, 1000 * 10);
+
+
+  var searchbranch_select, searchbydelivery;
+
+
+  function MENU_DELIVERY() {
+    var newrechord = [];
+    $.postJSON('/api/liff/list/menu/delivery', {
+      LINE_USER: LINE_USER,
+      action: 'getdetail'
+    }, (res) => {
+      if (res.result) {
+        // console.log('data',res.detail);
+        var obj = res.detail;
+        working.orderlast = obj;
+        if (working.orderlast.length == 0) {
+          $("#order_last").html("ไม่พบรายการสั่งซื้อ");
+          $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
+          $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+        if (searchbydelivery) {
+          filterbydelivery(searchbydelivery)
+          return;
+        }
+
+        if (searchbranch_select) {
+          draw_orderlast_by_filter(searchbranch_select)
+          return;
+        }
+
+        draworderlast(obj); // loop all
+      }
+    });
+  }
 
   function neworderCall() {
     var newrechord = [];
@@ -1094,6 +1138,15 @@
           $("#order_last").html("ไม่พบรายการสั่งซื้อ");
           $("#order_waiting_payment").html("ไม่พบรายการสั่งซื้อ");
           $("#order_waiting_finish").html("ไม่พบรายการสั่งซื้อ");
+          return;
+        }
+        if (searchbydelivery) {
+          filterbydelivery(searchbydelivery)
+          return;
+        }
+
+        if (searchbranch_select) {
+          draw_orderlast_by_filter(searchbranch_select)
           return;
         }
 
@@ -1152,7 +1205,69 @@
     }, 500);
   }
 
+  function search_selectbranch(obj) {
+
+    var searchbranchid = $(obj).val();
+    // alert(searchbranchid);
+    searchbranch_select = searchbranchid;
+    if (!searchbranchid) {
+      draworderlast(working.orderlast);
+      return;
+    }
+    draw_orderlast_by_filter(searchbranchid)
+  }
+
+  function filterbydelivery(dataid) {
+    // alert('find' + dataid)
+    if (!dataid) {
+      draworderlast(working.orderlast);
+      return;
+    }
+    searchbydelivery = dataid;
+    var order_last_by_deliverystatus = [];
+    // alert(working.orderlast.length)
+    for (var x = 0; x < working.orderlast.length; x++) {
+      if (working.orderlast[x].deliverystatus) {
+        if (working.orderlast[x].deliverystatus == dataid) {
+          if (searchbranch_select) {
+            if (working.orderlast[x].shopbranch == searchbranch_select) {
+              order_last_by_deliverystatus.push(working.orderlast[x])
+            }
+            // alert('b' + searchbranch_select)
+          } else {
+            order_last_by_deliverystatus.push(working.orderlast[x])
+          }
+
+        }
+      }
+    }
+
+    draworderlast(order_last_by_deliverystatus);
+  }
+
+  function draw_orderlast_by_filter(branch, delivery) {
+
+    var order_last_filter = [];
+    // alert(working.orderlast.length)
+    for (var x = 0; x < working.orderlast.length; x++) {
+      if (working.orderlast[x].shopbranch == branch) {
+        if (searchbydelivery) {
+          if (working.orderlast[x].deliverystatus == searchbydelivery) {
+            order_last_filter.push(working.orderlast[x])
+          }
+        } else {
+          order_last_filter.push(working.orderlast[x])
+        }
+
+      }
+    }
+
+    // alert(order_last_by_branch.length)
+    draworderlast(order_last_filter);
+  }
+
   function draworderlast(data) {
+    // alert('draw')
     var order1 = [],
       order2 = [],
       order3 = [],
@@ -1213,6 +1328,21 @@
           } else if (obj.deliverytype == 4) {
             obj.delivery_style = 'ffd320'
             obj.delivery_detail = '<strong class="text-light">ลูกค้ามานั่งทานที่ร้าน</strong>'
+          } else if (obj.deliverytype == 5) {
+            obj.delivery_style = '4373ff'
+            obj.delivery_detail = '<strong class="text-light">Lalamove Driver</strong>'
+          }
+        }
+        if (obj.deliverystatus) {
+          if (obj.deliverystatus == 1) {
+            obj.delivery_status_style = 'FF6100'
+            obj.delivery_status_show = '<strong class="text-light">รอ LalaMove Driver ตอบรับ <i class="fas fa-truck"></i></strong>'
+          } else if (obj.deliverystatus == 16) {
+            obj.delivery_status_style = 'FF6100'
+            obj.delivery_status_show = '<strong class="text-light">Driver ตอบรับเรียบร้อย <i class="fas fa-truck"></i></strong>'
+          } else if (obj.deliverystatus == 6) {
+            obj.delivery_status_style = 'FF6100'
+            obj.delivery_status_show = '<strong class="text-light">Driver ยกเลิกรายการ <i class="fas fa-truck"></i></strong>'
           }
         }
         obj.time = moment(obj.createdate, 'X').format('H:m:s D/M/Y');
@@ -1261,9 +1391,9 @@
         $("#order_last").html("ไม่พบรายการ");
       } else {
 
-        const sortoOrder1 = order1.sort((a, b) => b._id - a._id);
+        const sortoOrder1 = order1.sort((a, b) => b.lastupdate - a.lastupdate);
 
-        const sortoOrder5 = order5.sort((a, b) => b._id - a._id);
+        const sortoOrder5 = order5.sort((a, b) => b.lastupdate - a.lastupdate);
 
 
         var html1 = hash_replace(template1, 'ORDER', sortoOrder1)
@@ -1297,7 +1427,7 @@
 
   function replace_tab2(obj) {
 
-    const sortoOrder = obj.sort((a, b) => b._id - a._id);
+    const sortoOrder = obj.sort((a, b) => b.lastupdate - a.lastupdate);
 
     if (sortoOrder.length <= 0) {
       // alert('notfound')
@@ -1314,7 +1444,7 @@
     // console.log('tab3',obj);
 
     // const sortoOrder = obj.sort((a, b) => b.lastupdate - a.lastupdate);
-    const sortoOrder = obj.sort((a, b) => a._id - b._id);
+    const sortoOrder = obj.sort((a, b) => b.lastupdate - a.lastupdate);
     // console.log('sort',sortoOrder);
 
 
@@ -1471,6 +1601,17 @@
       if (res.result) {
         $('#shop_name').html(res.detail[0].shopid.name)
         working.shop_branch = res.detail;
+        if (working.shop_branch && working.shop_branch.length > 0) {
+          var optiondata = '';
+          optiondata += '<option value="" selected>  เลือกสาขา(ทั้งหมด)</option>';
+
+          var bh = working.shop_branch;
+          for (var x = 0; x < bh.length; x++) {
+            optiondata += '<option value="' + bh[x]._id + '">' + bh[x].name + '</option>';
+          }
+
+          $('#shopbranch').html(optiondata);
+        }
         // console.log('shop',working.shop_branch);
         getorder();
         // alert('shop',working.shop)
@@ -1736,6 +1877,23 @@
 
   function showError(error) {
     console.log("ERROR", error)
+  }
+
+  var delivery_listshow = false;
+
+  function show_orderdelivery() {
+
+    $('.delivery_show').hide();
+
+    if (delivery_listshow) {
+      searchbydelivery = false;
+      draworderlast(working.orderlast);
+      $('#deliverylistshow').hide();
+    } else {
+
+      $('#deliverylistshow').show();
+    }
+    delivery_listshow = !delivery_listshow;
   }
 
 
